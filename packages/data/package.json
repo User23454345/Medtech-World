@@ -1,0 +1,13 @@
+{
+  "name": "@medtech/data",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Zentrale Datenbank (SQLite via node:sqlite), Seeding, Repositories und Volltextsuche",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@medtech/core": "*"
+  }
+}

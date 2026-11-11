@@ -1,0 +1,17 @@
+{
+  "name": "@medtech/ui",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "MedTech World Designsystem: Tokens, Icons und wiederverwendbare React-Komponenten für alle Module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./styles.css": "./src/styles.css"
+  },
+  "dependencies": {
+    "@medtech/core": "*"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0"
+  }
+}

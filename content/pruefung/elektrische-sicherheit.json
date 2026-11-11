@@ -1,0 +1,82 @@
+{
+  "entities": [
+    {
+      "id": "test_procedure:elektrische-sicherheit-62353",
+      "title": "Elektrische Sicherheitsprüfung nach DIN EN 62353",
+      "aliases": ["Wiederholungsprüfung DIN EN 62353", "E-Check Medizingerät", "Prüfung nach Instandsetzung"],
+      "summary": "Wiederholungsprüfung und Prüfung nach Instandsetzung medizinischer elektrischer Geräte: Sichtprüfung, Schutzleiterwiderstand, Ableitströme, ggf. Isolationswiderstand, Funktionsprüfung, Bewertung und Dokumentation.",
+      "body": "Die Prüfung folgt [[legal_reference:din-en-62353]]. Grenzwerte sind in den technischen Daten mit Quelle hinterlegt. Herstellervorgaben gehen vor, wenn sie strengere Anforderungen enthalten.\n\nWichtige Begriffe: [[term:schutzklasse]], [[term:anwendungsteil]], [[term:ableitstrom]].",
+      "tags": ["Elektrische Sicherheit", "Prüfung", "Ableitstrom", "Service"],
+      "data": {
+        "kind": "elektrische-sicherheit",
+        "interval": "nach Herstellerangabe bzw. Gefährdungsbeurteilung; zusätzlich nach jeder Instandsetzung",
+        "qualification": "Elektrofachkraft bzw. befähigte Person mit Kenntnissen der Medizintechnik",
+        "equipment": ["Medizingeräte-Sicherheitstester nach DIN EN 62353", "Prüfprotokoll", "Herstellerunterlagen"],
+        "steps": [
+          { "title": "Sichtprüfung", "description": "Gehäuse, Netzanschlussleitung, Stecker, Anwendungsteile, Kennzeichnung und Zubehör auf Beschädigung prüfen." },
+          { "title": "Schutzleiterwiderstand (nur Schutzklasse I)", "description": "Widerstand zwischen Schutzkontakt des Netzsteckers und berührbaren, schutzleiterverbundenen Teilen messen; Netzleitung dabei bewegen.", "limit": "≤ 0,3 Ω (inkl. Netzanschlussleitung)" },
+          { "title": "Isolationswiderstand (optional)", "description": "Nur wenn vom Hersteller vorgesehen bzw. sinnvoll; DIN EN 62353 legt hierfür keinen allgemeinen Grenzwert fest." },
+          { "title": "Geräteableitstrom", "description": "Mit Ersatzableitstrom-, direkter oder Differenzstrommethode messen – Methode dokumentieren.", "limit": "siehe technische Daten je Methode und Schutzklasse" },
+          { "title": "Ableitstrom vom Anwendungsteil", "description": "Für Anwendungsteile vom Typ BF und CF messen.", "limit": "Typ BF ≤ 5000 µA, Typ CF ≤ 50 µA" },
+          { "title": "Funktionsprüfung", "description": "Sicherheitsrelevante Funktionen nach Herstellerangaben prüfen (z. B. Alarme)." },
+          { "title": "Bewertung und Dokumentation", "description": "Ergebnisse bewerten, Prüfprotokoll erstellen, Gerät kennzeichnen bzw. bei Mängeln außer Betrieb nehmen." }
+        ],
+        "documentation": ["Geräteidentifikation", "Prüfmethode und Messgerät", "Messwerte und Grenzwerte", "Bewertung und Unterschrift"]
+      },
+      "specs": [
+        { "key": "schutzleiterwiderstand_max", "label": "Schutzleiterwiderstand (inkl. Netzleitung)", "value": "≤ 0,3", "unit": "Ω", "source": "src:din-en-62353" },
+        { "key": "geraeteableitstrom_ersatz_sk1", "label": "Ersatz-Geräteableitstrom, Schutzklasse I", "value": "≤ 1000", "unit": "µA", "condition": "Ersatzableitstrommethode", "source": "src:din-en-62353" },
+        { "key": "geraeteableitstrom_ersatz_sk2", "label": "Ersatz-Geräteableitstrom, Schutzklasse II", "value": "≤ 500", "unit": "µA", "condition": "Ersatzableitstrommethode", "source": "src:din-en-62353" },
+        { "key": "geraeteableitstrom_direkt_sk1", "label": "Geräteableitstrom, Schutzklasse I", "value": "≤ 500", "unit": "µA", "condition": "direkte bzw. Differenzstrommethode", "source": "src:din-en-62353" },
+        { "key": "geraeteableitstrom_direkt_sk2", "label": "Geräteableitstrom, Schutzklasse II", "value": "≤ 100", "unit": "µA", "condition": "direkte bzw. Differenzstrommethode", "source": "src:din-en-62353" },
+        { "key": "ableitstrom_anwendungsteil_bf", "label": "Ableitstrom vom Anwendungsteil, Typ BF", "value": "≤ 5000", "unit": "µA", "source": "src:din-en-62353" },
+        { "key": "ableitstrom_anwendungsteil_cf", "label": "Ableitstrom vom Anwendungsteil, Typ CF", "value": "≤ 50", "unit": "µA", "source": "src:din-en-62353" }
+      ],
+      "links": [
+        { "rel": "based_on", "to": "legal_reference:din-en-62353" },
+        { "rel": "based_on", "to": "legal_reference:de-mpbetreibv" },
+        { "rel": "tests", "to": "device:pulsoximeter" },
+        { "rel": "tests", "to": "device:patientenmonitor" },
+        { "rel": "uses_principle", "to": "term:ableitstrom" },
+        { "rel": "uses_principle", "to": "term:schutzklasse" },
+        { "rel": "uses_principle", "to": "term:anwendungsteil" }
+      ],
+      "sources": ["src:din-en-62353"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "term:ableitstrom",
+      "title": "Ableitstrom",
+      "aliases": ["Leckstrom", "Geräteableitstrom", "Patientenableitstrom"],
+      "summary": "Unerwünschter Strom, der von netzspannungsführenden Teilen über Isolierungen zur Erde, zum Gehäuse oder über den Patienten fließt. Ableitströme werden bei Typ- und Wiederholungsprüfungen begrenzt.",
+      "body": "Für Wiederholungsprüfungen unterscheidet [[legal_reference:din-en-62353]] den **Geräteableitstrom** und den **Ableitstrom vom Anwendungsteil**. Je nach [[term:schutzklasse]] und Typ des [[term:anwendungsteil|Anwendungsteils]] gelten unterschiedliche Grenzwerte.",
+      "tags": ["Elektrische Sicherheit", "Ableitstrom"],
+      "data": { "category": "sicherheit", "english": "leakage current" },
+      "sources": ["src:din-en-62353", "src:iec-60601-1"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "term:schutzklasse",
+      "title": "Schutzklasse (I und II)",
+      "aliases": ["Schutzklasse I", "Schutzklasse II", "SK I", "SK II"],
+      "summary": "Einteilung elektrischer Geräte nach der Art des Schutzes gegen elektrischen Schlag: Schutzklasse I mit Schutzleiter, Schutzklasse II mit doppelter bzw. verstärkter Isolierung ohne Schutzleiter.",
+      "tags": ["Elektrische Sicherheit"],
+      "data": { "category": "sicherheit", "english": "protection class" },
+      "links": [{ "rel": "related", "to": "term:ableitstrom" }],
+      "sources": ["src:iec-60601-1"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "term:anwendungsteil",
+      "title": "Anwendungsteil (Typ B, BF, CF)",
+      "aliases": ["Typ BF", "Typ CF", "Typ B", "Applied Part"],
+      "summary": "Teil eines medizinischen elektrischen Geräts, das bestimmungsgemäß mit dem Patienten in Berührung kommt. Typ B, BF und CF unterscheiden sich im Schutzgrad – CF ist für die direkte Anwendung am Herzen vorgesehen.",
+      "body": "Ein [[component:spo2-sensor]] ist beispielsweise ein Anwendungsteil. Die zulässigen Ableitströme hängen vom Typ ab – siehe [[test_procedure:elektrische-sicherheit-62353]].",
+      "tags": ["Elektrische Sicherheit", "Anwendungsteil"],
+      "data": { "category": "sicherheit", "english": "applied part" },
+      "links": [{ "rel": "related", "to": "term:ableitstrom" }],
+      "sources": ["src:iec-60601-1"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    }
+  ]
+}

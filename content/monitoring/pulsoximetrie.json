@@ -1,0 +1,553 @@
+{
+  "sources": [
+    {
+      "id": "src:masimo-unternehmen",
+      "title": "Masimo – Unternehmenswebsite",
+      "publisher": "Masimo Corporation",
+      "kind": "hersteller",
+      "url": "https://www.masimo.com/",
+      "accessedAt": "2026-11-01"
+    },
+    {
+      "id": "src:draeger-unternehmen",
+      "title": "Dräger – Unternehmenswebsite",
+      "publisher": "Drägerwerk AG & Co. KGaA",
+      "kind": "hersteller",
+      "url": "https://www.draeger.com/",
+      "accessedAt": "2026-11-01"
+    }
+  ],
+  "entities": [
+    {
+      "id": "term:spo2",
+      "title": "SpO₂ (pulsoximetrische Sauerstoffsättigung)",
+      "aliases": ["SpO2", "Sauerstoffsättigung", "periphere Sauerstoffsättigung"],
+      "summary": "Mit einem Pulsoximeter nichtinvasiv geschätzter Anteil des sauerstoffbeladenen Hämoglobins am funktionellen Hämoglobin im arteriellen Blut, angegeben in Prozent.",
+      "body": "Das „p“ in SpO₂ steht für **pulsoximetrisch**. Davon zu unterscheiden ist die **SaO₂**, die per Blutgasanalyse aus arteriellem Blut bestimmt wird und als Referenz für die Kalibrierung von Pulsoximetern dient.\n\n## Einordnung\n- Die SpO₂ ist ein Schätzwert – Genauigkeit und Grenzen beschreibt [[term:pulsoximetrie]].\n- Dyshämoglobine (z. B. Carboxyhämoglobin bei Rauchgasvergiftung) können von klassischen Zwei-Wellenlängen-Geräten nicht unterschieden werden und führen zu falsch hohen Werten.\n- Gemessen wird SpO₂ u. a. mit [[device:pulsoximeter|Pulsoximetern]] und als Parameter von [[device:patientenmonitor|Patientenmonitoren]].",
+      "tags": ["SpO2", "Vitalparameter", "Monitoring"],
+      "data": { "category": "physiologie", "abbreviation": "SpO₂", "english": "peripheral oxygen saturation", "formula": "SpO₂ = HbO₂ / (HbO₂ + Hb) · 100 %" },
+      "links": [
+        { "rel": "related", "to": "term:pulsoximetrie" },
+        { "rel": "related", "to": "term:perfusionsindex" }
+      ],
+      "sources": ["src:jubran-pulse-oximetry-2015", "src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "term:pulsoximetrie",
+      "title": "Pulsoximetrie (Messprinzip)",
+      "aliases": ["Messprinzip Pulsoximetrie", "Ratio-of-Ratios"],
+      "summary": "Optisches Messverfahren: Rotes und infrarotes Licht durchstrahlt Gewebe; aus dem pulsierenden Anteil der Absorption beider Wellenlängen (Verhältnis R) wird die SpO₂ über eine empirische Kalibrierkurve berechnet.",
+      "body": "## Prinzip\nOxygeniertes und desoxygeniertes Hämoglobin absorbieren Licht unterschiedlich stark: Desoxyhämoglobin absorbiert im **roten** Bereich (ca. 660 nm) stärker, Oxyhämoglobin im **infraroten** Bereich (ca. 940 nm).\n\nEin [[component:spo2-sensor|SpO₂-Sensor]] beleuchtet das Gewebe abwechselnd mit beiden Wellenlängen ([[component:spo2-leuchtdioden]]); eine [[component:spo2-photodiode]] misst das durchgelassene Licht. Nur der **pulsierende Anteil (AC)** stammt vom arteriellen Blut, der konstante Anteil (DC) von Gewebe, venösem Blut und Knochen ([[term:photoplethysmographie]]).\n\n## Ratio-of-Ratios\nR = (AC_rot / DC_rot) / (AC_IR / DC_IR)\n\nDer Wert R wird über eine vom Hersteller empirisch ermittelte Kalibrierkurve in SpO₂ umgerechnet. Grob gilt: R ≈ 0,5 entspricht hoher, R ≈ 1 etwa 85 % und größere R-Werte niedrigerer Sättigung.\n\n## Grenzen\n- Bewegung, geringe Perfusion, Fremdlicht und Nagellack können die Messung stören ([[fault:spo2-bewegungsartefakte]], [[fault:spo2-kein-signal]]).\n- Laut FDA kann die Genauigkeit u. a. bei dunkler Hautpigmentierung, schlechter Durchblutung oder kalten Extremitäten eingeschränkt sein.\n- Unterhalb von ca. 70 % SpO₂ sinkt die Genauigkeit, da Kalibrierdaten fehlen.",
+      "tags": ["SpO2", "Messprinzip", "Optik"],
+      "data": { "category": "messprinzip", "english": "pulse oximetry", "formula": "R = (AC₆₆₀/DC₆₆₀) / (AC₉₄₀/DC₉₄₀)" },
+      "specs": [
+        {
+          "key": "spo2_accuracy_arms",
+          "label": "Maximal zulässige Genauigkeit (Arms) im Bereich 70–100 % SaO₂",
+          "value": "≤ 4",
+          "unit": "% SpO₂",
+          "condition": "Typprüfung nach ISO 80601-2-61",
+          "source": "src:iso-80601-2-61"
+        },
+        { "key": "wellenlaenge_rot", "label": "Typische Wellenlänge rot", "value": 660, "unit": "nm", "source": "src:jubran-pulse-oximetry-2015" },
+        { "key": "wellenlaenge_ir", "label": "Typische Wellenlänge infrarot", "value": 940, "unit": "nm", "source": "src:jubran-pulse-oximetry-2015" }
+      ],
+      "links": [{ "rel": "related", "to": "term:photoplethysmographie" }],
+      "sources": ["src:iso-80601-2-61", "src:jubran-pulse-oximetry-2015", "src:fda-pulse-oximeter-accuracy", "src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "term:photoplethysmographie",
+      "title": "Photoplethysmographie (PPG)",
+      "aliases": ["PPG", "Plethysmogramm", "Pleth-Kurve"],
+      "summary": "Optische Erfassung der pulssynchronen Volumenänderung im Gewebe. Die PPG-Kurve („Pleth“) ist Grundlage der Pulsoximetrie und wichtiger Indikator für die Signalqualität.",
+      "body": "Eine gleichmäßige, pulssynchrone Pleth-Kurve zeigt ein verwertbares Signal an. Unregelmäßige oder verrauschte Kurven deuten auf Artefakte hin – SpO₂-Werte sollten dann nicht ohne Plausibilitätsprüfung übernommen werden.",
+      "tags": ["SpO2", "Signal", "Messprinzip"],
+      "data": { "category": "messprinzip", "abbreviation": "PPG", "english": "photoplethysmography" },
+      "sources": ["src:jubran-pulse-oximetry-2015", "src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "term:perfusionsindex",
+      "title": "Perfusionsindex (PI)",
+      "aliases": ["PI", "Perfusion Index"],
+      "summary": "Verhältnis von pulsierendem zu nicht pulsierendem Signalanteil (AC/DC) des Infrarotsignals in Prozent – ein Maß für die periphere Durchblutung am Messort und die Signalstärke.",
+      "body": "Ein niedriger Perfusionsindex (z. B. bei kalten Händen oder Zentralisation) bedeutet ein schwaches Nutzsignal; Störungen wirken sich dann stärker aus. Viele Geräte zeigen den PI zusätzlich zur [[term:spo2]] an.",
+      "tags": ["SpO2", "Perfusion"],
+      "data": { "category": "messprinzip", "abbreviation": "PI", "english": "perfusion index", "formula": "PI = AC_IR / DC_IR · 100 %" },
+      "sources": ["src:jubran-pulse-oximetry-2015"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "device:pulsoximeter",
+      "title": "Pulsoximeter",
+      "aliases": ["Pulsoxymeter", "SpO2-Messgerät", "Oximeter"],
+      "summary": "Nichtinvasives Messgerät zur kontinuierlichen oder punktuellen Bestimmung der Sauerstoffsättigung (SpO₂) und der Pulsfrequenz über einen optischen Sensor, meist am Finger.",
+      "body": "## Aufbau\nEin Pulsoximeter besteht aus dem [[component:spo2-sensor]] (Leuchtdioden und Photodiode), dem [[component:spo2-sensorkabel]] bzw. einer integrierten Optik, der Signalverarbeitung und der Anzeige mit Alarmfunktion.\n\n## Bauformen\n- Finger-Clip-Geräte für Spot-Checks\n- Handgeräte mit wechselbaren Sensoren\n- SpO₂-Modul als Bestandteil eines [[device:patientenmonitor|Patientenmonitors]]\n\n## Hinweise für Service und Anwendung\n- Sensoren sind herstellerspezifisch abgestimmt – nur kompatible Sensoren verwenden.\n- Die Risikoklasse nach MDR hängt von der Zweckbestimmung ab (z. B. kontinuierliche Überwachung vitaler Parameter).",
+      "tags": ["SpO2", "Monitoring", "Vitalparameter"],
+      "data": {
+        "category": "Patientenüberwachung",
+        "applications": ["Intensiv- und Notfallmedizin", "Anästhesie", "Pflege", "Heimüberwachung", "Rettungsdienst"],
+        "operatingPrinciple": "Pulsoximetrie mit zwei Wellenlängen (rot/infrarot) und Auswertung des pulsierenden Signalanteils.",
+        "scene": {
+          "camera": [3.2, 2.2, 4.2],
+          "parts": [
+            { "id": "gehaeuse", "label": "Gerätegehäuse mit Elektronik", "shape": "box", "size": [1.6, 2.4, 0.6], "position": [-1.1, 0.4, 0], "color": "#dfe7ef", "description": "Signalverarbeitung, Alarme und Energieversorgung" },
+            { "id": "display", "label": "Anzeige (SpO₂, Puls, Pleth)", "shape": "box", "size": [1.3, 1.0, 0.05], "position": [-1.1, 0.9, 0.31], "color": "#0f2a3d" },
+            { "id": "kabel", "label": "Sensorkabel", "component": "component:spo2-sensorkabel", "shape": "cylinder", "size": [0.06, 1.6, 0], "position": [0.3, -0.2, 0], "rotation": [0, 0, 1.3], "color": "#4b5563" },
+            { "id": "clip-oben", "label": "Fingerclip-Sensor (Oberteil)", "component": "component:spo2-sensor", "shape": "box", "size": [0.9, 0.35, 0.6], "position": [1.5, 0.15, 0], "color": "#2f7fbf" },
+            { "id": "clip-unten", "label": "Fingerclip-Sensor (Unterteil)", "component": "component:spo2-sensor", "shape": "box", "size": [0.9, 0.35, 0.6], "position": [1.5, -0.55, 0], "color": "#2f7fbf" },
+            { "id": "led", "label": "Leuchtdioden rot/infrarot", "component": "component:spo2-leuchtdioden", "shape": "sphere", "size": [0.09, 0, 0], "position": [1.5, -0.03, 0.0], "color": "#e53935" },
+            { "id": "photodiode", "label": "Photodiode", "component": "component:spo2-photodiode", "shape": "box", "size": [0.2, 0.04, 0.2], "position": [1.5, -0.37, 0], "color": "#111827" },
+            { "id": "finger", "label": "Finger (Messort)", "shape": "capsule", "size": [0.16, 0.8, 0], "position": [1.5, -0.2, 0], "rotation": [0, 0, 1.5708], "color": "#e8b39a", "opacity": 0.55 }
+          ]
+        }
+      },
+      "specs": [
+        {
+          "key": "spo2_accuracy_arms",
+          "label": "Geforderte Genauigkeit (Arms), 70–100 % SaO₂",
+          "value": "≤ 4",
+          "unit": "% SpO₂",
+          "condition": "Typprüfung nach ISO 80601-2-61",
+          "source": "src:iso-80601-2-61"
+        }
+      ],
+      "links": [
+        { "rel": "has_component", "to": "component:spo2-sensor" },
+        { "rel": "has_component", "to": "component:spo2-sensorkabel" },
+        { "rel": "uses_principle", "to": "term:pulsoximetrie" },
+        { "rel": "uses_principle", "to": "term:spo2" },
+        { "rel": "uses_principle", "to": "term:photoplethysmographie" },
+        { "rel": "related", "to": "device:patientenmonitor" }
+      ],
+      "sources": ["src:iso-80601-2-61", "src:kramme-medizintechnik", "src:fda-pulse-oximeter-accuracy"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "device:patientenmonitor",
+      "title": "Patientenmonitor",
+      "aliases": ["Vitaldatenmonitor", "Überwachungsmonitor", "Monitor"],
+      "summary": "Gerät zur kontinuierlichen Überwachung mehrerer Vitalparameter – typischerweise EKG, SpO₂, nichtinvasiver Blutdruck, Atemfrequenz und Temperatur – mit Alarmierung und Trenddarstellung.",
+      "body": "## Typische Parameter\n- EKG und Herzfrequenz\n- [[term:spo2|SpO₂]] und Pulsfrequenz über ein SpO₂-Modul mit [[component:spo2-sensor]]\n- Nichtinvasiver Blutdruck (NIBP)\n- Temperatur, Atemfrequenz, ggf. Kapnographie\n\n## Service-Schwerpunkte\nAlarmfunktion, Messmodule, Zubehör (Kabel, Sensoren, Manschetten) und die elektrische Sicherheit nach [[legal_reference:din-en-62353]].",
+      "tags": ["Monitoring", "SpO2", "Intensivmedizin"],
+      "data": {
+        "category": "Patientenüberwachung",
+        "applications": ["Intensivstation", "OP/Anästhesie", "Aufwachraum", "Notaufnahme"],
+        "operatingPrinciple": "Modulare Erfassung mehrerer Vitalparameter mit gemeinsamer Anzeige- und Alarmlogik."
+      },
+      "links": [
+        { "rel": "has_component", "to": "component:spo2-sensor" },
+        { "rel": "has_component", "to": "component:spo2-sensorkabel" },
+        { "rel": "uses_principle", "to": "term:pulsoximetrie" },
+        { "rel": "uses_principle", "to": "term:spo2" }
+      ],
+      "sources": ["src:kramme-medizintechnik", "src:iec-60601-1"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "component:spo2-sensor",
+      "title": "SpO₂-Sensor (Fingerclip)",
+      "aliases": ["SpO2-Sensor", "Pulsoximetrie-Sensor", "Fingersensor", "Oximetriesensor"],
+      "summary": "Optischer Sensor, der Gewebe mit rotem und infrarotem Licht durchleuchtet und das transmittierte Licht misst. Es gibt wiederverwendbare Clip- und Einmal-Klebesensoren.",
+      "body": "Der Sensor enthält [[component:spo2-leuchtdioden]] und eine [[component:spo2-photodiode]]. Er ist auf das jeweilige Messsystem abgestimmt – die Kalibrierkurve des Geräts setzt bestimmte Wellenlängen voraus.\n\n**Typische Fehlerquellen:** Kabelbruch, verschmutzte Optik, falsche Sensorgröße, Fremdlicht – siehe [[fault:spo2-kein-signal]].",
+      "tags": ["SpO2", "Sensor", "Zubehör"],
+      "data": { "kind": "sensor", "function": "Optische Erfassung des photoplethysmographischen Signals bei zwei Wellenlängen", "wearPart": true },
+      "links": [
+        { "rel": "has_component", "to": "component:spo2-leuchtdioden" },
+        { "rel": "has_component", "to": "component:spo2-photodiode" },
+        { "rel": "uses_principle", "to": "term:pulsoximetrie" },
+        { "rel": "causes", "to": "fault:spo2-kein-signal" }
+      ],
+      "sources": ["src:jubran-pulse-oximetry-2015", "src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "component:spo2-leuchtdioden",
+      "title": "Leuchtdioden rot/infrarot (SpO₂)",
+      "aliases": ["SpO2-LEDs", "Rot-IR-LED"],
+      "summary": "Lichtquellen im SpO₂-Sensor, die im Wechsel rotes und infrarotes Licht aussenden. Ihre Wellenlängen sind Teil der Gerätekalibrierung.",
+      "tags": ["SpO2", "Optik"],
+      "data": { "kind": "optik", "function": "Abwechselnde Beleuchtung des Gewebes mit rotem und infrarotem Licht", "wearPart": false },
+      "specs": [
+        { "key": "wellenlaenge_rot", "label": "Typische Wellenlänge rot", "value": 660, "unit": "nm", "source": "src:jubran-pulse-oximetry-2015" },
+        { "key": "wellenlaenge_ir", "label": "Typische Wellenlänge infrarot", "value": 940, "unit": "nm", "source": "src:jubran-pulse-oximetry-2015" }
+      ],
+      "links": [{ "rel": "uses_principle", "to": "term:pulsoximetrie" }],
+      "sources": ["src:jubran-pulse-oximetry-2015"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "component:spo2-photodiode",
+      "title": "Photodiode (SpO₂-Sensor)",
+      "aliases": ["SpO2-Photodetektor"],
+      "summary": "Lichtempfänger im SpO₂-Sensor, der das durch das Gewebe transmittierte (oder reflektierte) Licht in ein elektrisches Signal umwandelt.",
+      "tags": ["SpO2", "Optik", "Sensor"],
+      "data": { "kind": "sensor", "function": "Umwandlung der Lichtintensität in einen Photostrom", "wearPart": false },
+      "links": [{ "rel": "uses_principle", "to": "term:photoplethysmographie" }],
+      "sources": ["src:jubran-pulse-oximetry-2015"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "component:spo2-sensorkabel",
+      "title": "SpO₂-Sensorkabel / Verlängerungskabel",
+      "aliases": ["SpO2-Kabel", "Patientenkabel SpO2"],
+      "summary": "Verbindet den SpO₂-Sensor mit Gerät oder Messmodul. Häufige Verschleißstelle: Knickschutz und Steckverbinder.",
+      "tags": ["SpO2", "Zubehör", "Kabel"],
+      "data": { "kind": "elektronik", "function": "Signal- und Versorgungsverbindung zwischen Sensor und Messmodul", "wearPart": true },
+      "links": [{ "rel": "causes", "to": "fault:spo2-kein-signal" }],
+      "sources": ["src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "fault:spo2-kein-signal",
+      "title": "SpO₂: „Kein Sensor“ / „Kein Pulssignal“",
+      "aliases": ["SpO2 kein Signal", "Sensor aus", "Pulssuche"],
+      "summary": "Das Gerät zeigt keinen SpO₂-Wert, meldet „Sensor aus“, „Sensorfehler“ oder sucht dauerhaft nach dem Puls.",
+      "body": "Systematisch vom Patienten zum Gerät vorgehen: erst Anwendung und Messort, dann Sensor, Kabel und zuletzt das Messmodul. Vor Eingriffen am Gerät die [[legal_reference:de-mpbetreibv|Instandhaltungsanforderungen]] und Herstellerunterlagen beachten.",
+      "tags": ["SpO2", "Fehlerdiagnose", "Alarm"],
+      "data": {
+        "severity": "hoch",
+        "symptoms": ["Kein SpO₂-Wert", "Meldung „Sensor aus“ oder „Sensorfehler“", "Dauerhafte Pulssuche", "Flache oder fehlende Pleth-Kurve"],
+        "causes": [
+          { "text": "Sensor falsch platziert oder nicht passende Sensorgröße", "likelihood": "haeufig" },
+          { "text": "Geringe Perfusion am Messort (kalte Finger, Zentralisation)", "likelihood": "haeufig" },
+          { "text": "Kabelbruch oder Steckerdefekt am Sensor/Verlängerungskabel", "likelihood": "gelegentlich" },
+          { "text": "Defekte LED oder Photodiode im Sensor", "likelihood": "gelegentlich" },
+          { "text": "Defektes SpO₂-Messmodul", "likelihood": "selten" }
+        ],
+        "diagnosis": [
+          { "id": "s1", "instruction": "Sensorplatzierung und Messort prüfen (Nagellack, Kälte, Sensorgröße).", "question": "Erscheint nach Korrektur eine gleichmäßige Pleth-Kurve?", "yes": "o-anwendung", "no": "s2" },
+          { "id": "s2", "instruction": "Sensor an einem anderen Messort bzw. an einer gesunden Testperson anlegen.", "question": "Wird jetzt ein plausibler Wert angezeigt?", "yes": "o-perfusion", "no": "s3" },
+          { "id": "s3", "instruction": "Sensor gegen einen nachweislich funktionierenden, kompatiblen Sensor tauschen.", "question": "Funktioniert die Messung mit dem Ersatzsensor?", "yes": "o-sensor", "no": "s4" },
+          { "id": "s4", "instruction": "Verlängerungskabel tauschen bzw. Steckverbinder sichtprüfen.", "question": "Funktioniert die Messung nach Kabeltausch?", "yes": "o-kabel", "no": "o-modul" }
+        ],
+        "outcomes": [
+          { "id": "o-anwendung", "text": "Anwendungsfehler – Einweisung zur korrekten Sensorplatzierung auffrischen." },
+          { "id": "o-perfusion", "text": "Physiologische Ursache (geringe Perfusion) – Messort wechseln, ggf. Ohr- oder Stirnsensor erwägen." },
+          { "id": "o-sensor", "text": "Sensor defekt – Sensor austauschen und aussondern." },
+          { "id": "o-kabel", "text": "Kabel defekt – Kabel austauschen." },
+          { "id": "o-modul", "text": "Verdacht auf Defekt im Messmodul – Gerät außer Betrieb nehmen, Instandsetzung nach Herstellervorgaben, anschließend Prüfung nach DIN EN 62353." }
+        ],
+        "remedies": ["Sensor korrekt platzieren bzw. Messort wechseln", "Kompatiblen Ersatzsensor verwenden", "Kabel/Steckverbinder tauschen", "Messmodul durch autorisierten Service instand setzen lassen"],
+        "safetyNotes": ["Bei unklarem Patientenzustand nicht auf die Gerätefehlersuche verlassen – klinische Beurteilung hat Vorrang.", "Nach Instandsetzung Funktions- und elektrische Sicherheitsprüfung durchführen."]
+      },
+      "links": [
+        { "rel": "affects", "to": "device:pulsoximeter" },
+        { "rel": "affects", "to": "device:patientenmonitor" },
+        { "rel": "affects", "to": "component:spo2-sensor" },
+        { "rel": "uses_principle", "to": "term:perfusionsindex" },
+        { "rel": "remedied_by", "to": "test_procedure:elektrische-sicherheit-62353" }
+      ],
+      "sources": ["src:jubran-pulse-oximetry-2015", "src:fda-pulse-oximeter-accuracy"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "fault:spo2-bewegungsartefakte",
+      "title": "SpO₂: Bewegungsartefakte und Fehlalarme",
+      "aliases": ["SpO2 Artefakte", "SpO2 Fehlalarm", "unruhige Pleth-Kurve"],
+      "summary": "Schwankende oder unplausibel niedrige SpO₂-Werte mit unruhiger Pleth-Kurve, typischerweise durch Bewegung, Zittern oder Fremdlicht – häufige Ursache von Fehlalarmen.",
+      "body": "Bewegung verändert den Lichtweg und erzeugt Signalanteile, die nicht vom arteriellen Puls stammen. Ältere Algorithmen interpretieren diese als Pulsation und berechnen ein falsches Verhältnis R ([[term:pulsoximetrie]]).",
+      "tags": ["SpO2", "Artefakt", "Alarm", "Fehlerdiagnose"],
+      "data": {
+        "severity": "mittel",
+        "symptoms": ["Schwankende SpO₂-Werte", "Unregelmäßige Pleth-Kurve", "Häufige Fehlalarme bei Bewegung"],
+        "causes": [
+          { "text": "Patientenbewegung, Zittern, Transport", "likelihood": "haeufig" },
+          { "text": "Starkes Fremdlicht (OP-Leuchte, Sonnenlicht)", "likelihood": "gelegentlich" },
+          { "text": "Lose sitzender Sensor", "likelihood": "haeufig" }
+        ],
+        "diagnosis": [
+          { "id": "d1", "instruction": "Pleth-Kurve beobachten, während der Patient die Hand ruhig hält.", "question": "Stabilisieren sich Kurve und Wert in Ruhe?", "yes": "o-bewegung", "no": "d2" },
+          { "id": "d2", "instruction": "Sensor gegen Licht abschirmen (z. B. abdecken).", "question": "Wird der Wert stabil?", "yes": "o-licht", "no": "o-sensor" }
+        ],
+        "outcomes": [
+          { "id": "o-bewegung", "text": "Bewegungsartefakt – Messort mit weniger Bewegung wählen (z. B. Ohr, Stirn) oder bewegungstolerante Technik nutzen." },
+          { "id": "o-licht", "text": "Fremdlichteinfluss – Sensor abschirmen." },
+          { "id": "o-sensor", "text": "Sensorsitz bzw. Sensor prüfen – siehe Fehlerbild „Kein Signal“." }
+        ],
+        "remedies": ["Sensor sicher fixieren", "Messort wechseln", "Sensor gegen Fremdlicht abschirmen", "Alarmgrenzen und Mittelungszeit gemäß Herstellerangaben prüfen"],
+        "safetyNotes": ["Alarmgrenzen nicht pauschal abschalten – Alarmmüdigkeit vermeiden, aber echte Hypoxämie nicht übersehen."]
+      },
+      "links": [
+        { "rel": "affects", "to": "device:pulsoximeter" },
+        { "rel": "affects", "to": "device:patientenmonitor" },
+        { "rel": "uses_principle", "to": "term:photoplethysmographie" },
+        { "rel": "related", "to": "fault:spo2-kein-signal" }
+      ],
+      "sources": ["src:jubran-pulse-oximetry-2015", "src:fda-pulse-oximeter-accuracy"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "learning_module:pulsoximetrie-grundlagen",
+      "title": "Pulsoximetrie verstehen: Messprinzip, Grenzen, Fehlersuche",
+      "aliases": ["Lernmodul Pulsoximetrie"],
+      "summary": "Lernmodul zu Messprinzip und Aufbau von Pulsoximetern, typischen Störgrößen und systematischer Fehlersuche – mit Simulation und Abschlussquiz.",
+      "tags": ["SpO2", "Monitoring", "Grundlagen"],
+      "data": {
+        "level": "einsteiger",
+        "durationMinutes": 30,
+        "objectives": [
+          "Das Messprinzip der Pulsoximetrie (rot/infrarot, AC/DC, Ratio-of-Ratios) erklären",
+          "Aufbau eines Pulsoximeters und Funktion der Sensorkomponenten benennen",
+          "Typische Störgrößen erkennen und Messwerte plausibilisieren",
+          "Bei „Kein Signal“ systematisch vom Patienten zum Gerät vorgehen"
+        ],
+        "sections": [
+          {
+            "title": "1. Was misst ein Pulsoximeter?",
+            "body": "Ein Pulsoximeter schätzt die [[term:spo2]] und die Pulsfrequenz. Grundlage ist die unterschiedliche Lichtabsorption von oxygeniertem und desoxygeniertem Hämoglobin."
+          },
+          {
+            "title": "2. Messprinzip",
+            "body": "Lies [[term:pulsoximetrie]] und probiere anschließend die Simulation [[simulation:pulsoximetrie]] aus: Verändere die Sättigung und beobachte, wie sich das Verhältnis R der Signale ändert."
+          },
+          {
+            "title": "3. Aufbau",
+            "body": "Ein [[component:spo2-sensor]] enthält [[component:spo2-leuchtdioden]] und eine [[component:spo2-photodiode]]. Im 3D Explorer kannst du das [[device:pulsoximeter]] interaktiv erkunden."
+          },
+          {
+            "title": "4. Störgrößen und Fehlersuche",
+            "body": "Bewegung, geringe Perfusion ([[term:perfusionsindex]]) und Fremdlicht sind häufige Ursachen falscher Werte. Arbeite die Diagnosebäume [[fault:spo2-bewegungsartefakte]] und [[fault:spo2-kein-signal]] durch."
+          }
+        ],
+        "prerequisites": []
+      },
+      "links": [
+        { "rel": "teaches", "to": "term:pulsoximetrie" },
+        { "rel": "teaches", "to": "term:spo2" },
+        { "rel": "teaches", "to": "device:pulsoximeter" },
+        { "rel": "teaches", "to": "fault:spo2-kein-signal" },
+        { "rel": "teaches", "to": "fault:spo2-bewegungsartefakte" },
+        { "rel": "teaches", "to": "simulation:pulsoximetrie" }
+      ],
+      "sources": ["src:jubran-pulse-oximetry-2015", "src:kramme-medizintechnik", "src:iso-80601-2-61"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "quiz_question:spo2-wellenlaengen",
+      "title": "Quiz: Wellenlängen der Pulsoximetrie",
+      "summary": "Welche Lichtarten nutzt ein klassisches Pulsoximeter zur Bestimmung der SpO₂?",
+      "data": {
+        "kind": "single",
+        "question": "Welche Kombination von Wellenlängen nutzt ein klassisches Pulsoximeter?",
+        "options": [
+          { "id": "a", "text": "Rot (ca. 660 nm) und Infrarot (ca. 940 nm)" },
+          { "id": "b", "text": "Blau (ca. 450 nm) und Grün (ca. 530 nm)" },
+          { "id": "c", "text": "Ultraviolett und sichtbares Weißlicht" },
+          { "id": "d", "text": "Nur Infrarot bei verschiedenen Intensitäten" }
+        ],
+        "correct": ["a"],
+        "explanation": "Oxy- und Desoxyhämoglobin unterscheiden sich im roten und infraroten Bereich deutlich in der Absorption – siehe [[term:pulsoximetrie]].",
+        "difficulty": 1
+      },
+      "links": [{ "rel": "quiz_for", "to": "learning_module:pulsoximetrie-grundlagen" }],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "quiz_question:spo2-ac-anteil",
+      "title": "Quiz: Pulsierender Signalanteil",
+      "summary": "Welcher Signalanteil wird zur Berechnung der arteriellen Sauerstoffsättigung herangezogen?",
+      "data": {
+        "kind": "single",
+        "question": "Warum wertet ein Pulsoximeter vor allem den pulsierenden Anteil (AC) des Signals aus?",
+        "options": [
+          { "id": "a", "text": "Weil er dem arteriellen Blut zugeordnet werden kann" },
+          { "id": "b", "text": "Weil er das stärkste Signal liefert" },
+          { "id": "c", "text": "Weil der konstante Anteil nur Rauschen enthält" },
+          { "id": "d", "text": "Weil der AC-Anteil unabhängig von Bewegung ist" }
+        ],
+        "correct": ["a"],
+        "explanation": "Der konstante Anteil (DC) stammt von Gewebe, venösem Blut und Knochen; nur die pulssynchrone Änderung ist dem arteriellen Blut zuzuordnen. Bewegung kann den AC-Anteil allerdings stark verfälschen.",
+        "difficulty": 2
+      },
+      "links": [{ "rel": "quiz_for", "to": "learning_module:pulsoximetrie-grundlagen" }],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "quiz_question:spo2-stoergroessen",
+      "title": "Quiz: Störgrößen der Pulsoximetrie",
+      "summary": "Welche Faktoren können die pulsoximetrische Messung verfälschen?",
+      "data": {
+        "kind": "multiple",
+        "question": "Welche Faktoren können die SpO₂-Messung verfälschen? (Mehrfachauswahl)",
+        "options": [
+          { "id": "a", "text": "Patientenbewegung" },
+          { "id": "b", "text": "Geringe periphere Durchblutung" },
+          { "id": "c", "text": "Starkes Fremdlicht" },
+          { "id": "d", "text": "Die Raumluftfeuchte" }
+        ],
+        "correct": ["a", "b", "c"],
+        "explanation": "Bewegung, geringe Perfusion und Fremdlicht gehören zu den häufigsten Störgrößen. Die Raumluftfeuchte spielt praktisch keine Rolle.",
+        "difficulty": 1
+      },
+      "links": [{ "rel": "quiz_for", "to": "learning_module:pulsoximetrie-grundlagen" }],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "simulation:pulsoximetrie",
+      "title": "Simulation: Pulsoximetrie und Störgrößen",
+      "aliases": ["SpO2-Simulator"],
+      "summary": "Interaktive Simulation von Rot- und Infrarotsignal, Ratio-of-Ratios und angezeigter SpO₂ – mit zuschaltbaren Störungen wie Bewegung, geringer Perfusion und Fremdlicht.",
+      "tags": ["SpO2", "Simulation", "Messprinzip"],
+      "data": {
+        "engine": "pulse-oximetry",
+        "learningGoals": [
+          "Zusammenhang zwischen Sättigung, Verhältnis R und angezeigter SpO₂ verstehen",
+          "Einfluss von Perfusion, Bewegung und Fremdlicht auf das PPG-Signal erkennen"
+        ],
+        "scenarios": [
+          { "id": "normal", "title": "Gesunder Erwachsener in Ruhe", "description": "Gleichmäßiges Signal bei normaler Sättigung.", "params": { "saturation": 97, "heartRate": 72, "perfusion": 3, "motion": 0, "ambientLight": 0 } },
+          { "id": "hypoxaemie", "title": "Hypoxämie", "description": "Sinkende Sättigung – beobachte, wie R steigt.", "params": { "saturation": 84, "heartRate": 105, "perfusion": 2.5, "motion": 0, "ambientLight": 0 } },
+          { "id": "perfusion", "title": "Geringe Perfusion", "description": "Sehr kleiner Pulsanteil – Signal-Rausch-Verhältnis sinkt.", "params": { "saturation": 96, "heartRate": 88, "perfusion": 0.2, "motion": 0, "ambientLight": 0 }, "fault": "fault:spo2-kein-signal" },
+          { "id": "bewegung", "title": "Bewegungsartefakt", "description": "Patient zittert – die Pleth-Kurve wird unruhig.", "params": { "saturation": 97, "heartRate": 80, "perfusion": 2, "motion": 0.8, "ambientLight": 0 }, "fault": "fault:spo2-bewegungsartefakte" },
+          { "id": "fremdlicht", "title": "Fremdlicht", "description": "Starke Umgebungsbeleuchtung überlagert das Signal.", "params": { "saturation": 97, "heartRate": 75, "perfusion": 2, "motion": 0, "ambientLight": 0.7 }, "fault": "fault:spo2-bewegungsartefakte" }
+        ]
+      },
+      "links": [
+        { "rel": "simulates", "to": "device:pulsoximeter" },
+        { "rel": "simulates", "to": "term:pulsoximetrie" },
+        { "rel": "simulates", "to": "fault:spo2-bewegungsartefakte" },
+        { "rel": "simulates", "to": "fault:spo2-kein-signal" },
+        { "rel": "uses_principle", "to": "term:photoplethysmographie" }
+      ],
+      "sources": ["src:jubran-pulse-oximetry-2015"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "manufacturer:masimo",
+      "title": "Masimo",
+      "aliases": ["Masimo Corporation"],
+      "summary": "US-amerikanischer Medizintechnikhersteller mit Sitz in Irvine (Kalifornien), bekannt für nichtinvasives Monitoring, insbesondere Pulsoximetrie (SpO₂) mit bewegungstoleranter Signalverarbeitung.",
+      "body": "In MedTech World werden zu realen Herstellern nur allgemeine, belegte Unternehmensinformationen geführt. Modellspezifische technische Daten sind den aktuellen Herstellerunterlagen zu entnehmen.",
+      "tags": ["Hersteller", "SpO2", "Monitoring"],
+      "data": { "country": "USA", "website": "https://www.masimo.com/", "founded": 1989, "focus": ["Pulsoximetrie", "Nichtinvasives Monitoring"] },
+      "links": [{ "rel": "related", "to": "device:pulsoximeter" }],
+      "sources": ["src:masimo-unternehmen"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "manufacturer:draeger",
+      "title": "Dräger",
+      "aliases": ["Drägerwerk", "Drägerwerk AG & Co. KGaA"],
+      "summary": "Deutscher Hersteller von Medizin- und Sicherheitstechnik mit Sitz in Lübeck, u. a. für Beatmung, Anästhesie und Patientenmonitoring.",
+      "body": "In MedTech World werden zu realen Herstellern nur allgemeine, belegte Unternehmensinformationen geführt. Modellspezifische technische Daten sind den aktuellen Herstellerunterlagen zu entnehmen.",
+      "tags": ["Hersteller", "Beatmung", "Monitoring"],
+      "data": { "country": "Deutschland", "website": "https://www.draeger.com/", "founded": 1889, "focus": ["Beatmung", "Anästhesie", "Patientenmonitoring"] },
+      "links": [{ "rel": "related", "to": "device:patientenmonitor" }],
+      "sources": ["src:draeger-unternehmen"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "manufacturer:nordlicht-medizintechnik",
+      "title": "Nordlicht Medizintechnik (Demo)",
+      "aliases": ["Nordlicht"],
+      "summary": "Fiktiver Demo-Hersteller, mit dem MedTech World die Verknüpfung von Hersteller, Produktmodellen, Ersatzteilen und Angeboten veranschaulicht – keine reale Firma.",
+      "tags": ["Hersteller", "Demo"],
+      "data": { "country": "Deutschland (fiktiv)", "focus": ["Pulsoximetrie", "Patientenmonitoring"] },
+      "sources": ["src:mtw-redaktion-demo"],
+      "demo": true,
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "product_model:nordlicht-oxicheck-200",
+      "title": "Nordlicht OxiCheck 200 (Demo)",
+      "summary": "Fiktives Hand-Pulsoximeter mit wechselbarem Fingerclip-Sensor – Demo-Datensatz zur Veranschaulichung von Produktmodell, technischen Daten und Ersatzteilen.",
+      "tags": ["SpO2", "Demo", "Pulsoximeter"],
+      "data": { "status": "aktiv", "releaseYear": 2024, "riskClass": "IIb" },
+      "specs": [
+        { "key": "spo2_messbereich", "label": "SpO₂-Messbereich", "value": "0–100", "unit": "%", "source": "src:mtw-redaktion-demo" },
+        { "key": "spo2_genauigkeit", "label": "SpO₂-Genauigkeit (Arms)", "value": "± 2", "unit": "%", "condition": "70–100 % SpO₂", "source": "src:mtw-redaktion-demo" },
+        { "key": "pulsfrequenz_bereich", "label": "Pulsfrequenzbereich", "value": "25–240", "unit": "1/min", "source": "src:mtw-redaktion-demo" },
+        { "key": "akkulaufzeit", "label": "Akkulaufzeit", "value": 20, "unit": "h", "source": "src:mtw-redaktion-demo" }
+      ],
+      "links": [
+        { "rel": "model_of", "to": "device:pulsoximeter" },
+        { "rel": "manufactured_by", "to": "manufacturer:nordlicht-medizintechnik" },
+        { "rel": "has_component", "to": "component:spo2-sensor" },
+        { "rel": "has_component", "to": "component:spo2-sensorkabel" }
+      ],
+      "sources": ["src:mtw-redaktion-demo"],
+      "demo": true,
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "product_model:nordlicht-vitalis-m5",
+      "title": "Nordlicht Vitalis M5 (Demo)",
+      "summary": "Fiktiver Patientenmonitor mit EKG-, SpO₂-, NIBP- und Temperaturmodul – Demo-Datensatz für die Verknüpfung von Monitor, Modulen und Zubehör.",
+      "tags": ["Monitoring", "SpO2", "Demo"],
+      "data": { "status": "aktiv", "releaseYear": 2023, "riskClass": "IIb" },
+      "specs": [
+        { "key": "bildschirmdiagonale", "label": "Bildschirmdiagonale", "value": 12.1, "unit": "Zoll", "source": "src:mtw-redaktion-demo" },
+        { "key": "parameter", "label": "Parameter", "value": "EKG, SpO₂, NIBP, Temperatur", "source": "src:mtw-redaktion-demo" }
+      ],
+      "links": [
+        { "rel": "model_of", "to": "device:patientenmonitor" },
+        { "rel": "manufactured_by", "to": "manufacturer:nordlicht-medizintechnik" },
+        { "rel": "has_component", "to": "component:spo2-sensor" }
+      ],
+      "sources": ["src:mtw-redaktion-demo"],
+      "demo": true,
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "spare_part:nordlicht-fingerclip-erwachsene",
+      "title": "Fingerclip-Sensor Erwachsene NL-S100 (Demo)",
+      "summary": "Fiktiver wiederverwendbarer SpO₂-Fingerclip-Sensor für Erwachsene, kompatibel mit den Demo-Modellen OxiCheck 200 und Vitalis M5.",
+      "tags": ["SpO2", "Sensor", "Demo", "Zubehör"],
+      "data": { "partNumber": "NL-S100", "kind": "sensor", "wearPart": true, "original": true, "typicalLifetime": "abhängig von Nutzung und Reinigung" },
+      "links": [
+        { "rel": "fits", "to": "product_model:nordlicht-oxicheck-200" },
+        { "rel": "fits", "to": "product_model:nordlicht-vitalis-m5" },
+        { "rel": "fits", "to": "component:spo2-sensor" },
+        { "rel": "manufactured_by", "to": "manufacturer:nordlicht-medizintechnik" }
+      ],
+      "sources": ["src:mtw-redaktion-demo"],
+      "demo": true,
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "offer:nordlicht-fingerclip-neu",
+      "title": "NL-S100 Fingerclip-Sensor, neu (Demo-Angebot)",
+      "summary": "Demo-Angebot im MedTech Market: Originalsensor NL-S100 für OxiCheck 200 und Vitalis M5, neu und originalverpackt.",
+      "tags": ["SpO2", "Demo", "Ersatzteil"],
+      "data": { "seller": "Demo-Servicepartner Nord", "price": 89, "currency": "EUR", "condition": "neu", "stock": 12, "location": "Hamburg", "warrantyMonths": 12 },
+      "links": [{ "rel": "offers", "to": "spare_part:nordlicht-fingerclip-erwachsene" }],
+      "demo": true,
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "media:pulsoximetrie-prinzip",
+      "title": "Schema: Messprinzip der Pulsoximetrie",
+      "summary": "Schematische Darstellung: Rote und infrarote LED durchleuchten den Finger, die Photodiode misst das transmittierte Licht.",
+      "data": {
+        "kind": "schema",
+        "alt": "Schema eines Fingers zwischen roter/infraroter Leuchtdiode oben und Photodiode unten mit Lichtweg durch das Gewebe",
+        "license": "CC BY 4.0",
+        "attribution": "MedTech World Redaktion",
+        "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 200\"><rect width=\"320\" height=\"200\" fill=\"#f4f8fb\"/><rect x=\"110\" y=\"20\" width=\"100\" height=\"34\" rx=\"6\" fill=\"#2f7fbf\"/><text x=\"160\" y=\"42\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#fff\" text-anchor=\"middle\">LED rot / IR</text><rect x=\"60\" y=\"78\" width=\"200\" height=\"44\" rx=\"22\" fill=\"#e8b39a\"/><text x=\"160\" y=\"104\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#5b3a29\" text-anchor=\"middle\">Gewebe mit arteriellem Blut</text><line x1=\"150\" y1=\"56\" x2=\"150\" y2=\"144\" stroke=\"#e53935\" stroke-width=\"3\" stroke-dasharray=\"6 4\"/><line x1=\"170\" y1=\"56\" x2=\"170\" y2=\"144\" stroke=\"#8e24aa\" stroke-width=\"3\" stroke-dasharray=\"6 4\"/><rect x=\"110\" y=\"146\" width=\"100\" height=\"34\" rx=\"6\" fill=\"#111827\"/><text x=\"160\" y=\"168\" font-family=\"sans-serif\" font-size=\"12\" fill=\"#fff\" text-anchor=\"middle\">Photodiode</text><text x=\"16\" y=\"60\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#e53935\">660 nm</text><text x=\"250\" y=\"60\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#8e24aa\">940 nm</text></svg>"
+      },
+      "links": [
+        { "rel": "illustrates", "to": "term:pulsoximetrie" },
+        { "rel": "illustrates", "to": "device:pulsoximeter" },
+        { "rel": "illustrates", "to": "component:spo2-sensor" }
+      ],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "document:merkblatt-spo2-messung",
+      "title": "Merkblatt: Zuverlässige SpO₂-Messung",
+      "summary": "Kompakte Checkliste für Anwender und Technik: Sensorwahl, Platzierung, Plausibilitätsprüfung und bekannte Grenzen der Pulsoximetrie.",
+      "body": "1. Passenden, kompatiblen Sensor in der richtigen Größe wählen.\n2. Messort warm, sauber, ohne Nagellack; Sensor gegen Fremdlicht abschirmen.\n3. Auf eine gleichmäßige Pleth-Kurve achten, bevor Werte übernommen werden.\n4. Grenzen beachten: Bewegung, geringe Perfusion, Dyshämoglobine und – laut FDA – mögliche Ungenauigkeiten bei dunkler Hautpigmentierung.\n5. Bei Zweifel klinische Beurteilung und ggf. Blutgasanalyse heranziehen.",
+      "tags": ["SpO2", "Checkliste", "Anwendung"],
+      "data": { "docType": "merkblatt", "language": "de", "version": "1.0" },
+      "links": [
+        { "rel": "documents", "to": "device:pulsoximeter" },
+        { "rel": "documents", "to": "term:pulsoximetrie" }
+      ],
+      "sources": ["src:fda-pulse-oximeter-accuracy", "src:jubran-pulse-oximetry-2015"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    }
+  ]
+}

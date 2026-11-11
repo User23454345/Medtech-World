@@ -1,0 +1,102 @@
+{
+  "sources": [
+    {
+      "id": "src:eu-mdr-2017-745",
+      "title": "Verordnung (EU) 2017/745 über Medizinprodukte (MDR)",
+      "publisher": "Europäische Union, Amtsblatt L 117",
+      "kind": "gesetz",
+      "url": "https://eur-lex.europa.eu/eli/reg/2017/745/oj",
+      "edition": "ABl. L 117 vom 5.5.2017",
+      "accessedAt": "2026-11-01"
+    },
+    {
+      "id": "src:eu-mdd-93-42",
+      "title": "Richtlinie 93/42/EWG über Medizinprodukte (MDD)",
+      "publisher": "Europäische Gemeinschaften, Amtsblatt L 169",
+      "kind": "gesetz",
+      "edition": "ABl. L 169 vom 12.7.1993",
+      "accessedAt": "2026-11-01"
+    },
+    {
+      "id": "src:de-mpbetreibv",
+      "title": "Medizinprodukte-Betreiberverordnung (MPBetreibV)",
+      "publisher": "Bundesministerium der Justiz – gesetze-im-internet.de",
+      "kind": "gesetz",
+      "url": "https://www.gesetze-im-internet.de/mpbetreibv/",
+      "accessedAt": "2026-11-01"
+    },
+    {
+      "id": "src:de-mpdg",
+      "title": "Medizinprodukterecht-Durchführungsgesetz (MPDG)",
+      "publisher": "Bundesministerium der Justiz – gesetze-im-internet.de",
+      "kind": "gesetz",
+      "url": "https://www.gesetze-im-internet.de/mpdg/",
+      "accessedAt": "2026-11-01"
+    },
+    {
+      "id": "src:de-mpg",
+      "title": "Gesetz über Medizinprodukte (Medizinproduktegesetz – MPG), außer Kraft",
+      "publisher": "Bundesgesetzblatt",
+      "kind": "gesetz",
+      "note": "Weitgehend am 26.05.2021 durch das MPDG abgelöst.",
+      "accessedAt": "2026-11-01"
+    },
+    {
+      "id": "src:iso-80601-2-61",
+      "title": "ISO 80601-2-61 – Medizinische elektrische Geräte – Besondere Festlegungen für die grundlegende Sicherheit und die wesentlichen Leistungsmerkmale von Pulsoximetern",
+      "publisher": "ISO / IEC",
+      "kind": "norm",
+      "edition": "2017",
+      "accessedAt": "2026-11-01"
+    },
+    {
+      "id": "src:iec-60601-1",
+      "title": "IEC 60601-1 – Medizinische elektrische Geräte – Teil 1: Allgemeine Festlegungen für die Sicherheit einschließlich der wesentlichen Leistungsmerkmale",
+      "publisher": "IEC",
+      "kind": "norm",
+      "edition": "2005 + A1:2012 + A2:2020",
+      "accessedAt": "2026-11-01"
+    },
+    {
+      "id": "src:din-en-62353",
+      "title": "DIN EN 62353 (VDE 0751-1) – Medizinische elektrische Geräte – Wiederholungsprüfungen und Prüfung nach Instandsetzung von medizinischen elektrischen Geräten",
+      "publisher": "DIN / VDE (IEC 62353:2014)",
+      "kind": "norm",
+      "edition": "2015-10",
+      "accessedAt": "2026-11-01"
+    },
+    {
+      "id": "src:fda-pulse-oximeter-accuracy",
+      "title": "Pulse Oximeter Accuracy and Limitations: FDA Safety Communication",
+      "publisher": "U.S. Food and Drug Administration",
+      "kind": "behoerde",
+      "url": "https://www.fda.gov/medical-devices/safety-communications/pulse-oximeter-accuracy-and-limitations-fda-safety-communication",
+      "edition": "2021",
+      "accessedAt": "2026-11-01"
+    },
+    {
+      "id": "src:kramme-medizintechnik",
+      "title": "Medizintechnik – Verfahren, Systeme und Informationsverarbeitung",
+      "publisher": "Kramme, R. (Hrsg.), Springer",
+      "kind": "fachliteratur",
+      "edition": "5. Auflage, 2017",
+      "accessedAt": "2026-11-01"
+    },
+    {
+      "id": "src:jubran-pulse-oximetry-2015",
+      "title": "Jubran, A.: Pulse oximetry. Critical Care 19, 272",
+      "publisher": "BioMed Central",
+      "kind": "wissenschaft",
+      "edition": "2015",
+      "accessedAt": "2026-11-01"
+    },
+    {
+      "id": "src:mtw-redaktion-demo",
+      "title": "MedTech World – fiktives Demo-Datenblatt (keine reale Herstellerangabe)",
+      "publisher": "MedTech World Redaktion",
+      "kind": "intern",
+      "note": "Ausschließlich für als Demo gekennzeichnete Inhalte verwenden.",
+      "accessedAt": "2026-11-01"
+    }
+  ]
+}

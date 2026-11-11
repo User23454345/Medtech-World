@@ -1,0 +1,176 @@
+{
+  "entities": [
+    {
+      "id": "legal_reference:eu-mdr",
+      "title": "EU-Medizinprodukteverordnung (MDR)",
+      "aliases": ["MDR", "Verordnung (EU) 2017/745"],
+      "summary": "Europäischer Rechtsrahmen für das Inverkehrbringen von Medizinprodukten – u. a. Klassifizierung nach Risikoklassen, Konformitätsbewertung, klinische Bewertung und Überwachung nach dem Inverkehrbringen.",
+      "body": "Die MDR ersetzt die Richtlinie 93/42/EWG ([[legal_reference:eu-mdd]]) und gilt seit dem 26. Mai 2021 unmittelbar in allen EU-Mitgliedstaaten.\n\n## Relevanz für Technik und Service\n- **Risikoklassen** I, IIa, IIb und III nach den Klassifizierungsregeln in Anhang VIII.\n- **Herstellerpflichten** zu technischer Dokumentation, Gebrauchsanweisung und Vigilanz.\n- Pflichten der **Betreiber** regelt in Deutschland ergänzend die [[legal_reference:de-mpbetreibv|MPBetreibV]].",
+      "tags": ["Recht", "EU", "Zulassung"],
+      "data": {
+        "jurisdiction": "EU",
+        "kind": "verordnung",
+        "citation": "Verordnung (EU) 2017/745",
+        "status": "in-kraft",
+        "validFrom": "2021-05-26",
+        "verifiedAt": "2026-11-01",
+        "reviewIntervalDays": 365
+      },
+      "sources": ["src:eu-mdr-2017-745"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "legal_reference:eu-mdd",
+      "title": "Medizinprodukterichtlinie 93/42/EWG (MDD)",
+      "aliases": ["MDD", "Richtlinie 93/42/EWG"],
+      "summary": "Frühere EU-Richtlinie für Medizinprodukte. Sie wurde durch die MDR abgelöst und ist nur noch für Übergangsfragen bei Bestandsprodukten von Bedeutung.",
+      "body": "Die MDD wurde durch die [[legal_reference:eu-mdr|MDR]] ersetzt. Inhalte, die sich noch auf die MDD stützen, müssen geprüft und aktualisiert werden.",
+      "tags": ["Recht", "EU", "historisch"],
+      "data": {
+        "jurisdiction": "EU",
+        "kind": "verordnung",
+        "citation": "Richtlinie 93/42/EWG",
+        "status": "ersetzt",
+        "verifiedAt": "2026-11-01",
+        "reviewIntervalDays": 730,
+        "supersededBy": "legal_reference:eu-mdr"
+      },
+      "links": [{ "rel": "related", "to": "legal_reference:eu-mdr" }],
+      "sources": ["src:eu-mdd-93-42", "src:eu-mdr-2017-745"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "legal_reference:de-mpdg",
+      "title": "Medizinprodukterecht-Durchführungsgesetz (MPDG)",
+      "aliases": ["MPDG"],
+      "summary": "Deutsches Gesetz zur Durchführung der MDR und IVDR. Es löste am 26. Mai 2021 das Medizinproduktegesetz (MPG) weitgehend ab.",
+      "body": "Das MPDG regelt nationale Ergänzungen zur [[legal_reference:eu-mdr|MDR]], etwa Zuständigkeiten der Behörden. Auf seiner Grundlage wurde u. a. die [[legal_reference:de-mpbetreibv|MPBetreibV]] angepasst.",
+      "tags": ["Recht", "Deutschland"],
+      "data": {
+        "jurisdiction": "DE",
+        "kind": "gesetz",
+        "citation": "MPDG",
+        "status": "in-kraft",
+        "validFrom": "2021-05-26",
+        "verifiedAt": "2026-11-01",
+        "reviewIntervalDays": 365
+      },
+      "links": [{ "rel": "related", "to": "legal_reference:eu-mdr" }],
+      "sources": ["src:de-mpdg"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "legal_reference:de-mpg",
+      "title": "Medizinproduktegesetz (MPG)",
+      "aliases": ["MPG"],
+      "summary": "Früheres deutsches Medizinproduktegesetz. Es wurde zum 26. Mai 2021 weitgehend durch das MPDG abgelöst – Verweise auf das MPG in älteren Unterlagen sind zu aktualisieren.",
+      "tags": ["Recht", "Deutschland", "historisch"],
+      "data": {
+        "jurisdiction": "DE",
+        "kind": "gesetz",
+        "citation": "MPG",
+        "status": "ersetzt",
+        "verifiedAt": "2026-11-01",
+        "reviewIntervalDays": 730,
+        "supersededBy": "legal_reference:de-mpdg"
+      },
+      "links": [{ "rel": "related", "to": "legal_reference:de-mpdg" }],
+      "sources": ["src:de-mpg", "src:de-mpdg"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "legal_reference:de-mpbetreibv",
+      "title": "Medizinprodukte-Betreiberverordnung (MPBetreibV)",
+      "aliases": ["MPBetreibV", "Betreiberverordnung"],
+      "summary": "Regelt in Deutschland das Errichten, Betreiben, Anwenden und Instandhalten von Medizinprodukten – u. a. Einweisung, Sicherheitstechnische und Messtechnische Kontrollen sowie Bestandsverzeichnis.",
+      "body": "## Wichtige Pflichten für Betreiber\n- **Sicherheitstechnische Kontrollen (STK)** für Medizinprodukte nach Anlage 1 – siehe [[legal_reference:de-mpbetreibv-stk]].\n- **Messtechnische Kontrollen (MTK)** für Medizinprodukte mit Messfunktion nach Anlage 2 – siehe [[legal_reference:de-mpbetreibv-mtk]].\n- Instandhaltung nur durch Personen mit erforderlicher Sachkenntnis, Voraussetzungen und Mitteln.\n- Bestandsverzeichnis und Medizinproduktebuch.\n\nDie konkrete Paragraphenzählung hat sich mit Novellierungen geändert; maßgeblich ist stets die aktuelle Fassung der Primärquelle.",
+      "tags": ["Recht", "Deutschland", "Betreiber"],
+      "data": {
+        "jurisdiction": "DE",
+        "kind": "verordnung",
+        "citation": "MPBetreibV",
+        "status": "in-kraft",
+        "verifiedAt": "2026-11-01",
+        "reviewIntervalDays": 365
+      },
+      "links": [{ "rel": "related", "to": "legal_reference:de-mpdg" }],
+      "sources": ["src:de-mpbetreibv"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "legal_reference:de-mpbetreibv-stk",
+      "title": "Sicherheitstechnische Kontrollen nach MPBetreibV",
+      "aliases": ["STK-Pflicht"],
+      "summary": "Betreiber müssen für Medizinprodukte nach Anlage 1 der MPBetreibV Sicherheitstechnische Kontrollen nach den Angaben des Herstellers durchführen lassen – fehlen diese, spätestens alle zwei Jahre.",
+      "body": "Die STK dient der rechtzeitigen Feststellung von Mängeln, die die Sicherheit von Patienten, Anwendern oder Dritten gefährden können. Anlage 1 umfasst u. a. bestimmte nichtimplantierbare aktive Medizinprodukte (z. B. zur Defibrillation, Infusion unter Druckaufbau oder maschinellen Beatmung).\n\nDie Ergebnisse sind zu dokumentieren (Protokoll, Medizinproduktebuch).",
+      "tags": ["STK", "Recht", "Prüfung"],
+      "data": {
+        "jurisdiction": "DE",
+        "kind": "verordnung",
+        "citation": "MPBetreibV – Sicherheitstechnische Kontrollen, Anlage 1",
+        "status": "in-kraft",
+        "verifiedAt": "2026-11-01",
+        "reviewIntervalDays": 365
+      },
+      "links": [{ "rel": "related", "to": "legal_reference:de-mpbetreibv" }],
+      "sources": ["src:de-mpbetreibv"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "legal_reference:de-mpbetreibv-mtk",
+      "title": "Messtechnische Kontrollen nach MPBetreibV",
+      "aliases": ["MTK-Pflicht"],
+      "summary": "Für Medizinprodukte mit Messfunktion nach Anlage 2 der MPBetreibV sind Messtechnische Kontrollen vorgeschrieben; sie prüfen, ob die zulässigen Fehlergrenzen eingehalten werden.",
+      "body": "Anlage 2 nennt die betroffenen Produktarten (z. B. nichtinvasive Blutdruckmessgeräte) und die jeweiligen Nachprüffristen. Pulsoximeter sind dort nicht aufgeführt – ihre Messgenauigkeit wird über die Typprüfung nach ISO 80601-2-61 und die Instandhaltungsvorgaben des Herstellers abgesichert (siehe [[device:pulsoximeter]]).",
+      "tags": ["MTK", "Recht", "Prüfung", "Messtechnik"],
+      "data": {
+        "jurisdiction": "DE",
+        "kind": "verordnung",
+        "citation": "MPBetreibV – Messtechnische Kontrollen, Anlage 2",
+        "status": "in-kraft",
+        "verifiedAt": "2026-11-01",
+        "reviewIntervalDays": 365
+      },
+      "links": [{ "rel": "related", "to": "legal_reference:de-mpbetreibv" }],
+      "sources": ["src:de-mpbetreibv"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "legal_reference:iec-60601-1",
+      "title": "IEC 60601-1 (Grundnorm Medizinische elektrische Geräte)",
+      "aliases": ["IEC 60601-1", "DIN EN 60601-1"],
+      "summary": "Grundnorm für Basissicherheit und wesentliche Leistungsmerkmale medizinischer elektrischer Geräte – u. a. Schutzklassen, Anwendungsteile (B, BF, CF) und Ableitstromgrenzen für die Typprüfung.",
+      "body": "Die IEC 60601-1 richtet sich an Hersteller (Entwicklung, Typprüfung). Für Wiederholungsprüfungen im Betrieb gilt die [[legal_reference:din-en-62353|DIN EN 62353]]. Ergänzende Festlegungen für einzelne Gerätearten stehen in den Besonderen Festlegungen der Reihe 60601-2-x bzw. 80601-2-x.",
+      "tags": ["Norm", "Elektrische Sicherheit"],
+      "data": {
+        "jurisdiction": "international",
+        "kind": "norm",
+        "citation": "IEC 60601-1:2005+A1:2012+A2:2020",
+        "status": "in-kraft",
+        "verifiedAt": "2026-11-01",
+        "reviewIntervalDays": 365
+      },
+      "sources": ["src:iec-60601-1"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "legal_reference:din-en-62353",
+      "title": "DIN EN 62353 (VDE 0751-1) – Wiederholungsprüfungen",
+      "aliases": ["DIN EN 62353", "IEC 62353", "VDE 0751-1"],
+      "summary": "Norm für Wiederholungsprüfungen und Prüfungen nach Instandsetzung medizinischer elektrischer Geräte: Sichtprüfung, Schutzleiterwiderstand, Ableitströme, Funktionsprüfung und Dokumentation.",
+      "body": "Die Norm beschreibt Messverfahren (direkte Methode, Differenzstrommethode, Ersatzableitstrommethode) und Grenzwerte. Siehe Prüfverfahren [[test_procedure:elektrische-sicherheit-62353]].",
+      "tags": ["Norm", "Elektrische Sicherheit", "Prüfung"],
+      "data": {
+        "jurisdiction": "international",
+        "kind": "norm",
+        "citation": "DIN EN 62353 (VDE 0751-1):2015-10 / IEC 62353:2014",
+        "status": "in-kraft",
+        "verifiedAt": "2026-11-01",
+        "reviewIntervalDays": 365
+      },
+      "links": [{ "rel": "related", "to": "legal_reference:iec-60601-1" }],
+      "sources": ["src:din-en-62353"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    }
+  ]
+}
