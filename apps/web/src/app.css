@@ -30,6 +30,7 @@
   .mw-modnav--open { display: flex; }
 }
 @media (max-width: 640px) { .mw-hide-sm { display: none; } }
+@media (max-width: 1440px) { .mw-modnav__link svg { display: none; } .mw-modnav__link { padding: 7px 8px; } .mw-searchbtn kbd { display: none; } }
 
 /* ---------------------------------------------------------------- Globale Suche */
 .mw-search-backdrop { position: fixed; inset: 0; background: rgba(5, 15, 25, 0.55); z-index: 60; display: flex; justify-content: center; align-items: flex-start; padding: 8vh 16px 16px; backdrop-filter: blur(2px); }

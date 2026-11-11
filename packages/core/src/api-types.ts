@@ -70,6 +70,8 @@ export interface EntityDetail<TData = unknown> extends EntitySummary {
   reviewer?: string;
   /** Module, in denen diese Entität eine Rolle spielt (für "In anderen Modulen öffnen") */
   modules: ModuleId[];
+  /** Titel aller per [[typ:slug]] im Text referenzierten Inhalte (für die Darstellung von Wiki-Links) */
+  linkedTitles: Record<string, string>;
 }
 
 export interface SearchHit extends EntitySummary {

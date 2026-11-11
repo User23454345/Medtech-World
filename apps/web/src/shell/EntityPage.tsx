@@ -21,6 +21,8 @@ import {
   SpecTable,
   Textarea,
   TypeBadge,
+  UiProvider,
+  useUi,
 } from '@medtech/ui';
 import { api } from '../lib/api.ts';
 import { useAuth } from '../lib/auth.tsx';
@@ -250,6 +252,13 @@ export function EntityView({ entity }: { entity: EntityDetail }) {
   );
 }
 
+/** Stellt Wiki-Links im Kontext einer Entität mit echten Titeln dar */
+export function EntityTitleScope({ entity, children }: { entity: EntityDetail; children: React.ReactNode }) {
+  const ui = useUi();
+  const titles = entity.linkedTitles ?? {};
+  return <UiProvider value={{ ...ui, resolveTitle: (id) => titles[id] ?? ui.resolveTitle?.(id) }}>{children}</UiProvider>;
+}
+
 /** Einheitliche Detailseite für ALLE Inhaltstypen: /e/:type/:slug */
 export function EntityPage() {
   const { type, slug } = useParams();
@@ -263,6 +272,10 @@ export function EntityPage() {
     return <div className="mw-container mw-page"><ErrorState error={error} onRetry={reload} /></div>;
   }
   if (!data) return <div className="mw-container mw-page"><EmptyState title="Nicht gefunden" /></div>;
-  return <EntityView entity={data} />;
+  return (
+    <EntityTitleScope entity={data}>
+      <EntityView entity={data} />
+    </EntityTitleScope>
+  );
 }
 

@@ -1,6 +1,7 @@
 import {
   ENTITY_TYPE_DEFS,
   ENTITY_TYPES,
+  extractWikiLinks,
   RELATION_DEFS,
   type EntityDetail,
   type EntitySummary,
@@ -242,6 +243,9 @@ export class ContentRepository {
       reviewedAt: row.reviewed_at,
       reviewer: row.reviewer ?? undefined,
       modules: this.modulesFor(row.type, id),
+      linkedTitles: Object.fromEntries(
+        [...this.summariesByIds(extractWikiLinks(`${row.body}\n${row.data}`), opts).values()].map((s) => [s.id, s.title]),
+      ),
     };
   }
 
