@@ -1,21 +1,11 @@
 import { ENTITY_TYPE_DEFS, entityPath, type ProgressEntry } from '@medtech/core';
-import { Badge, Icon, ProgressBar, useUi } from '@medtech/ui';
+import { Icon, ProgressBar, useUi } from '@medtech/ui';
 import { itemStatus, pathItemLink, readinessLabel, type ItemStatus, type PathItem, type Readiness } from './career-logic.ts';
+import { ProgressStatusBadge } from '../../shell/ProgressStatus.tsx';
 import './career.css';
 
-const STATUS_UI: Record<ItemStatus, { label: string; tone?: 'ok' | 'warn'; icon: string }> = {
-  completed: { label: 'Abgeschlossen', tone: 'ok', icon: 'check' },
-  started: { label: 'Begonnen', tone: 'warn', icon: 'history' },
-  open: { label: 'Offen', icon: 'target' },
-};
-
 export function StatusBadge({ status }: { status: ItemStatus }) {
-  const s = STATUS_UI[status];
-  return (
-    <Badge tone={s.tone} icon={s.icon}>
-      {s.label}
-    </Badge>
-  );
+  return <ProgressStatusBadge status={status} />;
 }
 
 /** Bereitschaftsanzeige (Kompetenzcheck) */

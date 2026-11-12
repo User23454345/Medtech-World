@@ -20,13 +20,15 @@ export function moduleRoutes(app: FastifyInstance, data: DataLayer) {
         /** Lernmodul (oder andere Entität), zu dem das Quiz gehört – für den Lernfortschritt */
         contextId: z.string().refine(isEntityId).optional(),
         answers: z
-          .array(z.object({ questionId: z.string().refine(isEntityId), selected: z.array(z.string().max(20)).max(10) }))
+          .array(z.object({ questionId: z.string().refine(isEntityId), selected: z.array(z.string().max(20)).min(1).max(10) }))
           .min(1)
           .max(100),
       }),
       req.body,
     );
     const drafts = includeDrafts(req);
+    // Bewusster Lern-Kompromiss: Lösung und Erklärung gibt es nur für tatsächlich beantwortete Fragen
+    // (leere Auswahl → 400). Die Prüfakademie dient dem Lernen, nicht der zertifizierten Prüfung.
     const results = body.answers.map((a) => {
       const q = data.content.get<QuizQuestionData>(a.questionId, { includeDrafts: drafts });
       if (!q || q.type !== 'quiz_question') throw notFound(`Quizfrage ${a.questionId}`);

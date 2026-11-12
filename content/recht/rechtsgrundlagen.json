@@ -28,7 +28,7 @@
       "tags": ["Recht", "EU", "historisch"],
       "data": {
         "jurisdiction": "EU",
-        "kind": "verordnung",
+        "kind": "richtlinie",
         "citation": "Richtlinie 93/42/EWG",
         "status": "ersetzt",
         "verifiedAt": "2026-11-01",

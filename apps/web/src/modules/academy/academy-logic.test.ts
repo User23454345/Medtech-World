@@ -15,6 +15,7 @@ import {
   isQuizComplete,
   normalizeProtocol,
   optionOutcome,
+  shuffledOptions,
   parseGermanNumber,
   parseLimit,
   progressSummary,
@@ -184,5 +185,18 @@ describe('Abschnittstitel', () => {
     expect(stripNumbering('1. Was misst ein Pulsoximeter?')).toBe('Was misst ein Pulsoximeter?');
     expect(stripNumbering('2) Aufbau')).toBe('Aufbau');
     expect(stripNumbering('IEC 60601')).toBe('IEC 60601');
+  });
+});
+
+describe('shuffledOptions', () => {
+  const opts = ['a', 'b', 'c', 'd'].map((id) => ({ id, text: id }));
+  it('mischt Einfach-/Mehrfachauswahl, behält alle Options-IDs', () => {
+    const out = shuffledOptions({ kind: 'single', options: opts }, () => 0);
+    expect(out.map((o) => o.id)).toEqual(['b', 'c', 'd', 'a']);
+    expect(out.map((o) => o.id).sort()).toEqual(['a', 'b', 'c', 'd']);
+    expect(opts.map((o) => o.id)).toEqual(['a', 'b', 'c', 'd']);
+  });
+  it('lässt Wahr/Falsch-Fragen unverändert', () => {
+    expect(shuffledOptions({ kind: 'truefalse', options: opts }, () => 0).map((o) => o.id)).toEqual(['a', 'b', 'c', 'd']);
   });
 });

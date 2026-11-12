@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState, type FormEvent, type Keyboard
 import { Route, Routes, useSearchParams } from 'react-router';
 import { ENTITY_TYPE_DEFS, MODULES, entityPath, type CopilotAnswer } from '@medtech/core';
 import { Alert, Badge, Button, Card, Icon, Loading, ModuleHero, Textarea, useUi } from '@medtech/ui';
+import { plural } from '../../lib/format.ts';
 import { api } from '../../lib/api.ts';
 import { useAuth } from '../../lib/auth.tsx';
 import { useAsync, useDocumentTitle, useEntity } from '../../lib/hooks.ts';
@@ -94,7 +95,7 @@ function CopilotPage() {
       try {
         const answer = await api.copilot.ask(question, contextId ?? undefined);
         setTurns((t) => t.map((x) => (x.id === id ? { ...x, status: 'done', answer } : x)));
-        setAnnounce(`Antwort erhalten mit ${answer.citations.length} Beleg(en).`);
+        setAnnounce(`Antwort erhalten mit ${plural(answer.citations.length, 'Beleg', 'Belegen')}.`);
       } catch (e) {
         const message = e instanceof Error ? e.message : 'Unbekannter Fehler';
         setTurns((t) => t.map((x) => (x.id === id ? { ...x, status: 'error', error: message } : x)));

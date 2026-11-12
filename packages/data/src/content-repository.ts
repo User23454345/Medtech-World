@@ -105,14 +105,14 @@ export class ContentRepository {
     return opts.includeDrafts ? '1=1' : `${alias}.review_status != 'entwurf'`;
   }
 
-  private thumbnails(ids: string[]): Map<string, string> {
+  private thumbnails(ids: string[], opts: ReadOptions = {}): Map<string, string> {
     const out = new Map<string, string>();
     if (ids.length === 0) return out;
     const rows = this.db
       .prepare(
         `SELECT r.to_id AS target, m.data AS data FROM relations r
          JOIN entities m ON m.id = r.from_id AND m.type = 'media'
-         WHERE r.rel = 'illustrates' AND r.to_id IN (SELECT value FROM json_each(?))
+         WHERE r.rel = 'illustrates' AND r.to_id IN (SELECT value FROM json_each(?)) AND ${this.draftFilter(opts, 'm')}
          ORDER BY m.slug`,
       )
       .all(JSON.stringify(ids)) as Array<{ target: string; data: string }>;
@@ -124,7 +124,7 @@ export class ContentRepository {
     }
     // Medien selbst zeigen sich selbst als Vorschaubild
     const media = this.db
-      .prepare(`SELECT id, data FROM entities WHERE type = 'media' AND id IN (SELECT value FROM json_each(?))`)
+      .prepare(`SELECT e.id, e.data FROM entities e WHERE e.type = 'media' AND e.id IN (SELECT value FROM json_each(?)) AND ${this.draftFilter(opts)}`)
       .all(JSON.stringify(ids)) as Array<{ id: string; data: string }>;
     for (const m of media) {
       const d = JSON.parse(m.data) as { svg?: string; url?: string };
@@ -134,8 +134,8 @@ export class ContentRepository {
     return out;
   }
 
-  toSummaries(rows: Array<Pick<EntityRow, 'id' | 'type' | 'slug' | 'title' | 'summary' | 'tags' | 'demo' | 'review_status' | 'flags'>>): EntitySummary[] {
-    const thumbs = this.thumbnails(rows.map((r) => r.id));
+  toSummaries(rows: Array<Pick<EntityRow, 'id' | 'type' | 'slug' | 'title' | 'summary' | 'tags' | 'demo' | 'review_status' | 'flags'>>, opts: ReadOptions = {}): EntitySummary[] {
+    const thumbs = this.thumbnails(rows.map((r) => r.id), opts);
     return rows.map((r) => ({
       id: r.id,
       type: r.type,
@@ -156,7 +156,7 @@ export class ContentRepository {
     const rows = this.db
       .prepare(`SELECT ${SUMMARY_COLS} FROM entities e WHERE e.id IN (SELECT value FROM json_each(?)) AND ${this.draftFilter(opts)}`)
       .all(JSON.stringify([...new Set(ids)])) as unknown as EntityRow[];
-    return new Map(this.toSummaries(rows).map((s) => [s.id, s]));
+    return new Map(this.toSummaries(rows, opts).map((s) => [s.id, s]));
   }
 
   exists(id: string, opts: ReadOptions = {}): boolean {
@@ -176,6 +176,8 @@ export class ContentRepository {
       params.push(opts.tag);
     }
     if (opts.relatedTo) {
+      // Nicht sichtbare (z. B. Entwurfs-)Bezugsentitäten verraten weder Existenz noch Verknüpfungen
+      if (!this.exists(opts.relatedTo, opts)) return { items: [], total: 0 };
       const relCond = opts.rel ? 'AND r.rel = ?' : '';
       where.push(`(EXISTS (SELECT 1 FROM relations r WHERE r.from_id = ? AND r.to_id = e.id ${relCond})
                 OR EXISTS (SELECT 1 FROM relations r WHERE r.to_id = ? AND r.from_id = e.id ${relCond}))`);
@@ -189,13 +191,13 @@ export class ContentRepository {
     const rows = this.db
       .prepare(`SELECT ${SUMMARY_COLS} FROM entities e WHERE ${whereSql} ORDER BY e.title COLLATE NOCASE LIMIT ? OFFSET ?`)
       .all(...params, limit, offset) as unknown as EntityRow[];
-    return { items: this.toSummaries(rows), total };
+    return { items: this.toSummaries(rows, opts), total };
   }
 
   get<TData = unknown>(id: string, opts: ReadOptions = {}): EntityDetail<TData> | null {
     const row = this.db.prepare(`SELECT * FROM entities e WHERE e.id = ? AND ${this.draftFilter(opts)}`).get(id) as EntityRow | undefined;
     if (!row) return null;
-    const [summary] = this.toSummaries([row]);
+    const [summary] = this.toSummaries([row], opts);
 
     const specs = (
       this.db
@@ -242,7 +244,7 @@ export class ContentRepository {
       relations: this.relationGroups(id, opts),
       reviewedAt: row.reviewed_at,
       reviewer: row.reviewer ?? undefined,
-      modules: this.modulesFor(row.type, id),
+      modules: this.modulesFor(row.type, id, opts),
       linkedTitles: Object.fromEntries(
         [...this.summariesByIds(extractWikiLinks(`${row.body}\n${row.data}`), opts).values()].map((s) => [s.id, s.title]),
       ),
@@ -263,7 +265,7 @@ export class ContentRepository {
       )
       .all(id, id) as unknown as Array<EntityRow & { direction: 'out' | 'in'; rel: RelationType; note: string | null }>;
 
-    const summaries = new Map(this.toSummaries(rows).map((s) => [s.id, s]));
+    const summaries = new Map(this.toSummaries(rows, opts).map((s) => [s.id, s]));
     const groups = new Map<string, RelationGroup>();
     for (const r of rows) {
       const def = RELATION_DEFS[r.rel];
@@ -283,12 +285,12 @@ export class ContentRepository {
   }
 
   /** In welchen Modulen spielt diese Entität eine Rolle? */
-  modulesFor(type: EntityType, id: string): ModuleId[] {
+  modulesFor(type: EntityType, id: string, opts: ReadOptions = {}): ModuleId[] {
     const def = ENTITY_TYPE_DEFS[type];
     const mods = new Set<ModuleId>([def.homeModule, ...def.alsoIn]);
     const rels = this.db
       .prepare(`SELECT DISTINCT e.type FROM relations r JOIN entities e ON e.id = CASE WHEN r.from_id = ? THEN r.to_id ELSE r.from_id END
-                WHERE r.from_id = ? OR r.to_id = ?`)
+                WHERE (r.from_id = ? OR r.to_id = ?) AND ${this.draftFilter(opts)}`)
       .all(id, id, id) as Array<{ type: EntityType }>;
     const types = new Set(rels.map((r) => r.type));
     if (types.has('simulation')) mods.add('simulator');
@@ -328,7 +330,7 @@ export class ContentRepository {
 
     // exakte Titel-/Alias-Treffer nach oben
     const q = query.normalize('NFKC').trim().toLowerCase();
-    const summaries = new Map(this.toSummaries(rows).map((s) => [s.id, s]));
+    const summaries = new Map(this.toSummaries(rows, opts).map((s) => [s.id, s]));
     let hits: SearchHit[] = rows.map((r, i) => {
       const def = ENTITY_TYPE_DEFS[r.type];
       const title = r.title.normalize('NFKC').toLowerCase();
@@ -391,7 +393,7 @@ export class ContentRepository {
          WHERE es.source_id = ? AND ${this.draftFilter(opts)} ORDER BY e.title`,
       )
       .all(sourceId) as unknown as EntityRow[];
-    return this.toSummaries(rows);
+    return this.toSummaries(rows, opts);
   }
 }
 

@@ -6,6 +6,7 @@ import { api } from '../../lib/api.ts';
 import { useAuth } from '../../lib/auth.tsx';
 import { useDocumentTitle, useEntity, useRecordVisit, useRequireLogin } from '../../lib/hooks.ts';
 import { EntityTitleScope, FavoriteButton } from '../../shell/EntityPage.tsx';
+import { ProgressStatusBadge } from '../../shell/ProgressStatus.tsx';
 import { getEngine, normalizeParams, type Engine, type ParamValue, type Params, type Timebase } from './engines/index.ts';
 import { fmtDuration } from './engines/infusion-pump.ts';
 import { LiveChart } from './components/LiveChart.tsx';
@@ -364,7 +365,7 @@ function ProgressCard({ entityId, loggedIn }: { entityId: string; loggedIn: bool
       ) : (
         <div className="mw-stack" style={{ gap: 8 }}>
           <p className="mw-small" style={{ margin: 0 }}>
-            Status: {status === 'completed' ? <Badge tone="ok" icon="check">abgeschlossen</Badge> : status === 'started' ? <Badge tone="info">begonnen</Badge> : '…'}
+            Status: {status === 'completed' || status === 'started' ? <ProgressStatusBadge status={status} /> : '…'}
           </p>
           {status !== 'completed' ? (
             <Button size="sm" icon="check" onClick={complete} disabled={busy}>

@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useState, type ReactNode } from 'react';
+import { Suspense, useEffect, useRef, useState, type ReactNode, type RefObject } from 'react';
 import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router';
 import { MODULE_LIST, ROLE_LABELS } from '@medtech/core';
 import { Icon, Loading } from '@medtech/ui';
@@ -21,12 +21,43 @@ function useTheme() {
   }, [effectiveSettings.theme, effectiveSettings.reducedMotion]);
 }
 
+/**
+ * Aufklappbereich (Disclosure) schließen bei Escape oder Klick außerhalb.
+ * Bei Escape kehrt der Fokus zum auslösenden Knopf zurück.
+ */
+function useDismiss(open: boolean, close: () => void, refs: Array<RefObject<HTMLElement | null>>, toggle: RefObject<HTMLElement | null>) {
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return;
+      close();
+      toggle.current?.focus();
+    };
+    const onPointer = (e: PointerEvent) => {
+      const target = e.target as Node | null;
+      if (target && refs.some((r) => r.current?.contains(target))) return;
+      close();
+    };
+    document.addEventListener('keydown', onKey);
+    document.addEventListener('pointerdown', onPointer);
+    return () => {
+      document.removeEventListener('keydown', onKey);
+      document.removeEventListener('pointerdown', onPointer);
+    };
+    // refs/close sind stabil genug; Neuregistrierung nur beim Öffnen/Schließen
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]);
+}
+
 function UserMenu() {
   const { user, logout, can } = useAuth();
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const rootRef = useRef<HTMLDivElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
   useEffect(() => setOpen(false), [location.pathname]);
+  useDismiss(open, () => setOpen(false), [rootRef], toggleRef);
 
   if (!user) {
     return (
@@ -38,8 +69,8 @@ function UserMenu() {
     );
   }
   return (
-    <div className="mw-usermenu">
-      <button type="button" className="mw-header-btn" aria-haspopup="menu" aria-expanded={open} onClick={() => setOpen((o) => !o)}>
+    <div className="mw-usermenu" ref={rootRef}>
+      <button ref={toggleRef} type="button" className="mw-header-btn" aria-expanded={open} aria-controls="mw-usermenu-panel" onClick={() => setOpen((o) => !o)}>
         <span className="mw-avatar" aria-hidden>
           {user.displayName.slice(0, 1).toUpperCase()}
         </span>
@@ -47,42 +78,41 @@ function UserMenu() {
         <Icon name="chevron-down" size={14} />
       </button>
       {open ? (
-        <div className="mw-usermenu__panel" role="menu">
+        <div className="mw-usermenu__panel" id="mw-usermenu-panel">
           <div className="mw-usermenu__head">
             <strong>{user.displayName}</strong>
             <span className="mw-muted mw-small">{ROLE_LABELS[user.role]}</span>
           </div>
-          <Link role="menuitem" to="/konto">
+          <Link to="/konto">
             <Icon name="home" /> Mein Bereich
           </Link>
-          <Link role="menuitem" to="/konto/favoriten">
+          <Link to="/konto/favoriten">
             <Icon name="star" /> Favoriten
           </Link>
-          <Link role="menuitem" to="/konto/fortschritt">
+          <Link to="/konto/fortschritt">
             <Icon name="graduation" /> Lernfortschritt
           </Link>
-          <Link role="menuitem" to="/konto/notizen">
+          <Link to="/konto/notizen">
             <Icon name="note" /> Notizen
           </Link>
-          <Link role="menuitem" to="/konto/verlauf">
+          <Link to="/konto/verlauf">
             <Icon name="history" /> Lernhistorie
           </Link>
-          <Link role="menuitem" to="/konto/einstellungen">
+          <Link to="/konto/einstellungen">
             <Icon name="settings" /> Einstellungen & Datenschutz
           </Link>
           {can('quality:read') ? (
-            <Link role="menuitem" to="/qualitaet">
+            <Link to="/qualitaet">
               <Icon name="shield" /> Qualitätssicherung
             </Link>
           ) : null}
           {can('users:manage') ? (
-            <Link role="menuitem" to="/admin/nutzer">
+            <Link to="/admin/nutzer">
               <Icon name="user" /> Nutzerverwaltung
             </Link>
           ) : null}
           <button
             type="button"
-            role="menuitem"
             onClick={async () => {
               await logout();
               navigate('/');
@@ -101,6 +131,9 @@ export function AppShell({ children }: { children?: ReactNode }) {
   const [searchOpen, setSearchOpen] = useState(false);
   const [navOpen, setNavOpen] = useState(false);
   const location = useLocation();
+  const navRef = useRef<HTMLElement>(null);
+  const navToggleRef = useRef<HTMLButtonElement>(null);
+  useDismiss(navOpen, () => setNavOpen(false), [navRef, navToggleRef], navToggleRef);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -136,10 +169,10 @@ export function AppShell({ children }: { children?: ReactNode }) {
               MedTech <strong>World</strong>
             </span>
           </Link>
-          <button type="button" className="mw-header-btn mw-show-md" aria-expanded={navOpen} aria-controls="mw-modnav" onClick={() => setNavOpen((o) => !o)}>
+          <button ref={navToggleRef} type="button" className="mw-header-btn mw-show-md" aria-expanded={navOpen} aria-controls="mw-modnav" onClick={() => setNavOpen((o) => !o)}>
             <Icon name="menu" /> <span className="mw-visually-hidden">Module</span>
           </button>
-          <nav id="mw-modnav" className={`mw-modnav${navOpen ? ' mw-modnav--open' : ''}`} aria-label="Module">
+          <nav ref={navRef} id="mw-modnav" className={`mw-modnav${navOpen ? ' mw-modnav--open' : ''}`} aria-label="Module">
             {MODULE_LIST.map((m) => (
               <NavLink key={m.id} to={m.path} className="mw-modnav__link" style={{ '--mw-accent': m.accent } as React.CSSProperties}>
                 <Icon name={m.icon} size={16} />
@@ -148,7 +181,7 @@ export function AppShell({ children }: { children?: ReactNode }) {
             ))}
           </nav>
           <div className="mw-header__actions">
-            <button type="button" className="mw-header-btn mw-searchbtn" onClick={() => setSearchOpen(true)} aria-label="Suche öffnen (Strg+K)">
+            <button type="button" className="mw-header-btn mw-searchbtn" onClick={() => setSearchOpen(true)} aria-label="Suchen (Strg+K)">
               <Icon name="search" />
               <span className="mw-hide-sm">Suchen</span>
               <kbd className="mw-kbd mw-hide-sm">Strg K</kbd>

@@ -23,6 +23,7 @@ import {
 import { api } from '../lib/api.ts';
 import { useAuth } from '../lib/auth.tsx';
 import { useAsync, useDocumentTitle } from '../lib/hooks.ts';
+import { ProgressStatusBadge } from '../shell/ProgressStatus.tsx';
 
 function safeNext(next: string | null): string {
   return next && next.startsWith('/') && !next.startsWith('//') && !next.startsWith('/konto/anmelden') ? next : '/konto';
@@ -264,7 +265,9 @@ export function ProgressPage() {
                       <td>
                         <Link to={entityPath(m.id)}>{m.title}</Link>
                       </td>
-                      <td>{p ? <Badge tone={p.status === 'completed' ? 'ok' : 'info'}>{p.status === 'completed' ? 'Abgeschlossen' : 'Begonnen'}</Badge> : <span className="mw-muted">offen</span>}</td>
+                      <td>
+                        <ProgressStatusBadge status={p ? p.status : 'open'} />
+                      </td>
                       <td>{p?.score != null ? `${p.score} %` : '–'}</td>
                     </tr>
                   );
@@ -281,7 +284,7 @@ export function ProgressPage() {
                   .map((p) => (
                     <li key={p.entityId} className="mw-spread">
                       <Link to={entityPath(p.entityId)}>{p.entity!.title}</Link>
-                      <Badge tone={p.status === 'completed' ? 'ok' : 'info'}>{p.status === 'completed' ? 'Abgeschlossen' : 'Begonnen'}{p.score != null ? ` · ${p.score} %` : ''}</Badge>
+                      <ProgressStatusBadge status={p.status} score={p.score} />
                     </li>
                   ))}
               </ul>
@@ -298,6 +301,7 @@ export function NotesPage() {
   const notes = useAsync(() => api.me.notes(), [user?.id], user ? undefined : null);
   const [text, setText] = useState('');
   const [editing, setEditing] = useState<{ id: string; text: string } | null>(null);
+  const [deleteError, setDeleteError] = useState<unknown>(null);
   return (
     <AccountLayout title="Notizen">
       <Card>
@@ -320,6 +324,7 @@ export function NotesPage() {
       </Card>
       <div className="mw-stack" style={{ marginTop: 16, gap: 10 }}>
         {notes.loading ? <Loading /> : null}
+        {deleteError ? <ErrorState error={deleteError} /> : null}
         {notes.data?.items.length === 0 ? <EmptyState title="Noch keine Notizen" icon="note" /> : null}
         {notes.data?.items.map((n) => (
           <Card key={n.id}>
@@ -332,7 +337,21 @@ export function NotesPage() {
                 <Button size="sm" variant="ghost" icon="edit" onClick={() => setEditing({ id: n.id, text: n.text })}>
                   Bearbeiten
                 </Button>
-                <Button size="sm" variant="ghost" icon="trash" onClick={async () => { await api.me.deleteNote(n.id); notes.reload(); }}>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  icon="trash"
+                  onClick={async () => {
+                    if (!window.confirm('Notiz wirklich löschen?')) return;
+                    setDeleteError(null);
+                    try {
+                      await api.me.deleteNote(n.id);
+                      notes.reload();
+                    } catch (err) {
+                      setDeleteError(err);
+                    }
+                  }}
+                >
                   Löschen
                 </Button>
               </span>

@@ -5,7 +5,7 @@
       "title": "IEC 60601-2-4 – Medizinische elektrische Geräte – Teil 2-4: Besondere Festlegungen für die Sicherheit einschließlich der wesentlichen Leistungsmerkmale von Defibrillatoren",
       "publisher": "IEC",
       "kind": "norm",
-      "edition": "2010",
+      "edition": "2010 + A1:2018",
       "accessedAt": "2026-11-01"
     },
     {
@@ -22,7 +22,7 @@
       "publisher": "European Resuscitation Council (ERC)",
       "kind": "verband",
       "edition": "2021",
-      "note": "Deutsche Fassung über den German Resuscitation Council (GRC). Für klinische Entscheidungen stets die jeweils aktuelle Leitlinienfassung heranziehen.",
+      "note": "Deutsche Fassung über den German Resuscitation Council (GRC). Diese Fassung ist durch die ERC-Leitlinien 2025 (veröffentlicht Oktober 2025, Resuscitation 215 Suppl 1) ersetzt; die hier zitierten Energieangaben beziehen sich auf die Fassung 2021. Für klinische Entscheidungen stets die aktuelle Leitlinienfassung heranziehen.",
       "accessedAt": "2026-11-01"
     }
   ],
@@ -99,8 +99,8 @@
       "tags": ["Defibrillation", "Notfall", "Kardiologie"],
       "data": { "category": "technik", "english": "biphasic defibrillation", "formula": "E = ½ · C · U²" },
       "specs": [
-        { "key": "energie_monophasisch_erwachsene", "label": "Energie monophasischer Schock (Erwachsene)", "value": 360, "unit": "J", "condition": "Empfehlung ERC-Leitlinien 2021", "source": "src:erc-leitlinien-2021" },
-        { "key": "energie_biphasisch_erster_schock", "label": "Energie erster biphasischer Schock (Erwachsene)", "value": "≥ 150", "unit": "J", "condition": "Empfehlung ERC-Leitlinien 2021; Herstellerangaben beachten", "source": "src:erc-leitlinien-2021" }
+        { "key": "energie_monophasisch_erwachsene", "label": "Energie monophasischer Schock (Erwachsene)", "value": 360, "unit": "J", "condition": "Angabe nach ERC-Leitlinien 2021 (inzwischen durch ERC 2025 ersetzt – aktuelle Fassung prüfen)", "source": "src:erc-leitlinien-2021" },
+        { "key": "energie_biphasisch_erster_schock", "label": "Energie erster biphasischer Schock (Erwachsene)", "value": "≥ 150", "unit": "J", "condition": "Angabe nach ERC-Leitlinien 2021 (inzwischen durch ERC 2025 ersetzt – aktuelle Fassung prüfen); Herstellerangaben beachten", "source": "src:erc-leitlinien-2021" }
       ],
       "links": [
         { "rel": "related", "to": "term:impedanz" },

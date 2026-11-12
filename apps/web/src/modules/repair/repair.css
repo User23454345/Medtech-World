@@ -164,7 +164,7 @@
 .mw-repair--reduced * { transition: none !important; }
 
 /* ---------------------------------------------------------------- Vollbild-Diagnose */
-.mw-repair-diagnose__kicker { display: block; font-size: var(--mw-fs-sm); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+.mw-repair-diagnose__kicker { display: block; font-size: var(--mw-fs-sm); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin: 0 0 4px; }
 .mw-repair-diagnose__card { padding: var(--mw-space-5); }
 .mw-repair-diagnose--fullscreen { background: var(--mw-bg); overflow: auto; height: 100%; }
 .mw-repair-diagnose__result { margin-top: var(--mw-space-2); }

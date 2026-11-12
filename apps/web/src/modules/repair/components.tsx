@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState, type CSSProperties, type Keyboard
 import { Link } from 'react-router';
 import { entityPath, MODULES, type EntityDetail, type EntitySummary, type FaultData } from '@medtech/core';
 import { Alert, Badge, Button, ButtonLink, EmptyState, EntityCard, ErrorState, Icon, Loading, ProgressBar } from '@medtech/ui';
+import { plural } from '../../lib/format.ts';
 import { api } from '../../lib/api.ts';
 import { useAuth } from '../../lib/auth.tsx';
 import { useRequireLogin } from '../../lib/hooks.ts';
@@ -211,7 +212,7 @@ export function DiagnosisWizard({ fault, compact, initialAnswers = [], onAnswers
 
       <div className="mw-repair-wizard__progress">
         <div className="mw-spread mw-small mw-muted">
-          <span>{result.state.status === 'outcome' ? `Diagnose abgeschlossen nach ${result.path.length} Schritt(en)` : `Schritt ${stepNo}`}</span>
+          <span>{result.state.status === 'outcome' ? `Diagnose abgeschlossen nach ${plural(result.path.length, 'Schritt', 'Schritten')}` : `Schritt ${stepNo}`}</span>
           <span>{percent} %</span>
         </div>
         <ProgressBar value={percent} label="Diagnosefortschritt" />

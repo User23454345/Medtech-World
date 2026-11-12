@@ -119,7 +119,7 @@ docker run -p 3001:3001 -v medtech-data:/app/.data \
   medtech-world
 ```
 
-Die API liefert im Container auch das gebaute Frontend aus (`http://localhost:3001`). Hinter einem TLS-Proxy betreiben; Cookies sind in Produktion `Secure`.
+Die API liefert im Container auch das gebaute Frontend aus (`http://localhost:3001`). Hinter einem TLS-Proxy betreiben; Cookies sind in Produktion `Secure`. Damit Rate-Limits die echte Client-IP sehen, `TRUST_PROXY` auf die IP/CIDR des Proxys setzen (z. B. `127.0.0.1`) – nicht pauschal `true`.
 
 ## Projektstruktur
 

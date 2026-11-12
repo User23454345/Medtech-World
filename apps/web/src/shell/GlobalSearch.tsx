@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
 import { ENTITY_TYPE_DEFS, MODULES, entityPath, type SearchHit } from '@medtech/core';
 import { Badge, Icon, Loading, QualityBadges } from '@medtech/ui';
@@ -29,17 +29,24 @@ export function GlobalSearch({ open, onClose }: { open: boolean; onClose: () => 
   const inputRef = useRef<HTMLInputElement>(null);
   const dialogRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    if (open) {
-      setActive(0);
-      setTimeout(() => inputRef.current?.focus(), 10);
-    }
+  // Synchron fokussieren (kein setTimeout), damit direkt nach Strg+K getippte Zeichen nicht verloren gehen;
+  // beim Schließen den Fokus an das zuvor fokussierte Element (z. B. den Suchknopf) zurückgeben.
+  useLayoutEffect(() => {
+    if (!open) return;
+    const previous = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    setActive(0);
+    inputRef.current?.focus();
+    return () => {
+      if (previous?.isConnected) previous.focus();
+    };
   }, [open]);
 
   const hits = data?.hits ?? [];
   const groups = new Map<string, SearchHit[]>();
   for (const h of hits) groups.set(h.module, [...(groups.get(h.module) ?? []), h]);
   const ordered = [...groups.values()].flat();
+  /** Ergebnisse gehören noch zu einer früheren Eingabe (Debounce/Laden läuft) */
+  const stale = q !== dq || loading;
 
   const go = (to: string) => {
     onClose();
@@ -57,7 +64,7 @@ export function GlobalSearch({ open, onClose }: { open: boolean; onClose: () => 
       setActive((a) => Math.max(a - 1, 0));
     } else if (e.key === 'Enter') {
       e.preventDefault();
-      const hit = ordered[active];
+      const hit = stale ? undefined : ordered[active];
       if (hit) go(entityPath(hit.id));
       else if (q.trim()) go(`/suche?q=${encodeURIComponent(q.trim())}`);
     } else if (e.key === 'Tab') {

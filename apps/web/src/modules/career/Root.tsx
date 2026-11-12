@@ -82,7 +82,7 @@ function CareerLanding() {
 
       <Section title="Kompetenzcheck" icon="target" id="kompetenzcheck">
         <p className="mw-muted" style={{ marginTop: 0 }}>
-          Bereitschaft je Berufsbild = Anteil der geforderten Lernmodule, die du in der Academy abgeschlossen hast. Prüfabläufe, Geräte und Begriffe im Lernpfad ergänzen das
+          Bereitschaft je Berufsbild = Anteil der geforderten Lernmodule, die du in der Prüfakademie abgeschlossen hast. Prüfabläufe, Geräte und Begriffe im Lernpfad ergänzen das
           Profil, fließen aber nicht in die Quote ein.
         </p>
         {!progress.loggedIn ? (
@@ -138,7 +138,7 @@ function CareerLanding() {
         ) : null}
         <div className="mw-row" style={{ marginTop: 16 }}>
           <ButtonLink to={MODULES.academy.path} icon="graduation">
-            Zur Academy
+            Zur Prüfakademie
           </ButtonLink>
           {progress.loggedIn ? (
             <ButtonLink to="/konto/fortschritt" icon="history" variant="ghost">

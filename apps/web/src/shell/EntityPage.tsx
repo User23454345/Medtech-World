@@ -24,6 +24,7 @@ import {
   UiProvider,
   useUi,
 } from '@medtech/ui';
+import { plural } from '../lib/format.ts';
 import { api } from '../lib/api.ts';
 import { useAuth } from '../lib/auth.tsx';
 import { useAsync, useDocumentTitle, useEntity, useRecordVisit, useRequireLogin } from '../lib/hooks.ts';
@@ -87,8 +88,14 @@ export function NotesPanel({ entityId }: { entityId: string }) {
               type="button"
               className="mw-btn mw-btn--ghost mw-btn--sm"
               onClick={async () => {
-                await api.me.deleteNote(n.id);
-                notes.reload();
+                if (!window.confirm('Notiz wirklich löschen?')) return;
+                setError(null);
+                try {
+                  await api.me.deleteNote(n.id);
+                  notes.reload();
+                } catch (err) {
+                  setError(err);
+                }
               }}
             >
               <Icon name="trash" size={14} /> Löschen
@@ -235,7 +242,7 @@ export function EntityView({ entity }: { entity: EntityDetail }) {
             <h2 className="mw-card__title">Qualität & Herkunft</h2>
             <ul className="mw-list-plain mw-small mw-stack" style={{ gap: 6 }}>
               <li>
-                <Icon name="file" size={14} /> {entity.sources.length} Quelle(n), {entity.specs.length} belegte technische Angabe(n)
+                <Icon name="file" size={14} /> {plural(entity.sources.length, 'Quelle', 'Quellen')}, {plural(entity.specs.length, 'belegte technische Angabe', 'belegte technische Angaben')}
               </li>
               <li>
                 <Icon name="check" size={14} /> Letzte fachliche Prüfung: {new Date(entity.reviewedAt).toLocaleDateString('de-DE')}

@@ -53,6 +53,19 @@ describe('infusion-pump', () => {
     expect(infusionPump.simulate(p, AIR_DETECT_AFTER + 10).alarms[0]).toMatch(/^Luft in der Leitung/);
   });
 
+  it('Okklusion nach dem Stopp (VTBI/Luft) belebt den Druck nicht wieder', () => {
+    const p = P({ rate: 100, vtbi: 10, occlusionAfterMin: 10 });
+    const s = pumpState(p, 700);
+    expect(s.stopReason).toBe('vtbi');
+    expect(s.occluded).toBe(false);
+    expect(s.pressure).toBe(0);
+    const labels = infusionPump.simulate(p, 900).readouts.map((r) => r.label);
+    expect(labels).not.toContain('Ohne Förderung seit');
+    const air = pumpState(P({ airInLine: true, occlusionAfterMin: 5 }), 600);
+    expect(air.stopReason).toBe('air');
+    expect(air.pressure).toBe(0);
+  });
+
   it('Achsenskalierung', () => {
     expect(niceCeil(7.3)).toBe(10);
     expect(niceCeil(0.46)).toBeCloseTo(0.5, 9);

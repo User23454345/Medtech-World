@@ -92,7 +92,7 @@ Alle Endpunkte erfordern eine Anmeldung (`401` für Gäste) und sehen ausschlie�
   "answers": [{ "questionId": "quiz_question:beatmung-peep", "selected": ["b"] }] }
 ```
 
-Antwort: `{ score, passed, passScore: 80, results: [{ questionId, correct, correctOptions, explanation }] }`. Eine Antwort ist richtig, wenn die (deduplizierte) Auswahl exakt der Lösungsmenge entspricht. Bei angemeldeten Nutzern mit `contextId` wird der Fortschritt gespeichert (`completed` ab 80 %, sonst `started`; bester Score bleibt) und ein Historieneintrag `quiz` angelegt. Unbekannte Fragen → `404`. Lösungen und Erklärungen werden nur über diesen Endpunkt ausgeliefert.
+Antwort: `{ score, passed, passScore: 80, results: [{ questionId, correct, correctOptions, explanation }] }`. Eine Antwort ist richtig, wenn die (deduplizierte) Auswahl exakt der Lösungsmenge entspricht. Bei angemeldeten Nutzern mit `contextId` wird der Fortschritt gespeichert (`completed` ab 80 %, sonst `started`; bester Score bleibt) und ein Historieneintrag `quiz` angelegt. Unbekannte Fragen → `404`, leere Auswahl (`selected: []`) → `400`. Lösungen und Erklärungen werden nur über diesen Endpunkt und nur für beantwortete Fragen ausgeliefert. Das ist ein bewusster Kompromiss für ein Lernangebot: Wer eine Antwort abschickt, sieht die Lösung – der Endpunkt eignet sich nicht für prüfungsrelevante Bewertungen. Die Detailansicht einer Quizfrage enthält `linkedTitles` nur für Verweise aus öffentlichen Feldern; die Antwortoptionen werden im Frontend je Versuch gemischt.
 
 ### Market (Demo)
 

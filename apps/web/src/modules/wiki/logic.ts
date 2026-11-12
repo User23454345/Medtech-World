@@ -36,6 +36,7 @@ export const DOC_TYPE_LABEL: Record<DocumentData['docType'], string> = {
 
 export const LEGAL_KIND_LABEL: Record<LegalReferenceData['kind'], string> = {
   verordnung: 'Verordnung',
+  richtlinie: 'Richtlinie',
   gesetz: 'Gesetz',
   norm: 'Norm',
   leitlinie: 'Leitlinie',

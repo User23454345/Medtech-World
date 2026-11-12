@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router';
 import { entityPath, type EntityDetail, type FaultData } from '@medtech/core';
 import { Alert, Button, ButtonLink, Icon } from '@medtech/ui';
+import { plural } from '../../lib/format.ts';
 import { useComponentFaults } from './data.ts';
 import { CauseList, DiagnosisWizard, diagnosePath, GuestHint, REPAIR_PATH, SafetyNotes, SeverityBadge, useDiagnosisTracking } from './components.tsx';
 import { isTreeUsable } from './diagnosis.ts';
@@ -21,7 +22,8 @@ export function FaultPanel({ entity }: { entity: EntityDetail }) {
       <div className="mw-row" style={{ gap: 8 }}>
         <SeverityBadge severity={data.severity} />
         <span className="mw-small mw-muted">
-          {data.symptoms.length} Symptom(e) · {data.causes.length} mögliche Ursache(n) · {data.diagnosis.length} Prüfschritt(e)
+          {plural(data.symptoms.length, 'Symptom', 'Symptome')} · {plural(data.causes.length, 'mögliche Ursache', 'mögliche Ursachen')} ·{' '}
+          {plural(data.diagnosis.length, 'Prüfschritt', 'Prüfschritte')}
         </span>
       </div>
 

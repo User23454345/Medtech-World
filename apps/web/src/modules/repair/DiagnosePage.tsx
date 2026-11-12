@@ -74,13 +74,13 @@ function DiagnoseView({ fault }: { fault: EntityDetail<FaultData> }) {
           ]}
         />
         <header className="mw-page-header">
+          <p className="mw-muted mw-repair-diagnose__kicker">Geführte Diagnose</p>
           <div className="mw-page-header__eyebrow">
             <SeverityBadge severity={data.severity} />
             {fault.demo ? <span className="mw-badge mw-badge--demo">Demo-Inhalt</span> : null}
           </div>
           <div className="mw-spread" style={{ alignItems: 'flex-start' }}>
             <h1 className="mw-page-header__title">
-              <span className="mw-muted mw-repair-diagnose__kicker">Geführte Diagnose</span>
               {fault.title}
             </h1>
             <div className="mw-row">
@@ -113,10 +113,10 @@ function DiagnoseView({ fault }: { fault: EntityDetail<FaultData> }) {
                   <div className="mw-stack mw-repair-diagnose__result">
                     {tracking.saved ? (
                       <Alert tone="ok" icon="check">
-                        Diagnose als abgeschlossen in Ihrem Lernfortschritt gespeichert.
+                        Diagnose als abgeschlossen in deinem Lernfortschritt gespeichert.
                       </Alert>
                     ) : (
-                      <GuestHint>um abgeschlossene Diagnosen in Ihrem Lernfortschritt zu speichern.</GuestHint>
+                      <GuestHint>um abgeschlossene Diagnosen in deinem Lernfortschritt zu speichern.</GuestHint>
                     )}
                     {data.remedies.length ? (
                       <section aria-labelledby="repair-remedies">

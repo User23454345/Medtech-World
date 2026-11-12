@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import type { EntityDetail } from '@medtech/core';
 import { Alert, Badge, Button, ErrorState, Icon, Markdown, ProgressBar } from '@medtech/ui';
 import { api, type QuizEvaluation } from '../../lib/api.ts';
@@ -11,6 +11,7 @@ import {
   isMultipleChoice,
   isQuizComplete,
   optionOutcome,
+  shuffledOptions,
   toggleOption,
   type OptionOutcome,
   type PublicQuizData,
@@ -44,6 +45,13 @@ export function QuizRunner({ questions, contextId, title = 'Ergebnis', onEvaluat
   const [evaluation, setEvaluation] = useState<QuizEvaluation | null>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<unknown>(null);
+  /** Zähler je Versuch – bei „Erneut versuchen“ werden die Optionen neu gemischt */
+  const [attempt, setAttempt] = useState(0);
+  const optionOrder = useMemo(
+    () => new Map(questions.map((q) => [q.id, shuffledOptions(q.data)])),
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- attempt erzwingt neues Mischen
+    [questions, attempt],
+  );
   const resultRef = useRef<HTMLDivElement>(null);
   const topRef = useRef<HTMLDivElement>(null);
   const ids = questions.map((q) => q.id);
@@ -76,6 +84,7 @@ export function QuizRunner({ questions, contextId, title = 'Ergebnis', onEvaluat
     setAnswers({});
     setEvaluation(null);
     setError(null);
+    setAttempt((n) => n + 1);
     topRef.current?.focus();
   }
 
@@ -129,7 +138,7 @@ export function QuizRunner({ questions, contextId, title = 'Ergebnis', onEvaluat
                   {'○'.repeat(Math.max(0, 3 - q.data.difficulty))}
                 </div>
                 <div className="mw-academy-options">
-                  {q.data.options.map((o) => {
+                  {(optionOrder.get(q.id) ?? q.data.options).map((o) => {
                     const outcome = result ? optionOutcome(o.id, selected, result.correctOptions) : 'neutral';
                     const label = OUTCOME_LABEL[outcome];
                     return (

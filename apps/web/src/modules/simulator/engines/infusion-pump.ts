@@ -61,7 +61,8 @@ export function pumpState(p: Params, t: number): PumpState {
   const stopReason: StopReason = tStop === Infinity ? null : tStop === tAir ? 'air' : tStop === tAlarm ? 'occlusion' : 'vtbi';
   const tc = Math.max(0, Math.min(t, tStop));
   const p0 = baselinePressure(rate);
-  const occluded = t >= tOcc;
+  // Eine Okklusion nach dem Stopp (VTBI erreicht, Luftalarm) spielt keine Rolle mehr
+  const occluded = t >= tOcc && tOcc < tStop;
   let pressure: number;
   if (occluded) pressure = Math.min(plim, Math.max(p0, p0 + (q * (tc - tOcc)) / LINE_COMPLIANCE));
   else pressure = t >= tStop ? 0 : p0;
@@ -73,7 +74,7 @@ export function pumpState(p: Params, t: number): PumpState {
     delivered: q * Math.min(tc, tOcc),
     pressure,
     occluded,
-    tOcc,
+    tOcc: tOcc < tStop ? tOcc : Infinity,
     tAlarm,
   };
 }

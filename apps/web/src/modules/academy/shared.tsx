@@ -1,5 +1,6 @@
 import type { EntityDetail, EntityType, ProgressEntry } from '@medtech/core';
 import { Badge } from '@medtech/ui';
+import { ProgressStatusBadge } from '../../shell/ProgressStatus.tsx';
 import { api } from '../../lib/api.ts';
 import { useAuth } from '../../lib/auth.tsx';
 import { useAsync } from '../../lib/hooks.ts';
@@ -46,15 +47,5 @@ export function LevelBadge({ level }: { level: LearningLevel }) {
 
 export function ProgressBadge({ entry }: { entry: ProgressEntry | undefined }) {
   if (!entry) return null;
-  if (entry.status === 'completed')
-    return (
-      <Badge tone="ok" icon="check">
-        Abgeschlossen{entry.score !== null ? ` · ${entry.score} %` : ''}
-      </Badge>
-    );
-  return (
-    <Badge tone="warn" icon="history">
-      Begonnen{entry.score !== null ? ` · ${entry.score} %` : ''}
-    </Badge>
-  );
+  return <ProgressStatusBadge status={entry.status} score={entry.score} />;
 }

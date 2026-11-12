@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router';
+import { NotFound } from '../../pages/NotFound.tsx';
 import { Landing } from './Landing.tsx';
 import { RunPage } from './RunPage.tsx';
 
@@ -8,7 +9,7 @@ export default function Root() {
     <Routes>
       <Route index element={<Landing />} />
       <Route path=":slug" element={<RunPage />} />
-      <Route path="*" element={<Landing />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }

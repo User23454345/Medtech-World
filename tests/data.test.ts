@@ -33,6 +33,13 @@ describe('Datenschicht mit realen Inhalten', () => {
     expect(summarizeIssues(seed.report.issues).errors).toBe(0);
   });
 
+  it('Such-Snippets ohne Leerzeichen vor Satzzeichen (Markdown-Reste)', () => {
+    const hit = data.content.search('pulsoximetrisch').hits.find((h) => h.id === 'term:spo2');
+    expect(hit?.snippet).toBeTruthy();
+    expect(hit!.snippet).not.toMatch(/ [.,;:]/);
+    expect(hit!.snippet).not.toContain('*');
+  });
+
   it('Bericht und Datenbank sind konsistent', () => {
     const count = (sql: string) => (data.db.prepare(sql).get() as { n: number }).n;
     expect(seed.report.counts.entities).toBeGreaterThan(50);
@@ -151,6 +158,11 @@ describe('Entwürfe', () => {
       files([
         entity('device:pulsoximeter', { title: 'Pulsoximeter', links: [{ rel: 'uses_principle', to: 'term:entwurfsbegriff' }] }),
         entity('term:entwurfsbegriff', { title: 'Entwurfsbegriff Plethysmografie', review: { status: 'entwurf', reviewedAt: '2026-05-01' } }),
+        entity('media:entwurfsbild', {
+          title: 'Entwurfsbild',
+          links: [{ rel: 'illustrates', to: 'device:pulsoximeter' }],
+          review: { status: 'entwurf', reviewedAt: '2026-05-01' },
+        }),
       ]),
       { today: TODAY },
     );
@@ -166,12 +178,23 @@ describe('Entwürfe', () => {
     expect(data.content.relationGroups('device:pulsoximeter')).toEqual([]);
   });
 
+  it('verraten sich nicht über Vorschaubilder, relatedTo oder Modulzuordnung', () => {
+    expect(data.content.get('device:pulsoximeter')?.thumbnail).toBeUndefined();
+    expect(data.content.list({ type: 'device' }).items[0]?.thumbnail).toBeUndefined();
+    expect(data.content.list({ relatedTo: 'media:entwurfsbild' })).toEqual({ items: [], total: 0 });
+    expect(data.content.list({ relatedTo: 'term:entwurfsbegriff' }).total).toBe(0);
+    // mit Redaktionsrechten weiterhin sichtbar
+    const opts = { includeDrafts: true };
+    expect(data.content.get('device:pulsoximeter', opts)?.thumbnail).toMatch(/^data:image\/svg\+xml/);
+    expect(data.content.list({ relatedTo: 'media:entwurfsbild', ...opts }).total).toBe(1);
+  });
+
   it('sind mit includeDrafts sichtbar', () => {
     const opts = { includeDrafts: true };
     expect(data.content.get('term:entwurfsbegriff', opts)?.flags.map((f) => f.kind)).toContain('draft');
     expect(data.content.search('Plethysmografie', opts).total).toBe(1);
     expect(data.content.list({ type: 'term', ...opts }).total).toBe(1);
-    expect(data.content.relationGroups('device:pulsoximeter', opts)).toHaveLength(1);
+    expect(data.content.relationGroups('device:pulsoximeter', opts)).toHaveLength(2);
   });
 
   it('Seeding mit QA-Fehlern wird abgebrochen (Inhalte bleiben unverändert)', () => {

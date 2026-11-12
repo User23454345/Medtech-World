@@ -4,7 +4,7 @@ import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import type { PublicUser, QuizQuestionData } from '@medtech/core';
 import { createDataLayer, seedFromDirectory, type DataLayer } from '@medtech/data';
 import { buildApp, CSRF_HEADER } from '../apps/api/src/app.ts';
-import { loadConfig } from '../apps/api/src/config.ts';
+import { loadConfig, parseTrustProxy } from '../apps/api/src/config.ts';
 import { SESSION_COOKIE } from '../apps/api/src/routes/account.ts';
 
 const CONTENT_DIR = resolve(import.meta.dirname, '../content');
@@ -217,6 +217,12 @@ describe('REST-API /api/v1', () => {
         expect(typeof body.data.multipleAnswers).toBe('boolean');
         expect(body.data.options.length).toBeGreaterThanOrEqual(2);
       }
+      // linkedTitles verraten keine Verweise, die nur in der (geheimen) Erklärung stehen
+      for (const q of items) {
+        const body = (await call('GET', `/api/v1/entities/quiz_question/${q.slug}`)).json();
+        const visible = `${body.body}\n${JSON.stringify(body.data)}`;
+        for (const id of Object.keys(body.linkedTitles)) expect(visible).toContain(id);
+      }
     });
 
     it('Qualitätsbericht: 401 Gast, 403 Lernende, 200 Redaktion', async () => {
@@ -287,8 +293,10 @@ describe('REST-API /api/v1', () => {
       const q = questions[0]!;
       const dup = await call('POST', '/api/v1/academy/quiz/evaluate', { body: { answers: [{ questionId: q.id, selected: [...q.data.correct, ...q.data.correct] }] } });
       expect(dup.json().score).toBe(100);
+      // Leere Auswahl liefert keine Lösung (kein Auslesen des Antwortschlüssels ohne Antwort)
       const none = await call('POST', '/api/v1/academy/quiz/evaluate', { body: { answers: [{ questionId: q.id, selected: [] }] } });
-      expect(none.json()).toMatchObject({ score: 0, passed: false });
+      expect(none.statusCode).toBe(400);
+      expect(JSON.stringify(none.json())).not.toContain('correctOptions');
     });
 
     it('Gäste erhalten eine Auswertung ohne gespeicherten Fortschritt; unbekannte Frage → 404', async () => {
@@ -432,6 +440,39 @@ describe('REST-API /api/v1', () => {
 });
 
 describe('Rate-Limiting', () => {
+  it('Produktion ohne TRUST_PROXY: gefälschtes X-Forwarded-For umgeht das Login-Limit nicht', async () => {
+    const data = createDataLayer({ path: ':memory:' });
+    const config = loadConfig({ NODE_ENV: 'production', SEED_DEMO_USERS: 'false', SEED_ON_START: 'false', DATABASE_PATH: ':memory:', WEB_DIST: '/nonexistent' });
+    expect(config.trustProxy).toBe(false);
+    // production=false nur, um Logger/Static-Auslieferung im Test abzuschalten – trustProxy stammt aus der Prod-Konfiguration
+    const app = await buildApp(data, { ...config, production: false, webDist: null });
+    try {
+      const codes: number[] = [];
+      for (let i = 1; i <= 12; i++) {
+        const res = await app.inject({
+          method: 'POST',
+          url: '/api/v1/auth/login',
+          headers: { [CSRF_HEADER]: '1', 'x-forwarded-for': `10.0.0.${i}` },
+          payload: { email: `x${i}@test.de` },
+        });
+        codes.push(res.statusCode);
+      }
+      expect(codes.slice(0, 10).every((c) => c === 400)).toBe(true);
+      expect(codes.slice(10)).toEqual([429, 429]);
+    } finally {
+      await app.close();
+      data.close();
+    }
+  });
+
+  it('TRUST_PROXY wird eng geparst', () => {
+    expect(parseTrustProxy(undefined)).toBe(false);
+    expect(parseTrustProxy('false')).toBe(false);
+    expect(parseTrustProxy('1')).toBe(false);
+    expect(parseTrustProxy('true')).toBe(true);
+    expect(parseTrustProxy('10.0.0.0/8')).toBe('10.0.0.0/8');
+  });
+
   it('Login: 11. Versuch innerhalb einer Minute → 429 mit Retry-After', async () => {
     const data = createDataLayer({ path: ':memory:' });
     const app = await buildApp(data, testConfig());

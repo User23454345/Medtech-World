@@ -23,7 +23,7 @@
       "title": "SpO₂ (pulsoximetrische Sauerstoffsättigung)",
       "aliases": ["SpO2", "Sauerstoffsättigung", "periphere Sauerstoffsättigung"],
       "summary": "Mit einem Pulsoximeter nichtinvasiv geschätzter Anteil des sauerstoffbeladenen Hämoglobins am funktionellen Hämoglobin im arteriellen Blut, angegeben in Prozent.",
-      "body": "Das „p“ in SpO₂ steht für **pulsoximetrisch**. Davon zu unterscheiden ist die **SaO₂**, die per Blutgasanalyse aus arteriellem Blut bestimmt wird und als Referenz für die Kalibrierung von Pulsoximetern dient.\n\n## Einordnung\n- Die SpO₂ ist ein Schätzwert – Genauigkeit und Grenzen beschreibt [[term:pulsoximetrie]].\n- Dyshämoglobine (z. B. Carboxyhämoglobin bei Rauchgasvergiftung) können von klassischen Zwei-Wellenlängen-Geräten nicht unterschieden werden und führen zu falsch hohen Werten.\n- Gemessen wird SpO₂ u. a. mit [[device:pulsoximeter|Pulsoximetern]] und als Parameter von [[device:patientenmonitor|Patientenmonitoren]].",
+      "body": "Das „p“ in SpO₂ steht für **pulsoximetrisch**. Davon zu unterscheiden ist die **SaO₂**, die per Blutgasanalyse aus arteriellem Blut bestimmt wird und als Referenz für die Kalibrierung von Pulsoximetern dient.\n\n## Einordnung\n- Die SpO₂ ist ein Schätzwert – Genauigkeit und Grenzen beschreibt [[term:pulsoximetrie]].\n- Dyshämoglobine können von klassischen Zwei-Wellenlängen-Geräten nicht unterschieden werden: **Carboxyhämoglobin** (z. B. bei Rauchgasvergiftung) wird als Oxyhämoglobin gewertet und führt zu falsch hohen Werten; **Methämoglobin** lässt die SpO₂ gegen etwa 85 % tendieren – je nach tatsächlicher Sättigung also falsch niedrig oder falsch hoch.\n- Gemessen wird SpO₂ u. a. mit [[device:pulsoximeter|Pulsoximetern]] und als Parameter von [[device:patientenmonitor|Patientenmonitoren]].",
       "tags": ["SpO2", "Vitalparameter", "Monitoring"],
       "data": { "category": "physiologie", "abbreviation": "SpO₂", "english": "peripheral oxygen saturation", "formula": "SpO₂ = HbO₂ / (HbO₂ + Hb) · 100 %" },
       "links": [
@@ -458,7 +458,7 @@
       "data": { "status": "aktiv", "releaseYear": 2024, "riskClass": "IIb" },
       "specs": [
         { "key": "spo2_messbereich", "label": "SpO₂-Messbereich", "value": "0–100", "unit": "%", "source": "src:mtw-redaktion-demo" },
-        { "key": "spo2_genauigkeit", "label": "SpO₂-Genauigkeit (Arms)", "value": "± 2", "unit": "%", "condition": "70–100 % SpO₂", "source": "src:mtw-redaktion-demo" },
+        { "key": "spo2_genauigkeit", "label": "SpO₂-Genauigkeit (Arms)", "value": "≤ 2", "unit": "%", "condition": "70–100 % SaO₂ (Referenz: Blutgasanalyse)", "source": "src:mtw-redaktion-demo" },
         { "key": "pulsfrequenz_bereich", "label": "Pulsfrequenzbereich", "value": "25–240", "unit": "1/min", "source": "src:mtw-redaktion-demo" },
         { "key": "akkulaufzeit", "label": "Akkulaufzeit", "value": 20, "unit": "h", "source": "src:mtw-redaktion-demo" }
       ],

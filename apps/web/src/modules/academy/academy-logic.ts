@@ -91,6 +91,21 @@ export function isMultipleChoice(q: Pick<PublicQuizData, 'kind' | 'multipleAnswe
   return q.multipleAnswers === true || q.kind === 'multiple';
 }
 
+/**
+ * Antwortoptionen je Versuch mischen (Fisher-Yates), damit die Position keine
+ * Lösung verrät. Die Options-IDs bleiben unverändert, die serverseitige
+ * Auswertung ist davon unabhängig. Wahr/Falsch-Fragen behalten ihre Reihenfolge.
+ */
+export function shuffledOptions<T>(q: { kind: PublicQuizData['kind']; options: readonly T[] }, random: () => number = Math.random): T[] {
+  const out = [...q.options];
+  if (q.kind === 'truefalse') return out;
+  for (let i = out.length - 1; i > 0; i--) {
+    const j = Math.floor(random() * (i + 1));
+    [out[i], out[j]] = [out[j]!, out[i]!];
+  }
+  return out;
+}
+
 /** Auswahl einer Option: Einfachauswahl ersetzt, Mehrfachauswahl schaltet um */
 export function toggleOption(selected: readonly string[], optionId: string, multiple: boolean): string[] {
   if (!multiple) return [optionId];

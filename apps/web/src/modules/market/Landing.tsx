@@ -173,7 +173,7 @@ function OfferBrowser({ offers }: { offers: MarketOffer[] }) {
               inputMode="decimal"
               value={minText}
               onChange={(e) => setMinText(e.target.value)}
-              placeholder={bounds ? `ab ${Math.floor(bounds.min).toLocaleString('de-DE')}` : 'von'}
+              placeholder="von"
               aria-invalid={minInvalid || undefined}
             />
             <span aria-hidden>–</span>
@@ -185,7 +185,7 @@ function OfferBrowser({ offers }: { offers: MarketOffer[] }) {
               inputMode="decimal"
               value={maxText}
               onChange={(e) => setMaxText(e.target.value)}
-              placeholder={bounds ? `bis ${Math.ceil(bounds.max).toLocaleString('de-DE')}` : 'bis'}
+              placeholder="bis"
               aria-invalid={maxInvalid || undefined}
             />
           </div>

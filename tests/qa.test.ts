@@ -160,6 +160,11 @@ describe('QA: Schemafehler', () => {
     const b = build(files([], [{ id: 'quelle-ohne-praefix', title: 'Titel', publisher: 'Verlag', kind: 'norm', accessedAt: '2026-01-01' }, { ...source('src:datum'), accessedAt: '01.01.2026' }]));
     expect(issuesFor(b, 'source.schema')).toHaveLength(2);
   });
+
+  it('URLs nur mit http(s) – javascript:/data: werden abgelehnt', () => {
+    const b = build(files([], [source('src:js', 'fachliteratur', 'javascript:alert(1)'), source('src:data', 'fachliteratur', 'data:text/html,x'), source('src:ok', 'fachliteratur', 'https://ok.example.com/')]));
+    expect(issuesFor(b, 'source.schema').map((i) => i.sourceId).sort()).toEqual(['src:data', 'src:js']);
+  });
 });
 
 describe('QA: Dubletten', () => {

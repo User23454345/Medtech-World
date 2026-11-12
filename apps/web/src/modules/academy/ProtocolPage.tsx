@@ -2,6 +2,7 @@ import { useEffect, useId, useMemo, useState } from 'react';
 import { useParams } from 'react-router';
 import { MODULES, entityPath, type EntityDetail, type SpecRow, type TestProcedureData } from '@medtech/core';
 import { Alert, Badge, Breadcrumbs, Button, ButtonLink, Card, ErrorState, Field, Icon, Input, Loading, ProgressBar, QualityNotices, Textarea } from '@medtech/ui';
+import { plural } from '../../lib/format.ts';
 import { useDocumentTitle, useEntity, useRecordVisit } from '../../lib/hooks.ts';
 import { NotFound } from '../../pages/NotFound.tsx';
 import {
@@ -223,7 +224,7 @@ function Protocol({ entity }: { entity: EntityDetail<TestProcedureData> }) {
         ) : null}
         {ev.result === 'nicht-bestanden' ? (
           <p className="mw-small">
-            {ev.failed} Prüfschritt(e) n. i. O. – Gerät kennzeichnen und gemäß Vorgaben der Einrichtung außer Betrieb nehmen bzw. Instandsetzung veranlassen.
+            {plural(ev.failed, 'Prüfschritt', 'Prüfschritte')} n. i. O. – Gerät kennzeichnen und gemäß Vorgaben der Einrichtung außer Betrieb nehmen bzw. Instandsetzung veranlassen.
           </p>
         ) : null}
         <Field label="Bemerkungen / festgestellte Mängel">

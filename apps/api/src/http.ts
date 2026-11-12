@@ -54,6 +54,8 @@ export const includeDrafts = (req: FastifyRequest) => can(req.user?.role, 'conte
  * Einfaches In-Memory-Rate-Limit (Fixed Window) pro IP und Bucket.
  * Für Mehrinstanzbetrieb durch Redis o. ä. ersetzen.
  */
+const MAX_RATE_LIMIT_KEYS = 10_000;
+
 export function createRateLimiter(limit: number, windowMs: number) {
   const hits = new Map<string, { count: number; reset: number }>();
   return function check(req: FastifyRequest, reply: FastifyReply, bucket: string) {
@@ -65,8 +67,13 @@ export function createRateLimiter(limit: number, windowMs: number) {
       hits.set(key, entry);
     }
     entry.count++;
-    if (hits.size > 10_000) {
+    if (hits.size > MAX_RATE_LIMIT_KEYS) {
       for (const [k, v] of hits) if (v.reset < now) hits.delete(k);
+      // Harte Obergrenze: älteste Einträge (Einfügereihenfolge) verwerfen
+      for (const k of hits.keys()) {
+        if (hits.size <= MAX_RATE_LIMIT_KEYS) break;
+        if (k !== key) hits.delete(k);
+      }
     }
     if (entry.count > limit) {
       reply.header('Retry-After', Math.ceil((entry.reset - now) / 1000));

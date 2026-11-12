@@ -2,6 +2,9 @@ import { z } from 'zod';
 import { ENTITY_TYPES, SLUG_PATTERN, type EntityType } from './entity-types.ts';
 import { RELATION_TYPES } from './relations.ts';
 
+/** Nur http(s)-URLs – schließt javascript:/data:-Links in <a href> aus */
+const httpUrl = z.url({ protocol: /^https?$/ });
+
 /**
  * Schemas für die Inhaltsdateien unter /content.
  *
@@ -37,7 +40,7 @@ export const sourceSchema = z
     title: z.string().min(3),
     publisher: z.string().min(2),
     kind: z.enum(SOURCE_KINDS),
-    url: z.url().optional(),
+    url: httpUrl.optional(),
     /** Ausgabe/Version, z. B. "2019-08" bei Normen oder "BGBl. I S. 2177" */
     edition: z.string().optional(),
     isbn: z.string().optional(),
@@ -118,7 +121,7 @@ export const deviceDataSchema = z
 export const manufacturerDataSchema = z
   .object({
     country: z.string(),
-    website: z.url().optional(),
+    website: httpUrl.optional(),
     founded: z.number().int().optional(),
     focus: z.array(z.string()).default([]),
   })
@@ -157,7 +160,7 @@ export const mediaDataSchema = z
     kind: z.enum(['schema', 'foto', 'diagramm', 'icon']),
     /** Inline-SVG (wird ausschließlich als <img> gerendert, nie als HTML) */
     svg: z.string().startsWith('<svg').optional(),
-    url: z.url().optional(),
+    url: httpUrl.optional(),
     alt: z.string().min(5),
     license: z.string(),
     attribution: z.string(),
@@ -287,14 +290,14 @@ export const documentDataSchema = z
     docType: z.enum(['gebrauchsanweisung', 'serviceanleitung', 'protokollvorlage', 'merkblatt', 'checkliste', 'leitfaden']),
     language: z.string().default('de'),
     version: z.string().optional(),
-    url: z.url().optional(),
+    url: httpUrl.optional(),
   })
   .strict();
 
 export const legalReferenceDataSchema = z
   .object({
     jurisdiction: z.enum(['EU', 'DE', 'AT', 'CH', 'international']),
-    kind: z.enum(['verordnung', 'gesetz', 'norm', 'leitlinie', 'empfehlung']),
+    kind: z.enum(['verordnung', 'richtlinie', 'gesetz', 'norm', 'leitlinie', 'empfehlung']),
     citation: z.string(),
     status: z.enum(['in-kraft', 'entwurf', 'ersetzt', 'aufgehoben']),
     validFrom: isoDate.optional(),

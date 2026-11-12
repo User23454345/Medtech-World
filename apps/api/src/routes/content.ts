@@ -3,6 +3,7 @@ import { z } from 'zod';
 import {
   ENTITY_TYPES,
   ENTITY_TYPE_LIST,
+  extractWikiLinks,
   MODULE_IDS,
   MODULE_LIST,
   RELATION_DEFS,
@@ -18,7 +19,10 @@ import { includeDrafts, notFound, parse, requirePermission } from '../http.ts';
 export function publicEntity(detail: EntityDetail): EntityDetail {
   if (detail.type !== 'quiz_question') return detail;
   const { correct: _c, explanation: _e, ...rest } = detail.data as QuizQuestionData;
-  return { ...detail, data: { ...rest, multipleAnswers: (detail.data as QuizQuestionData).correct.length > 1 } };
+  // Linktitel nur für Verweise aus den öffentlichen Feldern – Links aus der Erklärung würden die Lösung andeuten
+  const visibleLinks = new Set(extractWikiLinks(`${detail.body}\n${JSON.stringify(rest)}`));
+  const linkedTitles = Object.fromEntries(Object.entries(detail.linkedTitles).filter(([id]) => visibleLinks.has(id)));
+  return { ...detail, linkedTitles, data: { ...rest, multipleAnswers: (detail.data as QuizQuestionData).correct.length > 1 } };
 }
 
 const listQuery = z.object({

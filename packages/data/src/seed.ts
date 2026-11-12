@@ -96,8 +96,10 @@ export function seedContent(db: Database, files: RawContentFile[], opts: QaOptio
       t
         .replace(/\[\[([a-z_]+:[a-z0-9-]+)\|([^\]]*)\]\]/g, '$2')
         .replace(/\[\[([a-z_]+:[a-z0-9-]+)\]\]/g, (_m, id: string) => titles.get(id) ?? '')
-        .replace(/[#*_`>]+/g, ' ')
-        .replace(/[ \t]+/g, ' ');
+        .replace(/[*`]+/g, '')
+        .replace(/[#_>]+/g, ' ')
+        .replace(/[ \t]+/g, ' ')
+        .replace(/ ([.,;:!?)])/g, '$1');
 
     for (const e of bundle.entities) {
       insEntity.run(

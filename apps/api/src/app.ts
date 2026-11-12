@@ -1,4 +1,4 @@
-import Fastify, { type FastifyInstance } from 'fastify';
+import Fastify, { type FastifyInstance, type FastifyServerOptions } from 'fastify';
 import cookie from '@fastify/cookie';
 import fastifyStatic from '@fastify/static';
 import { existsSync } from 'node:fs';
@@ -16,11 +16,13 @@ import { moduleRoutes } from './routes/modules.ts';
 export const CSRF_HEADER = 'x-medtech-client';
 
 export async function buildApp(data: DataLayer, config: AppConfig): Promise<FastifyInstance> {
-  const app = Fastify({
+  const options: FastifyServerOptions = {
     logger: config.production ? { level: 'info', redact: ['req.headers.cookie', 'req.headers.authorization'] } : false,
     bodyLimit: 256 * 1024,
-    trustProxy: config.production,
-  });
+    // Standard: kein Vertrauen in X-Forwarded-For (sonst lassen sich Rate-Limits per Header umgehen)
+    trustProxy: config.trustProxy,
+  };
+  const app = Fastify(options);
 
   await app.register(cookie);
 

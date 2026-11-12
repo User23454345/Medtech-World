@@ -257,7 +257,7 @@ code { background: var(--mw-surface-2); padding: 1px 5px; border-radius: 4px; }
 .mw-range { width: 100%; accent-color: var(--mw-brand-500); }
 
 /* ------------------------------------------------------------------ Seitenkopf */
-.mw-page { padding: var(--mw-space-6) 0 var(--mw-space-7); }
+.mw-page { padding-block: var(--mw-space-6) var(--mw-space-7); }
 .mw-page-header { margin-bottom: var(--mw-space-5); }
 .mw-page-header__eyebrow { display: flex; gap: var(--mw-space-2); align-items: center; flex-wrap: wrap; margin-bottom: var(--mw-space-2); font-size: var(--mw-fs-sm); color: var(--mw-text-3); }
 .mw-page-header__title { margin: 0 0 var(--mw-space-2); font-size: var(--mw-fs-2xl); }

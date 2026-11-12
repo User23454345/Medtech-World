@@ -1,10 +1,12 @@
 import { useState, type CSSProperties } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { ENTITY_TYPE_DEFS, ENTITY_TYPE_LIST, MODULE_LIST, entityPath } from '@medtech/core';
-import { Badge, ButtonLink, Card, EntityChip, Icon, Section, Stat } from '@medtech/ui';
+import { ButtonLink, Card, EntityChip, Icon, Section, Stat } from '@medtech/ui';
 import { api } from '../lib/api.ts';
 import { useAuth } from '../lib/auth.tsx';
+import { distinctByEntity } from '../lib/format.ts';
 import { useAsync, useDocumentTitle } from '../lib/hooks.ts';
+import { ProgressStatusBadge } from '../shell/ProgressStatus.tsx';
 
 const EXAMPLES = ['SpO2', 'Ableitstrom', 'STK', 'Beatmung', 'Defibrillator', 'Infusionspumpe'];
 
@@ -14,7 +16,8 @@ export function Home() {
   const { user } = useAuth();
   const [q, setQ] = useState('');
   const meta = useAsync((s) => api.meta(s), [], 'meta');
-  const history = useAsync(() => api.me.history(6), [user?.id], user ? 'me:history:home' : null);
+  // Mehr laden als angezeigt, damit nach dem Entfernen von Dubletten (Ansicht + Quiz …) 6 verschiedene Inhalte bleiben
+  const history = useAsync(() => api.me.history(50), [user?.id], user ? 'me:history:home' : null);
   const progress = useAsync(() => api.me.progress(), [user?.id], user ? 'me:progress:home' : null);
 
   const counts = meta.data?.counts;
@@ -65,7 +68,9 @@ export function Home() {
               <Card>
                 <h3 className="mw-card__title">Zuletzt angesehen</h3>
                 <div className="mw-row" style={{ gap: 6 }}>
-                  {history.data?.items.filter((h) => h.entity).map((h) => <EntityChip key={h.entityId + h.at} entity={h.entity!} />)}
+                  {distinctByEntity(history.data?.items.filter((h) => h.entity) ?? [], 6).map((h) => (
+                    <EntityChip key={h.entityId} entity={h.entity!} />
+                  ))}
                 </div>
               </Card>
               <Card>
@@ -74,7 +79,7 @@ export function Home() {
                   {progress.data?.items.slice(0, 4).map((p) => (
                     <li key={p.entityId} className="mw-spread">
                       {p.entity ? <Link to={entityPath(p.entityId)}>{p.entity.title}</Link> : <span className="mw-muted">Entfernter Inhalt</span>}
-                      <Badge tone={p.status === 'completed' ? 'ok' : 'info'}>{p.status === 'completed' ? 'Abgeschlossen' : 'Begonnen'}{p.score !== null ? ` · ${p.score} %` : ''}</Badge>
+                      <ProgressStatusBadge status={p.status} score={p.score} />
                     </li>
                   ))}
                 </ul>
