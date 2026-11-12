@@ -1,0 +1,175 @@
+/* MedTech Repair Lab – modulspezifische Stile (Präfix mw-repair-) */
+
+.mw-repair {
+  --mw-repair-accent: var(--mw-mod-repair);
+  --mw-repair-accent-soft: color-mix(in srgb, var(--mw-mod-repair) 12%, var(--mw-surface));
+}
+.mw-repair-wizard,
+.mw-repair-panel,
+.mw-repair-known {
+  --mw-repair-accent: var(--mw-mod-repair);
+  --mw-repair-accent-soft: color-mix(in srgb, var(--mw-mod-repair) 12%, var(--mw-surface));
+}
+
+/* Anker unter dem fixierten Header sichtbar halten */
+.mw-repair-anchor { scroll-margin-top: calc(var(--mw-header-h) + var(--mw-space-4)); }
+
+/* ---------------------------------------------------------------- Hero */
+.mw-repair-hero { margin-top: var(--mw-space-4); }
+.mw-repair-hero__cta { background: #fff; color: var(--mw-mod-repair); }
+.mw-repair-hero__cta:hover { background: #fff4ec; color: var(--mw-mod-repair); }
+.mw-repair-hero__stats { margin-top: var(--mw-space-5); gap: var(--mw-space-6); }
+.mw-repair-hero__stats .mw-stat__value { color: #fff; }
+.mw-repair-hero__stats .mw-stat__label { color: rgba(255, 255, 255, 0.85); }
+
+/* ---------------------------------------------------------------- Einstieg */
+.mw-repair-flow {
+  display: flex; flex-wrap: wrap; gap: var(--mw-space-2);
+  list-style: none; margin: 0 0 var(--mw-space-4); padding: 0;
+  font-size: var(--mw-fs-sm); color: var(--mw-text-3);
+}
+.mw-repair-flow li { display: inline-flex; align-items: center; gap: var(--mw-space-2); padding: 4px 12px 4px 4px; border-radius: 999px; border: 1px solid var(--mw-border); background: var(--mw-surface); }
+.mw-repair-flow li span {
+  display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%;
+  background: var(--mw-surface-3); color: var(--mw-text-2); font-weight: 700; font-size: var(--mw-fs-xs);
+}
+.mw-repair-flow li.is-active { border-color: var(--mw-repair-accent); color: var(--mw-text); font-weight: 600; }
+.mw-repair-flow li.is-active span { background: var(--mw-repair-accent); color: #fff; }
+.mw-repair-flow li.is-done span { background: var(--mw-ok); color: #fff; }
+
+.mw-repair-devices { border: 0; padding: 0; margin: 0; min-width: 0; }
+.mw-repair-devices__list { display: flex; flex-wrap: wrap; gap: var(--mw-space-2); margin-top: var(--mw-space-2); }
+.mw-repair-device {
+  display: inline-flex; align-items: center; gap: var(--mw-space-2);
+  padding: 8px 14px; border-radius: var(--mw-radius);
+  border: 1px solid var(--mw-border); background: var(--mw-surface); color: var(--mw-text);
+  font: inherit; font-size: var(--mw-fs-sm); cursor: pointer;
+  transition: border-color var(--mw-transition), background var(--mw-transition);
+}
+.mw-repair-device:hover { border-color: var(--mw-border-strong); background: var(--mw-surface-2); }
+.mw-repair-device:focus-visible { outline: 3px solid var(--mw-focus); outline-offset: 2px; }
+.mw-repair-device[aria-pressed='true'] { border-color: var(--mw-repair-accent); background: var(--mw-repair-accent-soft); box-shadow: inset 0 0 0 1px var(--mw-repair-accent); }
+.mw-repair-device__thumb { width: 32px; height: 22px; object-fit: cover; border-radius: 4px; }
+.mw-repair-device__title { font-weight: 600; }
+.mw-repair-device__count { color: var(--mw-text-3); font-size: var(--mw-fs-xs); }
+
+.mw-repair-flow__result { margin-top: var(--mw-space-5); padding-top: var(--mw-space-4); border-top: 1px solid var(--mw-border); }
+.mw-repair-flow__heading { font-size: var(--mw-fs-lg); margin: 0; }
+.mw-repair-flow__heading:focus { outline: none; }
+.mw-repair-flow__heading:focus-visible { outline: 3px solid var(--mw-focus); outline-offset: 2px; }
+.mw-repair-flow__result .mw-grid { margin-top: var(--mw-space-3); }
+
+/* ---------------------------------------------------------------- Filter & Karten */
+.mw-repair-filters {
+  display: grid; gap: var(--mw-space-3); align-items: end;
+  grid-template-columns: minmax(220px, 2fr) minmax(160px, 1fr) minmax(200px, 1.4fr) auto;
+  margin-bottom: var(--mw-space-2);
+}
+@media (max-width: 760px) { .mw-repair-filters { grid-template-columns: 1fr; } }
+.mw-repair-filters .mw-field { margin: 0; }
+.mw-repair-filters__reset { justify-self: start; }
+
+.mw-repair-fault {
+  display: flex; flex-direction: column; gap: var(--mw-space-2);
+  border-left: 4px solid var(--mw-border-strong);
+}
+.mw-repair-fault--kritisch,
+.mw-repair-fault--hoch { border-left-color: var(--mw-danger); }
+.mw-repair-fault--mittel { border-left-color: var(--mw-warn); }
+.mw-repair-fault--niedrig { border-left-color: var(--mw-info); }
+.mw-repair-fault__title { font-size: var(--mw-fs-md); margin: 0; }
+.mw-repair-fault__summary { margin: 0; }
+.mw-repair-fault__actions { margin-top: auto; padding-top: var(--mw-space-2); gap: var(--mw-space-2); }
+
+/* ---------------------------------------------------------------- Ursachen */
+.mw-repair-causes { display: flex; flex-direction: column; gap: var(--mw-space-3); }
+.mw-repair-cause { font-size: var(--mw-fs-sm); }
+.mw-repair-likelihood { font-size: var(--mw-fs-xs); font-weight: 600; white-space: nowrap; color: var(--mw-text-2); }
+.mw-repair-bar { height: 6px; border-radius: 999px; background: var(--mw-surface-3); margin-top: 4px; overflow: hidden; }
+.mw-repair-bar__fill { height: 100%; border-radius: 999px; }
+.mw-repair-bar__fill--haeufig { background: var(--mw-repair-accent); }
+.mw-repair-bar__fill--gelegentlich { background: color-mix(in srgb, var(--mw-repair-accent) 65%, var(--mw-surface-3)); }
+.mw-repair-bar__fill--selten { background: color-mix(in srgb, var(--mw-repair-accent) 35%, var(--mw-surface-3)); }
+
+.mw-repair-list { margin: 0; padding-left: 1.2em; }
+.mw-repair-list li + li { margin-top: 4px; }
+.mw-repair-remedies { margin: 0; padding-left: 1.4em; }
+.mw-repair-remedies li + li { margin-top: 6px; }
+.mw-repair-safety { margin: 6px 0 0; padding-left: 1.2em; }
+
+/* ---------------------------------------------------------------- Panel auf der Detailseite */
+.mw-repair-panel__cols { display: grid; gap: var(--mw-space-5); grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); }
+.mw-repair-panel__h { font-size: var(--mw-fs-md); margin: 0 0 var(--mw-space-2); }
+.mw-repair-panel__diag { padding: var(--mw-space-4); border-radius: var(--mw-radius); border: 1px solid var(--mw-border); background: var(--mw-surface-2); display: flex; flex-direction: column; gap: var(--mw-space-3); }
+
+.mw-repair-known { display: flex; flex-direction: column; gap: 6px; }
+.mw-repair-known__item { display: flex; justify-content: space-between; align-items: baseline; gap: var(--mw-space-2); font-size: var(--mw-fs-sm); }
+.mw-repair-known__diag { display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; font-size: var(--mw-fs-xs); color: var(--mw-text-2); }
+
+/* ---------------------------------------------------------------- Diagnose-Assistent */
+.mw-repair-wizard { display: flex; flex-direction: column; gap: var(--mw-space-4); }
+.mw-repair-wizard__progress { display: flex; flex-direction: column; gap: 6px; }
+.mw-repair-wizard__progress .mw-progress__bar { background: var(--mw-repair-accent); }
+.mw-repair-wizard__controls { gap: var(--mw-space-2); }
+
+.mw-repair-trail { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+.mw-repair-trail__item {
+  display: flex; align-items: center; gap: var(--mw-space-2); width: 100%;
+  padding: 6px 10px; border-radius: var(--mw-radius-sm);
+  border: 1px solid var(--mw-border); background: var(--mw-surface);
+  color: var(--mw-text-2); font: inherit; font-size: var(--mw-fs-sm); text-align: left; cursor: pointer;
+}
+.mw-repair-trail__item:hover { background: var(--mw-surface-2); color: var(--mw-text); }
+.mw-repair-trail__item:focus-visible { outline: 3px solid var(--mw-focus); outline-offset: 1px; }
+.mw-repair-trail__no {
+  flex: none; display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 50%;
+  background: var(--mw-surface-3); font-size: var(--mw-fs-xs); font-weight: 700;
+}
+.mw-repair-trail__q { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mw-repair-trail__a { flex: none; font-weight: 700; font-size: var(--mw-fs-xs); padding: 2px 8px; border-radius: 999px; }
+.mw-repair-trail__a--yes { color: var(--mw-ok); background: color-mix(in srgb, var(--mw-ok) 14%, transparent); }
+.mw-repair-trail__a--no { color: var(--mw-danger); background: color-mix(in srgb, var(--mw-danger) 12%, transparent); }
+
+.mw-repair-step,
+.mw-repair-outcome {
+  padding: var(--mw-space-5); border-radius: var(--mw-radius-lg);
+  border: 1px solid var(--mw-border); background: var(--mw-surface-2);
+  animation: mw-repair-in 220ms ease-out;
+}
+.mw-repair-outcome { border: 2px solid var(--mw-repair-accent); background: var(--mw-repair-accent-soft); }
+.mw-repair-step__eyebrow { display: flex; align-items: center; gap: 6px; font-size: var(--mw-fs-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--mw-repair-accent); margin-bottom: var(--mw-space-2); }
+.mw-repair-step__instruction { font-size: var(--mw-fs-md); color: var(--mw-text-2); margin-bottom: var(--mw-space-2); }
+.mw-repair-step__question { font-size: var(--mw-fs-xl); margin: 0 0 var(--mw-space-4); }
+.mw-repair-outcome__text { font-size: var(--mw-fs-xl); margin: 0 0 var(--mw-space-3); }
+.mw-repair-step__question:focus,
+.mw-repair-outcome__text:focus { outline: none; }
+.mw-repair-step__question:focus-visible,
+.mw-repair-outcome__text:focus-visible { outline: 3px solid var(--mw-focus); outline-offset: 4px; border-radius: 4px; }
+.mw-repair-step__answers .mw-btn { min-width: 120px; }
+
+.mw-repair-wizard--compact .mw-repair-step,
+.mw-repair-wizard--compact .mw-repair-outcome { padding: var(--mw-space-4); background: var(--mw-surface); }
+.mw-repair-wizard--compact .mw-repair-step__question,
+.mw-repair-wizard--compact .mw-repair-outcome__text { font-size: var(--mw-fs-lg); }
+
+@keyframes mw-repair-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mw-repair-step, .mw-repair-outcome { animation: none; }
+}
+.mw-repair--reduced .mw-repair-step,
+.mw-repair--reduced .mw-repair-outcome { animation: none; }
+.mw-repair--reduced * { transition: none !important; }
+
+/* ---------------------------------------------------------------- Vollbild-Diagnose */
+.mw-repair-diagnose__kicker { display: block; font-size: var(--mw-fs-sm); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+.mw-repair-diagnose__card { padding: var(--mw-space-5); }
+.mw-repair-diagnose--fullscreen { background: var(--mw-bg); overflow: auto; height: 100%; }
+.mw-repair-diagnose__result { margin-top: var(--mw-space-2); }
+
+.mw-repair-resources { display: flex; flex-direction: column; gap: var(--mw-space-5); }
+.mw-repair-resources__title { display: flex; align-items: center; gap: 6px; font-size: var(--mw-fs-md); margin: 0 0 var(--mw-space-3); }
+/* Akzentleiste der EntityCard an den Kartenrand statt über den Text legen (siehe Bericht: gemeinsame Styles) */
+.mw-repair-resources .mw-entity-card { position: static; }

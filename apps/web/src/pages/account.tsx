@@ -172,17 +172,17 @@ export function AccountLayout({ title, children }: { title: string; children: Re
 
 export function AccountHome() {
   const { user, favorites } = useAuth();
-  const progress = useAsync(() => api.me.progress(), [user?.id], user ? 'me:progress' : null);
-  const notes = useAsync(() => api.me.notes(), [user?.id], user ? 'me:notes' : null);
-  const history = useAsync(() => api.me.history(8), [user?.id], user ? 'me:history:8' : null);
-  const completed = progress.data?.items.filter((p) => p.status === 'completed').length ?? 0;
+  const progress = useAsync(() => api.me.progress(), [user?.id], user ? undefined : null);
+  const notes = useAsync(() => api.me.notes(), [user?.id], user ? undefined : null);
+  const history = useAsync(() => api.me.history(8), [user?.id], user ? undefined : null);
+  const completed = progress.data?.items.filter((p) => p.status === 'completed' && p.entity?.type === 'learning_module').length ?? 0;
   return (
     <AccountLayout title={`Hallo, ${user?.displayName ?? ''}`}>
       <div className="mw-grid" style={{ '--mw-grid-min': '180px' } as CSSProperties}>
         <Card><Stat value={favorites.size} label="Favoriten" /></Card>
         <Card><Stat value={completed} label="abgeschlossene Lernmodule" /></Card>
         <Card><Stat value={notes.data?.items.length ?? '–'} label="Notizen" /></Card>
-        <Card><Stat value={user ? ROLE_LABELS[user.role] : '–'} label="Rolle" /></Card>
+        <Card><Stat value={<span style={{ fontSize: 'var(--mw-fs-xl)' }}>{user ? ROLE_LABELS[user.role] : '–'}</span>} label="Rolle" /></Card>
       </div>
       <h2 style={{ marginTop: 32 }}>Zuletzt angesehen</h2>
       {history.loading ? <Loading /> : <HistoryList items={history.data?.items ?? []} />}
@@ -192,7 +192,7 @@ export function AccountHome() {
 
 export function FavoritesPage() {
   const { user } = useAuth();
-  const favs = useAsync(() => api.me.favorites(), [user?.id], null);
+  const favs = useAsync(() => api.me.favorites(), [user?.id], user ? undefined : null);
   return (
     <AccountLayout title="Favoriten">
       {favs.loading ? (
@@ -225,7 +225,7 @@ export function FavoritesPage() {
 
 export function ProgressPage() {
   const { user } = useAuth();
-  const progress = useAsync(() => api.me.progress(), [user?.id], null);
+  const progress = useAsync(() => api.me.progress(), [user?.id], user ? undefined : null);
   const modules = useAsync((s) => api.list({ type: 'learning_module', limit: 500 }, s), [], 'list:learning_module:all');
   const byId = new Map(progress.data?.items.map((p) => [p.entityId, p]));
   const total = modules.data?.total ?? 0;
@@ -295,7 +295,7 @@ export function ProgressPage() {
 
 export function NotesPage() {
   const { user } = useAuth();
-  const notes = useAsync(() => api.me.notes(), [user?.id], null);
+  const notes = useAsync(() => api.me.notes(), [user?.id], user ? undefined : null);
   const [text, setText] = useState('');
   const [editing, setEditing] = useState<{ id: string; text: string } | null>(null);
   return (
@@ -384,7 +384,7 @@ function HistoryList({ items }: { items: Awaited<ReturnType<typeof api.me.histor
 
 export function HistoryPage() {
   const { user, settings } = useAuth();
-  const history = useAsync(() => api.me.history(200), [user?.id], null);
+  const history = useAsync(() => api.me.history(200), [user?.id], user ? undefined : null);
   return (
     <AccountLayout title="Lernhistorie">
       {settings?.trackHistory === false ? (
@@ -525,7 +525,7 @@ export function SettingsPage() {
 
 export function AdminUsersPage() {
   const { can, user } = useAuth();
-  const users = useAsync(() => api.admin.users(), [user?.id], null);
+  const users = useAsync(() => api.admin.users(), [user?.id], user ? undefined : null);
   useDocumentTitle('Nutzerverwaltung');
   if (!can('users:manage')) return <div className="mw-container mw-page"><Alert tone="danger">Keine Berechtigung.</Alert></div>;
   return (

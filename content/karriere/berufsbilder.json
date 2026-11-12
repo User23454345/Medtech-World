@@ -1,0 +1,201 @@
+{
+  "sources": [
+    {
+      "id": "src:ba-berufenet",
+      "title": "BERUFENET – Berufsinformationen der Bundesagentur für Arbeit",
+      "publisher": "Bundesagentur für Arbeit",
+      "kind": "behoerde",
+      "url": "https://web.arbeitsagentur.de/berufenet/",
+      "accessedAt": "2026-11-01"
+    }
+  ],
+  "entities": [
+    {
+      "id": "job_profile:medizintechniker-service",
+      "title": "Medizintechniker/in (Servicetechniker/in)",
+      "aliases": ["Servicetechniker/in Medizintechnik", "Medizintechniker", "Medizintechnikerin", "Techniker/in Medizintechnik"],
+      "summary": "Fachkraft, die medizintechnische Geräte in Kliniken, Praxen oder beim Hersteller installiert, wartet, prüft und instand setzt – einschließlich Sicherheitstechnischer und Messtechnischer Kontrollen und Prüfungen der elektrischen Sicherheit.",
+      "body": "Medizintechniker/innen im Service arbeiten an der Schnittstelle von Technik, Anwendern und Recht. Typische Tätigkeiten lassen sich direkt in MedTech World üben: Fehlersuche im Repair Lab (z. B. [[fault:infusion-okklusionsalarm]]), Prüfabläufe wie [[test_procedure:stk-infusionspumpe]] und [[test_procedure:elektrische-sicherheit-62353]] sowie die rechtlichen Grundlagen im [[learning_module:mpbetreibv-kompakt]].\n\nDer Zugang ist vielfältig: über eine elektrotechnische Berufsausbildung mit anschließender Spezialisierung, über eine Weiterbildung zum/zur staatlich geprüften Techniker/in mit Schwerpunkt Medizintechnik oder über ein ingenieurwissenschaftliches Studium.",
+      "tags": ["Karriere", "Service", "Instandhaltung", "STK"],
+      "data": {
+        "tasks": [
+          "Installation, Inbetriebnahme und Funktionsprüfung medizintechnischer Geräte",
+          "Wartung, Inspektion und Instandsetzung nach Herstellervorgaben",
+          "Sicherheitstechnische und Messtechnische Kontrollen nach MPBetreibV",
+          "Elektrische Sicherheitsprüfung nach DIN EN 62353",
+          "Systematische Fehlersuche und Austausch von Baugruppen",
+          "Dokumentation in Prüfprotokollen, Medizinproduktebuch und Instandhaltungssoftware",
+          "Unterstützung und Einweisung von Anwendern"
+        ],
+        "qualifications": [
+          "Abgeschlossene Berufsausbildung in einem elektrotechnischen Beruf, z. B. Elektroniker/in für Geräte und Systeme, oder vergleichbare Qualifikation",
+          "Weiterbildung zum/zur staatlich geprüften Techniker/in (Schwerpunkt Medizintechnik) oder Studium der Medizintechnik als möglicher Weg",
+          "Kenntnisse in Elektrotechnik, Messtechnik, Pneumatik und Mechanik",
+          "Kenntnisse des Medizinprodukterechts (MPBetreibV, MDR)",
+          "Herstellerschulungen für die betreuten Gerätetypen"
+        ],
+        "workplaces": ["Medizintechnik-Abteilungen von Krankenhäusern", "Herstellerservice im Außendienst", "Unabhängige Servicedienstleister", "Fachhandel für Medizintechnik"],
+        "careerPaths": ["Spezialisierung auf Geräteklassen (z. B. Beatmung, Infusion, Bildgebung)", "Leitung einer Medizintechnik-Abteilung", "Beauftragte Person für Medizinproduktesicherheit", "Produktspezialist/in oder Schulungsreferent/in beim Hersteller"]
+      },
+      "links": [
+        { "rel": "requires_skill", "to": "learning_module:mpbetreibv-kompakt" },
+        { "rel": "requires_skill", "to": "learning_module:elektrische-sicherheit-62353" },
+        { "rel": "requires_skill", "to": "learning_module:infusionstechnik" },
+        { "rel": "requires_skill", "to": "learning_module:beatmung-grundlagen" },
+        { "rel": "requires_skill", "to": "learning_module:ekg-defibrillation-medizintechnik" },
+        { "rel": "requires_skill", "to": "learning_module:pulsoximetrie-grundlagen" },
+        { "rel": "requires_skill", "to": "test_procedure:elektrische-sicherheit-62353" },
+        { "rel": "requires_skill", "to": "test_procedure:stk-infusionspumpe" },
+        { "rel": "requires_skill", "to": "test_procedure:stk-defibrillator" },
+        { "rel": "requires_skill", "to": "test_procedure:beatmungsgeraet-funktionspruefung-stk" },
+        { "rel": "requires_skill", "to": "test_procedure:mtk-nibp" },
+        { "rel": "based_on", "to": "legal_reference:de-mpbetreibv" }
+      ],
+      "sources": ["src:ba-berufenet", "src:de-mpbetreibv"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "job_profile:medizinprodukteberater",
+      "title": "Medizinprodukteberater/in",
+      "aliases": ["Medizinprodukteberater", "Medizinprodukteberaterin", "Medizinproduktberater/in"],
+      "summary": "Person, die berufsmäßig Fachkreise fachlich über Medizinprodukte informiert oder in deren sachgerechte Handhabung einweist. Die Tätigkeit ist im MPDG geregelt und setzt die erforderliche Sachkenntnis und Erfahrung für die jeweiligen Produkte voraus.",
+      "body": "Medizinprodukteberater/innen sind häufig im Außendienst von Herstellern oder Händlern tätig. Neben der fachlichen Information und Einweisung (vgl. [[document:checkliste-geraeteeinweisung]]) haben sie eine wichtige Rolle im Meldewesen: Mitteilungen von Angehörigen der Fachkreise über Nebenwirkungen, Funktionsstörungen oder sonstige Probleme mit Medizinprodukten sind zu dokumentieren und an den Hersteller weiterzugeben.\n\nRechtsgrundlage ist das [[legal_reference:de-mpdg]]; die genauen Anforderungen an Nachweis und Auffrischung der Sachkenntnis sind der aktuellen Fassung der Primärquelle zu entnehmen.",
+      "tags": ["Karriere", "Vertrieb", "Einweisung", "MPDG"],
+      "data": {
+        "tasks": [
+          "Fachliche Information von Ärztinnen, Ärzten, Pflegekräften und Medizintechnik über Medizinprodukte",
+          "Einweisung von Anwendern in die sachgerechte Handhabung",
+          "Unterstützung bei Funktionsprüfung und Ersteinweisung vor Inbetriebnahme",
+          "Entgegennahme, Dokumentation und Weiterleitung von Mitteilungen über Probleme mit Medizinprodukten an den Hersteller",
+          "Produktdemonstrationen und Schulungen"
+        ],
+        "qualifications": [
+          "Für die jeweiligen Medizinprodukte erforderliche Sachkenntnis und Erfahrung (Nachweis nach MPDG), z. B. durch eine naturwissenschaftliche, medizinische oder technische Ausbildung und Produktschulung",
+          "Kenntnisse des Medizinprodukterechts (MDR, MPDG, MPBetreibV)",
+          "Kommunikations- und Schulungskompetenz"
+        ],
+        "workplaces": ["Medizinproduktehersteller (Außendienst, Produktmanagement)", "Medizintechnischer Fachhandel", "Sanitätshäuser und Homecare-Versorger"],
+        "careerPaths": ["Produktspezialist/in bzw. Clinical Specialist", "Key-Account-Management", "Produktmanagement", "Schulungs- und Trainingsleitung"]
+      },
+      "links": [
+        { "rel": "requires_skill", "to": "learning_module:ekg-defibrillation-medizintechnik" },
+        { "rel": "based_on", "to": "legal_reference:de-mpdg" },
+        { "rel": "based_on", "to": "legal_reference:eu-mdr" },
+        { "rel": "requires_skill", "to": "learning_module:mpbetreibv-kompakt" },
+        { "rel": "requires_skill", "to": "learning_module:infusionstechnik" },
+        { "rel": "requires_skill", "to": "learning_module:pulsoximetrie-grundlagen" },
+        { "rel": "requires_skill", "to": "learning_module:beatmung-grundlagen" },
+        { "rel": "requires_skill", "to": "term:dosisfehlerreduktion" }
+      ],
+      "sources": ["src:de-mpdg", "src:ba-berufenet"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "job_profile:ingenieur-medizintechnik",
+      "title": "Ingenieur/in Medizintechnik (Biomedizintechnik)",
+      "aliases": ["Medizintechnikingenieur/in", "Biomedizintechniker/in", "Ingenieur/in Biomedizinische Technik", "Klinikingenieur/in"],
+      "summary": "Ingenieur/in mit Studium der Medizintechnik bzw. Biomedizinischen Technik, tätig in Entwicklung, Zulassung, Qualitätsmanagement, Produktion oder im technischen Management von Krankenhäusern.",
+      "body": "Ingenieur/innen der Medizintechnik verbinden Ingenieurwissen mit medizinischen Grundlagen. Bei Herstellern entwickeln sie Geräte nach Normen wie [[legal_reference:iec-60601-1]] und begleiten die Konformitätsbewertung nach der [[legal_reference:eu-mdr|MDR]]. In Krankenhäusern verantworten sie als Klinikingenieur/innen Beschaffung, Gerätemanagement und die Einhaltung der Betreiberpflichten.\n\nMedTech World bietet dafür die Grundlagen der Messprinzipien (z. B. [[term:pulsoximetrie]], [[term:oszillometrie]]) und die Prüfpraxis (z. B. [[test_procedure:elektrische-sicherheit-62353]]).",
+      "tags": ["Karriere", "Studium", "Entwicklung", "Regulatory Affairs"],
+      "data": {
+        "tasks": [
+          "Entwicklung und Konstruktion medizintechnischer Geräte und Software",
+          "Risikomanagement, Verifizierung und Validierung",
+          "Erstellung technischer Dokumentation und Begleitung der Konformitätsbewertung",
+          "Qualitätsmanagement und Überwachung nach dem Inverkehrbringen",
+          "Gerätemanagement, Beschaffungsplanung und Betreiberorganisation im Krankenhaus"
+        ],
+        "qualifications": [
+          "Bachelor- bzw. Masterstudium Medizintechnik, Biomedizinische Technik oder eines verwandten Ingenieurstudiengangs",
+          "Kenntnisse in Elektrotechnik, Informatik, Physik und physiologischen Grundlagen",
+          "Kenntnisse in Normen und Medizinprodukterecht (z. B. IEC 60601-1, MDR)"
+        ],
+        "workplaces": ["Medizinproduktehersteller (Entwicklung, Zulassung, Qualität)", "Krankenhäuser (Medizintechnik, technisches Management)", "Benannte Stellen und Prüfinstitute", "Forschungseinrichtungen und Hochschulen", "Behörden"],
+        "careerPaths": ["Projekt- oder Entwicklungsleitung", "Regulatory Affairs bzw. Qualitätsmanagement", "Leitung Medizintechnik im Krankenhaus", "Auditor/in bzw. Produktprüfer/in", "Promotion und Forschung"]
+      },
+      "links": [
+        { "rel": "requires_skill", "to": "learning_module:infusionstechnik" },
+        { "rel": "based_on", "to": "legal_reference:eu-mdr" },
+        { "rel": "based_on", "to": "legal_reference:iec-60601-1" },
+        { "rel": "requires_skill", "to": "learning_module:elektrische-sicherheit-62353" },
+        { "rel": "requires_skill", "to": "learning_module:mpbetreibv-kompakt" },
+        { "rel": "requires_skill", "to": "learning_module:pulsoximetrie-grundlagen" },
+        { "rel": "requires_skill", "to": "learning_module:beatmung-grundlagen" },
+        { "rel": "requires_skill", "to": "learning_module:ekg-defibrillation-medizintechnik" },
+        { "rel": "requires_skill", "to": "term:pulsoximetrie" },
+        { "rel": "requires_skill", "to": "term:oszillometrie" },
+        { "rel": "requires_skill", "to": "term:ableitstrom" }
+      ],
+      "sources": ["src:ba-berufenet", "src:eu-mdr-2017-745"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "job_profile:elektroniker-geraete-systeme",
+      "title": "Elektroniker/in für Geräte und Systeme",
+      "aliases": ["Elektroniker für Geräte und Systeme", "Elektronikerin für Geräte und Systeme", "Elektroniker/in Medizintechnik"],
+      "summary": "Anerkannter dualer Ausbildungsberuf: Elektroniker/innen für Geräte und Systeme fertigen, prüfen und reparieren elektronische Komponenten und Geräte. In der Medizintechnik arbeiten sie in Fertigung, Prüffeld und Service.",
+      "body": "Die duale Ausbildung dauert in der Regel dreieinhalb Jahre. Viele Medizintechnikhersteller und Servicedienstleister bilden in diesem Beruf aus; die medizintechnische Spezialisierung erfolgt im Ausbildungsbetrieb und durch Weiterbildung.\n\nTypische Einsatzfelder in der Medizintechnik sind die Fertigung und Endprüfung von Geräten wie [[device:infusionspumpe|Infusionspumpen]] oder [[device:patientenmonitor|Patientenmonitoren]], Baugruppentausch und Prüfungen nach [[test_procedure:elektrische-sicherheit-62353]].",
+      "tags": ["Karriere", "Ausbildung", "Elektronik", "Fertigung"],
+      "data": {
+        "tasks": [
+          "Fertigung, Montage und Inbetriebnahme elektronischer Baugruppen und Geräte",
+          "Prüfen und Messen von Baugruppen im Prüffeld",
+          "Fehlersuche und Reparatur auf Baugruppen- und Bauteilebene",
+          "Elektrische Sicherheitsprüfungen nach Vorgaben",
+          "Dokumentation von Prüf- und Reparaturergebnissen"
+        ],
+        "qualifications": [
+          "Abgeschlossene duale Berufsausbildung (in der Regel 3,5 Jahre)",
+          "Grundlagen der Elektrotechnik, Elektronik und Messtechnik",
+          "Für die Medizintechnik: Kenntnisse zu elektrischer Sicherheit medizinischer Geräte und Herstellerschulungen"
+        ],
+        "workplaces": ["Medizintechnikhersteller (Fertigung, Prüffeld, Reparaturzentrum)", "Servicedienstleister", "Medizintechnik-Abteilungen von Krankenhäusern"],
+        "careerPaths": ["Servicetechniker/in Medizintechnik", "Weiterbildung zum/zur staatlich geprüften Techniker/in", "Industriemeister/in Elektrotechnik", "Studium der Medizintechnik"]
+      },
+      "links": [
+        { "rel": "requires_skill", "to": "learning_module:elektrische-sicherheit-62353" },
+        { "rel": "requires_skill", "to": "learning_module:infusionstechnik" },
+        { "rel": "requires_skill", "to": "learning_module:ekg-defibrillation-medizintechnik" },
+        { "rel": "requires_skill", "to": "test_procedure:elektrische-sicherheit-62353" },
+        { "rel": "requires_skill", "to": "device:infusionspumpe" },
+        { "rel": "requires_skill", "to": "device:patientenmonitor" },
+        { "rel": "requires_skill", "to": "term:schutzklasse" },
+        { "rel": "related", "to": "job_profile:medizintechniker-service" }
+      ],
+      "sources": ["src:ba-berufenet"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "job_profile:beauftragte-medizinproduktesicherheit",
+      "title": "Beauftragte Person für Medizinproduktesicherheit",
+      "aliases": ["Beauftragter für Medizinproduktesicherheit", "Medizinproduktesicherheitsbeauftragte/r"],
+      "summary": "Funktion in Gesundheitseinrichtungen mit regelmäßig mehr als 20 Beschäftigten nach MPBetreibV: sachkundige und zuverlässige Kontaktperson für Behörden, Hersteller und Vertreiber in Fragen der Medizinproduktesicherheit.",
+      "body": "Die Funktion wird meist zusätzlich zu einer bestehenden Tätigkeit wahrgenommen – z. B. in der Medizintechnik, Pflege, Pharmazie oder im Qualitätsmanagement. Sie koordiniert interne Abläufe bei Meldungen über Vorkommnisse und bei korrektiven Maßnahmen wie Rückrufen. Die Gesundheitseinrichtung muss sicherstellen, dass die Funktion bekannt und erreichbar ist.\n\nRechtsgrundlage: [[legal_reference:de-mpbetreibv]]; kompakter Einstieg: [[learning_module:mpbetreibv-kompakt]].",
+      "tags": ["Karriere", "MPBetreibV", "Patientensicherheit", "Organisation"],
+      "data": {
+        "tasks": [
+          "Kontaktstelle für Behörden, Hersteller und Vertreiber im Zusammenhang mit Meldungen über Risiken von Medizinprodukten",
+          "Koordination interner Prozesse zu Meldungen von Vorkommnissen",
+          "Koordination der Umsetzung korrektiver Maßnahmen und Rückrufe in der Einrichtung",
+          "Zusammenarbeit mit Medizintechnik, Pflege, Ärzteschaft und Qualitätsmanagement"
+        ],
+        "qualifications": [
+          "Sachkunde und Zuverlässigkeit",
+          "Abgeschlossene medizinische, naturwissenschaftliche, pflegerische, pharmazeutische oder technische Ausbildung",
+          "Fundierte Kenntnisse des Medizinprodukterechts und des Meldewesens"
+        ],
+        "workplaces": ["Krankenhäuser", "Rehabilitationskliniken", "Größere Pflegeeinrichtungen und Praxisverbünde"],
+        "careerPaths": ["Leitung Qualitäts- bzw. Risikomanagement", "Leitung Medizintechnik", "Fachreferent/in Patientensicherheit"]
+      },
+      "links": [
+        { "rel": "based_on", "to": "legal_reference:de-mpbetreibv" },
+        { "rel": "requires_skill", "to": "learning_module:mpbetreibv-kompakt" },
+        { "rel": "requires_skill", "to": "test_procedure:stk-infusionspumpe" },
+        { "rel": "requires_skill", "to": "term:dosisfehlerreduktion" },
+        { "rel": "related", "to": "job_profile:medizintechniker-service" }
+      ],
+      "sources": ["src:de-mpbetreibv"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    }
+  ]
+}

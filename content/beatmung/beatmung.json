@@ -1,0 +1,828 @@
+{
+  "sources": [
+    {
+      "id": "src:iso-80601-2-12",
+      "title": "ISO 80601-2-12 – Medizinische elektrische Geräte – Besondere Festlegungen für die grundlegende Sicherheit und die wesentlichen Leistungsmerkmale von Beatmungsgeräten für die Intensivpflege",
+      "publisher": "ISO / IEC",
+      "kind": "norm",
+      "edition": "2020",
+      "accessedAt": "2026-11-01"
+    },
+    {
+      "id": "src:larsen-beatmung",
+      "title": "Larsen, R. et al.: Beatmung (Lehrbuch zu Indikationen, Techniken und Krankheitsbildern)",
+      "publisher": "Springer",
+      "kind": "fachliteratur",
+      "accessedAt": "2026-11-01"
+    },
+    {
+      "id": "src:ardsnet-2000",
+      "title": "The Acute Respiratory Distress Syndrome Network: Ventilation with Lower Tidal Volumes as Compared with Traditional Tidal Volumes for Acute Lung Injury and the Acute Respiratory Distress Syndrome. N Engl J Med 342:1301–1308",
+      "publisher": "Massachusetts Medical Society (New England Journal of Medicine)",
+      "kind": "wissenschaft",
+      "edition": "2000",
+      "accessedAt": "2026-11-01"
+    }
+  ],
+  "entities": [
+    {
+      "id": "device:beatmungsgeraet",
+      "title": "Intensiv-Beatmungsgerät",
+      "aliases": ["Beatmungsgerät", "Respirator", "Intensivrespirator", "Ventilator"],
+      "summary": "Aktives Medizinprodukt zur maschinellen Beatmung von Patienten auf Intensivstationen: Es erzeugt kontrollierte Druck- bzw. Flowverläufe, mischt Sauerstoff und Luft, überwacht Atemwegsdruck, Volumen und Sauerstoffkonzentration und alarmiert bei Abweichungen.",
+      "body": "## Funktionsprinzip\nEin Intensiv-Beatmungsgerät arbeitet mit **positivem Druck**: In der Inspiration wird Atemgas über das [[component:beatmungsschlauchsystem|Beatmungsschlauchsystem]] in die Lunge gefördert, die Exspiration erfolgt passiv durch die elastischen Rückstellkräfte von Lunge und Thorax. Das [[component:exspirationsventil|Exspirationsventil]] hält dabei den eingestellten [[term:peep|PEEP]] aufrecht.\n\n## Aufbau (vereinfacht)\n- **Gasdosierung:** [[component:beatmung-gasdosierung|Turbine bzw. Druckgasversorgung mit Gasmischer und Inspirationsventil]]\n- **Messtechnik:** [[component:beatmung-flowsensor|Flowsensor]], [[component:beatmung-drucksensor|Atemwegsdrucksensor]], [[component:beatmung-sauerstoffsensor|Sauerstoffsensor]]\n- **Patientenseite:** [[component:beatmungsschlauchsystem|Schlauchsystem]] mit Inspirations- und Exspirationsschenkel, Y-Stück und [[component:atemgasbefeuchter|Atemgasbefeuchtung]]\n- **Steuerung und Bedienung:** Regelung der Beatmungsform, Bildschirm mit Kurven, Messwerten und Alarmen, Akku für Netzausfall und Transport\n\n## Beatmungsformen\nGrundlegend werden [[term:druckkontrollierte-beatmung|druckkontrollierte (PCV)]] und [[term:volumenkontrollierte-beatmung|volumenkontrollierte (VCV)]] Beatmung unterschieden. Wie Druck, Flow und Volumen zusammenhängen, bestimmen [[term:compliance]] und [[term:resistance]] des Patienten – ausprobieren lässt sich das in der [[simulation:beatmung|Beatmungssimulation]].\n\n## Betreiberpflichten\nGeräte zur maschinellen Beatmung sind in Anlage 1 der MPBetreibV aufgeführt und unterliegen damit der [[legal_reference:de-mpbetreibv-stk|Pflicht zu Sicherheitstechnischen Kontrollen]]. Ein generischer Ablauf ist im Prüfverfahren [[test_procedure:beatmungsgeraet-funktionspruefung-stk]] beschrieben; maßgeblich sind stets die Herstellerangaben.\n\n## Typische Fehlerbilder\n- [[fault:beatmung-leckage-diskonnektion]]\n- [[fault:beatmung-hoher-atemwegsdruck]]\n- [[fault:beatmung-flowsensor-fehler]]",
+      "tags": ["Beatmung", "Intensivmedizin", "STK"],
+      "data": {
+        "category": "Beatmung und Atemtherapie",
+        "typicalRiskClass": "IIb",
+        "applications": ["Intensivstation", "Intermediate Care", "Intrahospitaler Transport (geräteabhängig)", "Langzeitbeatmung im Krankenhaus"],
+        "operatingPrinciple": "Überdruckbeatmung: geregelte Gasdosierung in der Inspiration, passive Exspiration gegen ein PEEP-regelndes Exspirationsventil, kontinuierliche Messung von Druck, Flow, Volumen und FiO₂ mit Alarmüberwachung.",
+        "scene": {
+          "camera": [3.6, 2.6, 4.6],
+          "parts": [
+            { "id": "fahrgestell", "label": "Fahrgestell", "shape": "box", "size": [1.4, 0.1, 1.2], "position": [0, -1.45, 0], "color": "#6b7280" },
+            { "id": "saeule", "label": "Gerätesäule", "shape": "cylinder", "size": [0.08, 1.4, 0], "position": [0, -0.7, 0], "color": "#9ca3af" },
+            { "id": "gehaeuse", "label": "Gerätegehäuse (Pneumatik und Elektronik)", "shape": "box", "size": [1.6, 1.2, 1.0], "position": [0, 0.6, 0], "color": "#dfe7ef", "opacity": 0.45, "description": "Halbtransparent dargestellt, damit die innenliegenden Baugruppen sichtbar sind." },
+            { "id": "bildschirm", "label": "Bildschirm mit Kurven, Messwerten und Alarmen", "shape": "box", "size": [1.4, 0.9, 0.08], "position": [0, 1.75, 0.25], "rotation": [-0.2, 0, 0], "color": "#0f2a3d" },
+            { "id": "gasdosierung", "label": "Gasdosierung (Turbine bzw. Druckgas mit Mischer)", "component": "component:beatmung-gasdosierung", "shape": "cylinder", "size": [0.25, 0.4, 0], "position": [-0.45, 0.6, -0.1], "color": "#2f7fbf" },
+            { "id": "o2-sensor", "label": "Sauerstoffsensor", "component": "component:beatmung-sauerstoffsensor", "shape": "cylinder", "size": [0.08, 0.2, 0], "position": [-0.1, 0.85, 0.15], "color": "#16a34a" },
+            { "id": "drucksensor", "label": "Atemwegsdrucksensor", "component": "component:beatmung-drucksensor", "shape": "box", "size": [0.18, 0.1, 0.12], "position": [0.2, 0.85, 0.1], "color": "#f59e0b" },
+            { "id": "insp-anschluss", "label": "Inspirationsanschluss", "shape": "cylinder", "size": [0.08, 0.2, 0], "position": [-0.45, 0.3, 0.6], "rotation": [1.5708, 0, 0], "color": "#1d4ed8" },
+            { "id": "exspirationsventil", "label": "Exspirationsventil (PEEP)", "component": "component:exspirationsventil", "shape": "cylinder", "size": [0.16, 0.2, 0], "position": [0.45, 0.3, 0.6], "rotation": [1.5708, 0, 0], "color": "#7c3aed" },
+            { "id": "flowsensor", "label": "Flowsensor (exspiratorisch)", "component": "component:beatmung-flowsensor", "shape": "cylinder", "size": [0.07, 0.3, 0], "position": [0.45, 0.3, 0.85], "rotation": [1.5708, 0, 0], "color": "#e11d48" },
+            { "id": "insp-schenkel", "label": "Inspirationsschenkel", "component": "component:beatmungsschlauchsystem", "shape": "cylinder", "size": [0.06, 1.35, 0], "position": [-0.2, 0.3, 1.38], "rotation": [1.5708, 0, -0.35], "color": "#93c5fd", "opacity": 0.85 },
+            { "id": "exsp-schenkel", "label": "Exspirationsschenkel", "component": "component:beatmungsschlauchsystem", "shape": "cylinder", "size": [0.06, 1.05, 0], "position": [0.25, 0.3, 1.5], "rotation": [1.5708, 0, 0.35], "color": "#c4b5fd", "opacity": 0.85 },
+            { "id": "y-stueck", "label": "Y-Stück", "component": "component:beatmungsschlauchsystem", "shape": "sphere", "size": [0.1, 0, 0], "position": [0.05, 0.3, 2.05], "color": "#e5e7eb" },
+            { "id": "befeuchter", "label": "Atemgasbefeuchter (aktiv, beheizt)", "component": "component:atemgasbefeuchter", "shape": "cylinder", "size": [0.22, 0.4, 0], "position": [-1.1, -0.2, 0.3], "color": "#38bdf8", "opacity": 0.8, "description": "Vereinfacht neben dem Gerät dargestellt; im realen Aufbau liegt die Befeuchterkammer im Inspirationsschenkel." },
+            { "id": "testlunge", "label": "Testlunge (Prüfzubehör)", "shape": "sphere", "size": [0.32, 0, 0], "position": [0.05, 0.3, 2.5], "color": "#f9a8d4", "opacity": 0.75 }
+          ]
+        }
+      },
+      "links": [
+        { "rel": "has_component", "to": "component:beatmung-gasdosierung" },
+        { "rel": "has_component", "to": "component:beatmung-flowsensor" },
+        { "rel": "has_component", "to": "component:beatmung-drucksensor" },
+        { "rel": "has_component", "to": "component:beatmung-sauerstoffsensor" },
+        { "rel": "has_component", "to": "component:exspirationsventil" },
+        { "rel": "has_component", "to": "component:beatmungsschlauchsystem" },
+        { "rel": "has_component", "to": "component:atemgasbefeuchter" },
+        { "rel": "uses_principle", "to": "term:peep" },
+        { "rel": "uses_principle", "to": "term:tidalvolumen" },
+        { "rel": "uses_principle", "to": "term:atemminutenvolumen" },
+        { "rel": "uses_principle", "to": "term:compliance" },
+        { "rel": "uses_principle", "to": "term:resistance" },
+        { "rel": "uses_principle", "to": "term:druckkontrollierte-beatmung" },
+        { "rel": "uses_principle", "to": "term:volumenkontrollierte-beatmung" },
+        { "rel": "uses_principle", "to": "term:ie-verhaeltnis" },
+        { "rel": "based_on", "to": "legal_reference:de-mpbetreibv-stk" },
+        { "rel": "based_on", "to": "legal_reference:eu-mdr" },
+        { "rel": "related", "to": "manufacturer:draeger", "note": "Hersteller u. a. von Beatmungstechnik – keine modellspezifischen Angaben" },
+        { "rel": "related", "to": "device:patientenmonitor" }
+      ],
+      "sources": ["src:iso-80601-2-12", "src:larsen-beatmung", "src:kramme-medizintechnik", "src:de-mpbetreibv"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "component:beatmung-gasdosierung",
+      "title": "Gasdosierung des Beatmungsgeräts (Turbine bzw. Druckgas mit Gasmischer)",
+      "aliases": ["Beatmungsturbine", "Gebläse Beatmungsgerät", "Gasmischer Beatmung", "Inspirationsventil"],
+      "summary": "Baugruppe, die das Atemgas für die Inspiration bereitstellt: entweder eine Turbine (Gebläse) mit Raumluft plus Sauerstoffzumischung oder geregelte Ventile an der Druckgasversorgung (O₂ und Druckluft) mit Gasmischer.",
+      "body": "## Varianten\n- **Druckgasbetrieb:** Sauerstoff und medizinische Druckluft aus der zentralen Gasversorgung bzw. aus Flaschen werden über Druckminderer und schnell regelnde Proportionalventile dosiert und gemischt.\n- **Turbinenbetrieb:** Ein Gebläse saugt Umgebungsluft an und erzeugt den Inspirationsdruck; Sauerstoff wird zugemischt. Solche Geräte sind unabhängig von einer Druckluftversorgung.\n\nDie Gasdosierung wird von der Gerätesteuerung anhand der Messwerte von [[component:beatmung-flowsensor|Flow-]] und [[component:beatmung-drucksensor|Drucksensor]] geregelt. Die eingestellte Sauerstoffkonzentration wird durch den [[component:beatmung-sauerstoffsensor]] überwacht.\n\n**Service-Hinweis:** Ein Ausfall der Gasversorgung muss vom Gerät alarmiert werden – diese Alarme gehören zur Funktionsprüfung ([[test_procedure:beatmungsgeraet-funktionspruefung-stk]]).",
+      "tags": ["Beatmung", "Pneumatik"],
+      "data": { "kind": "pneumatik", "function": "Bereitstellung, Mischung und geregelte Dosierung des inspiratorischen Atemgases", "wearPart": false },
+      "links": [
+        { "rel": "uses_principle", "to": "term:druckkontrollierte-beatmung" },
+        { "rel": "uses_principle", "to": "term:volumenkontrollierte-beatmung" }
+      ],
+      "sources": ["src:larsen-beatmung", "src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "component:beatmung-flowsensor",
+      "title": "Flowsensor (Beatmungsgerät)",
+      "aliases": ["Flow-Sensor Beatmung", "Volumensensor", "Pneumotachograph"],
+      "summary": "Sensor zur Messung des Atemgasflusses, aus dem das Gerät durch Integration über die Zeit Tidal- und Atemminutenvolumen berechnet. Verbreitete Messprinzipien sind Hitzdrahtanemometrie und Differenzdruckmessung.",
+      "body": "## Messprinzipien\n- **Hitzdrahtanemometrie:** Ein beheizter, sehr dünner Draht wird vom Gasstrom gekühlt; die zur Temperaturhaltung nötige Heizleistung ist ein Maß für den Flow.\n- **Differenzdruckverfahren (Pneumotachograph):** Ein definierter Strömungswiderstand erzeugt einen flowabhängigen Druckabfall, der gemessen wird.\n\nJe nach Gerätekonzept sitzt der Flowsensor im Exspirationszweig des Geräts oder proximal am Y-Stück.\n\n## Bedeutung\nAus dem Flow werden [[term:tidalvolumen]] und [[term:atemminutenvolumen]] berechnet, außerdem stützen sich Leckage-, Volumen- und häufig auch Triggerfunktionen auf diese Messung. Feuchtigkeit, Sekret oder Ablagerungen verfälschen die Messung – siehe [[fault:beatmung-flowsensor-fehler]].\n\nFlowsensoren sind oft Verschleiß- oder Einmalteile und müssen nach dem Einsetzen gemäß Gebrauchsanweisung kalibriert werden.",
+      "tags": ["Beatmung", "Sensor", "Verschleißteil"],
+      "data": { "kind": "sensor", "function": "Messung des Atemgasflusses zur Berechnung von Volumina sowie für Alarme und Triggerung", "wearPart": true },
+      "links": [
+        { "rel": "uses_principle", "to": "term:tidalvolumen" },
+        { "rel": "uses_principle", "to": "term:atemminutenvolumen" },
+        { "rel": "causes", "to": "fault:beatmung-flowsensor-fehler" },
+        { "rel": "causes", "to": "fault:beatmung-leckage-diskonnektion", "note": "Fehlmessung kann eine Leckage vortäuschen" }
+      ],
+      "sources": ["src:larsen-beatmung", "src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "component:beatmung-drucksensor",
+      "title": "Atemwegsdrucksensor (Beatmungsgerät)",
+      "aliases": ["Paw-Sensor", "Drucksensor Beatmung"],
+      "summary": "Drucksensor, der den Atemwegsdruck (Paw) im Beatmungssystem erfasst. Er liefert Spitzen-, Plateau- und PEEP-Werte, regelt die druckkontrollierte Beatmung und löst Druckalarme aus.",
+      "body": "Der gemessene Druckverlauf ist Grundlage der [[term:druckkontrollierte-beatmung|druckkontrollierten Beatmung]] und der Alarme „Atemwegsdruck hoch“ bzw. „niedrig“. Aus Spitzen- und Plateaudruck lassen sich Rückschlüsse auf [[term:resistance]] und [[term:compliance]] ziehen ([[fault:beatmung-hoher-atemwegsdruck]]).\n\nDruckmessleitungen und -anschlüsse dürfen nicht durch Kondenswasser blockiert sein; eine Nullpunktprüfung bzw. Kalibrierung erfolgt nach Herstellerangabe.",
+      "tags": ["Beatmung", "Sensor", "Druck"],
+      "data": { "kind": "sensor", "function": "Erfassung des Atemwegsdrucks für Regelung, Anzeige und Druckalarme", "wearPart": false },
+      "links": [
+        { "rel": "uses_principle", "to": "term:peep" },
+        { "rel": "uses_principle", "to": "term:resistance" }
+      ],
+      "sources": ["src:larsen-beatmung", "src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "component:beatmung-sauerstoffsensor",
+      "title": "Sauerstoffsensor (Beatmungsgerät)",
+      "aliases": ["O2-Sensor Beatmung", "FiO2-Sensor", "O₂-Zelle"],
+      "summary": "Sensor zur Überwachung der inspiratorischen Sauerstoffkonzentration (FiO₂). Verbreitet sind galvanische (elektrochemische) Messzellen, die sich verbrauchen, sowie paramagnetische Sensoren.",
+      "body": "Der Sauerstoffsensor überwacht, ob die von der [[component:beatmung-gasdosierung|Gasdosierung]] gemischte Sauerstoffkonzentration dem eingestellten Wert entspricht, und löst bei Abweichung einen Alarm aus.\n\n- **Galvanische Messzellen** erzeugen einen sauerstoffabhängigen Strom. Ihr Elektrolyt bzw. ihre Elektrode wird dabei verbraucht – die Zelle ist ein Verschleißteil mit begrenzter Lebensdauer.\n- **Paramagnetische Sensoren** nutzen die magnetischen Eigenschaften von Sauerstoff und unterliegen keinem chemischen Verbrauch.\n\nKalibrierung (meist mit Raumluft und 100 % O₂) und Wechselintervalle richten sich nach den Herstellerangaben und sind Bestandteil der [[test_procedure:beatmungsgeraet-funktionspruefung-stk|Funktionsprüfung]].",
+      "tags": ["Beatmung", "Sensor", "Sauerstoff"],
+      "data": { "kind": "sensor", "function": "Messung und Überwachung der inspiratorischen Sauerstoffkonzentration (FiO₂)", "wearPart": true },
+      "links": [{ "rel": "related", "to": "term:spo2" }],
+      "sources": ["src:larsen-beatmung", "src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "component:exspirationsventil",
+      "title": "Exspirationsventil (Beatmungsgerät)",
+      "aliases": ["PEEP-Ventil", "Ausatemventil", "Exspirationsventil-Membran"],
+      "summary": "Ventil im Exspirationszweig, das während der Inspiration schließt und in der Exspiration so öffnet, dass der Atemwegsdruck nicht unter den eingestellten PEEP fällt. Häufig als Membranventil ausgeführt.",
+      "body": "Das Exspirationsventil ist für die Einhaltung des [[term:peep|PEEP]] und – bei druckkontrollierter Beatmung – für die Druckbegrenzung mitverantwortlich. Bei vielen Geräten ist es zur Aufbereitung abnehmbar; die Membran ist ein Verschleißteil.\n\n**Typische Probleme:**\n- falsch oder nicht vollständig eingesetztes Ventil bzw. beschädigte Membran → Undichtigkeit ([[fault:beatmung-leckage-diskonnektion]])\n- verklebtes oder blockiertes Ventil, verlegter Exspirationsfilter → erhöhte Drücke ([[fault:beatmung-hoher-atemwegsdruck]])\n\nNach jedem Ein- bzw. Umbau ist der Gerätecheck mit Dichtheitsprüfung gemäß Gebrauchsanweisung durchzuführen.",
+      "tags": ["Beatmung", "Pneumatik", "Verschleißteil"],
+      "data": { "kind": "pneumatik", "function": "Verschluss in der Inspiration und PEEP-Regelung in der Exspiration", "wearPart": true },
+      "links": [
+        { "rel": "uses_principle", "to": "term:peep" },
+        { "rel": "causes", "to": "fault:beatmung-leckage-diskonnektion" },
+        { "rel": "causes", "to": "fault:beatmung-hoher-atemwegsdruck" }
+      ],
+      "sources": ["src:larsen-beatmung", "src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "component:beatmungsschlauchsystem",
+      "title": "Beatmungsschlauchsystem",
+      "aliases": ["Beatmungsschläuche", "Patientenschlauchsystem", "Y-Stück"],
+      "summary": "Verbindung zwischen Gerät und Patient aus Inspirations- und Exspirationsschenkel, Y-Stück und ggf. Wasserfallen, Filtern und Temperaturfühleranschlüssen – als Einweg- oder aufbereitbares Mehrwegsystem.",
+      "body": "Das Schlauchsystem hat eine eigene Dehnbarkeit (Schlauchcompliance), die viele Geräte im Selbsttest ermitteln und bei der Volumenberechnung berücksichtigen. Deshalb gilt: **Nach jedem Wechsel des Schlauchsystems den Gerätecheck gemäß Gebrauchsanweisung durchführen.**\n\nHäufige Fehlerquellen:\n- Diskonnektion oder undichte Konnektoren, Wasserfallen oder Anschlüsse → [[fault:beatmung-leckage-diskonnektion]]\n- abgeknickte Schläuche oder Kondenswasser im Schlauch → [[fault:beatmung-hoher-atemwegsdruck]]\n\nBei aktiver Befeuchtung ([[component:atemgasbefeuchter]]) werden häufig beheizte Schläuche verwendet, um Kondensation zu verringern.",
+      "tags": ["Beatmung", "Zubehör", "Verbrauchsmaterial"],
+      "data": { "kind": "verbrauchsmaterial", "function": "Gasführung zwischen Beatmungsgerät und Patient", "wearPart": true },
+      "links": [
+        { "rel": "causes", "to": "fault:beatmung-leckage-diskonnektion" },
+        { "rel": "causes", "to": "fault:beatmung-hoher-atemwegsdruck" }
+      ],
+      "sources": ["src:larsen-beatmung", "src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "component:atemgasbefeuchter",
+      "title": "Atemgasbefeuchter (Beatmung)",
+      "aliases": ["Beatmungsbefeuchter", "Aktiver Befeuchter", "HME-Filter", "Wärme- und Feuchtigkeitstauscher"],
+      "summary": "Einrichtung zur Anwärmung und Befeuchtung des Atemgases, weil die oberen Atemwege bei Intubation umgangen werden: aktiv als beheizte Befeuchterkammer oder passiv als Wärme- und Feuchtigkeitstauscher (HME).",
+      "body": "Medizinische Gase aus der Druckgasversorgung sind trocken. Ohne Befeuchtung drohen Austrocknung der Schleimhäute und zähes Sekret.\n\n- **Aktive Befeuchtung:** Eine beheizte Wasserkammer im Inspirationsschenkel des [[component:beatmungsschlauchsystem|Schlauchsystems]] befeuchtet und erwärmt das Gas.\n- **Passive Befeuchtung (HME):** Ein Wärme- und Feuchtigkeitstauscher am Y-Stück speichert Wärme und Feuchtigkeit der Ausatemluft und gibt sie in der Inspiration wieder ab. HME erhöhen den Totraum und den Atemwegswiderstand.\n\nAktive Befeuchtung und HME dürfen nicht gleichzeitig eingesetzt werden. Kondenswasser im Schlauch oder ein durch Sekret verlegter HME kann zu erhöhten Atemwegsdrücken führen ([[fault:beatmung-hoher-atemwegsdruck]]).",
+      "tags": ["Beatmung", "Befeuchtung", "Zubehör"],
+      "data": { "kind": "verbrauchsmaterial", "function": "Anwärmung und Befeuchtung des inspiratorischen Atemgases", "wearPart": true },
+      "links": [
+        { "rel": "causes", "to": "fault:beatmung-hoher-atemwegsdruck" },
+        { "rel": "uses_principle", "to": "term:resistance" }
+      ],
+      "sources": ["src:larsen-beatmung", "src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "term:peep",
+      "title": "PEEP (positiver endexspiratorischer Druck)",
+      "aliases": ["PEEP", "positive end-expiratory pressure", "endexspiratorischer Druck"],
+      "summary": "Positiver Druck, der am Ende der Exspiration in den Atemwegen aufrechterhalten wird. Er hält Alveolen offen, vergrößert die funktionelle Residualkapazität und verbessert so die Oxygenierung.",
+      "body": "Der PEEP wird am Beatmungsgerät eingestellt und vom [[component:exspirationsventil|Exspirationsventil]] geregelt: Es öffnet in der Exspiration nur so weit, dass der Atemwegsdruck nicht unter den PEEP fällt.\n\n## Wirkungen\n- Verhinderung des endexspiratorischen Alveolarkollapses (Atelektasen)\n- Verbesserung der Oxygenierung\n- Erhöhung des intrathorakalen Drucks – dadurch kann der venöse Rückstrom zum Herzen und damit das Herzzeitvolumen sinken\n\n## Abgrenzung\nVom eingestellten (externen) PEEP zu unterscheiden ist der **intrinsische PEEP (Auto-PEEP)**: Er entsteht, wenn die Exspirationszeit nicht ausreicht, um das Volumen vollständig auszuatmen – etwa bei hoher [[term:resistance]] oder ungünstigem [[term:ie-verhaeltnis|I:E-Verhältnis]].",
+      "tags": ["Beatmung", "Grundlagen"],
+      "data": { "category": "technik", "abbreviation": "PEEP", "english": "positive end-expiratory pressure" },
+      "links": [{ "rel": "related", "to": "term:compliance" }],
+      "sources": ["src:larsen-beatmung", "src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "term:tidalvolumen",
+      "title": "Tidalvolumen (Atemzugvolumen)",
+      "aliases": ["Atemzugvolumen", "Tidal volume", "VT", "Hubvolumen"],
+      "summary": "Gasvolumen, das pro Atemzug ein- bzw. ausgeatmet wird. Bei der Beatmung wird es entweder vorgegeben (volumenkontrolliert) oder ergibt sich aus Druck und Compliance (druckkontrolliert).",
+      "body": "Das Beatmungsgerät misst das Tidalvolumen über den [[component:beatmung-flowsensor|Flowsensor]]. Ist das exspiratorische Volumen deutlich kleiner als das inspiratorische, deutet das auf eine Leckage hin ([[fault:beatmung-leckage-diskonnektion]]).\n\n## Lungenprotektive Beatmung\nIn der Studie des ARDS-Network führte beim akuten Lungenversagen (ARDS) ein Tidalvolumen von **6 ml pro kg Standardkörpergewicht** (berechnet aus Größe und Geschlecht, nicht aus dem tatsächlichen Gewicht) mit Begrenzung des Plateaudrucks zu einer niedrigeren Sterblichkeit als ein Tidalvolumen von 12 ml/kg. Dieses Konzept prägt die lungenprotektive Beatmung bis heute.\n\nZusammenhang mit dem Minutenvolumen: siehe [[term:atemminutenvolumen]].",
+      "tags": ["Beatmung", "Grundlagen", "Volumen"],
+      "data": { "category": "physiologie", "abbreviation": "VT", "english": "tidal volume" },
+      "specs": [
+        { "key": "vt_lungenprotektiv", "label": "Ziel-Tidalvolumen lungenprotektive Beatmung", "value": 6, "unit": "ml/kg Standardkörpergewicht", "condition": "ARDS, Interventionsgruppe der ARDS-Network-Studie", "source": "src:ardsnet-2000" },
+        { "key": "plateaudruck_grenze", "label": "Obergrenze Plateaudruck", "value": "≤ 30", "unit": "cmH₂O", "condition": "ARDS, Interventionsgruppe der ARDS-Network-Studie", "source": "src:ardsnet-2000" }
+      ],
+      "links": [
+        { "rel": "related", "to": "term:atemminutenvolumen" },
+        { "rel": "related", "to": "term:compliance" }
+      ],
+      "sources": ["src:larsen-beatmung", "src:ardsnet-2000"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "term:atemminutenvolumen",
+      "title": "Atemminutenvolumen (AMV)",
+      "aliases": ["AMV", "Minutenvolumen", "Minute volume", "MV"],
+      "summary": "In einer Minute ein- bzw. ausgeatmetes Gasvolumen; Produkt aus Tidalvolumen und Atemfrequenz. Das Minutenvolumen bestimmt maßgeblich die CO₂-Elimination.",
+      "body": "**Beispiel:** Bei einem [[term:tidalvolumen|Tidalvolumen]] von 500 ml und einer Atemfrequenz von 12/min beträgt das Atemminutenvolumen 6 l/min.\n\nNicht das gesamte Minutenvolumen nimmt am Gasaustausch teil: Der Anteil, der nur den Totraum (Atemwege, Schlauchsystem ab Y-Stück, ggf. HME-Filter) ventiliert, trägt nicht zur CO₂-Abgabe bei. Kleine Tidalvolumina bei hoher Frequenz erhöhen deshalb den Totraumanteil.\n\nBeatmungsgeräte überwachen das exspiratorische Minutenvolumen mit oberen und unteren Alarmgrenzen; ein Abfall ist ein typisches Zeichen für Leckage, Diskonnektion oder Verlegung.",
+      "tags": ["Beatmung", "Grundlagen", "Volumen"],
+      "data": { "category": "physiologie", "abbreviation": "AMV", "english": "minute volume", "formula": "AMV = VT · AF" },
+      "links": [{ "rel": "related", "to": "fault:beatmung-leckage-diskonnektion" }],
+      "sources": ["src:larsen-beatmung", "src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "term:compliance",
+      "title": "Compliance (Atemmechanik)",
+      "aliases": ["Dehnbarkeit der Lunge", "Lungencompliance", "Compliance des respiratorischen Systems"],
+      "summary": "Maß für die Dehnbarkeit von Lunge und Thorax: Volumenänderung pro Druckänderung (ΔV/Δp), angegeben in ml/mbar bzw. ml/cmH₂O. Eine niedrige Compliance bedeutet eine „steife“ Lunge.",
+      "body": "## Bedeutung für die Beatmung\nBei gegebener Druckdifferenz zwischen Plateaudruck und [[term:peep|PEEP]] bestimmt die Compliance, welches Volumen in die Lunge gelangt:\n\nVT ≈ C · (p_Plateau − PEEP)\n\n- In der [[term:druckkontrollierte-beatmung|druckkontrollierten Beatmung]] sinkt bei abnehmender Compliance das Tidalvolumen.\n- In der [[term:volumenkontrollierte-beatmung|volumenkontrollierten Beatmung]] steigt stattdessen der Plateaudruck.\n\nDie statische Compliance wird am Gerät meist über ein endinspiratorisches Halte-Manöver (Plateaudruck) bestimmt.\n\n## Ursachen verminderter Compliance\nZum Beispiel ARDS, Lungenödem, Atelektasen, Pneumothorax oder ein eingeschränkt beweglicher Thorax. Zusammen mit der [[term:resistance]] ergibt sie die Zeitkonstante τ = R · C, die bestimmt, wie schnell sich die Lunge füllt und entleert (nach etwa drei Zeitkonstanten ist sie zu rund 95 % entleert).\n\nHinweis zu Einheiten: 1 cmH₂O ≈ 0,98 mbar.",
+      "tags": ["Beatmung", "Atemmechanik", "Grundlagen"],
+      "data": { "category": "physiologie", "abbreviation": "C", "english": "compliance", "formula": "C = ΔV / Δp" },
+      "links": [{ "rel": "related", "to": "term:resistance" }],
+      "sources": ["src:larsen-beatmung", "src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "term:resistance",
+      "title": "Resistance (Atemwegswiderstand)",
+      "aliases": ["Atemwegswiderstand", "Strömungswiderstand Atemwege", "Raw"],
+      "summary": "Strömungswiderstand von Atemwegen, Tubus und Schlauchsystem: Druckdifferenz pro Gasfluss (Δp/V̇), angegeben in mbar/(l/s) bzw. cmH₂O/(l/s).",
+      "body": "## Bedeutung für die Beatmung\nUm einen bestimmten Flow zu erzeugen, muss zusätzlich zum elastischen Druckanteil ([[term:compliance]]) ein resistiver Druck aufgebracht werden. In der [[term:volumenkontrollierte-beatmung|volumenkontrollierten Beatmung]] mit konstantem Flow zeigt sich eine erhöhte Resistance daher als **große Differenz zwischen Spitzendruck und Plateaudruck**.\n\n## Typische Ursachen erhöhter Resistance\n- Sekret, Abknicken oder zu kleiner Innendurchmesser des Tubus\n- Bronchospasmus (z. B. Asthma, COPD)\n- verlegte Filter oder HME ([[component:atemgasbefeuchter]])\n\nEine hohe Resistance verlängert die Zeitkonstante; bei zu kurzer Exspirationszeit droht ein intrinsischer [[term:peep|PEEP]]. Siehe auch [[fault:beatmung-hoher-atemwegsdruck]].",
+      "tags": ["Beatmung", "Atemmechanik", "Grundlagen"],
+      "data": { "category": "physiologie", "abbreviation": "R", "english": "airway resistance", "formula": "R = Δp / V̇" },
+      "links": [{ "rel": "related", "to": "fault:beatmung-hoher-atemwegsdruck" }],
+      "sources": ["src:larsen-beatmung", "src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "term:druckkontrollierte-beatmung",
+      "title": "Druckkontrollierte Beatmung (PCV)",
+      "aliases": ["PCV", "Pressure Controlled Ventilation", "druckkontrollierte Beatmung", "PC-CMV"],
+      "summary": "Beatmungsform, bei der für die Inspirationszeit ein konstanter inspiratorischer Druck vorgegeben wird. Das resultierende Tidalvolumen hängt von Druckdifferenz, Inspirationszeit, Compliance und Resistance ab.",
+      "body": "## Charakteristik\n- **Vorgegeben:** inspiratorischer Druck, [[term:peep|PEEP]], Atemfrequenz und Inspirationszeit bzw. [[term:ie-verhaeltnis|I:E-Verhältnis]]\n- **Ergebnis:** [[term:tidalvolumen|Tidalvolumen]] – es ändert sich, wenn sich [[term:compliance]] oder [[term:resistance]] ändern\n- **Flowverlauf:** hoher Anfangsflow, der mit zunehmender Füllung der Lunge abfällt (dezelerierender Flow)\n\n## Vor- und Nachteile\nDer Spitzendruck ist sicher begrenzt. Dafür ist das Volumen nicht garantiert: Eine Verschlechterung der Compliance oder eine Verlegung zeigt sich als **abnehmendes Tidal- und Minutenvolumen** – Volumenalarme müssen daher sinnvoll eingestellt sein.\n\nGegenstück: [[term:volumenkontrollierte-beatmung]].",
+      "tags": ["Beatmung", "Beatmungsform"],
+      "data": { "category": "technik", "abbreviation": "PCV", "english": "pressure controlled ventilation" },
+      "links": [{ "rel": "related", "to": "term:volumenkontrollierte-beatmung" }],
+      "sources": ["src:larsen-beatmung", "src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "term:volumenkontrollierte-beatmung",
+      "title": "Volumenkontrollierte Beatmung (VCV)",
+      "aliases": ["VCV", "Volume Controlled Ventilation", "volumenkontrollierte Beatmung", "VC-CMV"],
+      "summary": "Beatmungsform, bei der ein festes Tidalvolumen mit vorgegebenem Flow verabreicht wird. Der entstehende Atemwegsdruck hängt von Compliance und Resistance ab und wird durch eine Druckalarmgrenze begrenzt.",
+      "body": "## Charakteristik\n- **Vorgegeben:** [[term:tidalvolumen|Tidalvolumen]], Atemfrequenz, Flow bzw. Inspirationszeit, [[term:peep|PEEP]]\n- **Ergebnis:** Atemwegsdruck – Spitzendruck und Plateaudruck steigen bei sinkender [[term:compliance]] bzw. steigender [[term:resistance]]\n- **Flowverlauf:** häufig konstanter Flow (Rechteckflow)\n\n## Vor- und Nachteile\nDas Volumen und damit das Minutenvolumen ist garantiert. Dafür können bei verschlechterter Atemmechanik hohe Drücke entstehen. Beim Erreichen der oberen Druckgrenze bricht das Gerät die Inspiration ab und alarmiert ([[fault:beatmung-hoher-atemwegsdruck]]).\n\nGegenstück: [[term:druckkontrollierte-beatmung]].",
+      "tags": ["Beatmung", "Beatmungsform"],
+      "data": { "category": "technik", "abbreviation": "VCV", "english": "volume controlled ventilation" },
+      "sources": ["src:larsen-beatmung", "src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "term:ie-verhaeltnis",
+      "title": "I:E-Verhältnis (Atemzeitverhältnis)",
+      "aliases": ["I:E", "Atemzeitverhältnis", "Inspirations-Exspirations-Verhältnis", "I:E ratio"],
+      "summary": "Verhältnis von Inspirationszeit zu Exspirationszeit eines Atemzyklus. Unter Ruhebedingungen ist die Exspiration länger als die Inspiration; häufig wird 1:2 eingestellt.",
+      "body": "## Berechnung\nDie Dauer eines Atemzyklus ergibt sich aus der Atemfrequenz: T = 60 s / AF. Bei 15/min ist T = 4 s; bei I:E = 1:2 entfallen davon etwa 1,33 s auf die Inspiration und 2,67 s auf die Exspiration.\n\n## Praxisbezug\n- Eine zu kurze Exspirationszeit – etwa bei hoher Frequenz oder hoher [[term:resistance]] – verhindert das vollständige Ausatmen; es entsteht ein intrinsischer [[term:peep|PEEP]].\n- Eine verlängerte Inspirationszeit (bis hin zum umgekehrten Verhältnis, „Inverse Ratio“) erhöht den mittleren Atemwegsdruck und wird in speziellen Situationen gezielt eingesetzt.\n\nIn der [[simulation:beatmung|Beatmungssimulation]] wird das I:E-Verhältnis als Zahl angegeben: 0,5 entspricht 1:2.",
+      "tags": ["Beatmung", "Grundlagen", "Zeitsteuerung"],
+      "data": { "category": "technik", "abbreviation": "I:E", "english": "inspiratory-to-expiratory ratio", "formula": "I:E = t_I / t_E" },
+      "links": [{ "rel": "related", "to": "term:druckkontrollierte-beatmung" }],
+      "sources": ["src:larsen-beatmung"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "fault:beatmung-leckage-diskonnektion",
+      "title": "Beatmung: Leckage- bzw. Diskonnektionsalarm",
+      "aliases": ["Diskonnektion Beatmung", "Leckagealarm", "Leckage Beatmungssystem", "Minutenvolumen niedrig"],
+      "summary": "Das Beatmungsgerät meldet Leckage oder Diskonnektion: Das exspiratorisch gemessene Volumen ist deutlich kleiner als das abgegebene, Atemwegsdruck und Minutenvolumen fallen ab. Lebensbedrohlich, wenn der Patient nicht mehr ausreichend beatmet wird.",
+      "body": "**Immer zuerst den Patienten sichern, dann das Gerät untersuchen.** Bei unklarer Situation den Patienten manuell mit Beatmungsbeutel und Sauerstoff beatmen und ärztliche Hilfe hinzuziehen.\n\nSystematisch vom Patienten zum Gerät vorgehen: Tubus/Kanüle und Cuff, [[component:beatmungsschlauchsystem|Schlauchsystem]], [[component:exspirationsventil|Exspirationsventil]] und [[component:beatmung-flowsensor|Flowsensor]]. Leckagen lassen sich in der [[simulation:beatmung|Beatmungssimulation]] nachvollziehen.",
+      "tags": ["Beatmung", "Alarm", "Fehlerdiagnose"],
+      "data": {
+        "severity": "kritisch",
+        "symptoms": [
+          "Alarm „Leckage“ bzw. „Diskonnektion“",
+          "Exspiratorisches Tidalvolumen deutlich kleiner als das inspiratorische",
+          "Alarm „Minutenvolumen niedrig“",
+          "Abfall des Atemwegsdrucks bzw. fehlender Druckaufbau",
+          "Hörbares Zischen am Tubus oder an Konnektoren"
+        ],
+        "causes": [
+          { "text": "Diskonnektion am Y-Stück, am Tubusanschluss oder an Schlauchverbindungen", "likelihood": "haeufig" },
+          { "text": "Undichter oder zu gering geblockter Cuff bzw. dislozierter Tubus", "likelihood": "haeufig" },
+          { "text": "Undichtigkeit im Schlauchsystem (Wasserfalle, Konnektoren, geschlossenes Absaugsystem, Fühleranschlüsse)", "likelihood": "gelegentlich" },
+          { "text": "Exspirationsventil nicht korrekt eingesetzt oder Membran beschädigt", "likelihood": "gelegentlich" },
+          { "text": "Fehlmessung durch verschmutzten oder defekten Flowsensor (scheinbare Leckage)", "likelihood": "gelegentlich" },
+          { "text": "Patientenseitige Leckage, z. B. bronchopleurale Fistel oder Thoraxdrainage", "likelihood": "selten" }
+        ],
+        "diagnosis": [
+          { "id": "l1", "instruction": "Patienten beurteilen (Thoraxbewegung, SpO₂) und alle Verbindungen vom Tubus bis zum Gerät sichten und abtasten.", "question": "Ist eine Diskonnektion oder offene Verbindung erkennbar?", "yes": "o-diskonnektion", "no": "l2" },
+          { "id": "l2", "instruction": "Cuffdruck mit einem Cuffdruckmesser kontrollieren und auf Nebenluftgeräusche im Mund-Rachen-Raum achten (ärztliche bzw. pflegerische Aufgabe).", "question": "Ist der Cuff undicht oder zu gering geblockt bzw. liegt der Tubus fehl?", "yes": "o-cuff", "no": "l3" },
+          { "id": "l3", "instruction": "Patienten durch das Behandlungsteam anderweitig sicher beatmen lassen (z. B. Ersatzgerät oder Beatmungsbeutel). Das Gerät anschließend mit einer Testlunge betreiben bzw. den Gerätecheck mit Dichtheitsprüfung gemäß Gebrauchsanweisung durchführen.", "question": "Tritt die Leckage auch an der Testlunge auf?", "yes": "l4", "no": "o-patient" },
+          { "id": "l4", "instruction": "Schlauchsystem gegen ein neues bzw. geprüftes System tauschen und den Gerätecheck wiederholen.", "question": "Ist die Leckage danach behoben?", "yes": "o-schlauch", "no": "l5" },
+          { "id": "l5", "instruction": "Sitz von Exspirationsventil und Membran prüfen, Flowsensor kalibrieren bzw. gegen einen Ersatzsensor tauschen und den Gerätecheck wiederholen.", "question": "Ist die Leckage danach behoben?", "yes": "o-ventil-sensor", "no": "o-service" }
+        ],
+        "outcomes": [
+          { "id": "o-diskonnektion", "text": "Diskonnektion – Verbindung sofort wiederherstellen, Beatmung und Volumina kontrollieren, Ursache (Zug am Schlauchsystem, Lagerung) beseitigen." },
+          { "id": "o-cuff", "text": "Leckage am Atemweg – Cuffdruck korrigieren bzw. Tubuslage ärztlich überprüfen lassen." },
+          { "id": "o-patient", "text": "Gerät an der Testlunge dicht – patientenseitige Ursache wahrscheinlich (z. B. Fistel, Drainage, Atemweg); ärztliche Abklärung." },
+          { "id": "o-schlauch", "text": "Undichtes Schlauchsystem – Schlauchsystem verwerfen bzw. zur Aufbereitung geben und Fehler dokumentieren." },
+          { "id": "o-ventil-sensor", "text": "Exspirationsventil/Membran oder Flowsensor ursächlich – Teil tauschen, Gerätecheck bestehen lassen und dokumentieren." },
+          { "id": "o-service", "text": "Leckage im Gerät nicht lokalisierbar – Gerät außer Betrieb nehmen, kennzeichnen und durch Medizintechnik bzw. Herstellerservice instand setzen lassen." }
+        ],
+        "remedies": [
+          "Verbindungen wiederherstellen und gegen Zug sichern",
+          "Cuffdruck korrigieren bzw. Atemweg ärztlich überprüfen lassen",
+          "Schlauchsystem tauschen und Gerätecheck durchführen",
+          "Exspirationsventil-Membran bzw. Flowsensor tauschen und kalibrieren",
+          "Nach Instandsetzung Funktionsprüfung gemäß [[test_procedure:beatmungsgeraet-funktionspruefung-stk]]"
+        ],
+        "safetyNotes": [
+          "Patientensicherheit hat Vorrang: Bei Zweifel an der Beatmung sofort manuell mit Beatmungsbeutel und Sauerstoff beatmen.",
+          "Gerätebezogene Fehlersuche nur ohne angeschlossenen Patienten durchführen.",
+          "Alarmgrenzen nicht erweitern oder Alarme unterdrücken, um eine ungeklärte Leckage „wegzuregeln“.",
+          "Für beatmete Patienten muss jederzeit eine Möglichkeit zur manuellen Beatmung griffbereit sein."
+        ]
+      },
+      "links": [
+        { "rel": "affects", "to": "device:beatmungsgeraet" },
+        { "rel": "affects", "to": "component:beatmungsschlauchsystem" },
+        { "rel": "affects", "to": "component:exspirationsventil" },
+        { "rel": "uses_principle", "to": "term:tidalvolumen" },
+        { "rel": "uses_principle", "to": "term:atemminutenvolumen" },
+        { "rel": "remedied_by", "to": "spare_part:nordlicht-exspirationsmembran-em7" },
+        { "rel": "remedied_by", "to": "test_procedure:beatmungsgeraet-funktionspruefung-stk" },
+        { "rel": "remedied_by", "to": "learning_module:beatmung-grundlagen" }
+      ],
+      "sources": ["src:larsen-beatmung", "src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "fault:beatmung-hoher-atemwegsdruck",
+      "title": "Beatmung: Hoher Atemwegsdruck / Okklusion",
+      "aliases": ["Druckalarm hoch", "Paw hoch", "Okklusion Beatmung", "Stenosealarm"],
+      "summary": "Der Atemwegsdruck überschreitet die obere Alarmgrenze bzw. die Inspiration wird druckbegrenzt abgebrochen. In der druckkontrollierten Beatmung zeigt sich das Problem dagegen meist als abfallendes Tidalvolumen.",
+      "body": "Ein hoher Atemwegsdruck kann **resistive** Ursachen (Verlegung, Bronchospasmus – Spitzendruck hoch, Plateaudruck kaum verändert) oder **elastische** Ursachen (verminderte [[term:compliance]] – auch der Plateaudruck steigt) haben. Der Vergleich von Spitzen- und Plateaudruck ist deshalb der wichtigste Diagnoseschritt. Hintergrund: [[term:resistance]], [[term:volumenkontrollierte-beatmung]].",
+      "tags": ["Beatmung", "Alarm", "Fehlerdiagnose"],
+      "data": {
+        "severity": "kritisch",
+        "symptoms": [
+          "Alarm „Atemwegsdruck hoch“",
+          "Steigender Spitzendruck bei volumenkontrollierter Beatmung",
+          "Abbruch der Inspiration an der Druckgrenze mit zu kleinem Tidalvolumen",
+          "Bei druckkontrollierter Beatmung: Abfall von Tidal- und Minutenvolumen",
+          "Ggf. ansteigender Endexspirationsdruck durch unvollständige Exspiration"
+        ],
+        "causes": [
+          { "text": "Sekret im Tubus oder in den Atemwegen", "likelihood": "haeufig" },
+          { "text": "Abgeknickter Tubus oder Schlauch, Beißen auf den Tubus", "likelihood": "haeufig" },
+          { "text": "Husten, Pressen oder Gegenatmen des Patienten", "likelihood": "haeufig" },
+          { "text": "Kondenswasser im Schlauchsystem", "likelihood": "gelegentlich" },
+          { "text": "Verlegter Filter bzw. HME", "likelihood": "gelegentlich" },
+          { "text": "Bronchospasmus", "likelihood": "gelegentlich" },
+          { "text": "Abnehmende Compliance, z. B. Pneumothorax, Atelektase, Lungenödem", "likelihood": "gelegentlich" },
+          { "text": "Blockiertes Exspirationsventil oder verlegter Exspirationsfilter", "likelihood": "selten" }
+        ],
+        "diagnosis": [
+          { "id": "h1", "instruction": "Patienten beurteilen; Tubus, Schläuche und Konnektoren auf Abknicken, Beißen und Wasseransammlungen prüfen.", "question": "Liegt eine sichtbare mechanische Verlegung vor?", "yes": "o-knick", "no": "h2" },
+          { "id": "h2", "instruction": "Endinspiratorischen Halt durchführen und Spitzendruck mit Plateaudruck vergleichen.", "question": "Ist vor allem der Spitzendruck erhöht, während der Plateaudruck weitgehend unverändert ist?", "yes": "h3", "no": "o-compliance" },
+          { "id": "h3", "instruction": "Tubus durch das Behandlungsteam absaugen lassen.", "question": "Sinkt der Spitzendruck nach dem Absaugen deutlich?", "yes": "o-sekret", "no": "h4" },
+          { "id": "h4", "instruction": "Filter bzw. HME im Patientenpfad prüfen und ggf. tauschen.", "question": "Normalisiert sich der Druck nach dem Tausch?", "yes": "o-filter", "no": "h5" },
+          { "id": "h5", "instruction": "Patienten durch das Behandlungsteam anderweitig sicher beatmen lassen und das Gerät mit einer Testlunge betreiben.", "question": "Tritt der erhöhte Druck auch an der Testlunge auf?", "yes": "o-geraet", "no": "o-bronchospasmus" }
+        ],
+        "outcomes": [
+          { "id": "o-knick", "text": "Mechanische Verlegung – Knick beseitigen, Beißschutz verwenden, Kondenswasser entleeren." },
+          { "id": "o-compliance", "text": "Auch der Plateaudruck ist erhöht: verminderte Compliance oder intrinsischer PEEP wahrscheinlich – umgehende ärztliche Abklärung (z. B. Pneumothorax ausschließen)." },
+          { "id": "o-sekret", "text": "Sekretverlegung – Absaugen und Atemgasbefeuchtung überprüfen." },
+          { "id": "o-filter", "text": "Verlegter Filter/HME – Filter tauschen, Wechselintervall und Befeuchtungskonzept prüfen." },
+          { "id": "o-geraet", "text": "Gerätebedingte Ursache (z. B. Exspirationsventil, Exspirationsfilter, Pneumatik) – Gerät außer Betrieb nehmen und instand setzen lassen." },
+          { "id": "o-bronchospasmus", "text": "Patientenbedingt erhöhte Resistance, z. B. Bronchospasmus – ärztliche Therapie; Beatmungseinstellung und Exspirationszeit überprüfen." }
+        ],
+        "remedies": [
+          "Verlegung beseitigen bzw. absaugen",
+          "Kondenswasser entleeren, Filter/HME tauschen",
+          "Exspirationsventil prüfen bzw. tauschen und Gerätecheck durchführen",
+          "Nach Instandsetzung Funktionsprüfung gemäß [[test_procedure:beatmungsgeraet-funktionspruefung-stk]]"
+        ],
+        "safetyNotes": [
+          "Ein Druckalarm ist ein Notfallhinweis – zuerst Patient und Atemweg beurteilen, nicht die Alarmgrenze anheben.",
+          "Ein plötzlicher Druckanstieg mit Kreislaufverschlechterung kann auf einen Spannungspneumothorax hinweisen – sofortige ärztliche Abklärung.",
+          "Gerätebezogene Fehlersuche nur ohne angeschlossenen Patienten durchführen."
+        ]
+      },
+      "links": [
+        { "rel": "affects", "to": "device:beatmungsgeraet" },
+        { "rel": "affects", "to": "component:beatmungsschlauchsystem" },
+        { "rel": "affects", "to": "component:beatmung-drucksensor" },
+        { "rel": "uses_principle", "to": "term:resistance" },
+        { "rel": "uses_principle", "to": "term:compliance" },
+        { "rel": "remedied_by", "to": "test_procedure:beatmungsgeraet-funktionspruefung-stk" },
+        { "rel": "remedied_by", "to": "learning_module:beatmung-grundlagen" }
+      ],
+      "sources": ["src:larsen-beatmung", "src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "fault:beatmung-flowsensor-fehler",
+      "title": "Beatmung: Flowsensor-Fehler bzw. Kalibrierung fehlgeschlagen",
+      "aliases": ["Flowsensor defekt", "Flowsensor kalibrieren", "Flowmessung ausgefallen", "Volumenmessung unplausibel"],
+      "summary": "Das Gerät meldet einen Flowsensor-Fehler oder die Kalibrierung schlägt fehl; Volumenwerte sind unplausibel oder fehlen. Volumen-, Leckage- und Triggerfunktionen sind dann ggf. nicht zuverlässig.",
+      "body": "Der [[component:beatmung-flowsensor|Flowsensor]] ist eine empfindliche Komponente: Feuchtigkeit, Sekret und Ablagerungen (z. B. nach Medikamentenvernebelung) verfälschen die Messung. Ohne zuverlässige Flowmessung sind [[term:tidalvolumen|Tidal-]] und [[term:atemminutenvolumen|Minutenvolumen]] sowie Leckagealarme nicht aussagekräftig.",
+      "tags": ["Beatmung", "Sensor", "Fehlerdiagnose", "Kalibrierung"],
+      "data": {
+        "severity": "hoch",
+        "symptoms": [
+          "Meldung „Flowsensor defekt“ oder „Flowsensor kalibrieren“",
+          "Kalibrierung des Flowsensors schlägt fehl",
+          "Unplausible oder fehlende Volumenwerte",
+          "Leckagealarm ohne nachweisbare Leckage",
+          "Fehltriggerung (Autotriggerung) bei flowgetriggerter Beatmung"
+        ],
+        "causes": [
+          { "text": "Feuchtigkeit, Kondensat oder Sekret am Sensorelement", "likelihood": "haeufig" },
+          { "text": "Ablagerungen nach Medikamentenvernebelung", "likelihood": "gelegentlich" },
+          { "text": "Sensor gealtert bzw. Messelement beschädigt", "likelihood": "gelegentlich" },
+          { "text": "Sensor falsch eingesetzt oder nicht freigegebener Sensortyp", "likelihood": "gelegentlich" },
+          { "text": "Aufbereitung nicht nach Herstellerangaben", "likelihood": "gelegentlich" },
+          { "text": "Defekte Steckverbindung oder Messelektronik", "likelihood": "selten" }
+        ],
+        "diagnosis": [
+          { "id": "f1", "instruction": "Sitz, Ausrichtung und Typ des Flowsensors mit der Gebrauchsanweisung vergleichen.", "question": "War der Sensor falsch eingesetzt oder handelt es sich um einen nicht freigegebenen Typ?", "yes": "o-einbau", "no": "f2" },
+          { "id": "f2", "instruction": "Sensor sichtprüfen (Feuchtigkeit, Sekret, Ablagerungen, Beschädigung des Messelements).", "question": "Ist der Sensor feucht, verschmutzt oder sichtbar beschädigt?", "yes": "o-feucht", "no": "f3" },
+          { "id": "f3", "instruction": "Flowsensor-Kalibrierung gemäß Gebrauchsanweisung durchführen und Volumina an einer Testlunge kontrollieren.", "question": "Ist die Kalibrierung erfolgreich und sind die Volumenwerte plausibel?", "yes": "o-kalibriert", "no": "f4" },
+          { "id": "f4", "instruction": "Sensor gegen einen neuen bzw. ordnungsgemäß aufbereiteten Ersatzsensor tauschen und erneut kalibrieren.", "question": "Funktioniert die Messung mit dem Ersatzsensor?", "yes": "o-sensor", "no": "o-elektronik" }
+        ],
+        "outcomes": [
+          { "id": "o-einbau", "text": "Einbau- bzw. Typfehler – freigegebenen Sensor korrekt einsetzen und kalibrieren; Einweisung auffrischen." },
+          { "id": "o-feucht", "text": "Feuchtigkeit oder Verschmutzung – Sensor gemäß Herstellerangaben tauschen bzw. aufbereiten; Ursache (Kondensat, Vernebelung, Befeuchtung) beheben." },
+          { "id": "o-kalibriert", "text": "Kalibrierdrift – nach erfolgreicher Kalibrierung weiter verwenden und Verlauf beobachten." },
+          { "id": "o-sensor", "text": "Flowsensor defekt – Sensor austauschen und aussondern." },
+          { "id": "o-elektronik", "text": "Verdacht auf Defekt der Steckverbindung oder Messelektronik – Gerät außer Betrieb nehmen und instand setzen lassen." }
+        ],
+        "remedies": [
+          "Flowsensor korrekt einsetzen und kalibrieren",
+          "Flowsensor tauschen (z. B. [[spare_part:nordlicht-flowsensor-fs7]] beim Demo-Modell)",
+          "Kondensatbildung reduzieren (Befeuchtung, Schlauchführung prüfen)",
+          "Aufbereitung ausschließlich nach Herstellerangaben"
+        ],
+        "safetyNotes": [
+          "Bei ausgefallener Flowmessung den Patienten engmaschig klinisch und mit unabhängigem Monitoring (z. B. SpO₂, Kapnographie) überwachen; ggf. Ersatzgerät verwenden.",
+          "Flowsensoren nur nach Herstellerangaben reinigen – ungeeignete Verfahren können das Messelement zerstören.",
+          "Nach jedem Sensortausch Kalibrierung und Gerätecheck durchführen."
+        ]
+      },
+      "links": [
+        { "rel": "affects", "to": "device:beatmungsgeraet" },
+        { "rel": "affects", "to": "component:beatmung-flowsensor" },
+        { "rel": "affects", "to": "product_model:nordlicht-ventis-700" },
+        { "rel": "uses_principle", "to": "term:tidalvolumen" },
+        { "rel": "remedied_by", "to": "spare_part:nordlicht-flowsensor-fs7" },
+        { "rel": "remedied_by", "to": "test_procedure:beatmungsgeraet-funktionspruefung-stk" },
+        { "rel": "related", "to": "fault:beatmung-leckage-diskonnektion" }
+      ],
+      "sources": ["src:larsen-beatmung", "src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "test_procedure:beatmungsgeraet-funktionspruefung-stk",
+      "title": "Funktionsprüfung und STK von Intensiv-Beatmungsgeräten",
+      "aliases": ["STK Beatmungsgerät", "Sicherheitstechnische Kontrolle Beatmung", "Funktionsprüfung Respirator"],
+      "summary": "Generischer Ablauf der Sicherheitstechnischen Kontrolle bzw. Funktionsprüfung von Intensiv-Beatmungsgeräten: Sichtprüfung, Gerätecheck, Kalibrierungen, Messgenauigkeit an der Testlunge, Alarmprüfung, elektrische Sicherheit und Dokumentation.",
+      "body": "Geräte zur maschinellen Beatmung sind in Anlage 1 der MPBetreibV aufgeführt; für sie sind [[legal_reference:de-mpbetreibv-stk|Sicherheitstechnische Kontrollen]] durchzuführen. Umfang, Intervall und Toleranzen legt der **Hersteller** fest – dieses Verfahren beschreibt nur den typischen Ablauf und ersetzt nicht die herstellerspezifische Prüfanweisung.\n\nDie elektrische Sicherheit wird nach [[test_procedure:elektrische-sicherheit-62353]] geprüft. Typische Befunde und ihre Diagnose: [[fault:beatmung-leckage-diskonnektion]], [[fault:beatmung-flowsensor-fehler]].",
+      "tags": ["STK", "Beatmung", "Prüfung", "Service"],
+      "data": {
+        "kind": "STK",
+        "interval": "nach Herstellerangaben; fehlen diese, spätestens alle zwei Jahre (MPBetreibV). Zusätzlich Funktionsprüfung nach Instandsetzung.",
+        "qualification": "Person, die aufgrund ihrer Ausbildung, Kenntnisse und praktischen Tätigkeit die STK ordnungsgemäß durchführen kann und über geeignete Mess- und Prüfeinrichtungen verfügt; gerätespezifische Herstellerschulung empfohlen.",
+        "equipment": [
+          "Testlunge (Prüflunge) mit bekannter Compliance und Resistance",
+          "Gasfluss- bzw. Beatmungsanalysator (Messung von Volumen, Druck, Frequenz, O₂-Konzentration)",
+          "Medizingeräte-Sicherheitstester nach DIN EN 62353",
+          "Neues, geprüftes Patientenschlauchsystem und Flowsensor",
+          "Herstellerunterlagen (Gebrauchsanweisung, Service- bzw. STK-Anleitung) und Prüfprotokoll"
+        ],
+        "steps": [
+          { "title": "Vorbereitung und Unterlagen", "description": "Gerät identifizieren, Medizinproduktebuch und letzte Prüfergebnisse einsehen, herstellerspezifische Prüfanweisung und aktuelle Softwarestände bereitlegen." },
+          { "title": "Sichtprüfung", "description": "Gehäuse, Bedienelemente, Bildschirm, Netzkabel, Gasanschlüsse und -schläuche, Filter, Exspirationsventil, Flowsensor, Befestigungen und Fahrgestell auf Beschädigung, Verschmutzung und Vollständigkeit prüfen; Kennzeichnungen und Prüfplaketten kontrollieren." },
+          { "title": "Gerätecheck / Selbsttest", "description": "Den vom Hersteller vorgesehenen Gerätecheck mit Dichtheitsprüfung und ggf. Ermittlung der Schlauchsystem-Compliance durchführen; Ergebnis dokumentieren." },
+          { "title": "Kalibrierung der Sensoren", "description": "Flowsensor und Sauerstoffsensor gemäß Herstellerangaben kalibrieren; Verschleißteile (z. B. galvanische O₂-Zelle, Membranen, Filter) nach Wechselintervall tauschen." },
+          { "title": "Messgenauigkeit an der Testlunge", "description": "In definierten Einstellungen (z. B. volumen- und druckkontrolliert) Tidalvolumen, Atemfrequenz, Drücke, PEEP und O₂-Konzentration mit dem Analysator gegen die Geräteanzeige bzw. die Einstellwerte vergleichen.", "limit": "Toleranzen gemäß Herstellerangaben" },
+          { "title": "Alarmprüfung", "description": "Sicherheitsrelevante Alarme gezielt auslösen und Funktion prüfen, u. a. Diskonnektion/Minutenvolumen niedrig, Atemwegsdruck hoch, Apnoe, O₂-Konzentration, Ausfall der Gasversorgung und Netzausfall mit Umschaltung auf Akku." },
+          { "title": "Akku und Notstromfunktion", "description": "Akkubetrieb und Ladezustandsanzeige gemäß Herstellerangaben prüfen." },
+          { "title": "Elektrische Sicherheit", "description": "Wiederholungsprüfung nach DIN EN 62353 durchführen (Schutzleiterwiderstand, Ableitströme)." },
+          { "title": "Abschluss und Dokumentation", "description": "Gerät in den Auslieferungszustand zurücksetzen, Ergebnisse bewerten, Prüfprotokoll erstellen, Eintrag ins Medizinproduktebuch vornehmen und Prüfplakette anbringen; bei Mängeln Gerät außer Betrieb nehmen und kennzeichnen." }
+        ],
+        "documentation": [
+          "Geräteidentifikation (Typ, Seriennummer, Inventarnummer, Softwarestand)",
+          "Verwendete Prüfmittel mit Kalibrierstatus",
+          "Ergebnisse von Gerätecheck, Kalibrierungen, Messgenauigkeit und Alarmprüfung",
+          "Getauschte Verschleißteile",
+          "Messwerte der elektrischen Sicherheitsprüfung",
+          "Gesamtbewertung, Datum, Name der prüfenden Person, nächster Prüftermin",
+          "Eintrag im Medizinproduktebuch"
+        ]
+      },
+      "links": [
+        { "rel": "tests", "to": "device:beatmungsgeraet" },
+        { "rel": "tests", "to": "component:beatmung-flowsensor" },
+        { "rel": "tests", "to": "component:beatmung-sauerstoffsensor" },
+        { "rel": "tests", "to": "component:exspirationsventil" },
+        { "rel": "based_on", "to": "legal_reference:de-mpbetreibv-stk" },
+        { "rel": "based_on", "to": "legal_reference:din-en-62353" },
+        { "rel": "related", "to": "test_procedure:elektrische-sicherheit-62353" }
+      ],
+      "sources": ["src:de-mpbetreibv", "src:iso-80601-2-12", "src:din-en-62353"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "learning_module:beatmung-grundlagen",
+      "title": "Grundlagen der maschinellen Beatmung",
+      "aliases": ["Lernmodul Beatmung", "Beatmung Grundlagen"],
+      "summary": "Lernmodul zu Atemmechanik, Beatmungsparametern, druck- und volumenkontrollierter Beatmung, Aufbau eines Intensiv-Beatmungsgeräts sowie Alarmen und Fehlersuche – mit Simulation und Abschlussquiz.",
+      "tags": ["Beatmung", "Grundlagen", "Intensivmedizin"],
+      "data": {
+        "level": "einsteiger",
+        "durationMinutes": 45,
+        "objectives": [
+          "Die Beatmungsparameter Tidalvolumen, Atemfrequenz, Atemminutenvolumen, PEEP und I:E-Verhältnis erklären und berechnen",
+          "Compliance und Resistance unterscheiden und ihre Auswirkungen auf Druck und Volumen beschreiben",
+          "Druck- und volumenkontrollierte Beatmung vergleichen und typische Veränderungen vorhersagen",
+          "Die Baugruppen eines Intensiv-Beatmungsgeräts und ihre Funktion benennen",
+          "Bei Leckage-, Druck- und Sensoralarmen systematisch und patientensicher vorgehen"
+        ],
+        "sections": [
+          {
+            "title": "1. Beatmungsparameter",
+            "body": "Bei der maschinellen Beatmung wird Atemgas mit Überdruck in die Lunge gefördert; die Ausatmung erfolgt passiv. Die wichtigsten Größen sind:\n\n- [[term:tidalvolumen|Tidalvolumen (VT)]] – Volumen pro Atemzug\n- Atemfrequenz (AF) – Atemzüge pro Minute\n- [[term:atemminutenvolumen|Atemminutenvolumen]] – AMV = VT · AF, z. B. 500 ml · 12/min = 6 l/min\n- [[term:peep|PEEP]] – positiver Druck am Ende der Exspiration, hält die Alveolen offen\n- [[term:ie-verhaeltnis|I:E-Verhältnis]] – Verhältnis von Inspirations- zu Exspirationszeit, häufig 1:2\n- FiO₂ – inspiratorische Sauerstofffraktion\n\nDas Minutenvolumen bestimmt maßgeblich die CO₂-Abgabe, PEEP und FiO₂ beeinflussen vor allem die Oxygenierung."
+          },
+          {
+            "title": "2. Atemmechanik: Compliance und Resistance",
+            "body": "Um Gas in die Lunge zu bringen, muss das Gerät zwei Widerstände überwinden:\n\n- Die **elastischen Kräfte** von Lunge und Thorax, beschrieben durch die [[term:compliance|Compliance]] C = ΔV/Δp. Eine „steife“ Lunge (z. B. bei ARDS) hat eine niedrige Compliance.\n- Den **Strömungswiderstand** der Atemwege und des Tubus, beschrieben durch die [[term:resistance|Resistance]] R = Δp/V̇.\n\nDas Produkt τ = R · C ist die Zeitkonstante. Nach etwa drei Zeitkonstanten ist die Lunge zu rund 95 % gefüllt bzw. entleert. Ist die Exspirationszeit zu kurz, bleibt Volumen in der Lunge zurück – es entsteht ein intrinsischer PEEP.\n\n**Merke:** Eine Resistance-Erhöhung vergrößert vor allem die Differenz zwischen Spitzen- und Plateaudruck, eine Compliance-Abnahme erhöht auch den Plateaudruck."
+          },
+          {
+            "title": "3. Druckkontrolliert oder volumenkontrolliert?",
+            "body": "- Bei der [[term:druckkontrollierte-beatmung|druckkontrollierten Beatmung (PCV)]] wird der Inspirationsdruck vorgegeben. Das Tidalvolumen ergibt sich aus Druckdifferenz, Inspirationszeit und Atemmechanik. Sinkt die Compliance, **sinkt das Volumen**.\n- Bei der [[term:volumenkontrollierte-beatmung|volumenkontrollierten Beatmung (VCV)]] wird das Tidalvolumen vorgegeben. Sinkt die Compliance oder steigt die Resistance, **steigt der Druck** – bis zur Druckalarmgrenze.\n\nProbiere es in der [[simulation:beatmung|Beatmungssimulation]] aus: Vergleiche die Szenarien „Normal PCV“, „Normal VCV“ und „Reduzierte Compliance (ARDS-ähnlich)“ und beobachte Druck-, Flow- und Volumenkurven.\n\nFür das ARDS hat die Studie des ARDS-Network gezeigt, dass eine lungenprotektive Beatmung mit 6 ml/kg Standardkörpergewicht und begrenztem Plateaudruck die Sterblichkeit senkt."
+          },
+          {
+            "title": "4. Aufbau eines Intensiv-Beatmungsgeräts",
+            "body": "Ein [[device:beatmungsgeraet|Intensiv-Beatmungsgerät]] besteht im Kern aus:\n\n- der [[component:beatmung-gasdosierung|Gasdosierung]] – Turbine oder Druckgasversorgung mit Gasmischer und Inspirationsventil,\n- der Messtechnik – [[component:beatmung-flowsensor|Flowsensor]], [[component:beatmung-drucksensor|Atemwegsdrucksensor]] und [[component:beatmung-sauerstoffsensor|Sauerstoffsensor]],\n- dem [[component:exspirationsventil|Exspirationsventil]], das den PEEP regelt,\n- dem [[component:beatmungsschlauchsystem|Schlauchsystem]] mit Y-Stück und der [[component:atemgasbefeuchter|Atemgasbefeuchtung]],\n- Steuerung, Bedienoberfläche, Alarmsystem und Akku.\n\nIm 3D Explorer kannst du die Baugruppen interaktiv erkunden. Das Schema [[media:beatmung-pneumatik-schema]] zeigt den Gasweg."
+          },
+          {
+            "title": "5. Alarme, Fehlersuche und Prüfung",
+            "body": "Bei jedem Alarm gilt: **Erst der Patient, dann das Gerät.** Im Zweifel manuell mit Beatmungsbeutel und Sauerstoff beatmen.\n\nArbeite die Diagnosebäume durch:\n- [[fault:beatmung-leckage-diskonnektion]] – Volumenverlust zwischen Inspiration und Exspiration\n- [[fault:beatmung-hoher-atemwegsdruck]] – Spitzen- und Plateaudruck vergleichen\n- [[fault:beatmung-flowsensor-fehler]] – Kalibrierung und Sensortausch\n\nGeräte zur maschinellen Beatmung unterliegen der STK-Pflicht nach [[legal_reference:de-mpbetreibv-stk]]. Den typischen Prüfablauf beschreibt [[test_procedure:beatmungsgeraet-funktionspruefung-stk]]."
+          }
+        ],
+        "prerequisites": []
+      },
+      "links": [
+        { "rel": "teaches", "to": "device:beatmungsgeraet" },
+        { "rel": "teaches", "to": "term:peep" },
+        { "rel": "teaches", "to": "term:tidalvolumen" },
+        { "rel": "teaches", "to": "term:atemminutenvolumen" },
+        { "rel": "teaches", "to": "term:compliance" },
+        { "rel": "teaches", "to": "term:resistance" },
+        { "rel": "teaches", "to": "term:druckkontrollierte-beatmung" },
+        { "rel": "teaches", "to": "term:volumenkontrollierte-beatmung" },
+        { "rel": "teaches", "to": "term:ie-verhaeltnis" },
+        { "rel": "teaches", "to": "simulation:beatmung" },
+        { "rel": "teaches", "to": "fault:beatmung-flowsensor-fehler" },
+        { "rel": "based_on", "to": "legal_reference:de-mpbetreibv-stk" }
+      ],
+      "sources": ["src:larsen-beatmung", "src:kramme-medizintechnik", "src:ardsnet-2000"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "quiz_question:beatmung-peep",
+      "title": "Quiz: Was ist PEEP?",
+      "summary": "Definition und Zweck des positiven endexspiratorischen Drucks bei der maschinellen Beatmung.",
+      "data": {
+        "kind": "single",
+        "question": "Was beschreibt der PEEP bei der maschinellen Beatmung?",
+        "options": [
+          { "id": "a", "text": "Den positiven Druck, der am Ende der Exspiration in den Atemwegen aufrechterhalten wird" },
+          { "id": "b", "text": "Den höchsten Druck, der während der Inspiration erreicht wird" },
+          { "id": "c", "text": "Den Druck, der während eines endinspiratorischen Halts gemessen wird" },
+          { "id": "d", "text": "Den Versorgungsdruck der zentralen Sauerstoffleitung" }
+        ],
+        "correct": ["a"],
+        "explanation": "PEEP steht für positive end-expiratory pressure. Er wird vom Exspirationsventil geregelt und hält die Alveolen am Ende der Ausatmung offen. Der höchste Druck ist der Spitzendruck, der Druck beim endinspiratorischen Halt der Plateaudruck – siehe [[term:peep]].",
+        "difficulty": 1
+      },
+      "links": [{ "rel": "quiz_for", "to": "learning_module:beatmung-grundlagen" }],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "quiz_question:beatmung-amv",
+      "title": "Quiz: Atemminutenvolumen berechnen",
+      "summary": "Berechnung des Atemminutenvolumens aus Tidalvolumen und Atemfrequenz.",
+      "data": {
+        "kind": "single",
+        "question": "Ein Patient wird mit einem Tidalvolumen von 500 ml und einer Atemfrequenz von 12/min beatmet. Wie groß ist das Atemminutenvolumen?",
+        "options": [
+          { "id": "a", "text": "6 l/min" },
+          { "id": "b", "text": "0,6 l/min" },
+          { "id": "c", "text": "12 l/min" },
+          { "id": "d", "text": "41,7 ml/min" }
+        ],
+        "correct": ["a"],
+        "explanation": "AMV = VT · AF = 500 ml · 12/min = 6000 ml/min = 6 l/min – siehe [[term:atemminutenvolumen]].",
+        "difficulty": 1
+      },
+      "links": [{ "rel": "quiz_for", "to": "learning_module:beatmung-grundlagen" }],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "quiz_question:beatmung-pcv-compliance",
+      "title": "Quiz: PCV bei abnehmender Compliance",
+      "summary": "Auswirkung einer sinkenden Compliance auf das Tidalvolumen bei druckkontrollierter Beatmung.",
+      "data": {
+        "kind": "single",
+        "question": "Ein Patient wird druckkontrolliert (PCV) mit unveränderten Einstellungen beatmet. Seine Compliance nimmt deutlich ab. Was ist zu erwarten?",
+        "options": [
+          { "id": "a", "text": "Das Tidalvolumen sinkt" },
+          { "id": "b", "text": "Der eingestellte Inspirationsdruck steigt automatisch an" },
+          { "id": "c", "text": "Das Tidalvolumen steigt" },
+          { "id": "d", "text": "Es ändert sich nichts, weil das Volumen garantiert ist" }
+        ],
+        "correct": ["a"],
+        "explanation": "Bei PCV ist der Druck vorgegeben. Das Volumen ergibt sich näherungsweise aus Compliance mal Druckdifferenz (VT ≈ C · Δp). Sinkt die Compliance, sinkt bei gleichem Druck das Tidalvolumen – siehe [[term:druckkontrollierte-beatmung]] und [[term:compliance]].",
+        "difficulty": 2
+      },
+      "links": [{ "rel": "quiz_for", "to": "learning_module:beatmung-grundlagen" }],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "quiz_question:beatmung-vcv-resistance",
+      "title": "Quiz: VCV bei erhöhter Resistance",
+      "summary": "Typisches Druckmuster bei volumenkontrollierter Beatmung und erhöhtem Atemwegswiderstand.",
+      "data": {
+        "kind": "single",
+        "question": "Bei volumenkontrollierter Beatmung mit konstantem Flow steigt der Spitzendruck deutlich an, der Plateaudruck bleibt jedoch nahezu unverändert. Was ist die wahrscheinlichste Ursache?",
+        "options": [
+          { "id": "a", "text": "Erhöhte Resistance, z. B. durch Sekret im Tubus" },
+          { "id": "b", "text": "Verminderte Compliance, z. B. durch ein Lungenödem" },
+          { "id": "c", "text": "Eine Leckage am Cuff" },
+          { "id": "d", "text": "Ein zu niedrig eingestellter PEEP" }
+        ],
+        "correct": ["a"],
+        "explanation": "Die Differenz zwischen Spitzen- und Plateaudruck entsteht durch den resistiven Druckanteil. Steigt nur der Spitzendruck, ist die Resistance erhöht. Eine verminderte Compliance würde auch den Plateaudruck erhöhen, eine Leckage eher zu niedrigen Drücken führen – siehe [[fault:beatmung-hoher-atemwegsdruck]].",
+        "difficulty": 2
+      },
+      "links": [{ "rel": "quiz_for", "to": "learning_module:beatmung-grundlagen" }],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "quiz_question:beatmung-leckage-ursachen",
+      "title": "Quiz: Ursachen eines Leckagealarms",
+      "summary": "Welche Ursachen kommen für einen Leckage- bzw. Diskonnektionsalarm am Beatmungsgerät infrage?",
+      "data": {
+        "kind": "multiple",
+        "question": "Welche der folgenden Ursachen können einen Leckage- bzw. Diskonnektionsalarm auslösen? (Mehrfachauswahl)",
+        "options": [
+          { "id": "a", "text": "Diskonnektion am Y-Stück" },
+          { "id": "b", "text": "Undichter oder zu gering geblockter Cuff" },
+          { "id": "c", "text": "Nicht korrekt eingesetztes Exspirationsventil" },
+          { "id": "d", "text": "Sekretverlegung des Tubus" }
+        ],
+        "correct": ["a", "b", "c"],
+        "explanation": "Diskonnektion, Cuff-Undichtigkeit und ein falsch eingesetztes Exspirationsventil führen zu Volumenverlust. Eine Sekretverlegung erhöht dagegen den Atemwegsdruck und löst typischerweise einen Druckalarm aus – siehe [[fault:beatmung-leckage-diskonnektion]].",
+        "difficulty": 1
+      },
+      "links": [{ "rel": "quiz_for", "to": "learning_module:beatmung-grundlagen" }],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "simulation:beatmung",
+      "title": "Simulation: Maschinelle Beatmung (PCV/VCV)",
+      "aliases": ["Beatmungssimulator", "Beatmungssimulation"],
+      "summary": "Interaktive Simulation von Druck-, Flow- und Volumenkurven bei druck- und volumenkontrollierter Beatmung – mit veränderbarer Compliance, Resistance und Leckage.",
+      "body": "Die Simulation beruht auf einem vereinfachten Ein-Kompartiment-Modell der Lunge (Compliance und Resistance in Reihe). Sie dient dem Verständnis der Zusammenhänge, nicht der Einstellung realer Beatmungsgeräte. Hintergrund: [[learning_module:beatmung-grundlagen]].",
+      "tags": ["Beatmung", "Simulation", "Atemmechanik"],
+      "data": {
+        "engine": "ventilation",
+        "learningGoals": [
+          "Unterschiede zwischen druck- und volumenkontrollierter Beatmung an den Kurven erkennen",
+          "Auswirkungen von Compliance und Resistance auf Druck, Flow und Tidalvolumen vorhersagen",
+          "Leckagen am Unterschied zwischen inspiratorischem und exspiratorischem Volumen erkennen",
+          "Den Einfluss von PEEP, Atemfrequenz und I:E-Verhältnis nachvollziehen"
+        ],
+        "scenarios": [
+          { "id": "pcv-normal", "title": "Normal – druckkontrolliert (PCV)", "description": "Lungengesunder Erwachsener: Inspirationsdruck 15 mbar bei PEEP 5 mbar. Beachte den abfallenden (dezelerierenden) Flow.", "params": { "mode": "PCV", "peep": 5, "pInsp": 15, "tidalVolume": 500, "respRate": 14, "ieRatio": 0.5, "compliance": 50, "resistance": 10, "leak": 0 } },
+          { "id": "vcv-normal", "title": "Normal – volumenkontrolliert (VCV)", "description": "Gleiche Atemmechanik, aber vorgegebenes Tidalvolumen von 500 ml mit konstantem Flow. Beobachte Spitzen- und Plateaudruck.", "params": { "mode": "VCV", "peep": 5, "pInsp": 15, "tidalVolume": 500, "respRate": 14, "ieRatio": 0.5, "compliance": 50, "resistance": 10, "leak": 0 } },
+          { "id": "ards", "title": "Reduzierte Compliance (ARDS-ähnlich)", "description": "Steife Lunge mit niedriger Compliance unter druckkontrollierter Beatmung mit höherem PEEP: Das Tidalvolumen bleibt trotz höheren Drucks klein. Schalte auf VCV um und beobachte den Druckanstieg.", "params": { "mode": "PCV", "peep": 10, "pInsp": 25, "tidalVolume": 400, "respRate": 20, "ieRatio": 0.5, "compliance": 20, "resistance": 10, "leak": 0 }, "fault": "fault:beatmung-hoher-atemwegsdruck" },
+          { "id": "hohe-resistance", "title": "Hohe Resistance (Verlegung/Bronchospasmus)", "description": "Volumenkontrollierte Beatmung bei stark erhöhtem Atemwegswiderstand: Der Spitzendruck steigt deutlich, der Plateaudruck kaum. Die Exspiration verlängert sich.", "params": { "mode": "VCV", "peep": 5, "pInsp": 15, "tidalVolume": 500, "respRate": 14, "ieRatio": 0.5, "compliance": 50, "resistance": 30, "leak": 0 }, "fault": "fault:beatmung-hoher-atemwegsdruck" },
+          { "id": "leckage", "title": "Leckage im System", "description": "Ein Teil des abgegebenen Volumens geht verloren: Das exspiratorische Volumen ist deutlich kleiner als das inspiratorische.", "params": { "mode": "PCV", "peep": 5, "pInsp": 15, "tidalVolume": 500, "respRate": 14, "ieRatio": 0.5, "compliance": 50, "resistance": 10, "leak": 0.3 }, "fault": "fault:beatmung-leckage-diskonnektion" },
+          { "id": "kurze-exspiration", "title": "Kurze Exspirationszeit (Auto-PEEP-Risiko)", "description": "Hohe Atemfrequenz, verlängerte Inspiration und erhöhte Resistance: Der Flow erreicht am Ende der Exspiration nicht mehr null – Hinweis auf intrinsischen PEEP.", "params": { "mode": "VCV", "peep": 5, "pInsp": 15, "tidalVolume": 450, "respRate": 28, "ieRatio": 1, "compliance": 50, "resistance": 25, "leak": 0 } }
+        ]
+      },
+      "links": [
+        { "rel": "simulates", "to": "device:beatmungsgeraet" },
+        { "rel": "simulates", "to": "term:druckkontrollierte-beatmung" },
+        { "rel": "simulates", "to": "term:volumenkontrollierte-beatmung" },
+        { "rel": "simulates", "to": "term:compliance" },
+        { "rel": "simulates", "to": "term:resistance" },
+        { "rel": "simulates", "to": "fault:beatmung-leckage-diskonnektion" },
+        { "rel": "simulates", "to": "fault:beatmung-hoher-atemwegsdruck" },
+        { "rel": "uses_principle", "to": "term:peep" },
+        { "rel": "uses_principle", "to": "term:ie-verhaeltnis" }
+      ],
+      "sources": ["src:larsen-beatmung", "src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "media:beatmung-pneumatik-schema",
+      "title": "Schema: Gasweg eines Intensiv-Beatmungsgeräts",
+      "summary": "Vereinfachtes Pneumatikschema: Gasversorgung, Gasdosierung mit O₂-Sensor, Inspirationsschenkel mit Befeuchter, Y-Stück und Patient, Exspirationsschenkel mit Flowsensor und PEEP-regelndem Exspirationsventil.",
+      "data": {
+        "kind": "schema",
+        "alt": "Blockschema des Gaswegs eines Beatmungsgeräts von der Gasversorgung über Gasdosierung, Befeuchter und Y-Stück zum Patienten und zurück über Flowsensor und Exspirationsventil zur Abluft",
+        "license": "CC BY 4.0",
+        "attribution": "MedTech World Redaktion",
+        "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 560 240\"><defs><marker id=\"a\" viewBox=\"0 0 10 10\" refX=\"9\" refY=\"5\" markerWidth=\"7\" markerHeight=\"7\" orient=\"auto\"><path d=\"M0 0L10 5L0 10z\" fill=\"#374151\"/></marker></defs><rect width=\"560\" height=\"240\" fill=\"#f4f8fb\"/><g font-family=\"sans-serif\" font-size=\"11\" text-anchor=\"middle\"><rect x=\"10\" y=\"40\" width=\"100\" height=\"44\" rx=\"6\" fill=\"#2f7fbf\"/><text x=\"60\" y=\"58\" fill=\"#fff\">Gasversorgung</text><text x=\"60\" y=\"74\" fill=\"#fff\">O₂ / Luft, Turbine</text><rect x=\"135\" y=\"40\" width=\"100\" height=\"44\" rx=\"6\" fill=\"#1d4ed8\"/><text x=\"185\" y=\"58\" fill=\"#fff\">Gasdosierung</text><text x=\"185\" y=\"74\" fill=\"#fff\">+ O₂-Sensor</text><rect x=\"135\" y=\"100\" width=\"100\" height=\"30\" rx=\"6\" fill=\"#f59e0b\"/><text x=\"185\" y=\"119\" fill=\"#111827\">Drucksensor</text><line x1=\"110\" y1=\"62\" x2=\"133\" y2=\"62\" stroke=\"#374151\" stroke-width=\"2\" marker-end=\"url(#a)\"/><line x1=\"235\" y1=\"62\" x2=\"318\" y2=\"62\" stroke=\"#3b82f6\" stroke-width=\"4\" marker-end=\"url(#a)\"/><text x=\"277\" y=\"52\" fill=\"#1d4ed8\">Inspiration</text><line x1=\"260\" y1=\"62\" x2=\"235\" y2=\"112\" stroke=\"#f59e0b\" stroke-width=\"1.5\" stroke-dasharray=\"4 3\"/><rect x=\"320\" y=\"40\" width=\"86\" height=\"44\" rx=\"6\" fill=\"#38bdf8\"/><text x=\"363\" y=\"66\" fill=\"#0f172a\">Befeuchter</text><polyline points=\"406,62 440,62 440,110\" fill=\"none\" stroke=\"#3b82f6\" stroke-width=\"4\" marker-end=\"url(#a)\"/><circle cx=\"440\" cy=\"122\" r=\"9\" fill=\"#9ca3af\"/><text x=\"440\" y=\"150\" fill=\"#374151\">Y-Stück</text><line x1=\"449\" y1=\"122\" x2=\"472\" y2=\"122\" stroke=\"#6b7280\" stroke-width=\"4\"/><ellipse cx=\"510\" cy=\"122\" rx=\"36\" ry=\"44\" fill=\"#f9a8d4\"/><text x=\"510\" y=\"126\" fill=\"#5b2135\">Patient</text><polyline points=\"440,131 440,200 332,200\" fill=\"none\" stroke=\"#7c3aed\" stroke-width=\"4\" marker-end=\"url(#a)\"/><text x=\"390\" y=\"192\" fill=\"#7c3aed\">Exspiration</text><rect x=\"252\" y=\"182\" width=\"78\" height=\"36\" rx=\"6\" fill=\"#e11d48\"/><text x=\"291\" y=\"204\" fill=\"#fff\">Flowsensor</text><line x1=\"252\" y1=\"200\" x2=\"232\" y2=\"200\" stroke=\"#7c3aed\" stroke-width=\"4\" marker-end=\"url(#a)\"/><rect x=\"120\" y=\"182\" width=\"110\" height=\"36\" rx=\"6\" fill=\"#6d28d9\"/><text x=\"175\" y=\"197\" fill=\"#fff\">Exspirationsventil</text><text x=\"175\" y=\"211\" fill=\"#fff\">(PEEP)</text><line x1=\"120\" y1=\"200\" x2=\"70\" y2=\"200\" stroke=\"#374151\" stroke-width=\"2\" marker-end=\"url(#a)\"/><text x=\"40\" y=\"204\" fill=\"#374151\">Abluft</text></g></svg>"
+      },
+      "links": [
+        { "rel": "illustrates", "to": "device:beatmungsgeraet" },
+        { "rel": "illustrates", "to": "component:exspirationsventil" },
+        { "rel": "illustrates", "to": "component:beatmung-flowsensor" },
+        { "rel": "illustrates", "to": "component:beatmung-gasdosierung" }
+      ],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "product_model:nordlicht-ventis-700",
+      "title": "Nordlicht Ventis 700 (Demo)",
+      "aliases": ["Ventis 700"],
+      "summary": "Fiktives turbinengetriebenes Intensiv-Beatmungsgerät – Demo-Datensatz zur Veranschaulichung von Produktmodell, technischen Daten, Ersatzteilen und Angeboten. Keine reale Herstellerangabe.",
+      "body": "Dieses Modell existiert nicht. Es zeigt, wie ein Produktmodell mit dem Gerätetyp [[device:beatmungsgeraet]], seinen Komponenten und Ersatzteilen wie [[spare_part:nordlicht-flowsensor-fs7]] und [[spare_part:nordlicht-exspirationsmembran-em7]] verknüpft wird.",
+      "tags": ["Beatmung", "Demo"],
+      "data": { "status": "aktiv", "releaseYear": 2025, "riskClass": "IIb" },
+      "specs": [
+        { "key": "beatmungsformen", "label": "Beatmungsformen", "value": "PCV, VCV, druckunterstützte Spontanatmung", "source": "src:mtw-redaktion-demo" },
+        { "key": "gasdosierung", "label": "Gasdosierung", "value": "Turbine mit O₂-Zumischung", "source": "src:mtw-redaktion-demo" },
+        { "key": "tidalvolumen_bereich", "label": "Einstellbereich Tidalvolumen", "value": "50–2000", "unit": "ml", "source": "src:mtw-redaktion-demo" },
+        { "key": "peep_bereich", "label": "Einstellbereich PEEP", "value": "0–30", "unit": "mbar", "source": "src:mtw-redaktion-demo" },
+        { "key": "akkulaufzeit", "label": "Akkulaufzeit", "value": 120, "unit": "min", "source": "src:mtw-redaktion-demo" }
+      ],
+      "links": [
+        { "rel": "model_of", "to": "device:beatmungsgeraet" },
+        { "rel": "manufactured_by", "to": "manufacturer:nordlicht-medizintechnik" },
+        { "rel": "has_component", "to": "component:beatmung-gasdosierung" },
+        { "rel": "has_component", "to": "component:beatmung-flowsensor" },
+        { "rel": "has_component", "to": "component:exspirationsventil" },
+        { "rel": "has_component", "to": "component:beatmung-sauerstoffsensor" },
+        { "rel": "has_component", "to": "component:beatmung-drucksensor" }
+      ],
+      "sources": ["src:mtw-redaktion-demo"],
+      "demo": true,
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "spare_part:nordlicht-flowsensor-fs7",
+      "title": "Flowsensor FS-7 für Ventis 700 (Demo)",
+      "summary": "Fiktiver aufbereitbarer Hitzdraht-Flowsensor für das Demo-Beatmungsgerät Ventis 700 – Demo-Datensatz, keine reale Herstellerangabe.",
+      "tags": ["Beatmung", "Sensor", "Demo", "Ersatzteil"],
+      "data": { "partNumber": "NL-FS7", "kind": "sensor", "wearPart": true, "original": true, "typicalLifetime": "abhängig von Einsatzdauer und Aufbereitungszyklen (Demo)" },
+      "links": [
+        { "rel": "fits", "to": "product_model:nordlicht-ventis-700" },
+        { "rel": "fits", "to": "component:beatmung-flowsensor" },
+        { "rel": "manufactured_by", "to": "manufacturer:nordlicht-medizintechnik" }
+      ],
+      "sources": ["src:mtw-redaktion-demo"],
+      "demo": true,
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "spare_part:nordlicht-exspirationsmembran-em7",
+      "title": "Exspirationsventil-Membran EM-7 für Ventis 700 (Demo)",
+      "summary": "Fiktive Silikonmembran für das Exspirationsventil des Demo-Beatmungsgeräts Ventis 700 – Verschleißteil im Demo-Datensatz, keine reale Herstellerangabe.",
+      "tags": ["Beatmung", "Pneumatik", "Demo", "Ersatzteil"],
+      "data": { "partNumber": "NL-EM7", "kind": "pneumatik", "wearPart": true, "original": true, "typicalLifetime": "Wechsel gemäß Wartungsplan bzw. bei Beschädigung (Demo)" },
+      "links": [
+        { "rel": "fits", "to": "product_model:nordlicht-ventis-700" },
+        { "rel": "fits", "to": "component:exspirationsventil" },
+        { "rel": "manufactured_by", "to": "manufacturer:nordlicht-medizintechnik" }
+      ],
+      "sources": ["src:mtw-redaktion-demo"],
+      "demo": true,
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "offer:nordlicht-flowsensor-fs7-neu",
+      "title": "Flowsensor FS-7, neu (Demo-Angebot)",
+      "summary": "Demo-Angebot im MedTech Market: Original-Flowsensor FS-7 für das Demo-Beatmungsgerät Ventis 700, neu und originalverpackt.",
+      "tags": ["Beatmung", "Demo", "Ersatzteil"],
+      "data": { "seller": "Demo-Servicepartner Nord", "price": 165, "currency": "EUR", "condition": "neu", "stock": 20, "location": "Hamburg", "warrantyMonths": 12 },
+      "links": [{ "rel": "offers", "to": "spare_part:nordlicht-flowsensor-fs7" }],
+      "demo": true,
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "offer:nordlicht-ventis-700-generalueberholt",
+      "title": "Nordlicht Ventis 700, generalüberholt (Demo-Angebot)",
+      "summary": "Demo-Angebot im MedTech Market: generalüberholtes Demo-Beatmungsgerät Ventis 700 mit neuer Exspirationsmembran, frischer STK und elektrischer Sicherheitsprüfung.",
+      "tags": ["Beatmung", "Demo", "Gerät"],
+      "data": { "seller": "Demo-Medizintechnik Süd", "price": 18900, "currency": "EUR", "condition": "generalueberholt", "stock": 1, "location": "München", "warrantyMonths": 12 },
+      "links": [{ "rel": "offers", "to": "product_model:nordlicht-ventis-700" }],
+      "demo": true,
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    }
+  ]
+}

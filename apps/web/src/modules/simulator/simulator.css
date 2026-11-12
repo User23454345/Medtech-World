@@ -1,0 +1,127 @@
+/* MedTech Simulator – modulspezifische Styles (Präfix mw-simulator-) */
+
+.mw-simulator {
+  /* Monitorbildschirm: in beiden Themes dunkel, wie an realen Geräten */
+  --mw-simulator-screen: #0b1520;
+  --mw-simulator-grid: rgba(148, 163, 184, 0.16);
+  --mw-simulator-screen-text: #cbd5e1;
+}
+[data-theme='dark'] .mw-simulator {
+  --mw-simulator-screen: #050b11;
+  --mw-simulator-grid: rgba(148, 163, 184, 0.14);
+}
+
+.mw-simulator-layout {
+  display: grid;
+  gap: var(--mw-space-5, 24px);
+  grid-template-columns: minmax(0, 1fr) 340px;
+  align-items: start;
+}
+@media (max-width: 1000px) {
+  .mw-simulator-layout { grid-template-columns: minmax(0, 1fr); }
+}
+.mw-simulator-main { min-width: 0; display: flex; flex-direction: column; gap: var(--mw-space-4, 16px); }
+.mw-simulator-main > .mw-section { margin-top: 0; }
+
+.mw-simulator-scenario__row { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; justify-content: space-between; }
+.mw-simulator-scenario__desc p { margin: 10px 0 0; }
+.mw-simulator-transport { gap: 8px; flex-wrap: wrap; }
+
+/* Alarmleiste */
+.mw-simulator-alarms {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 10px 14px;
+  border-radius: var(--mw-radius);
+  border: 1px solid var(--mw-border);
+  background: var(--mw-surface);
+  color: var(--mw-ok);
+  font-weight: 600;
+}
+.mw-simulator-alarms--active {
+  border-color: var(--mw-danger);
+  background: color-mix(in srgb, var(--mw-danger) 12%, var(--mw-surface));
+  color: var(--mw-text);
+}
+.mw-simulator-alarms--active > svg { color: var(--mw-danger); flex-shrink: 0; margin-top: 2px; }
+.mw-simulator-alarms ul { display: flex; flex-direction: column; gap: 2px; }
+
+/* Bildschirm */
+.mw-simulator-screen { overflow: hidden; background: var(--mw-simulator-screen); border-color: #1e293b; }
+.mw-simulator-screen__bar {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 12px;
+  font-size: var(--mw-fs-sm);
+  color: var(--mw-simulator-screen-text);
+  border-bottom: 1px solid var(--mw-simulator-grid);
+  font-variant-numeric: tabular-nums;
+}
+.mw-simulator-screen__note { padding: 8px 12px; color: var(--mw-simulator-screen-text) !important; margin: 0; }
+.mw-simulator-screen__note .mw-select { padding-top: 2px; padding-bottom: 2px; }
+.mw-simulator-chart { margin: 0; }
+.mw-simulator-chart__canvas { display: block; width: 100%; height: 220px; }
+
+/* Messwerte */
+.mw-simulator-readouts {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 10px;
+  margin: 0;
+}
+.mw-simulator-readout {
+  border: 1px solid var(--mw-border);
+  border-left: 5px solid var(--mw-ok);
+  border-radius: var(--mw-radius-sm);
+  background: var(--mw-surface);
+  padding: 8px 12px;
+}
+.mw-simulator-readout dt { font-size: var(--mw-fs-xs); color: var(--mw-text-3); text-transform: none; }
+.mw-simulator-readout dd { margin: 0; }
+.mw-simulator-readout__value { font-size: var(--mw-fs-xl); font-weight: 700; font-variant-numeric: tabular-nums; }
+.mw-simulator-readout__unit { color: var(--mw-text-2); font-size: var(--mw-fs-sm); }
+.mw-simulator-readout__hint { font-size: var(--mw-fs-xs); color: var(--mw-text-3); }
+.mw-simulator-readout--warn { border-left-color: var(--mw-warn); background: color-mix(in srgb, var(--mw-warn) 8%, var(--mw-surface)); }
+.mw-simulator-readout--alarm { border-left-color: var(--mw-danger); background: color-mix(in srgb, var(--mw-danger) 10%, var(--mw-surface)); }
+.mw-simulator-readout--alarm .mw-simulator-readout__value { color: var(--mw-danger); }
+[data-theme='dark'] .mw-simulator-readout--alarm .mw-simulator-readout__value { color: #f87171; }
+[data-theme='dark'] .mw-simulator-alarms:not(.mw-simulator-alarms--active) { color: #4ade80; }
+
+/* Parameter */
+.mw-simulator-params { display: flex; flex-direction: column; gap: 14px; }
+.mw-simulator-param { display: flex; flex-direction: column; gap: 4px; }
+.mw-simulator-param .mw-label { margin: 0; }
+.mw-simulator-param__value { display: inline-flex; align-items: center; gap: 4px; }
+.mw-simulator-param__value .mw-simulator-param__number { width: 84px; flex: none; padding: 2px 6px; text-align: right; font-variant-numeric: tabular-nums; }
+
+/* Prüftabelle */
+.mw-simulator-check--fail th, .mw-simulator-check--fail td { background: color-mix(in srgb, var(--mw-danger) 7%, transparent); }
+.mw-simulator-verdict {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 16px;
+  border-radius: var(--mw-radius);
+  border: 2px solid var(--mw-ok);
+  background: color-mix(in srgb, var(--mw-ok) 10%, var(--mw-surface));
+}
+.mw-simulator-verdict > svg { color: var(--mw-ok); flex-shrink: 0; }
+.mw-simulator-verdict--fail { border-color: var(--mw-danger); background: color-mix(in srgb, var(--mw-danger) 10%, var(--mw-surface)); }
+.mw-simulator-verdict--fail > svg { color: var(--mw-danger); }
+
+.mw-simulator-explanation .mw-prose p:first-child { margin-top: 0; }
+.mw-simulator-goals { margin: 0; padding-left: 1.2em; display: flex; flex-direction: column; gap: 4px; font-size: var(--mw-fs-sm); }
+
+/* Panel auf der Detailseite */
+.mw-simulator-panel__h { font-size: var(--mw-fs-md); margin: 0 0 6px; }
+.mw-simulator-scenario-list { display: flex; flex-direction: column; gap: 0; }
+.mw-simulator-scenario-list > li { padding: 10px 0; border-top: 1px solid var(--mw-border); }
+.mw-simulator-scenario-list > li:first-child { border-top: none; }
+.mw-simulator-engine-card .mw-card__title { font-size: var(--mw-fs-md); }
+
+/* Übersicht: Karte + Startknopf (Knopf außerhalb des Kartenlinks) */
+.mw-simulator-card { display: flex; flex-direction: column; gap: 8px; }
+.mw-simulator-card > .mw-card { flex: 1; }
+.mw-simulator-card__start { align-self: flex-start; }

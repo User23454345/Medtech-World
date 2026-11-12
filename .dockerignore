@@ -1,0 +1,25 @@
+# Abhängigkeiten und Build-Ergebnisse werden im Image neu erzeugt
+node_modules
+**/node_modules
+**/dist
+coverage
+
+# Lokale Daten und Geheimnisse gehören nie ins Image
+.data
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+.env
+.env.*
+!.env.example
+
+# Werkzeuge, Versionsverwaltung, Editoren
+.git
+.github
+.vscode
+.idea
+.DS_Store
+*.log
+Dockerfile
+.dockerignore

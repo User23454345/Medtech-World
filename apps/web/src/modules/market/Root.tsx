@@ -1,6 +1,18 @@
-import { ModuleLanding } from '../../shell/ModuleLanding.tsx';
+import { Route, Routes } from 'react-router';
+import { NotFound } from '../../pages/NotFound.tsx';
+import { InquiriesPage } from './InquiriesPage.tsx';
+import { Landing } from './Landing.tsx';
+import { OfferPage } from './OfferPage.tsx';
+import './market.css';
 
-/** Platzhalter – wird im Ausbau durch die modulspezifische Startseite ersetzt. */
+/** MedTech Market – Demo-Marktplatz mit Kompatibilität aus der zentralen Datenbasis */
 export default function Root() {
-  return <ModuleLanding module="market" />;
+  return (
+    <Routes>
+      <Route index element={<Landing />} />
+      <Route path="angebot/:slug" element={<OfferPage />} />
+      <Route path="anfragen" element={<InquiriesPage />} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+  );
 }

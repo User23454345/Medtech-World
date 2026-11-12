@@ -1,0 +1,62 @@
+/* MedTech Career Hub – modulspezifische Stile (Präfix mw-career-) */
+
+.mw-career,
+.mw-career-panel,
+.mw-career-path,
+.mw-career-readiness {
+  --mw-career-accent: var(--mw-mod-career);
+  --mw-career-soft: color-mix(in srgb, var(--mw-mod-career) 10%, var(--mw-surface));
+  --mw-career-strong: color-mix(in srgb, var(--mw-mod-career) 75%, var(--mw-text));
+}
+[data-theme='dark'] .mw-career,
+[data-theme='dark'] .mw-career-panel,
+[data-theme='dark'] .mw-career-path,
+[data-theme='dark'] .mw-career-readiness {
+  --mw-career-soft: color-mix(in srgb, var(--mw-mod-career) 22%, var(--mw-surface));
+  --mw-career-strong: color-mix(in srgb, var(--mw-mod-career) 45%, var(--mw-text));
+}
+
+/* ---------------------------------------------------------------- Hero */
+.mw-career-hero__stats { margin-top: var(--mw-space-5); gap: var(--mw-space-6); }
+.mw-career-hero__stats .mw-stat__value { color: #fff; }
+.mw-career-hero__stats .mw-stat__label { color: rgba(255, 255, 255, 0.85); }
+
+/* ---------------------------------------------------------------- Kompetenzcheck */
+.mw-career-check { display: grid; gap: var(--mw-space-3); grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr)); margin-top: var(--mw-space-3); }
+.mw-career-check > li { display: flex; }
+.mw-career-check__card { flex: 1; display: flex; flex-direction: column; gap: var(--mw-space-3); border-top: 3px solid var(--mw-career-accent); }
+.mw-career-check__title { display: flex; align-items: center; gap: 6px; margin: 0; font-size: var(--mw-fs-md); }
+.mw-career-check__title svg { flex: none; color: var(--mw-career-strong); }
+
+.mw-career-readiness { display: flex; flex-direction: column; gap: 6px; }
+.mw-career-readiness .mw-progress__bar { background: var(--mw-career-accent); }
+.mw-career-readiness__value { color: var(--mw-career-strong); font-variant-numeric: tabular-nums; }
+.mw-career-next, .mw-career-done { margin: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px; }
+.mw-career-done { color: var(--mw-ok); }
+
+/* ---------------------------------------------------------------- Detailpanel Berufsbild */
+.mw-career-facts { display: grid; gap: var(--mw-space-4); grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); }
+.mw-career-facts__group { padding: var(--mw-space-3) var(--mw-space-4); border-radius: var(--mw-radius); background: var(--mw-surface-2); border: 1px solid var(--mw-border); }
+.mw-career-facts__title { display: flex; align-items: center; gap: 6px; margin: 0 0 var(--mw-space-2); font-size: var(--mw-fs-md); }
+.mw-career-facts__title svg { color: var(--mw-career-strong); }
+.mw-career-facts__list { margin: 0; padding-left: 1.1em; display: flex; flex-direction: column; gap: 4px; font-size: var(--mw-fs-sm); color: var(--mw-text-2); }
+.mw-career-panel__path { margin-top: var(--mw-space-4); display: flex; flex-direction: column; gap: var(--mw-space-3); }
+.mw-career-panel__subtitle { margin: 0 0 6px; font-size: var(--mw-fs-sm); text-transform: uppercase; letter-spacing: 0.04em; color: var(--mw-text-3); }
+.mw-career-panel__readiness { padding: var(--mw-space-3) var(--mw-space-4); border-radius: var(--mw-radius); background: var(--mw-career-soft); display: flex; flex-direction: column; gap: 6px; }
+
+/* ---------------------------------------------------------------- Lernpfad */
+.mw-career-path { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.mw-career-path__item { position: relative; display: flex; gap: var(--mw-space-3); padding-bottom: var(--mw-space-4); }
+.mw-career-path__item:not(:last-child)::before {
+  content: ''; position: absolute; left: 13px; top: 30px; bottom: 2px; width: 2px; background: var(--mw-border);
+}
+.mw-career-path__item.is-completed:not(:last-child)::before { background: var(--mw-ok); }
+.mw-career-path__step {
+  flex: none; display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%;
+  font-weight: 700; font-size: var(--mw-fs-sm);
+  border: 2px solid var(--mw-career-accent); color: var(--mw-career-strong); background: var(--mw-surface);
+}
+.mw-career-path__item.is-completed .mw-career-path__step { background: var(--mw-ok); border-color: var(--mw-ok); color: #fff; }
+.mw-career-path__item.is-started .mw-career-path__step { border-color: var(--mw-warn); color: var(--mw-warn); }
+.mw-career-path__body { min-width: 0; display: flex; flex-direction: column; gap: 2px; padding-top: 2px; }
+.mw-career-path__title { font-weight: 600; }

@@ -1,0 +1,122 @@
+/* MedTech Market – modulspezifische Stile (Präfix mw-market-) */
+
+.mw-market,
+.mw-market-panel,
+.mw-market-aside,
+.mw-market-offer,
+.mw-market-finder {
+  --mw-market-accent: var(--mw-mod-market);
+  --mw-market-accent-soft: color-mix(in srgb, var(--mw-mod-market) 12%, var(--mw-surface));
+}
+
+.mw-market-anchor { scroll-margin-top: calc(var(--mw-header-h) + var(--mw-space-4)); }
+
+/* ---------------------------------------------------------------- Hero */
+.mw-market-hero__actions { margin-top: var(--mw-space-4); }
+.mw-market-hero__cta { background: #fff; color: var(--mw-mod-market); border-color: transparent; text-decoration: none; }
+.mw-market-hero__cta:hover { background: color-mix(in srgb, #fff 88%, var(--mw-mod-market)); color: var(--mw-mod-market); }
+.mw-market-hero__ghost { background: transparent; color: #fff; border: 1px solid rgba(255, 255, 255, 0.6); text-decoration: none; }
+.mw-market-hero__ghost:hover { background: rgba(255, 255, 255, 0.12); color: #fff; }
+.mw-market-hero__stats { margin-top: var(--mw-space-5); gap: var(--mw-space-6); }
+.mw-market-hero__stats .mw-stat__value { color: #fff; }
+.mw-market-hero__stats .mw-stat__label { color: rgba(255, 255, 255, 0.85); }
+
+/* ---------------------------------------------------------------- Demo-Hinweis */
+.mw-market-demo { margin-bottom: var(--mw-space-5); }
+.mw-market-demo .mw-alert { border-width: 2px; }
+.mw-market-demo-inline {
+  display: flex; gap: 6px; align-items: baseline; margin: 0;
+  padding: 6px 10px; border-radius: var(--mw-radius-sm);
+  font-size: var(--mw-fs-sm); color: var(--mw-text-2);
+  background: color-mix(in srgb, var(--mw-demo) 12%, var(--mw-surface));
+  border: 1px dashed color-mix(in srgb, var(--mw-demo) 55%, transparent);
+}
+
+/* ---------------------------------------------------------------- Filter */
+.mw-market-filters {
+  display: grid; gap: var(--mw-space-3) var(--mw-space-4); align-items: end;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 180px), 1fr));
+}
+.mw-market-filters__wide { grid-column: span 2; }
+@media (max-width: 560px) { .mw-market-filters__wide { grid-column: auto; } }
+.mw-market-filters__price { border: 0; margin: 0; padding: 0; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.mw-market-filters__price legend { padding: 0; }
+.mw-market-filters__price .mw-input { min-width: 0; }
+.mw-market-filters__check { padding-bottom: 10px; }
+
+/* ---------------------------------------------------------------- Angebotskarte */
+.mw-market-offer { position: relative; display: flex; flex-direction: column; gap: var(--mw-space-2); padding: 18px; overflow: hidden; }
+.mw-market-offer__accent { position: absolute; inset: 0 auto 0 0; width: 4px; background: var(--mw-market-accent); }
+.mw-market-offer__title { font-size: var(--mw-fs-md); margin: 0; line-height: 1.35; }
+.mw-market-offer__link { color: var(--mw-text); text-decoration: none; }
+.mw-market-offer__link::after { content: ''; position: absolute; inset: 0; }
+.mw-market-offer__link:hover { color: var(--mw-link); }
+.mw-market-offer__link:focus-visible { outline: none; }
+.mw-market-offer:focus-within { outline: 2px solid var(--mw-focus); outline-offset: 2px; }
+.mw-market-offer__price { font-size: var(--mw-fs-xl); font-weight: 700; color: var(--mw-text); font-variant-numeric: tabular-nums; }
+.mw-market-offer__vat { display: block; font-size: var(--mw-fs-xs); font-weight: 400; color: var(--mw-text-3); }
+.mw-market-offer__facts { display: grid; gap: 4px; font-size: var(--mw-fs-sm); color: var(--mw-text-2); }
+.mw-market-offer__facts li { display: flex; gap: 6px; align-items: center; }
+.mw-market-offer__targets { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: auto; padding-top: var(--mw-space-2); border-top: 1px solid var(--mw-border); }
+.mw-market-offer__target {
+  position: relative; z-index: 1; font-size: var(--mw-fs-xs); padding: 2px 8px; border-radius: 999px;
+  background: var(--mw-market-accent-soft); color: var(--mw-text); text-decoration: none; border: 1px solid var(--mw-border);
+}
+.mw-market-offer__target:hover { border-color: var(--mw-market-accent); }
+
+/* ---------------------------------------------------------------- Bestand */
+.mw-market-stock { display: inline-flex; gap: 6px; align-items: center; }
+.mw-market-stock__dot { width: 8px; height: 8px; border-radius: 50%; background: var(--mw-ok); flex: none; }
+.mw-market-stock--low .mw-market-stock__dot { background: var(--mw-warn); }
+.mw-market-stock--none .mw-market-stock__dot { background: var(--mw-danger); }
+.mw-market-stock--none { color: var(--mw-text-3); }
+
+/* ---------------------------------------------------------------- Panels */
+.mw-market-subtitle { font-size: var(--mw-fs-md); margin: 0 0 var(--mw-space-2); }
+.mw-market-pricebox {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--mw-space-4); align-items: center;
+  padding: var(--mw-space-4); border-radius: var(--mw-radius);
+  background: var(--mw-market-accent-soft); border: 1px solid color-mix(in srgb, var(--mw-market-accent) 35%, var(--mw-border));
+}
+.mw-market-pricebox__label { font-size: var(--mw-fs-xs); text-transform: uppercase; letter-spacing: 0.05em; color: var(--mw-text-3); font-weight: 600; }
+.mw-market-pricebox__price { font-size: var(--mw-fs-3xl); font-weight: 800; line-height: 1.1; color: var(--mw-text); font-variant-numeric: tabular-nums; }
+
+.mw-market-facts { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 180px), 1fr)); gap: var(--mw-space-3); margin: 0; }
+.mw-market-facts > div { padding: 10px 12px; border: 1px solid var(--mw-border); border-radius: var(--mw-radius-sm); background: var(--mw-surface); }
+.mw-market-facts__wide { grid-column: 1 / -1; }
+.mw-market-facts dt { font-size: var(--mw-fs-xs); color: var(--mw-text-3); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 2px; }
+.mw-market-facts dd { margin: 0; font-weight: 600; color: var(--mw-text); }
+
+.mw-market-inquiry { padding: var(--mw-space-4); border: 1px solid var(--mw-border); border-radius: var(--mw-radius); background: var(--mw-surface-2); }
+
+.mw-market-compat-group { display: flex; flex-direction: column; gap: 4px; }
+
+/* ---------------------------------------------------------------- Seitenleiste */
+.mw-market-aside__list { display: flex; flex-direction: column; gap: 10px; }
+.mw-market-aside__list li { padding-bottom: 10px; border-bottom: 1px solid var(--mw-border); }
+.mw-market-aside__list li:last-child { border-bottom: 0; padding-bottom: 0; }
+.mw-market-aside__part { display: inline-flex; gap: 6px; align-items: center; font-weight: 600; font-size: var(--mw-fs-sm); }
+
+/* ---------------------------------------------------------------- Finder */
+.mw-market-finder { display: flex; flex-direction: column; gap: var(--mw-space-4); border-top: 3px solid var(--mw-market-accent); }
+.mw-market-finder__title { margin: 2px 0; font-size: var(--mw-fs-lg); }
+.mw-market-finder__parts { display: flex; flex-direction: column; gap: var(--mw-space-4); }
+.mw-market-finder__part { display: flex; flex-direction: column; gap: var(--mw-space-3); padding: var(--mw-space-3); border: 1px solid var(--mw-border); border-radius: var(--mw-radius); background: var(--mw-surface-2); }
+.mw-market-finder__part-title { display: inline-flex; gap: 6px; align-items: center; font-weight: 700; }
+.mw-market-finder__best { text-align: right; font-size: var(--mw-fs-lg); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.mw-market-via { font-size: var(--mw-fs-xs); padding: 2px 8px; border-radius: 999px; border: 1px solid var(--mw-border); color: var(--mw-text-2); background: var(--mw-surface); }
+.mw-market-via--direct { border-color: var(--mw-ok); color: var(--mw-text); }
+.mw-market-via--model { border-color: var(--mw-market-accent); }
+.mw-market-via--component { border-style: dashed; }
+
+/* ---------------------------------------------------------------- Anfragen */
+.mw-market-inquiry-item { display: flex; flex-direction: column; gap: var(--mw-space-2); }
+.mw-market-inquiry-item__title { display: inline-flex; gap: 6px; align-items: center; font-weight: 700; }
+.mw-market-inquiry-item__msg {
+  margin: 0; padding: 8px 12px; white-space: pre-wrap; color: var(--mw-text-2);
+  border-left: 3px solid var(--mw-market-accent); background: var(--mw-surface-2); border-radius: 0 var(--mw-radius-sm) var(--mw-radius-sm) 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mw-market-offer, .mw-market-offer * { transition: none !important; }
+}

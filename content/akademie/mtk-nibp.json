@@ -1,0 +1,141 @@
+{
+  "sources": [
+    {
+      "id": "src:iec-80601-2-30",
+      "title": "IEC 80601-2-30 – Medizinische elektrische Geräte – Besondere Festlegungen für die Sicherheit einschließlich der wesentlichen Leistungsmerkmale von automatisierten nichtinvasiven Blutdruckmessgeräten",
+      "publisher": "IEC",
+      "kind": "norm",
+      "accessedAt": "2026-11-01"
+    }
+  ],
+  "entities": [
+    {
+      "id": "device:nibp-messgeraet",
+      "title": "Nichtinvasives Blutdruckmessgerät (NIBP)",
+      "aliases": ["NIBP", "Automatisches Blutdruckmessgerät", "Oszillometrisches Blutdruckmessgerät", "NIBP-Modul"],
+      "summary": "Automatisiertes Messgerät, das den arteriellen Blutdruck über eine Oberarm- oder Handgelenksmanschette nichtinvasiv bestimmt – überwiegend nach dem oszillometrischen Verfahren. Als eigenständiges Gerät oder als Modul eines Patientenmonitors.",
+      "body": "## Aufbau\nEine [[component:nibp-pumpe]] pumpt die [[component:nibp-manschette]] auf, ein [[component:nibp-ablassventil]] lässt den Druck kontrolliert ab, und ein [[component:nibp-drucksensor]] erfasst Manschettendruck und die überlagerten Druckschwankungen. Die Auswertung erfolgt nach dem Prinzip der [[term:oszillometrie]].\n\n## Einsatz\nNIBP-Messungen sind Standard in Notaufnahme, Anästhesie, Intensiv- und Allgemeinstation – häufig als Parameter des [[device:patientenmonitor|Patientenmonitors]] mit automatischen Messintervallen.\n\n## Messtechnische Kontrolle\nNichtinvasive Blutdruckmessgeräte sind in Anlage 2 der MPBetreibV aufgeführt und unterliegen daher Messtechnischen Kontrollen – siehe [[test_procedure:mtk-nibp]].\n\n## Anwendungshinweise\n- Manschettengröße passend zum Armumfang wählen: Eine zu kleine Manschette führt zu falsch hohen, eine zu große zu falsch niedrigen Werten.\n- Manschette auf Herzhöhe; Bewegung und Sprechen während der Messung vermeiden.\n- Bei Herzrhythmusstörungen oder starken Bewegungen kann die oszillometrische Messung ungenau sein oder fehlschlagen.",
+      "tags": ["Blutdruck", "NIBP", "Monitoring", "MTK"],
+      "data": {
+        "category": "Patientenüberwachung",
+        "applications": ["Notaufnahme", "Anästhesie", "Intensivmedizin", "Allgemeinstation", "Ambulante Versorgung"],
+        "operatingPrinciple": "Oszillometrie: Auswertung der Druckschwankungen in der Manschette während der kontrollierten Druckablassphase.",
+        "scene": {
+          "camera": [3.4, 2.2, 4.4],
+          "parts": [
+            { "id": "gehaeuse", "label": "Gerätegehäuse mit Auswerteelektronik", "shape": "box", "size": [1.8, 1.4, 1.0], "position": [-1.2, 0, 0], "color": "#dfe7ef" },
+            { "id": "display", "label": "Anzeige (SYS/DIA/MAD, Puls)", "shape": "box", "size": [1.2, 0.7, 0.05], "position": [-1.2, 0.2, 0.52], "color": "#0f2a3d" },
+            { "id": "pumpe", "label": "Membranpumpe", "component": "component:nibp-pumpe", "shape": "cylinder", "size": [0.2, 0.45, 0], "position": [-1.6, -0.35, 0], "rotation": [0, 0, 1.5708], "color": "#2f7fbf" },
+            { "id": "ventil", "label": "Ablassventil", "component": "component:nibp-ablassventil", "shape": "cylinder", "size": [0.12, 0.3, 0], "position": [-1.0, -0.35, 0], "color": "#f59e0b" },
+            { "id": "drucksensor", "label": "Drucksensor", "component": "component:nibp-drucksensor", "shape": "box", "size": [0.3, 0.2, 0.2], "position": [-0.6, -0.35, 0], "color": "#16a34a" },
+            { "id": "schlauch", "label": "Manschettenschlauch", "shape": "cylinder", "size": [0.04, 1.4, 0], "position": [0.4, 0, 0], "rotation": [0, 0, 1.5708], "color": "#4b5563" },
+            { "id": "oberarm", "label": "Oberarm (Darstellung)", "shape": "capsule", "size": [0.35, 1.6, 0], "position": [1.7, 0, 0], "color": "#e8b39a", "opacity": 0.6 },
+            { "id": "manschette", "label": "Blutdruckmanschette", "component": "component:nibp-manschette", "shape": "torus", "size": [0.45, 0.18, 0], "position": [1.7, 0, 0], "rotation": [1.5708, 0, 0], "color": "#1e3a8a" }
+          ]
+        }
+      },
+      "links": [
+        { "rel": "has_component", "to": "component:nibp-manschette" },
+        { "rel": "has_component", "to": "component:nibp-drucksensor" },
+        { "rel": "has_component", "to": "component:nibp-pumpe" },
+        { "rel": "has_component", "to": "component:nibp-ablassventil" },
+        { "rel": "uses_principle", "to": "term:oszillometrie" },
+        { "rel": "based_on", "to": "legal_reference:de-mpbetreibv-mtk" },
+        { "rel": "related", "to": "device:patientenmonitor" }
+      ],
+      "sources": ["src:kramme-medizintechnik", "src:iec-80601-2-30"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "component:nibp-manschette",
+      "title": "Blutdruckmanschette (NIBP)",
+      "aliases": ["NIBP-Manschette", "Oberarmmanschette", "Blutdruckmanschette"],
+      "summary": "Aufblasbare Manschette mit Luftkammer, die um Oberarm oder Oberschenkel gelegt wird, um die Arterie zu komprimieren. Größe und Sitz beeinflussen die Messgenauigkeit erheblich.",
+      "body": "Manschetten gibt es in verschiedenen Größen (z. B. Neugeborene, Kinder, Erwachsene, große Erwachsene) als wiederverwendbare oder Einmalprodukte. Die Größe richtet sich nach dem Armumfang; Markierungen auf der Manschette zeigen den zulässigen Bereich. Undichte Luftkammern oder Schläuche führen zu Fehlmessungen bzw. Messabbrüchen und fallen bei der Dichtheitsprüfung der [[test_procedure:mtk-nibp]] auf.",
+      "tags": ["Blutdruck", "NIBP", "Zubehör"],
+      "data": { "kind": "verbrauchsmaterial", "function": "Kompression der Arterie und Übertragung der arteriellen Pulsationen auf das Luftvolumen", "wearPart": true },
+      "sources": ["src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "component:nibp-drucksensor",
+      "title": "Drucksensor (NIBP-Messgerät)",
+      "aliases": ["NIBP-Drucksensor", "Manschettendrucksensor"],
+      "summary": "Elektronischer Drucksensor, der den statischen Manschettendruck und die überlagerten kleinen Druckoszillationen erfasst. Seine Genauigkeit ist Gegenstand der Messtechnischen Kontrolle.",
+      "body": "Aus dem Sensorsignal werden der statische Druck (Manschettendruck) und durch Filterung die pulssynchronen Oszillationen gewonnen, die der Algorithmus nach dem Prinzip der [[term:oszillometrie]] auswertet. Eine Drift des Sensors verfälscht alle Messwerte; deshalb wird die Druckanzeige bei der [[test_procedure:mtk-nibp]] mit einem Referenzmessgerät verglichen.",
+      "tags": ["Blutdruck", "NIBP", "Sensor"],
+      "data": { "kind": "sensor", "function": "Messung von Manschettendruck und Druckoszillationen", "wearPart": false },
+      "links": [{ "rel": "uses_principle", "to": "term:oszillometrie" }],
+      "sources": ["src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "component:nibp-pumpe",
+      "title": "Pumpe (NIBP-Messgerät)",
+      "aliases": ["NIBP-Pumpe", "Manschettenpumpe"],
+      "summary": "Kleine elektrisch angetriebene Pumpe, die die Blutdruckmanschette bis über den erwarteten systolischen Druck aufpumpt.",
+      "body": "Die Steuerung begrenzt den maximalen Manschettendruck; zusätzlich sind Sicherheitsfunktionen gegen zu hohen bzw. zu lang anhaltenden Manschettendruck vorgesehen. Verschleiß der Pumpe äußert sich z. B. durch verlängerte Aufpumpzeiten.",
+      "tags": ["Blutdruck", "NIBP", "Pneumatik"],
+      "data": { "kind": "pneumatik", "function": "Aufpumpen der Manschette", "wearPart": false },
+      "sources": ["src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "component:nibp-ablassventil",
+      "title": "Ablassventil (NIBP-Messgerät)",
+      "aliases": ["NIBP-Ventil", "Druckablassventil"],
+      "summary": "Ventil, das den Manschettendruck während der Messung kontrolliert (stufenweise oder kontinuierlich) absenkt und nach der Messung bzw. im Fehlerfall schnell entlüftet.",
+      "body": "Ein gleichmäßiger, kontrollierter Druckablass ist Voraussetzung für die Auswertung nach dem Prinzip der [[term:oszillometrie]]. Ein undichtes Ventil verursacht Druckverlust und fällt bei der Dichtheitsprüfung im Rahmen der [[test_procedure:mtk-nibp]] auf.",
+      "tags": ["Blutdruck", "NIBP", "Pneumatik"],
+      "data": { "kind": "pneumatik", "function": "Kontrollierter Druckablass und Schnellentlüftung der Manschette", "wearPart": false },
+      "sources": ["src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "term:oszillometrie",
+      "title": "Oszillometrie (Blutdruckmessung)",
+      "aliases": ["Oszillometrische Blutdruckmessung", "Oscillometry", "Oszillometrisches Verfahren"],
+      "summary": "Verfahren der automatischen nichtinvasiven Blutdruckmessung, bei dem die pulssynchronen Druckschwankungen in der Manschette während des Druckablassens ausgewertet werden.",
+      "body": "Die Manschette wird über den systolischen Druck aufgepumpt und anschließend kontrolliert entlüftet. Sobald das Blut die Arterie wieder passiert, übertragen sich Pulsationen als kleine Druckschwankungen (Oszillationen) auf die Manschette. Ihre Amplitude nimmt zunächst zu und dann wieder ab.\n\n- Das **Maximum der Oszillationsamplitude** liegt etwa beim **mittleren arteriellen Druck (MAD)**.\n- Systolischer und diastolischer Druck werden über herstellerspezifische Algorithmen aus dem Verlauf der Amplituden abgeleitet.\n\nDas Verfahren benötigt kein Stethoskop, ist aber störanfällig bei Bewegung und Arrhythmien. Die Druckmessung selbst wird bei der [[test_procedure:mtk-nibp]] geprüft.",
+      "tags": ["Blutdruck", "Messprinzip", "NIBP"],
+      "data": { "category": "messprinzip", "english": "oscillometry" },
+      "links": [{ "rel": "related", "to": "device:patientenmonitor" }],
+      "sources": ["src:kramme-medizintechnik", "src:iec-80601-2-30"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "test_procedure:mtk-nibp",
+      "title": "MTK nichtinvasive Blutdruckmessgeräte",
+      "aliases": ["Messtechnische Kontrolle Blutdruckmessgerät", "MTK NIBP", "MTK Blutdruck"],
+      "summary": "Messtechnische Kontrolle nach MPBetreibV für nichtinvasive Blutdruckmessgeräte: Sichtprüfung, Dichtheitsprüfung des pneumatischen Systems, Vergleich der Druckanzeige mit einem Referenzmessgerät, Kennzeichnung und Dokumentation.",
+      "body": "Nichtinvasive Blutdruckmessgeräte sind in Anlage 2 der MPBetreibV aufgeführt – siehe [[legal_reference:de-mpbetreibv-mtk]]. Die MTK stellt fest, ob das Gerät die zulässigen **Fehlergrenzen** einhält. Fristen ergeben sich aus Anlage 2 bzw. den Herstellerangaben; maßgeblich ist die aktuelle Fassung der Verordnung.\n\nDie hier beschriebenen Schritte sind bewusst allgemein gehalten. Prüfbedingungen, Prüfpunkte und Fehlergrenzen sind den Herstellerunterlagen und den für das Produkt geltenden Vorgaben zu entnehmen. Kern der MTK ist die **statische Druckmessung** im Service- bzw. Prüfmodus des Geräts; ein NIBP-Simulator kann ergänzend zur Plausibilisierung der Messfunktion dienen. Grundlagen: [[term:oszillometrie]].",
+      "tags": ["MTK", "Blutdruck", "NIBP", "Prüfung", "MPBetreibV"],
+      "data": {
+        "kind": "MTK",
+        "interval": "gemäß Anlage 2 der MPBetreibV bzw. Herstellerangabe (aktuelle Fassung beachten)",
+        "qualification": "Zuständige Behörde oder Person, die die Anforderungen der MPBetreibV an Sachkenntnis und Mittel für Messtechnische Kontrollen erfüllt",
+        "equipment": ["Referenzdruckmessgerät mit rückführbarer Kalibrierung", "Starres Prüfvolumen bzw. Manschette um Prüfzylinder, T-Stück und Schläuche", "Optional: NIBP-Simulator zur Funktionsplausibilisierung", "Herstellerunterlagen (Serviceanleitung, Prüfvorschrift)", "Prüfprotokoll, Prüfkennzeichen, Medizinproduktebuch"],
+        "steps": [
+          { "title": "Sichtprüfung", "description": "Gerät, Anzeige, Manschetten, Schläuche und Steckverbinder auf Beschädigung und Vollständigkeit prüfen; Kennzeichnung der letzten MTK kontrollieren." },
+          { "title": "Prüfaufbau und Service-Modus", "description": "Gerät nach Herstellerangabe in den Prüf- bzw. Kalibriermodus versetzen (Druckanzeige ohne automatischen Ablass); Referenzdruckmessgerät über T-Stück an das pneumatische System anschließen." },
+          { "title": "Dichtheitsprüfung", "description": "System auf einen vorgegebenen Druck bringen und den Druckabfall über die vorgegebene Zeit beobachten.", "limit": "zulässiger Druckabfall nach Herstellerangabe bzw. Prüfvorgabe" },
+          { "title": "Messabweichung der Druckanzeige", "description": "An mehreren Prüfpunkten über den Messbereich die Anzeige des Geräts mit dem Referenzmessgerät vergleichen und die Abweichungen notieren.", "limit": "Fehlergrenzen nach Herstellerangabe bzw. den für das Produkt geltenden Vorgaben" },
+          { "title": "Sicherheitsfunktionen (sofern vorgesehen)", "description": "Druckbegrenzung bzw. Schnellentlüftung prüfen, wenn der Hersteller dies als Bestandteil der Prüfung vorsieht." },
+          { "title": "Bewertung, Kennzeichnung und Dokumentation", "description": "Ergebnis bewerten; bei bestandener MTK Gerät so kennzeichnen, dass das Jahr der nächsten MTK und die durchführende Stelle erkennbar sind; Protokoll und Eintrag in das Medizinproduktebuch. Bei Überschreitung der Fehlergrenzen Gerät außer Betrieb nehmen und Betreiber informieren." }
+        ],
+        "documentation": ["Geräteidentifikation (Typ, Seriennummer, Inventarnummer)", "Referenzmessgerät mit Kalibrierstatus", "Prüfpunkte, Anzeige- und Referenzwerte, Abweichungen", "Ergebnis der Dichtheitsprüfung", "Bewertung, Datum, Unterschrift, durchführende Stelle", "Eintrag im Medizinproduktebuch"]
+      },
+      "links": [
+        { "rel": "based_on", "to": "legal_reference:de-mpbetreibv-mtk" },
+        { "rel": "based_on", "to": "legal_reference:de-mpbetreibv" },
+        { "rel": "tests", "to": "device:nibp-messgeraet" },
+        { "rel": "tests", "to": "device:patientenmonitor" },
+        { "rel": "tests", "to": "component:nibp-drucksensor" },
+        { "rel": "tests", "to": "component:nibp-manschette" },
+        { "rel": "uses_principle", "to": "term:oszillometrie" }
+      ],
+      "sources": ["src:de-mpbetreibv", "src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    }
+  ]
+}

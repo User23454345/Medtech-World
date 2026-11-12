@@ -1,0 +1,651 @@
+{
+  "sources": [
+    {
+      "id": "src:iec-60601-2-24",
+      "title": "IEC 60601-2-24 – Medizinische elektrische Geräte – Besondere Festlegungen für die Sicherheit einschließlich der wesentlichen Leistungsmerkmale von Infusionspumpen und Infusionsreglern",
+      "publisher": "IEC",
+      "kind": "norm",
+      "edition": "2012",
+      "accessedAt": "2026-11-01"
+    }
+  ],
+  "entities": [
+    {
+      "id": "device:infusionspumpe",
+      "title": "Volumetrische Infusionspumpe",
+      "aliases": ["Infusionspumpe", "Großvolumenpumpe", "Peristaltische Infusionspumpe", "Infusion pump"],
+      "summary": "Aktives Medizinprodukt, das Infusionslösungen aus Beutel oder Flasche über ein gerätespezifisches Infusionsset mit einstellbarer Förderrate in den Patienten fördert – meist über eine peristaltische Fördermechanik.",
+      "body": "## Funktionsprinzip\nDie [[component:infusion-peristaltik]] drückt das Pumpensegment des [[component:infusionsset-pumpe|Infusionssets]] wellenförmig zusammen und fördert so ein definiertes Volumen pro Umdrehung bzw. Hub. Die Förderung ist damit – anders als bei der Schwerkraftinfusion – weitgehend unabhängig von Fallhöhe und Gegendruck. Vorgegeben werden [[term:foerderrate]] und [[term:vtbi]].\n\n## Sicherheitsfunktionen\n- [[component:infusion-drucksensor]] zur Erkennung einer [[term:okklusion]] vor und hinter der Pumpe\n- [[component:luftblasendetektor]] gegen Luftinfusion\n- Schutz vor unkontrolliertem Durchfluss (Free-Flow-Schutz) beim Öffnen der Pumpentür\n- optional ein [[component:tropfensensor]] an der Tropfkammer\n- [[component:infusionspumpen-akku]] für Transport und Netzausfall\n- häufig [[term:dosisfehlerreduktion]] mit Medikamentenbibliothek\n\n## Abgrenzung\nFür sehr kleine Förderraten und hochkonzentrierte Medikamente wird meist die [[device:spritzenpumpe]] eingesetzt. Infusionspumpen unterliegen in Deutschland den Sicherheitstechnischen Kontrollen – siehe [[test_procedure:stk-infusionspumpe]].",
+      "tags": ["Infusion", "Infusionstechnik", "Intensivmedizin", "STK"],
+      "data": {
+        "category": "Infusionstechnik",
+        "typicalRiskClass": "IIb",
+        "applications": ["Intensivmedizin", "Anästhesie", "Allgemeinstationen", "Onkologie", "Parenterale Ernährung"],
+        "operatingPrinciple": "Peristaltische Verdrängung im Pumpensegment eines gerätespezifischen Infusionssets mit Überwachung von Leitungsdruck und Luft in der Leitung.",
+        "scene": {
+          "camera": [3.6, 2.4, 4.6],
+          "parts": [
+            { "id": "gehaeuse", "label": "Pumpengehäuse mit Steuerelektronik", "shape": "box", "size": [2.0, 2.6, 1.2], "position": [0, 0, 0], "color": "#dfe7ef", "description": "Steuerung, Alarmgeber und Bedienoberfläche" },
+            { "id": "display", "label": "Display und Tastenfeld", "shape": "box", "size": [1.4, 0.8, 0.05], "position": [0, 0.75, 0.62], "color": "#0f2a3d" },
+            { "id": "tuer", "label": "Pumpentür (geöffnet dargestellt, transparent)", "shape": "box", "size": [1.6, 1.3, 0.08], "position": [0, -0.45, 0.72], "color": "#9fb6c8", "opacity": 0.3 },
+            { "id": "peristaltik", "label": "Peristaltische Fördermechanik", "component": "component:infusion-peristaltik", "shape": "box", "size": [0.5, 1.0, 0.3], "position": [0, -0.45, 0.5], "color": "#6b7c8f", "description": "Lamellen drücken das Pumpensegment nacheinander zu" },
+            { "id": "pumpensegment", "label": "Pumpensegment des Infusionssets", "component": "component:infusionsset-pumpe", "shape": "cylinder", "size": [0.06, 1.3, 0], "position": [0, -0.45, 0.68], "color": "#e8f1f8", "opacity": 0.85 },
+            { "id": "leitung-oben", "label": "Infusionsleitung zum Behälter", "component": "component:infusionsset-pumpe", "shape": "cylinder", "size": [0.04, 1.3, 0], "position": [0, 1.75, 0.68], "color": "#e8f1f8", "opacity": 0.85 },
+            { "id": "drucksensor-oben", "label": "Drucksensor vor der Pumpe (upstream)", "component": "component:infusion-drucksensor", "shape": "box", "size": [0.3, 0.15, 0.2], "position": [0, 0.15, 0.6], "color": "#2f7fbf" },
+            { "id": "drucksensor-unten", "label": "Drucksensor hinter der Pumpe (downstream)", "component": "component:infusion-drucksensor", "shape": "box", "size": [0.3, 0.15, 0.2], "position": [0, -1.0, 0.6], "color": "#2f7fbf" },
+            { "id": "luftsensor", "label": "Ultraschall-Luftsensor", "component": "component:luftblasendetektor", "shape": "box", "size": [0.3, 0.18, 0.25], "position": [0, -1.2, 0.62], "color": "#f59e0b" },
+            { "id": "tropfkammer", "label": "Tropfkammer des Infusionssets", "component": "component:infusionsset-pumpe", "shape": "cylinder", "size": [0.16, 0.5, 0], "position": [0, 2.55, 0.68], "color": "#cfe3f3", "opacity": 0.6 },
+            { "id": "tropfensensor", "label": "Tropfensensor (optional)", "component": "component:tropfensensor", "shape": "torus", "size": [0.22, 0.05, 0], "position": [0, 2.5, 0.68], "rotation": [1.5708, 0, 0], "color": "#8e24aa" },
+            { "id": "akku", "label": "Akku", "component": "component:infusionspumpen-akku", "shape": "box", "size": [1.2, 0.4, 0.3], "position": [0, -0.95, -0.35], "color": "#16a34a", "opacity": 0.8 },
+            { "id": "halterung", "label": "Stativklemme", "shape": "cylinder", "size": [0.12, 0.6, 0], "position": [-1.3, 0.3, -0.2], "color": "#4b5563" }
+          ]
+        }
+      },
+      "links": [
+        { "rel": "has_component", "to": "component:infusion-peristaltik" },
+        { "rel": "has_component", "to": "component:infusion-drucksensor" },
+        { "rel": "has_component", "to": "component:luftblasendetektor" },
+        { "rel": "has_component", "to": "component:tropfensensor" },
+        { "rel": "has_component", "to": "component:infusionspumpen-akku" },
+        { "rel": "has_component", "to": "component:infusionsset-pumpe" },
+        { "rel": "uses_principle", "to": "term:foerderrate" },
+        { "rel": "uses_principle", "to": "term:vtbi" },
+        { "rel": "uses_principle", "to": "term:okklusion" },
+        { "rel": "based_on", "to": "legal_reference:de-mpbetreibv-stk" },
+        { "rel": "related", "to": "device:spritzenpumpe" }
+      ],
+      "sources": ["src:kramme-medizintechnik", "src:iec-60601-2-24"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "device:spritzenpumpe",
+      "title": "Spritzenpumpe",
+      "aliases": ["Infusionsspritzenpumpe", "Syringe pump"],
+      "summary": "Infusionsgerät, das den Kolben einer eingelegten Spritze über einen motorgetriebenen Spindelantrieb gleichmäßig vorschiebt. Geeignet für kleine Volumina und niedrige Förderraten, z. B. für hochwirksame Medikamente.",
+      "body": "## Funktionsprinzip\nEin Schrittmotor treibt über eine Gewindespindel den [[component:spritzenantrieb]] an, der den Spritzenkolben vorschiebt. Das geförderte Volumen ergibt sich aus Vorschubweg und Innendurchmesser der Spritze – deshalb muss der eingelegte **Spritzentyp korrekt erkannt bzw. ausgewählt** sein. Umgangssprachlich wird die Spritzenpumpe nach einem Markennamen oft „Perfusor“ genannt.\n\n## Besonderheiten\n- Bei sehr niedrigen [[term:foerderrate|Förderraten]] kann es nach dem Start dauern, bis das mechanische Spiel und die Nachgiebigkeit von Spritze und Leitung überwunden sind (Anlaufverzögerung).\n- Eine [[term:okklusion]] wird über die Kraft am Kolben erkannt; bei niedrigen Raten kann die Zeit bis zum Alarm lang sein – siehe [[fault:infusion-okklusionsalarm]].\n- Wird die Pumpe oberhalb des Patienten betrieben und ist die Spritze nicht korrekt fixiert, droht eine unkontrollierte Entleerung (Siphoneffekt). Höhenänderungen der Pumpe können kurzzeitig Bolus oder Förderunterbrechung verursachen.\n\n## Sicherheit und Prüfung\nWie die [[device:infusionspumpe]] verfügt sie über Druck- bzw. Kraftüberwachung, Voralarm „Spritze fast leer“, [[component:infusionspumpen-akku|Akku]] und häufig [[term:dosisfehlerreduktion]]. Prüfung: [[test_procedure:stk-infusionspumpe]].",
+      "tags": ["Infusion", "Infusionstechnik", "Intensivmedizin", "STK"],
+      "data": {
+        "category": "Infusionstechnik",
+        "typicalRiskClass": "IIb",
+        "applications": ["Intensivmedizin", "Anästhesie", "Neonatologie", "Schmerztherapie", "Kontinuierliche Gabe hochwirksamer Medikamente"],
+        "operatingPrinciple": "Motorgetriebener Spindelantrieb schiebt den Spritzenkolben mit definierter Geschwindigkeit vor; Fördervolumen aus Vorschub und Spritzeninnendurchmesser.",
+        "scene": {
+          "camera": [3.4, 2.6, 4.4],
+          "parts": [
+            { "id": "gehaeuse", "label": "Pumpengehäuse mit Steuerelektronik", "shape": "box", "size": [3.0, 1.0, 1.2], "position": [0, -0.3, 0], "color": "#dfe7ef" },
+            { "id": "display", "label": "Display und Tastenfeld", "shape": "box", "size": [0.9, 0.6, 0.05], "position": [1.0, -0.3, 0.62], "color": "#0f2a3d" },
+            { "id": "spritzenzylinder", "label": "Spritzenzylinder (eingelegte Spritze)", "shape": "cylinder", "size": [0.25, 1.8, 0], "position": [-0.3, 0.45, 0.2], "rotation": [0, 0, 1.5708], "color": "#e8f1f8", "opacity": 0.6 },
+            { "id": "kolben", "label": "Spritzenkolben", "shape": "cylinder", "size": [0.08, 1.2, 0], "position": [1.0, 0.45, 0.2], "rotation": [0, 0, 1.5708], "color": "#cbd5e1" },
+            { "id": "antriebskopf", "label": "Antriebskopf mit Kolbenhalter", "component": "component:spritzenantrieb", "shape": "box", "size": [0.35, 0.7, 0.8], "position": [1.7, 0.45, 0.1], "color": "#2f7fbf" },
+            { "id": "spindel", "label": "Gewindespindel", "component": "component:spritzenantrieb", "shape": "cylinder", "size": [0.06, 2.6, 0], "position": [0.1, -0.05, -0.3], "rotation": [0, 0, 1.5708], "color": "#6b7c8f" },
+            { "id": "kraftsensor", "label": "Kraft- bzw. Drucksensor im Antriebskopf", "component": "component:infusion-drucksensor", "shape": "sphere", "size": [0.1, 0, 0], "position": [1.55, 0.45, 0.2], "color": "#f59e0b" },
+            { "id": "leitung", "label": "Spritzenleitung zum Patienten", "shape": "cylinder", "size": [0.03, 1.2, 0], "position": [-1.8, 0.45, 0.2], "rotation": [0, 0, 1.5708], "color": "#e8f1f8", "opacity": 0.85 },
+            { "id": "akku", "label": "Akku", "component": "component:infusionspumpen-akku", "shape": "box", "size": [1.0, 0.3, 0.4], "position": [-0.8, -0.5, -0.2], "color": "#16a34a", "opacity": 0.8 }
+          ]
+        }
+      },
+      "links": [
+        { "rel": "has_component", "to": "component:spritzenantrieb" },
+        { "rel": "has_component", "to": "component:infusion-drucksensor" },
+        { "rel": "has_component", "to": "component:infusionspumpen-akku" },
+        { "rel": "uses_principle", "to": "term:foerderrate" },
+        { "rel": "uses_principle", "to": "term:okklusion" },
+        { "rel": "uses_principle", "to": "term:bolus" },
+        { "rel": "based_on", "to": "legal_reference:de-mpbetreibv-stk" }
+      ],
+      "sources": ["src:kramme-medizintechnik", "src:iec-60601-2-24"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "component:infusion-peristaltik",
+      "title": "Peristaltische Fördermechanik (Infusionspumpe)",
+      "aliases": ["Fördermechanik Infusionspumpe", "Linearperistaltik", "Fingerperistaltik", "Pumpenmechanik"],
+      "summary": "Mechanik einer volumetrischen Infusionspumpe, die das Pumpensegment des Infusionssets mit nacheinander schließenden Lamellen oder Rollen abklemmt und die Flüssigkeit so in Richtung Patient verdrängt.",
+      "body": "Bei der **Linearperistaltik** drücken mehrere über eine Nockenwelle angetriebene Lamellen das Pumpensegment nacheinander zu; bei der **Rotationsperistaltik** übernehmen Rollen diese Aufgabe. Die Fördergenauigkeit hängt wesentlich vom **Infusionsset** ab: Material, Wanddicke und Elastizität des Pumpensegments sind auf die Mechanik abgestimmt – daher nur vom Hersteller freigegebene Sets verwenden ([[component:infusionsset-pumpe]]).\n\nVerschleiß an Antrieb und Lamellen sowie nicht freigegebene oder zu lange verwendete Sets sind mögliche Ursachen von [[fault:infusion-foerderrate-ungenau]].",
+      "tags": ["Infusion", "Mechanik"],
+      "data": { "kind": "mechanik", "function": "Verdrängung der Infusionslösung im Pumpensegment mit definiertem Volumen pro Arbeitszyklus", "wearPart": false },
+      "links": [
+        { "rel": "uses_principle", "to": "term:foerderrate" },
+        { "rel": "causes", "to": "fault:infusion-foerderrate-ungenau" }
+      ],
+      "sources": ["src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "component:spritzenantrieb",
+      "title": "Spritzenantrieb (Spindelantrieb mit Antriebskopf)",
+      "aliases": ["Spindelantrieb Spritzenpumpe", "Antriebskopf", "Kolbenvorschub"],
+      "summary": "Antriebseinheit der Spritzenpumpe aus Schrittmotor, Getriebe, Gewindespindel und Antriebskopf, der den Spritzenkolben fasst und mit definierter Geschwindigkeit vorschiebt.",
+      "body": "Der Antriebskopf hält den Kolben formschlüssig, damit die Spritze bei Unterdruck auf der Patientenseite nicht unkontrolliert leergesaugt werden kann (Siphoneffekt). In der Regel überwachen Sensoren, ob Spritzenflansch und Kolben korrekt eingelegt sind, und messen die Kraft am Kolben zur Erkennung einer [[term:okklusion]].\n\nMechanisches Spiel in Spindel und Spindelmutter wirkt sich vor allem bei niedrigen [[term:foerderrate|Förderraten]] aus (Anlaufverzögerung) – siehe [[fault:infusion-foerderrate-ungenau]].",
+      "tags": ["Infusion", "Spritzenpumpe", "Antrieb"],
+      "data": { "kind": "aktor", "function": "Gleichmäßiger, präziser Vorschub des Spritzenkolbens", "wearPart": false },
+      "links": [
+        { "rel": "causes", "to": "fault:infusion-foerderrate-ungenau" }
+      ],
+      "sources": ["src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "component:infusion-drucksensor",
+      "title": "Drucksensor zur Okklusionserkennung (Infusionstechnik)",
+      "aliases": ["Okklusionssensor", "Drucksensor Infusionspumpe", "Kraftsensor Spritzenpumpe"],
+      "summary": "Sensor, der den Leitungsdruck (volumetrische Pumpe) bzw. die Kraft am Spritzenkolben (Spritzenpumpe) überwacht und bei Überschreiten der eingestellten Druckalarmgrenze einen Okklusionsalarm auslöst.",
+      "body": "Volumetrische Pumpen überwachen meist den Druck **hinter der Pumpe** (patientenseitig, downstream) und **vor der Pumpe** (behälterseitig, upstream). Bei Spritzenpumpen wird die Kraft am Kolben gemessen und in einen Druck umgerechnet; dafür muss der Spritzentyp korrekt hinterlegt sein.\n\nDie Zeit bis zum Alarm hängt von [[term:foerderrate]], Druckalarmgrenze und Nachgiebigkeit des Systems ab. Nach einer [[term:okklusion]] steht das System unter Druck – beim Lösen droht ein ungewollter [[term:bolus]]. Siehe [[fault:infusion-okklusionsalarm]].",
+      "tags": ["Infusion", "Sensor", "Okklusion", "Alarm"],
+      "data": { "kind": "sensor", "function": "Überwachung von Leitungsdruck bzw. Kolbenkraft zur Okklusionserkennung", "wearPart": false },
+      "links": [
+        { "rel": "uses_principle", "to": "term:okklusion" },
+        { "rel": "causes", "to": "fault:infusion-okklusionsalarm" }
+      ],
+      "sources": ["src:kramme-medizintechnik", "src:iec-60601-2-24"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "component:luftblasendetektor",
+      "title": "Luftblasendetektor (Luft-in-Leitung-Sensor)",
+      "aliases": ["Luftsensor", "Air-in-Line-Detektor", "Ultraschall-Luftdetektor", "Luftdetektor Infusionspumpe"],
+      "summary": "Sensor einer Infusionspumpe, der Luftblasen in der Infusionsleitung erkennt – meist per Ultraschall durch die Schlauchwand – und bei Überschreiten der eingestellten Grenze die Förderung stoppt und alarmiert.",
+      "body": "Ultraschall wird von Flüssigkeit deutlich besser übertragen als von Luft. Befindet sich eine Luftblase zwischen Sender und Empfänger, sinkt das Empfangssignal. Je nach Gerät werden Einzelblasen und die Summe kleinerer Blasen über ein Zeitfenster bewertet.\n\nDie Leitung muss korrekt und vollständig im Sensorkanal liegen; Verschmutzungen oder eingetrocknete Lösungsreste können Fehlalarme auslösen. Siehe [[fault:infusion-luft-im-system]].",
+      "tags": ["Infusion", "Sensor", "Luft", "Alarm"],
+      "data": { "kind": "sensor", "function": "Erkennung von Luft in der Infusionsleitung zum Schutz vor Luftembolie", "wearPart": false },
+      "links": [
+        { "rel": "causes", "to": "fault:infusion-luft-im-system" }
+      ],
+      "sources": ["src:kramme-medizintechnik", "src:iec-60601-2-24"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "component:tropfensensor",
+      "title": "Tropfensensor (Tropfkammer)",
+      "aliases": ["Tropfendetektor", "Tropfenzähler", "Drop sensor"],
+      "summary": "Optischer Sensor, der an der Tropfkammer des Infusionssets fallende Tropfen erfasst. Je nach Gerät dient er zur Erkennung eines leeren Behälters bzw. ausbleibenden Flusses oder – bei tropfengesteuerten Geräten – zur Regelung.",
+      "body": "Eine Lichtschranke registriert jeden fallenden Tropfen. Bei volumetrischen Pumpen ist der Tropfensensor häufig optional und meldet vor allem „Behälter leer“ bzw. einen ausbleibenden Fluss. Für eine reine Tropfenzählung gilt: Die Tropfengröße hängt u. a. von Tropfkammer, Viskosität und Oberflächenspannung der Lösung ab – sie ist daher keine exakte Volumenmessung.\n\nDie Tropfkammer muss senkrecht hängen und darf nicht zu voll sein, sonst werden Tropfen nicht sicher erkannt.",
+      "tags": ["Infusion", "Sensor", "Optik"],
+      "data": { "kind": "sensor", "function": "Optische Erfassung von Tropfen in der Tropfkammer (Fluss- bzw. Leer-Erkennung)", "wearPart": false },
+      "sources": ["src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "component:infusionspumpen-akku",
+      "title": "Akku (Infusions- und Spritzenpumpe)",
+      "aliases": ["Pumpenakku", "Akkupack Infusionspumpe"],
+      "summary": "Wiederaufladbarer Energiespeicher, der den Betrieb von Infusions- und Spritzenpumpen bei Transport und Netzausfall sicherstellt. Seine Kapazität nimmt mit Alter und Ladezyklen ab.",
+      "body": "Die verbleibende Laufzeit hängt von Förderrate, Displaybeleuchtung und Alter des Akkus ab. Pumpen melden einen niedrigen Ladezustand mit Voralarm und Alarm. Kapazität und Netzausfallumschaltung werden im Rahmen der [[test_procedure:stk-infusionspumpe]] bzw. der Instandhaltung nach Herstellerangabe geprüft; Akkus sind Verschleißteile.",
+      "tags": ["Infusion", "Energie", "Verschleißteil"],
+      "data": { "kind": "energie", "function": "Netzunabhängige Energieversorgung bei Transport und Netzausfall", "wearPart": true },
+      "sources": ["src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "component:infusionsset-pumpe",
+      "title": "Infusionsset für Infusionspumpen (Pumpenset)",
+      "aliases": ["Pumpenset", "Infusionsleitung mit Pumpensegment", "Überleitsystem Infusionspumpe"],
+      "summary": "Gerätespezifisches Einmal-Infusionsset mit Einstichdorn, Tropfkammer, Pumpensegment und Patientenanschluss. Es ist Teil des Fördersystems und beeinflusst maßgeblich die Fördergenauigkeit.",
+      "body": "Volumetrische Pumpen sind auf die vom Hersteller freigegebenen Sets abgestimmt; häufig enthält das Set eine Klemme, die beim Öffnen der Pumpentür einen freien Durchfluss verhindert. Sets sind nach Herstellerangabe zu wechseln – eine Verwendung über die vorgesehene Dauer hinaus kann die Förderrate verfälschen ([[fault:infusion-foerderrate-ungenau]]). Unvollständiges Entlüften ist eine häufige Ursache von [[fault:infusion-luft-im-system]].",
+      "tags": ["Infusion", "Verbrauchsmaterial"],
+      "data": { "kind": "verbrauchsmaterial", "function": "Flüssigkeitsweg vom Behälter zum Patienten mit pumpenspezifischem Fördersegment", "wearPart": true },
+      "links": [
+        { "rel": "causes", "to": "fault:infusion-foerderrate-ungenau" },
+        { "rel": "causes", "to": "fault:infusion-luft-im-system" },
+        { "rel": "causes", "to": "fault:infusion-okklusionsalarm" }
+      ],
+      "sources": ["src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "term:okklusion",
+      "title": "Okklusion (Infusionstechnik)",
+      "aliases": ["Okklusion", "Verschluss der Infusionsleitung", "Occlusion"],
+      "summary": "Verschluss oder starke Verengung im Flüssigkeitsweg einer Infusion, z. B. durch geschlossene Klemme, abgeknickte Leitung oder verlegten Zugang. Infusionspumpen erkennen sie über einen Druckanstieg bzw. -abfall.",
+      "body": "Man unterscheidet die Okklusion **hinter der Pumpe** (patientenseitig, Druckanstieg) und **vor der Pumpe** (behälterseitig, z. B. geschlossene Rollenklemme oder nicht belüfteter starrer Behälter).\n\nWichtig für die Praxis:\n- Bis der Druck die Alarmgrenze erreicht, vergeht Zeit. Bei niedriger [[term:foerderrate]] und hoher Druckalarmgrenze kann diese Zeit lang sein – in dieser Zeit erhält der Patient kein Medikament.\n- Das gespeicherte Volumen in der unter Druck stehenden Leitung kann beim Lösen als [[term:bolus]] abgegeben werden. Daher vor dem Öffnen Druck entlasten bzw. die Bolusreduktion der Pumpe nutzen.\n\nSiehe [[fault:infusion-okklusionsalarm]] und [[simulation:infusionspumpe]].",
+      "tags": ["Infusion", "Alarm", "Patientensicherheit"],
+      "data": { "category": "technik", "english": "occlusion" },
+      "links": [
+        { "rel": "related", "to": "term:bolus" }
+      ],
+      "sources": ["src:kramme-medizintechnik", "src:iec-60601-2-24"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "term:bolus",
+      "title": "Bolus (Infusionstechnik)",
+      "aliases": ["Bolusgabe", "Bolus"],
+      "summary": "Zusätzlich zur laufenden Förderrate in kurzer Zeit verabreichte Menge eines Medikaments oder einer Lösung – gewollt als programmierter Bolus oder ungewollt, z. B. nach Lösen einer Okklusion.",
+      "body": "**Gewollter Bolus:** Viele Pumpen bieten eine Bolusfunktion mit vorgegebenem Volumen bzw. Dosis und Bolusrate; Grenzen können über die [[term:dosisfehlerreduktion|Medikamentenbibliothek]] festgelegt sein.\n\n**Ungewollter Bolus:** Entsteht z. B., wenn eine unter Druck stehende Leitung nach einer [[term:okklusion]] freigegeben wird, beim Siphoneffekt einer nicht korrekt fixierten Spritze oder bei Höhenänderungen der [[device:spritzenpumpe]]. Gerade bei hochwirksamen Medikamenten mit kleiner Förderrate kann das klinisch relevant sein.",
+      "tags": ["Infusion", "Patientensicherheit"],
+      "data": { "category": "technik", "english": "bolus" },
+      "sources": ["src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "term:foerderrate",
+      "title": "Förderrate (Infusionsrate)",
+      "aliases": ["Infusionsrate", "Flussrate", "Laufrate", "Flow rate"],
+      "summary": "Pro Zeiteinheit geförderte Flüssigkeitsmenge einer Infusions- oder Spritzenpumpe, üblicherweise in ml/h angegeben. Bei Dosisprogrammierung berechnet die Pumpe sie aus Dosis, Körpergewicht und Konzentration.",
+      "body": "Die Genauigkeit der Förderrate wird mit einem Infusionspumpen-Analysator geprüft (siehe [[test_procedure:stk-infusionspumpe]]). Typische Einflussfaktoren sind das verwendete Set bzw. der Spritzentyp, Gegendruck, Höhendifferenzen und – bei der Spritzenpumpe – die Anlaufphase bei sehr niedrigen Raten.\n\nZusammenhang mit dem Vorwahlvolumen: Laufzeit = [[term:vtbi]] / Förderrate.",
+      "tags": ["Infusion", "Grundlagen"],
+      "data": { "category": "technik", "english": "flow rate", "formula": "Laufzeit [h] = VTBI [ml] / Förderrate [ml/h]" },
+      "links": [
+        { "rel": "related", "to": "term:vtbi" }
+      ],
+      "sources": ["src:kramme-medizintechnik", "src:iec-60601-2-24"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "term:vtbi",
+      "title": "VTBI (Vorwahlvolumen)",
+      "aliases": ["Volume To Be Infused", "Vorwahlvolumen", "Zu infundierendes Volumen"],
+      "summary": "An der Infusionspumpe eingestelltes Volumen, das infundiert werden soll. Ist es erreicht, alarmiert die Pumpe und stoppt oder läuft – je nach Einstellung – mit einer geringen Offenhalterate (KVO) weiter.",
+      "body": "Das VTBI begrenzt die Infusionsmenge unabhängig vom Inhalt des Behälters. Viele Pumpen geben einen Voralarm kurz vor Erreichen des VTBI. Die KVO-Rate (keep vein open) soll den Zugang offen halten; ob und mit welcher Rate sie läuft, hängt von Gerät und Konfiguration ab.\n\nBeispiel: 500 ml bei einer [[term:foerderrate]] von 100 ml/h ergeben eine Laufzeit von 5 Stunden.",
+      "tags": ["Infusion", "Grundlagen"],
+      "data": { "category": "technik", "abbreviation": "VTBI", "english": "volume to be infused" },
+      "sources": ["src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "term:dosisfehlerreduktion",
+      "title": "Dosisfehlerreduktionssoftware (Medikamentenbibliothek)",
+      "aliases": ["DERS", "Dose Error Reduction Software", "Medikamentenbibliothek", "Smart Pump", "Arzneimitteldatenbank Infusionspumpe"],
+      "summary": "Software in Infusions- und Spritzenpumpen, die eine einrichtungsspezifische Medikamentenbibliothek mit Konzentrationen und Dosisgrenzen bereitstellt und bei Eingaben außerhalb dieser Grenzen warnt oder sperrt.",
+      "body": "Die Bibliothek wird von der Einrichtung (Pharmazie, Ärzteschaft, Pflege, Medizintechnik) gepflegt und auf die Pumpen verteilt. Typisch sind:\n- **weiche Grenzen** (Soft Limits): Warnung, die nach bewusster Bestätigung übergangen werden kann,\n- **harte Grenzen** (Hard Limits): Eingabe wird nicht akzeptiert.\n\nDie Software reduziert Programmierfehler (z. B. Kommafehler), ersetzt aber weder die ärztliche Verordnung noch die Kontrolle von Medikament, Konzentration und Patient. Ihr Nutzen hängt davon ab, dass die Bibliothek aktuell ist und tatsächlich verwendet wird.",
+      "tags": ["Infusion", "Software", "Patientensicherheit"],
+      "data": { "category": "sicherheit", "abbreviation": "DERS", "english": "dose error reduction software" },
+      "links": [
+        { "rel": "related", "to": "device:infusionspumpe" },
+        { "rel": "related", "to": "device:spritzenpumpe" }
+      ],
+      "sources": ["src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "fault:infusion-okklusionsalarm",
+      "title": "Infusionspumpe: Okklusionsalarm",
+      "aliases": ["Okklusionsalarm", "Druckalarm Infusionspumpe", "Verschlussalarm"],
+      "summary": "Die Infusions- oder Spritzenpumpe stoppt die Förderung und meldet eine Okklusion, weil der Druck in der Leitung bzw. die Kraft am Kolben die eingestellte Alarmgrenze überschritten hat (oder behälterseitig ein Unterdruck erkannt wurde).",
+      "body": "In den meisten Fällen liegt die Ursache im Flüssigkeitsweg zwischen Pumpe und Patient – nicht im Gerät. Vorgehen vom Patienten zur Pumpe; **vor dem Öffnen** einer Klemme oder dem Lösen eines Knicks den Druck entlasten, um einen ungewollten [[term:bolus]] zu vermeiden. Hintergrund: [[term:okklusion]]. Das Verhalten lässt sich in der [[simulation:infusionspumpe]] nachvollziehen.",
+      "tags": ["Infusion", "Alarm", "Fehlerdiagnose", "Okklusion"],
+      "data": {
+        "severity": "hoch",
+        "symptoms": ["Alarm „Okklusion“ bzw. „Druck zu hoch“ – Förderung gestoppt", "Bei Spritzenpumpen ggf. Voralarm durch ansteigenden Druck", "Alarm „Okklusion vor der Pumpe“ bzw. „Behälterseite prüfen“ bei volumetrischen Pumpen"],
+        "causes": [
+          { "text": "Geschlossene Klemme oder geschlossener Dreiwegehahn", "likelihood": "haeufig" },
+          { "text": "Abgeknickte oder eingeklemmte Infusionsleitung", "likelihood": "haeufig" },
+          { "text": "Verlegter, dislozierter oder thrombosierter Gefäßzugang", "likelihood": "gelegentlich" },
+          { "text": "Verstopfter Inline-Filter oder Rückschlagventil, Ausfällung bei inkompatiblen Lösungen", "likelihood": "gelegentlich" },
+          { "text": "Druckalarmgrenze für Förderrate, Katheter und Viskosität der Lösung zu niedrig gewählt", "likelihood": "gelegentlich" },
+          { "text": "Nicht belüfteter starrer Behälter oder geschlossene Rollenklemme oberhalb der Pumpe (Okklusion vor der Pumpe)", "likelihood": "gelegentlich" },
+          { "text": "Defekter oder dejustierter Druck- bzw. Kraftsensor", "likelihood": "selten" }
+        ],
+        "diagnosis": [
+          { "id": "s1", "instruction": "Gesamten Flüssigkeitsweg vom Behälter bis zum Patienten abfahren: Klemmen, Dreiwegehähne, Knicke, eingeklemmte Leitung, Belüftung des Behälters.", "question": "Ist eine Klemme geschlossen, die Leitung abgeknickt oder der Behälter nicht belüftet?", "yes": "o-anwendung", "no": "s2" },
+          { "id": "s2", "instruction": "Durchgängigkeit des Zugangs durch die zuständige Pflege- bzw. Ärztekraft prüfen lassen (Lage, Schwellung, Rückfluss).", "question": "Ist der Zugang verlegt, disloziert oder paravasal?", "yes": "o-zugang", "no": "s3" },
+          { "id": "s3", "instruction": "Nach Druckentlastung Zubehör im Leitungsweg prüfen: Inline-Filter, Rückschlagventile, Mehrfachverbinder; auf Ausfällungen achten.", "question": "Ist ein Filter, Ventil oder Verbinder verstopft?", "yes": "o-zubehoer", "no": "s4" },
+          { "id": "s4", "instruction": "Eingestellte Druckalarmgrenze mit Förderrate, Katheterlumen und Viskosität der Lösung abgleichen (Herstellerangaben und interne Standards beachten).", "question": "Ist die Druckgrenze für diese Kombination zu niedrig gewählt?", "yes": "o-einstellung", "no": "s5" },
+          { "id": "s5", "instruction": "Pumpe außer Betrieb nehmen und durch die Medizintechnik mit einem Infusionspumpen-Analysator den Okklusionsdruck bzw. die Alarmauslösung prüfen lassen.", "question": "Löst der Alarm ohne Okklusion oder bei deutlich abweichendem Druck aus?", "yes": "o-sensor", "no": "o-unklar" }
+        ],
+        "outcomes": [
+          { "id": "o-anwendung", "text": "Anwendungsbedingte Okklusion – Druck entlasten, Ursache beheben, Förderung neu starten; ggf. Einweisung auffrischen." },
+          { "id": "o-zugang", "text": "Problem am Gefäßzugang – ärztlich bzw. pflegerisch versorgen, Zugang ggf. neu anlegen." },
+          { "id": "o-zubehoer", "text": "Zubehör verstopft – Filter bzw. Verbinder tauschen, Kompatibilität der Lösungen prüfen lassen." },
+          { "id": "o-einstellung", "text": "Druckalarmgrenze unpassend – nach interner Vorgabe und Herstellerangabe anpassen." },
+          { "id": "o-sensor", "text": "Verdacht auf Defekt der Druck- bzw. Kraftmessung – Gerät kennzeichnen, außer Betrieb nehmen, Instandsetzung und anschließende Prüfung nach Herstellerangabe." },
+          { "id": "o-unklar", "text": "Gerät technisch unauffällig – Vorfall dokumentieren, Anwendung beobachten; bei wiederholtem Auftreten Hersteller einbeziehen." }
+        ],
+        "remedies": ["Druck vor dem Lösen der Okklusion entlasten (Bolusreduktion der Pumpe nutzen bzw. Leitung nach Herstellervorgabe entlasten)", "Klemmen und Leitungsführung prüfen, Leitung knickfrei verlegen", "Zubehör (Filter, Ventile) tauschen", "Druckalarmgrenze nach Vorgabe einstellen", "Bei Gerätedefekt: Prüfung nach [[test_procedure:stk-infusionspumpe]] nach der Instandsetzung"],
+        "safetyNotes": ["Während einer Okklusion erhält der Patient kein Medikament – bei lebenswichtigen Medikamenten Unterbrechung so kurz wie möglich halten.", "Unter Druck stehende Leitungen nicht unkontrolliert öffnen: Gefahr eines ungewollten Bolus.", "Bei Zweifeln an der Gerätefunktion Pumpe ersetzen und außer Betrieb nehmen."]
+      },
+      "links": [
+        { "rel": "affects", "to": "device:infusionspumpe" },
+        { "rel": "affects", "to": "device:spritzenpumpe" },
+        { "rel": "affects", "to": "component:infusion-drucksensor" },
+        { "rel": "uses_principle", "to": "term:okklusion" },
+        { "rel": "uses_principle", "to": "term:bolus" },
+        { "rel": "remedied_by", "to": "test_procedure:stk-infusionspumpe" },
+        { "rel": "remedied_by", "to": "learning_module:infusionstechnik" }
+      ],
+      "sources": ["src:kramme-medizintechnik", "src:iec-60601-2-24"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "fault:infusion-luft-im-system",
+      "title": "Infusionspumpe: Alarm „Luft in der Leitung“",
+      "aliases": ["Luftalarm", "Luft-im-System-Alarm", "Air-in-Line-Alarm"],
+      "summary": "Der Luftblasendetektor der Infusionspumpe erkennt Luft in der Leitung, die Förderung stoppt und die Pumpe alarmiert. Ursachen reichen von unvollständig entlüfteten Sets bis zu einem verschmutzten oder defekten Sensor.",
+      "body": "Luft in der Infusionsleitung kann beim Patienten eine Luftembolie verursachen. Den Alarm daher nie einfach quittieren und weiterlaufen lassen, sondern Ursache klären. Funktionsweise des Sensors: [[component:luftblasendetektor]].",
+      "tags": ["Infusion", "Alarm", "Fehlerdiagnose", "Luft"],
+      "data": {
+        "severity": "hoch",
+        "symptoms": ["Alarm „Luft in Leitung“ bzw. „Luftblase“ – Förderung gestoppt", "Sichtbare Luftblasen im Set unterhalb der Pumpe", "Wiederkehrender Alarm ohne sichtbare Luft"],
+        "causes": [
+          { "text": "Infusionsset nicht vollständig entlüftet", "likelihood": "haeufig" },
+          { "text": "Behälter oder Tropfkammer leergelaufen", "likelihood": "haeufig" },
+          { "text": "Ausgasen von Lösungen (z. B. kalt aus dem Kühlschrank), Mikroblasen", "likelihood": "gelegentlich" },
+          { "text": "Leitung nicht korrekt im Sensorkanal eingelegt", "likelihood": "gelegentlich" },
+          { "text": "Undichte Konnektoren oder Zuspritzstellen, über die Luft angesaugt wird", "likelihood": "gelegentlich" },
+          { "text": "Verschmutzter oder defekter Luftsensor", "likelihood": "selten" }
+        ],
+        "diagnosis": [
+          { "id": "s1", "instruction": "Füllstand von Behälter und Tropfkammer prüfen.", "question": "Ist der Behälter leer oder die Tropfkammer leergelaufen?", "yes": "o-behaelter", "no": "s2" },
+          { "id": "s2", "instruction": "Leitung im Bereich der Pumpe und unterhalb des Sensors auf Luftblasen prüfen.", "question": "Sind Luftblasen sichtbar?", "yes": "s3", "no": "s4" },
+          { "id": "s3", "instruction": "Konnektoren, Zuspritzstellen und Dichtigkeit des Sets prüfen.", "question": "Wird über eine Undichtigkeit Luft angesaugt?", "yes": "o-undicht", "no": "o-entlueften" },
+          { "id": "s4", "instruction": "Leitung nach Gebrauchsanweisung neu und vollständig in den Sensorkanal einlegen; Sensorflächen gemäß Herstellerangabe reinigen.", "question": "Tritt der Alarm danach weiterhin ohne sichtbare Luft auf?", "yes": "s5", "no": "o-einlegen" },
+          { "id": "s5", "instruction": "Mit einem neuen, korrekt entlüfteten Set erneut testen.", "question": "Tritt der Alarm auch mit dem neuen Set auf?", "yes": "o-sensor", "no": "o-set" }
+        ],
+        "outcomes": [
+          { "id": "o-behaelter", "text": "Behälter leer – neuen Behälter anschließen, Tropfkammer füllen, Set nach Herstellervorgabe entlüften." },
+          { "id": "o-undicht", "text": "Undichtigkeit – betroffene Teile bzw. das Set tauschen und neu entlüften." },
+          { "id": "o-entlueften", "text": "Luft im Set – Luft nach Herstellervorgabe entfernen (ggf. Leitung vom Patienten trennen), Ursache wie Ausgasen kalter Lösungen beachten." },
+          { "id": "o-einlegen", "text": "Einlege- oder Verschmutzungsproblem – Einweisung zum korrekten Einlegen auffrischen." },
+          { "id": "o-set", "text": "Fehlerhaftes Set – Set aussondern; bei gehäuftem Auftreten Charge dokumentieren und melden." },
+          { "id": "o-sensor", "text": "Verdacht auf defekten Luftsensor – Pumpe außer Betrieb nehmen, Instandsetzung und Luftalarmprüfung nach Herstellerangabe." }
+        ],
+        "remedies": ["Set vollständig entlüften und korrekt einlegen", "Gekühlte Lösungen nach interner Vorgabe temperieren lassen", "Luftsensor nach Herstellerangabe reinigen", "Defekten Sensor tauschen (z. B. [[spare_part:nordlicht-luftsensor-as3]] beim Demo-Modell) und Luftalarm prüfen"],
+        "safetyNotes": ["Luft nie in Richtung Patient „durchdrücken“.", "Luftalarm nicht dauerhaft unterdrücken oder Sensor manipulieren.", "Bei Verdacht auf Luftembolie sofort ärztliche Hilfe hinzuziehen."]
+      },
+      "links": [
+        { "rel": "affects", "to": "device:infusionspumpe" },
+        { "rel": "affects", "to": "component:luftblasendetektor" },
+        { "rel": "remedied_by", "to": "spare_part:nordlicht-luftsensor-as3" },
+        { "rel": "remedied_by", "to": "test_procedure:stk-infusionspumpe" },
+        { "rel": "remedied_by", "to": "learning_module:infusionstechnik" }
+      ],
+      "sources": ["src:kramme-medizintechnik", "src:iec-60601-2-24"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "fault:infusion-foerderrate-ungenau",
+      "title": "Infusionspumpe: Förderrate ungenau",
+      "aliases": ["Förderfehler", "Falsche Infusionsrate", "Förderratenabweichung"],
+      "summary": "Das tatsächlich geförderte Volumen weicht von der eingestellten Förderrate ab – erkennbar z. B. an zu früh oder zu spät leeren Behältern oder an einer Abweichung bei der Förderratenprüfung.",
+      "body": "Zuerst Programmierung und Zubehör prüfen, dann den Aufbau, zuletzt die Mechanik. Eine belastbare Aussage über die Gerätegenauigkeit liefert nur die messtechnische Prüfung mit einem Infusionspumpen-Analysator unter definierten Bedingungen ([[test_procedure:stk-infusionspumpe]]). Grundlagen: [[term:foerderrate]].",
+      "tags": ["Infusion", "Fehlerdiagnose", "Förderrate"],
+      "data": {
+        "severity": "hoch",
+        "symptoms": ["Behälter bzw. Spritze früher oder später leer als berechnet", "Angezeigtes infundiertes Volumen passt nicht zum Verbrauch", "Abweichung außerhalb der Herstellertoleranz bei der Förderratenprüfung", "Verzögerter Wirkungseintritt nach Start bei sehr niedrigen Raten"],
+        "causes": [
+          { "text": "Programmierfehler (Rate, Einheit, Konzentration, Körpergewicht)", "likelihood": "haeufig" },
+          { "text": "Nicht freigegebenes Set bzw. falsch ausgewählter oder erkannter Spritzentyp", "likelihood": "haeufig" },
+          { "text": "Anlaufverzögerung durch mechanisches Spiel und Nachgiebigkeit bei sehr niedrigen Raten (Spritzenpumpe)", "likelihood": "gelegentlich" },
+          { "text": "Höhendifferenz bzw. Siphoneffekt, Spritze nicht korrekt fixiert", "likelihood": "gelegentlich" },
+          { "text": "Set über die vom Hersteller vorgesehene Dauer hinaus verwendet (ermüdetes Pumpensegment)", "likelihood": "gelegentlich" },
+          { "text": "Verschleiß von Fördermechanik, Spindel oder Spindelmutter", "likelihood": "selten" }
+        ],
+        "diagnosis": [
+          { "id": "s1", "instruction": "Programmierung kontrollieren: Förderrate, Einheit, VTBI, Konzentration, Körpergewicht; Eintrag der Medikamentenbibliothek prüfen.", "question": "Liegt ein Programmierfehler vor?", "yes": "o-programmierung", "no": "s2" },
+          { "id": "s2", "instruction": "Zubehör prüfen: freigegebenes Set bzw. korrekt erkannter Spritzentyp, Liegedauer des Sets.", "question": "Wurde nicht freigegebenes oder überaltertes Zubehör verwendet bzw. ist der Spritzentyp falsch?", "yes": "o-zubehoer", "no": "s3" },
+          { "id": "s3", "instruction": "Aufbau prüfen: Höhe der Pumpe relativ zum Patienten, Fixierung der Spritze, Belüftung des Behälters, Gegendruck durch Filter oder kleine Katheter.", "question": "Liegt ein Aufbaufehler vor?", "yes": "o-aufbau", "no": "s4" },
+          { "id": "s4", "instruction": "Pumpe außer Betrieb nehmen; Förderratenprüfung mit Infusionspumpen-Analysator und neuem, freigegebenem Zubehör durchführen.", "question": "Liegt die Abweichung außerhalb der Herstellertoleranz?", "yes": "o-mechanik", "no": "o-unauffaellig" }
+        ],
+        "outcomes": [
+          { "id": "o-programmierung", "text": "Programmierfehler – korrigieren, Vorfall nach internem Verfahren dokumentieren; Nutzung der Medikamentenbibliothek fördern." },
+          { "id": "o-zubehoer", "text": "Zubehörproblem – freigegebenes Zubehör verwenden, Spritzentyp korrekt auswählen, Set nach Herstellerangabe wechseln." },
+          { "id": "o-aufbau", "text": "Aufbaufehler – Pumpe auf Patientenhöhe, Spritze korrekt fixieren, Behälter belüften; Einweisung auffrischen." },
+          { "id": "o-mechanik", "text": "Technischer Defekt der Fördermechanik – Instandsetzung durch befugtes Personal, anschließend Förderratenprüfung und STK-relevante Prüfungen." },
+          { "id": "o-unauffaellig", "text": "Gerät messtechnisch unauffällig – Anwendungsbedingungen weiter beobachten, Vorfall dokumentieren." }
+        ],
+        "remedies": ["Programmierung im Vier-Augen-Prinzip nach internem Standard prüfen", "Nur freigegebene Sets und Spritzen verwenden", "Bei sehr niedrigen Raten Anlaufphase berücksichtigen (z. B. Spritze vor dem Anschluss vorfördern nach Herstellervorgabe)", "Nach Instandsetzung Förderratenprüfung gemäß [[test_procedure:stk-infusionspumpe]]"],
+        "safetyNotes": ["Bei hochwirksamen Medikamenten kann schon eine geringe Abweichung klinisch relevant sein.", "Eine fehlerhaft fördernde Pumpe nicht weiterverwenden, sondern kennzeichnen und austauschen."]
+      },
+      "links": [
+        { "rel": "affects", "to": "device:infusionspumpe" },
+        { "rel": "affects", "to": "device:spritzenpumpe" },
+        { "rel": "affects", "to": "component:infusion-peristaltik" },
+        { "rel": "affects", "to": "component:spritzenantrieb" },
+        { "rel": "uses_principle", "to": "term:foerderrate" },
+        { "rel": "remedied_by", "to": "test_procedure:stk-infusionspumpe" },
+        { "rel": "remedied_by", "to": "learning_module:infusionstechnik" }
+      ],
+      "sources": ["src:kramme-medizintechnik", "src:iec-60601-2-24"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "test_procedure:stk-infusionspumpe",
+      "title": "STK Infusions- und Spritzenpumpe",
+      "aliases": ["Sicherheitstechnische Kontrolle Infusionspumpe", "STK Spritzenpumpe", "Infusionspumpen-Prüfung"],
+      "summary": "Sicherheitstechnische Kontrolle nach MPBetreibV für Infusions- und Spritzenpumpen: Sichtprüfung, Selbsttest, Förderratenprüfung mit Infusionspumpen-Analysator, Okklusionsdruck und -alarm, Luftalarm, weitere Alarme, Akkubetrieb, elektrische Sicherheit und Dokumentation.",
+      "body": "Infusions- und Spritzenpumpen gehören zu den aktiven Medizinprodukten, die Flüssigkeiten unter potenziellem Druckaufbau in den Blutkreislauf einbringen; sie sind daher in Anlage 1 der MPBetreibV erfasst – siehe [[legal_reference:de-mpbetreibv-stk]]. Umfang, Prüfbedingungen und Toleranzen legt der **Hersteller** fest; fehlen Angaben zur Frist, ist die STK spätestens alle zwei Jahre durchzuführen.\n\nDie hier beschriebenen Schritte geben den typischen Ablauf wieder und ersetzen nicht die Herstellervorgaben. Grenzwerte werden bewusst nicht pauschal angegeben, da sie gerätespezifisch sind. Die elektrische Sicherheit wird nach [[test_procedure:elektrische-sicherheit-62353]] geprüft. Eine Vorlage für das Protokoll: [[document:protokollvorlage-stk]].",
+      "tags": ["STK", "Infusion", "Prüfung", "MPBetreibV"],
+      "data": {
+        "kind": "STK",
+        "interval": "nach Herstellerangabe; fehlen Angaben, spätestens alle zwei Jahre (MPBetreibV)",
+        "qualification": "Person, die die Anforderungen der MPBetreibV an Sachkenntnis, Voraussetzungen und Mittel erfüllt, i. d. R. mit Herstellerschulung für den Gerätetyp",
+        "equipment": ["Infusionspumpen-Analysator (Förderrate, Okklusionsdruck)", "Vom Hersteller freigegebene Infusionssets bzw. Spritzen", "Prüfflüssigkeit nach Herstellerangabe (z. B. Wasser)", "Medizingeräte-Sicherheitstester nach DIN EN 62353", "Herstellerunterlagen (Serviceanleitung, STK-Checkliste)", "Prüfprotokoll bzw. Medizinproduktebuch"],
+        "steps": [
+          { "title": "Sichtprüfung", "description": "Gehäuse, Display, Tasten, Pumpentür bzw. Spritzenhalterung, Antriebskopf, Stativklemme, Netzteil und Netzleitung, Kennzeichnung sowie Sensorbereiche (Luftsensor, Drucksensoren) auf Beschädigung, Verschmutzung und Vollständigkeit prüfen." },
+          { "title": "Selbsttest, Anzeigen und Konfiguration", "description": "Selbsttest beim Einschalten beobachten, optische und akustische Alarmgeber prüfen; Softwarestand und Version der Medikamentenbibliothek dokumentieren, sofern vorhanden.", "limit": "Selbsttest bestanden" },
+          { "title": "Förderratenprüfung", "description": "Mit einem Infusionspumpen-Analysator bei den vom Hersteller vorgegebenen Förderraten unter Verwendung eines freigegebenen Sets bzw. einer freigegebenen Spritze messen; gemessene mit eingestellter Rate bzw. gefördertem Volumen vergleichen.", "limit": "Toleranz nach Herstellerangabe" },
+          { "title": "Okklusionsdruck und Okklusionsalarm", "description": "Patientenseitige Okklusion am Analysator erzeugen; Druck bei Alarmauslösung und – sofern gefordert – Zeit bis zum Alarm für die eingestellte Druckstufe messen. Bei volumetrischen Pumpen auch die behälterseitige Okklusionserkennung prüfen, wenn vorgesehen.", "limit": "nach Herstellerangabe" },
+          { "title": "Bolus nach Okklusion bzw. Druckentlastung", "description": "Sofern vom Hersteller vorgesehen: Funktion der automatischen Druckentlastung bzw. das nach Lösen der Okklusion abgegebene Volumen prüfen.", "limit": "nach Herstellerangabe" },
+          { "title": "Luftalarm (volumetrische Pumpen)", "description": "Luftblase nach Herstellervorgabe vor den Luftsensor bringen bzw. das vom Hersteller vorgesehene Prüfmittel verwenden; Alarmauslösung und Förderstopp prüfen." },
+          { "title": "Weitere Alarme und Schutzfunktionen", "description": "Alarme wie „Tür offen“, „Spritze nicht korrekt eingelegt“, „Behälter bzw. Spritze leer“, „VTBI erreicht“ sowie Free-Flow-Schutz beim Öffnen der Pumpentür bzw. Kolbenhalterung prüfen." },
+          { "title": "Akku- und Netzausfallbetrieb", "description": "Umschaltung auf Akku bei Netztrennung und Akkualarme prüfen; Akkukapazität nach Herstellerangabe bewerten." },
+          { "title": "Elektrische Sicherheit", "description": "Prüfung nach DIN EN 62353 gemäß dem verknüpften Prüfverfahren (Schutzleiterwiderstand bei Schutzklasse I, Ableitströme)." },
+          { "title": "Bewertung und Dokumentation", "description": "Ergebnisse bewerten, Prüfprotokoll erstellen, Eintrag in das Medizinproduktebuch, Prüfkennzeichnung; bei Mängeln Gerät außer Betrieb nehmen und Betreiber informieren." }
+        ],
+        "documentation": ["Geräteidentifikation (Typ, Seriennummer, Inventarnummer)", "Verwendete Prüfmittel mit Kalibrierstatus sowie verwendetes Set bzw. Spritzentyp", "Messwerte: Förderraten, Okklusionsdruck, Alarmprüfungen, Ableitströme", "Bewertung, Mängel, Datum und Unterschrift", "Eintrag im Medizinproduktebuch"]
+      },
+      "links": [
+        { "rel": "based_on", "to": "legal_reference:de-mpbetreibv-stk" },
+        { "rel": "based_on", "to": "legal_reference:de-mpbetreibv" },
+        { "rel": "tests", "to": "device:infusionspumpe" },
+        { "rel": "tests", "to": "device:spritzenpumpe" },
+        { "rel": "tests", "to": "component:infusion-drucksensor" },
+        { "rel": "tests", "to": "component:luftblasendetektor" },
+        { "rel": "tests", "to": "component:infusionspumpen-akku" },
+        { "rel": "uses_principle", "to": "term:foerderrate" },
+        { "rel": "uses_principle", "to": "term:okklusion" },
+        { "rel": "related", "to": "test_procedure:elektrische-sicherheit-62353" }
+      ],
+      "sources": ["src:de-mpbetreibv", "src:iec-60601-2-24", "src:din-en-62353"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "simulation:infusionspumpe",
+      "title": "Simulation: Infusionspumpe, Okklusion und Luftalarm",
+      "aliases": ["Infusionspumpen-Simulator"],
+      "summary": "Interaktive Simulation einer Infusionspumpe: Förderrate, Vorwahlvolumen, Druckverlauf bei Okklusion, Zeit bis zum Alarm, Bolus nach Lösen der Okklusion und Luft-in-Leitung-Alarm.",
+      "body": "Vergleiche die Szenarien mit hoher und niedriger [[term:foerderrate]]: Bei gleicher Druckalarmgrenze dauert es bei niedriger Rate deutlich länger, bis eine [[term:okklusion]] erkannt wird. Eine hohe Druckalarmgrenze verlängert diese Zeit zusätzlich und vergrößert das Volumen, das nach dem Lösen als [[term:bolus]] abgegeben werden kann.",
+      "tags": ["Infusion", "Simulation", "Okklusion"],
+      "data": {
+        "engine": "infusion-pump",
+        "learningGoals": ["Zusammenhang von Förderrate, VTBI und Laufzeit verstehen", "Druckanstieg bei Okklusion und Zeit bis zum Alarm in Abhängigkeit von Förderrate und Druckalarmgrenze nachvollziehen", "Gefahr eines Bolus nach Lösen einer Okklusion erkennen", "Reaktion der Pumpe auf Luft in der Leitung kennenlernen"],
+        "scenarios": [
+          { "id": "normalbetrieb", "title": "Normalbetrieb", "description": "500 ml mit 100 ml/h ohne Störung – beobachte Laufzeit und VTBI-Ende.", "params": { "rate": 100, "vtbi": 500, "occlusionAfterMin": 0, "airInLine": false, "pressureLimit": 300 } },
+          { "id": "okklusion-hohe-rate", "title": "Okklusion bei hoher Förderrate", "description": "Nach 5 Minuten wird eine Klemme geschlossen – der Druck steigt schnell, der Alarm folgt rasch.", "params": { "rate": 120, "vtbi": 500, "occlusionAfterMin": 5, "airInLine": false, "pressureLimit": 300 }, "fault": "fault:infusion-okklusionsalarm" },
+          { "id": "okklusion-niedrige-rate", "title": "Okklusion bei niedriger Förderrate", "description": "Spritzenpumpe mit 2 ml/h: Der Druck steigt langsam, bis zum Alarm vergeht viel Zeit ohne Medikamentengabe.", "params": { "rate": 2, "vtbi": 50, "occlusionAfterMin": 5, "airInLine": false, "pressureLimit": 300 }, "fault": "fault:infusion-okklusionsalarm" },
+          { "id": "okklusion-hohe-druckgrenze", "title": "Okklusion mit hoher Druckalarmgrenze", "description": "Wie zuvor, aber mit hoher Druckgrenze – die Zeit bis zum Alarm und das gespeicherte Bolusvolumen nehmen zu.", "params": { "rate": 2, "vtbi": 50, "occlusionAfterMin": 5, "airInLine": false, "pressureLimit": 900 }, "fault": "fault:infusion-okklusionsalarm" },
+          { "id": "luft-in-leitung", "title": "Luft in der Leitung", "description": "Eine Luftblase erreicht den Luftsensor – die Pumpe stoppt und alarmiert.", "params": { "rate": 100, "vtbi": 250, "occlusionAfterMin": 0, "airInLine": true, "pressureLimit": 300 }, "fault": "fault:infusion-luft-im-system" }
+        ]
+      },
+      "links": [
+        { "rel": "simulates", "to": "device:infusionspumpe" },
+        { "rel": "simulates", "to": "device:spritzenpumpe" },
+        { "rel": "simulates", "to": "term:okklusion" },
+        { "rel": "simulates", "to": "fault:infusion-okklusionsalarm" },
+        { "rel": "simulates", "to": "fault:infusion-luft-im-system" },
+        { "rel": "uses_principle", "to": "term:foerderrate" },
+        { "rel": "uses_principle", "to": "term:vtbi" },
+        { "rel": "uses_principle", "to": "term:bolus" }
+      ],
+      "sources": ["src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "learning_module:infusionstechnik",
+      "title": "Infusionstechnik sicher anwenden und prüfen",
+      "aliases": ["Lernmodul Infusionstechnik", "Infusionspumpen Grundlagen"],
+      "summary": "Lernmodul zu Aufbau und Funktion von Infusions- und Spritzenpumpen, Programmierung, Sicherheitsfunktionen, typischen Alarmen und der Sicherheitstechnischen Kontrolle – mit Simulation und Abschlussquiz.",
+      "tags": ["Infusion", "Grundlagen", "STK"],
+      "data": {
+        "level": "einsteiger",
+        "durationMinutes": 40,
+        "objectives": [
+          "Volumetrische Infusionspumpe und Spritzenpumpe in Aufbau und Einsatzgebiet unterscheiden",
+          "Förderrate, VTBI und Bolus korrekt anwenden und die Laufzeit berechnen",
+          "Sicherheitsfunktionen (Okklusions- und Luftüberwachung, Free-Flow-Schutz, Medikamentenbibliothek) erklären",
+          "Okklusions- und Luftalarme systematisch abarbeiten und die Gefahr eines ungewollten Bolus einschätzen",
+          "Ablauf und Prüfmittel der STK von Infusions- und Spritzenpumpen benennen"
+        ],
+        "sections": [
+          {
+            "title": "1. Warum Infusionspumpen?",
+            "body": "Bei der **Schwerkraftinfusion** hängt der Fluss von Fallhöhe, Gegendruck und Rollenklemme ab und schwankt entsprechend. Infusionspumpen fördern dagegen ein **definiertes Volumen pro Zeit** und überwachen den Flüssigkeitsweg.\n\n- Die [[device:infusionspumpe|volumetrische Infusionspumpe]] fördert aus Beutel oder Flasche über ein gerätespezifisches Set – typisch für größere Volumina, z. B. Flüssigkeitstherapie oder parenterale Ernährung.\n- Die [[device:spritzenpumpe]] schiebt den Kolben einer Spritze vor – typisch für kleine Volumina und niedrige Raten, z. B. hochwirksame Medikamente in der Intensivmedizin.\n\nBeide Gerätearten gelten wegen der möglichen Folgen von Dosierfehlern als Produkte mit hohem Risiko und werden regelmäßig sicherheitstechnisch kontrolliert."
+          },
+          {
+            "title": "2. Aufbau und Sicherheitsfunktionen",
+            "body": "Zentrale Baugruppen der volumetrischen Pumpe sind die [[component:infusion-peristaltik]], das [[component:infusionsset-pumpe|Pumpenset]], die [[component:infusion-drucksensor|Drucksensoren]] vor und hinter der Pumpe, der [[component:luftblasendetektor]], optional ein [[component:tropfensensor]] sowie der [[component:infusionspumpen-akku|Akku]]. Bei der Spritzenpumpe übernimmt der [[component:spritzenantrieb]] die Förderung; die Okklusion wird über die Kraft am Kolben erkannt.\n\nDer **Free-Flow-Schutz** verhindert, dass beim Öffnen der Pumpentür Flüssigkeit unkontrolliert nachläuft. Erkunde den Aufbau im 3D Explorer."
+          },
+          {
+            "title": "3. Programmierung: Rate, VTBI, Bolus und Medikamentenbibliothek",
+            "body": "Grundgrößen sind die [[term:foerderrate]] in ml/h und das [[term:vtbi]]. Es gilt: **Laufzeit = VTBI / Förderrate** – 500 ml bei 100 ml/h laufen also 5 Stunden.\n\nEin [[term:bolus]] kann gewollt (Bolusfunktion) oder ungewollt sein. Bei der Dosisprogrammierung (z. B. µg/kg/min) rechnet die Pumpe aus Dosis, Konzentration und Körpergewicht die Rate aus – Eingabefehler in diesen Größen wirken sich direkt auf die Dosis aus. Die [[term:dosisfehlerreduktion]] mit Soft- und Hard-Limits fängt viele dieser Fehler ab, ersetzt aber nicht die Kontrolle durch das Fachpersonal."
+          },
+          {
+            "title": "4. Alarme verstehen und Fehler systematisch suchen",
+            "body": "Die häufigsten technischen Alarme sind Okklusion und Luft in der Leitung. Zwei Zusammenhänge sind entscheidend:\n\n1. **Zeit bis zum Okklusionsalarm:** Je niedriger die Förderrate und je höher die Druckalarmgrenze, desto länger dauert es, bis eine [[term:okklusion]] erkannt wird.\n2. **Bolus nach Okklusion:** Das im System gespeicherte Volumen wird beim Lösen freigesetzt – deshalb Druck vor dem Öffnen entlasten.\n\nProbiere beides in der [[simulation:infusionspumpe]] aus und arbeite die Diagnosebäume [[fault:infusion-okklusionsalarm]], [[fault:infusion-luft-im-system]] und [[fault:infusion-foerderrate-ungenau]] durch."
+          },
+          {
+            "title": "5. Prüfen: Funktionsprüfung, STK und elektrische Sicherheit",
+            "body": "Vor jeder Anwendung überzeugt sich der Anwender von Funktionsfähigkeit und ordnungsgemäßem Zustand des Geräts (Selbsttest, Sichtprüfung, korrektes Zubehör). Die Medizintechnik führt die [[test_procedure:stk-infusionspumpe]] nach Herstellerangabe durch: Förderratenprüfung mit Infusionspumpen-Analysator, Okklusionsdruck und -alarm, Luftalarm, weitere Alarme, Akkubetrieb sowie die [[test_procedure:elektrische-sicherheit-62353|elektrische Sicherheitsprüfung]]. Rechtsgrundlage ist [[legal_reference:de-mpbetreibv-stk]]."
+          }
+        ],
+        "prerequisites": []
+      },
+      "links": [
+        { "rel": "teaches", "to": "device:infusionspumpe" },
+        { "rel": "teaches", "to": "device:spritzenpumpe" },
+        { "rel": "teaches", "to": "term:okklusion" },
+        { "rel": "teaches", "to": "term:foerderrate" },
+        { "rel": "teaches", "to": "term:vtbi" },
+        { "rel": "teaches", "to": "term:bolus" },
+        { "rel": "teaches", "to": "term:dosisfehlerreduktion" },
+        { "rel": "teaches", "to": "simulation:infusionspumpe" },
+        { "rel": "teaches", "to": "test_procedure:stk-infusionspumpe" },
+        { "rel": "based_on", "to": "legal_reference:de-mpbetreibv-stk" }
+      ],
+      "sources": ["src:kramme-medizintechnik", "src:iec-60601-2-24", "src:de-mpbetreibv"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "quiz_question:infusion-okklusion-niedrige-rate",
+      "title": "Quiz: Okklusionsalarm bei niedriger Förderrate",
+      "summary": "Warum kann es bei einer Spritzenpumpe mit niedriger Förderrate lange dauern, bis eine Okklusion gemeldet wird?",
+      "data": {
+        "kind": "single",
+        "question": "Eine Spritzenpumpe fördert 1 ml/h. Die Leitung wird abgeklemmt. Warum kann es lange dauern, bis der Okklusionsalarm auslöst?",
+        "options": [
+          { "id": "a", "text": "Weil pro Zeit nur wenig Volumen gegen das nachgiebige System gefördert wird und der Druck daher langsam bis zur Alarmgrenze ansteigt" },
+          { "id": "b", "text": "Weil der Drucksensor bei niedrigen Raten abgeschaltet ist" },
+          { "id": "c", "text": "Weil Okklusionen bei Spritzenpumpen grundsätzlich nur beim Start erkannt werden" },
+          { "id": "d", "text": "Weil der Luftsensor die Okklusion zuerst bestätigen muss" }
+        ],
+        "correct": ["a"],
+        "explanation": "Der Druck steigt in dem Maß, in dem Volumen gegen Spritze, Leitung und Kolbenspiel gefördert wird. Bei niedriger Rate und hoher Druckgrenze dauert das lange – siehe [[term:okklusion]].",
+        "difficulty": 2
+      },
+      "links": [{ "rel": "quiz_for", "to": "learning_module:infusionstechnik" }],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "quiz_question:infusion-bolus-nach-okklusion",
+      "title": "Quiz: Lösen einer Okklusion",
+      "summary": "Was ist zu beachten, bevor eine Okklusion hinter der Pumpe gelöst wird?",
+      "data": {
+        "kind": "single",
+        "question": "Eine Infusionspumpe meldet eine Okklusion hinter der Pumpe, Ursache ist ein geschlossener Dreiwegehahn. Was ist vor dem Öffnen zu beachten?",
+        "options": [
+          { "id": "a", "text": "Den Druck in der Leitung entlasten, damit kein ungewollter Bolus abgegeben wird" },
+          { "id": "b", "text": "Die Druckalarmgrenze auf den Höchstwert stellen" },
+          { "id": "c", "text": "Den Luftsensor deaktivieren" },
+          { "id": "d", "text": "Nichts – der Dreiwegehahn kann sofort geöffnet werden" }
+        ],
+        "correct": ["a"],
+        "explanation": "In der unter Druck stehenden Leitung ist Volumen gespeichert, das beim Öffnen als [[term:bolus]] zum Patienten gelangen kann. Viele Pumpen bieten eine automatische Druckentlastung.",
+        "difficulty": 1
+      },
+      "links": [{ "rel": "quiz_for", "to": "learning_module:infusionstechnik" }],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "quiz_question:infusion-laufzeit-vtbi",
+      "title": "Quiz: Laufzeit aus VTBI und Förderrate",
+      "summary": "Berechnung der Laufzeit einer Infusion aus Vorwahlvolumen und Förderrate.",
+      "data": {
+        "kind": "single",
+        "question": "An einer volumetrischen Infusionspumpe sind ein VTBI von 250 ml und eine Förderrate von 125 ml/h eingestellt. Nach welcher Zeit ist das VTBI erreicht?",
+        "options": [
+          { "id": "a", "text": "Nach 2 Stunden" },
+          { "id": "b", "text": "Nach 30 Minuten" },
+          { "id": "c", "text": "Nach 1 Stunde" },
+          { "id": "d", "text": "Nach 3 Stunden" }
+        ],
+        "correct": ["a"],
+        "explanation": "Laufzeit = VTBI / Förderrate = 250 ml / 125 ml/h = 2 h. Siehe [[term:vtbi]] und [[term:foerderrate]].",
+        "difficulty": 1
+      },
+      "links": [{ "rel": "quiz_for", "to": "learning_module:infusionstechnik" }],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "quiz_question:infusion-medikamentenbibliothek",
+      "title": "Quiz: Dosisfehlerreduktionssoftware",
+      "summary": "Welche Aussagen zur Medikamentenbibliothek (DERS) einer Infusionspumpe treffen zu?",
+      "data": {
+        "kind": "multiple",
+        "question": "Welche Aussagen zur Dosisfehlerreduktionssoftware (Medikamentenbibliothek) treffen zu? (Mehrere Antworten möglich)",
+        "options": [
+          { "id": "a", "text": "Sie stellt einrichtungsspezifisch festgelegte Medikamente, Konzentrationen und Dosisgrenzen bereit." },
+          { "id": "b", "text": "Bei Überschreiten einer harten Grenze wird die Eingabe nicht akzeptiert." },
+          { "id": "c", "text": "Sie misst die tatsächliche Medikamentenkonzentration im Beutel." },
+          { "id": "d", "text": "Sie ersetzt die ärztliche Verordnung." }
+        ],
+        "correct": ["a", "b"],
+        "explanation": "Die [[term:dosisfehlerreduktion]] prüft Eingaben gegen hinterlegte Grenzen (Soft und Hard Limits). Sie misst keine Konzentrationen und ersetzt weder Verordnung noch Kontrolle durch das Fachpersonal.",
+        "difficulty": 2
+      },
+      "links": [{ "rel": "quiz_for", "to": "learning_module:infusionstechnik" }],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "quiz_question:infusion-stk-pruefmittel",
+      "title": "Quiz: Förderratenprüfung bei der STK",
+      "summary": "Womit wird bei der STK einer Infusionspumpe die Förderrate geprüft?",
+      "data": {
+        "kind": "single",
+        "question": "Womit wird bei der Sicherheitstechnischen Kontrolle einer Infusionspumpe die Förderrate typischerweise geprüft?",
+        "options": [
+          { "id": "a", "text": "Mit einem Infusionspumpen-Analysator unter Verwendung eines vom Hersteller freigegebenen Sets" },
+          { "id": "b", "text": "Durch Ablesen des angezeigten infundierten Volumens am Display" },
+          { "id": "c", "text": "Mit einem Medizingeräte-Sicherheitstester nach DIN EN 62353" },
+          { "id": "d", "text": "Durch Zählen der Tropfen in der Tropfkammer über eine Minute" }
+        ],
+        "correct": ["a"],
+        "explanation": "Die Displayanzeige ist ein Rechenwert der Pumpe und keine unabhängige Messung; der Sicherheitstester misst elektrische Größen. Die Förderrate wird mit einem Infusionspumpen-Analysator gemessen – siehe [[test_procedure:stk-infusionspumpe]].",
+        "difficulty": 1
+      },
+      "links": [
+        { "rel": "quiz_for", "to": "learning_module:infusionstechnik" },
+        { "rel": "quiz_for", "to": "test_procedure:stk-infusionspumpe" }
+      ],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "media:infusionspumpe-peristaltik-schema",
+      "title": "Schema: Volumetrische Infusionspumpe mit Sicherheitssensoren",
+      "summary": "Schematische Darstellung des Flüssigkeitswegs einer volumetrischen Infusionspumpe: Behälter, Tropfkammer, Drucksensor vor der Pumpe, peristaltische Lamellen, Drucksensor und Luftsensor hinter der Pumpe, Patient.",
+      "data": {
+        "kind": "schema",
+        "alt": "Schema: Infusionsbeutel mit Tropfkammer oben, darunter Leitung durch Drucksensor, peristaltische Lamellen, zweiten Drucksensor und Luftsensor zum Patienten",
+        "license": "CC BY 4.0",
+        "attribution": "MedTech World Redaktion",
+        "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 360 300\"><rect width=\"360\" height=\"300\" fill=\"#f4f8fb\"/><rect x=\"30\" y=\"14\" width=\"60\" height=\"60\" rx=\"10\" fill=\"#cfe3f3\" stroke=\"#2f7fbf\"/><text x=\"60\" y=\"48\" font-family=\"sans-serif\" font-size=\"11\" fill=\"#0f2a3d\" text-anchor=\"middle\">Beutel</text><rect x=\"50\" y=\"80\" width=\"20\" height=\"30\" rx=\"4\" fill=\"#e8f1f8\" stroke=\"#2f7fbf\"/><text x=\"80\" y=\"100\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#0f2a3d\">Tropfkammer</text><line x1=\"60\" y1=\"110\" x2=\"60\" y2=\"290\" stroke=\"#7aa7cc\" stroke-width=\"5\"/><rect x=\"40\" y=\"122\" width=\"40\" height=\"16\" rx=\"3\" fill=\"#2f7fbf\"/><text x=\"90\" y=\"134\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#0f2a3d\">Drucksensor vor der Pumpe</text><rect x=\"70\" y=\"148\" width=\"34\" height=\"9\" fill=\"#6b7c8f\"/><rect x=\"64\" y=\"160\" width=\"34\" height=\"9\" fill=\"#6b7c8f\"/><rect x=\"70\" y=\"172\" width=\"34\" height=\"9\" fill=\"#6b7c8f\"/><rect x=\"64\" y=\"184\" width=\"34\" height=\"9\" fill=\"#6b7c8f\"/><text x=\"112\" y=\"174\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#0f2a3d\">Peristaltische Lamellen (Förderrichtung nach unten)</text><rect x=\"40\" y=\"204\" width=\"40\" height=\"16\" rx=\"3\" fill=\"#2f7fbf\"/><text x=\"90\" y=\"216\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#0f2a3d\">Drucksensor hinter der Pumpe (Okklusion)</text><rect x=\"40\" y=\"230\" width=\"40\" height=\"16\" rx=\"3\" fill=\"#f59e0b\"/><text x=\"90\" y=\"242\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#0f2a3d\">Ultraschall-Luftsensor</text><circle cx=\"60\" cy=\"278\" r=\"8\" fill=\"#e8b39a\"/><text x=\"90\" y=\"282\" font-family=\"sans-serif\" font-size=\"10\" fill=\"#0f2a3d\">zum Patienten</text></svg>"
+      },
+      "links": [
+        { "rel": "illustrates", "to": "device:infusionspumpe" },
+        { "rel": "illustrates", "to": "component:infusion-peristaltik" },
+        { "rel": "illustrates", "to": "component:luftblasendetektor" },
+        { "rel": "illustrates", "to": "component:infusion-drucksensor" }
+      ],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    }
+  ]
+}

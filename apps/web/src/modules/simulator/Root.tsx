@@ -1,6 +1,14 @@
-import { ModuleLanding } from '../../shell/ModuleLanding.tsx';
+import { Route, Routes } from 'react-router';
+import { Landing } from './Landing.tsx';
+import { RunPage } from './RunPage.tsx';
 
-/** Platzhalter – wird im Ausbau durch die modulspezifische Startseite ersetzt. */
+/** MedTech Simulator: Übersicht und Simulationslauf (/simulator/:slug) */
 export default function Root() {
-  return <ModuleLanding module="simulator" />;
+  return (
+    <Routes>
+      <Route index element={<Landing />} />
+      <Route path=":slug" element={<RunPage />} />
+      <Route path="*" element={<Landing />} />
+    </Routes>
+  );
 }

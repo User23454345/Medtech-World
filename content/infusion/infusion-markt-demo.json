@@ -1,0 +1,103 @@
+{
+  "entities": [
+    {
+      "id": "product_model:nordlicht-infusa-vp3",
+      "title": "Nordlicht Infusa VP 3 (Demo)",
+      "summary": "Fiktive volumetrische Infusionspumpe mit Linearperistaltik, Ultraschall-Luftsensor und Medikamentenbibliothek – Demo-Datensatz zur Veranschaulichung von Produktmodell, technischen Daten und Ersatzteilen.",
+      "body": "Demo-Modell zur Geräteklasse [[device:infusionspumpe]]. Alle Angaben sind fiktiv und dienen ausschließlich der Veranschaulichung.",
+      "tags": ["Infusion", "Demo", "Infusionspumpe"],
+      "data": { "status": "aktiv", "releaseYear": 2023, "riskClass": "IIb" },
+      "specs": [
+        { "key": "foerderrate_bereich", "label": "Förderratenbereich", "value": "0,1–1200", "unit": "ml/h", "source": "src:mtw-redaktion-demo" },
+        { "key": "vtbi_bereich", "label": "VTBI-Bereich", "value": "0,1–9999", "unit": "ml", "source": "src:mtw-redaktion-demo" },
+        { "key": "druckstufen", "label": "Einstellbare Okklusionsdruckstufen", "value": 9, "source": "src:mtw-redaktion-demo" },
+        { "key": "akkulaufzeit", "label": "Akkulaufzeit", "value": 8, "unit": "h", "condition": "bei 25 ml/h", "source": "src:mtw-redaktion-demo" }
+      ],
+      "links": [
+        { "rel": "model_of", "to": "device:infusionspumpe" },
+        { "rel": "manufactured_by", "to": "manufacturer:nordlicht-medizintechnik" },
+        { "rel": "has_component", "to": "component:infusion-peristaltik" },
+        { "rel": "has_component", "to": "component:infusion-drucksensor" },
+        { "rel": "has_component", "to": "component:luftblasendetektor" },
+        { "rel": "has_component", "to": "component:infusionspumpen-akku" }
+      ],
+      "sources": ["src:mtw-redaktion-demo"],
+      "demo": true,
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "product_model:nordlicht-syrino-s50",
+      "title": "Nordlicht Syrino S 50 (Demo)",
+      "summary": "Fiktive Spritzenpumpe für Spritzen bis 50 ml mit automatischer Spritzenerkennung und Druckentlastung nach Okklusion – Demo-Datensatz ohne reale Herstellerangaben.",
+      "body": "Demo-Modell zur Geräteklasse [[device:spritzenpumpe]]. Alle Angaben sind fiktiv.",
+      "tags": ["Infusion", "Demo", "Spritzenpumpe"],
+      "data": { "status": "aktiv", "releaseYear": 2024, "riskClass": "IIb" },
+      "specs": [
+        { "key": "foerderrate_bereich", "label": "Förderratenbereich", "value": "0,01–200", "unit": "ml/h", "condition": "mit 50-ml-Spritze", "source": "src:mtw-redaktion-demo" },
+        { "key": "spritzengroessen", "label": "Unterstützte Spritzengrößen", "value": "5–50", "unit": "ml", "source": "src:mtw-redaktion-demo" },
+        { "key": "akkulaufzeit", "label": "Akkulaufzeit", "value": 10, "unit": "h", "condition": "bei 5 ml/h", "source": "src:mtw-redaktion-demo" }
+      ],
+      "links": [
+        { "rel": "model_of", "to": "device:spritzenpumpe" },
+        { "rel": "manufactured_by", "to": "manufacturer:nordlicht-medizintechnik" },
+        { "rel": "has_component", "to": "component:spritzenantrieb" },
+        { "rel": "has_component", "to": "component:infusion-drucksensor" },
+        { "rel": "has_component", "to": "component:infusionspumpen-akku" }
+      ],
+      "sources": ["src:mtw-redaktion-demo"],
+      "demo": true,
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "spare_part:nordlicht-akkupack-b300",
+      "title": "Akkupack NL-B300 für Infusa VP 3 und Syrino S 50 (Demo)",
+      "summary": "Fiktiver wiederaufladbarer Akkupack für die Demo-Modelle Infusa VP 3 und Syrino S 50 – Verschleißteil, Tausch nach Kapazitätsprüfung bzw. Herstellervorgabe.",
+      "tags": ["Infusion", "Akku", "Demo", "Ersatzteil"],
+      "data": { "partNumber": "NL-B300", "kind": "energie", "wearPart": true, "original": true, "typicalLifetime": "abhängig von Ladezyklen und Lagerung; Tausch nach Herstellervorgabe" },
+      "links": [
+        { "rel": "fits", "to": "product_model:nordlicht-infusa-vp3" },
+        { "rel": "fits", "to": "product_model:nordlicht-syrino-s50" },
+        { "rel": "fits", "to": "component:infusionspumpen-akku" },
+        { "rel": "manufactured_by", "to": "manufacturer:nordlicht-medizintechnik" }
+      ],
+      "sources": ["src:mtw-redaktion-demo"],
+      "demo": true,
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "spare_part:nordlicht-luftsensor-as3",
+      "title": "Luftsensor-Modul NL-AS3 für Infusa VP 3 (Demo)",
+      "summary": "Fiktives Ultraschall-Luftsensormodul als Ersatzteil für die Demo-Infusionspumpe Infusa VP 3. Nach dem Tausch sind Luftalarmprüfung und STK-relevante Prüfungen erforderlich.",
+      "tags": ["Infusion", "Sensor", "Demo", "Ersatzteil"],
+      "data": { "partNumber": "NL-AS3", "kind": "sensor", "wearPart": false, "original": true },
+      "links": [
+        { "rel": "fits", "to": "product_model:nordlicht-infusa-vp3" },
+        { "rel": "fits", "to": "component:luftblasendetektor" },
+        { "rel": "manufactured_by", "to": "manufacturer:nordlicht-medizintechnik" }
+      ],
+      "sources": ["src:mtw-redaktion-demo"],
+      "demo": true,
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "offer:nordlicht-akkupack-b300-neu",
+      "title": "Akkupack NL-B300, neu (Demo-Angebot)",
+      "summary": "Demo-Angebot im MedTech Market: Original-Akkupack NL-B300 für Infusa VP 3 und Syrino S 50, neu und originalverpackt.",
+      "tags": ["Infusion", "Demo", "Ersatzteil"],
+      "data": { "seller": "Demo-Servicepartner Süd", "price": 119, "currency": "EUR", "condition": "neu", "stock": 20, "location": "München", "warrantyMonths": 12 },
+      "links": [{ "rel": "offers", "to": "spare_part:nordlicht-akkupack-b300" }],
+      "demo": true,
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "offer:nordlicht-syrino-s50-generalueberholt",
+      "title": "Syrino S 50 Spritzenpumpe, generalüberholt (Demo-Angebot)",
+      "summary": "Demo-Angebot im MedTech Market: generalüberholte Spritzenpumpe Syrino S 50 mit neuem Akku, aktueller STK und elektrischer Sicherheitsprüfung.",
+      "tags": ["Infusion", "Demo", "Spritzenpumpe"],
+      "data": { "seller": "Demo-Medizintechnik-Service West", "price": 890, "currency": "EUR", "condition": "generalueberholt", "stock": 3, "location": "Köln", "warrantyMonths": 6 },
+      "links": [{ "rel": "offers", "to": "product_model:nordlicht-syrino-s50" }],
+      "demo": true,
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    }
+  ]
+}

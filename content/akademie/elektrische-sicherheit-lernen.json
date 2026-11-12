@@ -1,0 +1,195 @@
+{
+  "entities": [
+    {
+      "id": "learning_module:elektrische-sicherheit-62353",
+      "title": "Elektrische Sicherheitsprüfung nach DIN EN 62353",
+      "aliases": ["Lernmodul DIN EN 62353", "Lernmodul Elektrische Sicherheit", "Wiederholungsprüfung lernen"],
+      "summary": "Lernmodul zur Wiederholungsprüfung und Prüfung nach Instandsetzung medizinischer elektrischer Geräte: Schutzklassen, Anwendungsteile, Ableitströme, Messverfahren, Grenzwerte, Bewertung und Dokumentation – mit Simulation und Quiz.",
+      "tags": ["Elektrische Sicherheit", "Prüfung", "Ableitstrom", "DIN EN 62353"],
+      "data": {
+        "level": "fortgeschritten",
+        "durationMinutes": 45,
+        "objectives": [
+          "Typprüfung nach IEC 60601-1 und Wiederholungsprüfung nach DIN EN 62353 abgrenzen",
+          "Schutzklassen und Anwendungsteile (B, BF, CF) und ihre Bedeutung für die Prüfung erklären",
+          "Den Ablauf der Prüfung von der Sichtprüfung bis zur Dokumentation beschreiben",
+          "Direkte Methode, Differenzstrommethode und Ersatzableitstrommethode unterscheiden",
+          "Messwerte anhand der hinterlegten Grenzwerte bewerten"
+        ],
+        "sections": [
+          {
+            "title": "1. Wozu eine Wiederholungsprüfung?",
+            "body": "Die [[legal_reference:iec-60601-1|IEC 60601-1]] legt die Anforderungen an die Basissicherheit fest, die der Hersteller bei Entwicklung und Typprüfung nachweist. Im Betrieb altern Isolierungen, Leitungen werden beschädigt, Stecker und Schutzleiterverbindungen lockern sich. Die [[legal_reference:din-en-62353|DIN EN 62353]] beschreibt daher eine praxisgerechte **Wiederholungsprüfung** und die **Prüfung nach Instandsetzung**.\n\nDie Prüfung führt eine Elektrofachkraft bzw. befähigte Person mit Kenntnissen der Medizintechnik durch. Herstellervorgaben gehen vor, wenn sie strengere oder zusätzliche Anforderungen enthalten. Das zugehörige Prüfverfahren: [[test_procedure:elektrische-sicherheit-62353]]."
+          },
+          {
+            "title": "2. Schutzklassen, Anwendungsteile und Ableitströme",
+            "body": "- [[term:schutzklasse|Schutzklasse I]]: Schutz durch Basisisolierung **und** Schutzleiter – deshalb wird der Schutzleiterwiderstand gemessen.\n- Schutzklasse II: doppelte bzw. verstärkte Isolierung, **kein Schutzleiter** – die Schutzleiterprüfung entfällt.\n- [[term:anwendungsteil|Anwendungsteile]] kommen bestimmungsgemäß mit dem Patienten in Berührung. Typ B, BF und CF unterscheiden sich im Schutzgrad; CF-Anwendungsteile sind für die direkte Anwendung am Herzen vorgesehen und haben die strengsten Grenzwerte.\n\nEin [[term:ableitstrom]] fließt unbeabsichtigt über Isolierungen zur Erde, zum Gehäuse oder über den Patienten. Da Patienten durch Elektroden, Katheter oder herabgesetzte Hautwiderstände besonders gefährdet sein können, sind die zulässigen Werte eng begrenzt."
+          },
+          {
+            "title": "3. Prüfablauf",
+            "body": "1. **Sichtprüfung** – Gehäuse, Netzleitung, Stecker, Anwendungsteile, Kennzeichnung und Zubehör. Viele Mängel werden bereits hier gefunden.\n2. **Schutzleiterwiderstand** (nur Schutzklasse I) – zwischen Schutzkontakt des Netzsteckers und berührbaren, schutzleiterverbundenen Teilen; die Netzleitung wird während der Messung bewegt, um Leiterbrüche zu erkennen. Grenzwert: **≤ 0,3 Ω** inklusive Netzanschlussleitung.\n3. **Isolationswiderstand** – optional, wenn vom Hersteller vorgesehen; die Norm legt hierfür keinen allgemeinen Grenzwert fest.\n4. **Geräteableitstrom** und **Ableitstrom vom Anwendungsteil** (Typ BF und CF).\n5. **Funktionsprüfung** der sicherheitsrelevanten Funktionen nach Herstellerangaben.\n6. **Bewertung und Dokumentation**."
+          },
+          {
+            "title": "4. Messverfahren und Grenzwerte",
+            "body": "- **Direkte Methode:** Das Gerät ist in Betrieb; der Ableitstrom wird direkt über das Messgerät gemessen. Das Gerät muss dabei isoliert von Erde aufgestellt sein.\n- **Differenzstrommethode:** Das Gerät ist in Betrieb; gemessen wird die Differenz der Ströme in den Netzleitern.\n- **Ersatzableitstrommethode:** Das Gerät wird nicht aus dem Netz betrieben; zwischen den kurzgeschlossenen Netzleitern und den Schutzleiter- bzw. berührbaren leitfähigen Teilen wird eine Prüfspannung angelegt. Schaltungsteile, die erst im Betrieb aktiv werden, werden dabei nicht erfasst – daher den Netzschalter des Prüflings einschalten.\n\nDie verwendete **Methode ist zu dokumentieren**, weil sich die Grenzwerte unterscheiden:\n\n| Messung | Grenzwert |\n|---|---|\n| Ersatz-Geräteableitstrom, Schutzklasse I | ≤ 1000 µA |\n| Ersatz-Geräteableitstrom, Schutzklasse II | ≤ 500 µA |\n| Geräteableitstrom direkt/Differenz, Schutzklasse I | ≤ 500 µA |\n| Geräteableitstrom direkt/Differenz, Schutzklasse II | ≤ 100 µA |\n| Ableitstrom vom Anwendungsteil, Typ BF | ≤ 5000 µA |\n| Ableitstrom vom Anwendungsteil, Typ CF | ≤ 50 µA |\n\nQuelle und Bedingungen siehe technische Daten von [[test_procedure:elektrische-sicherheit-62353]]."
+          },
+          {
+            "title": "5. Bewerten, dokumentieren und üben",
+            "body": "Ein Gerät, das einen Grenzwert überschreitet oder bei der Sichtprüfung gefährdende Mängel zeigt, darf nicht weiter betrieben werden: kennzeichnen, außer Betrieb nehmen, Betreiber informieren, nach Instandsetzung erneut prüfen. Das Protokoll enthält Geräteidentifikation, Prüfmethode und Messgerät, Messwerte mit Grenzwerten, Bewertung und Unterschrift (Vorlage: [[document:protokollvorlage-stk]]).\n\nÜbe die Bewertung typischer Messergebnisse in der [[simulation:elektrische-sicherheit]]: einwandfreies Gerät, zu hoher Schutzleiterwiderstand, erhöhter Geräteableitstrom und Grenzwertüberschreitung an einem CF-Anwendungsteil."
+          }
+        ],
+        "prerequisites": []
+      },
+      "links": [
+        { "rel": "teaches", "to": "test_procedure:elektrische-sicherheit-62353" },
+        { "rel": "teaches", "to": "term:ableitstrom" },
+        { "rel": "teaches", "to": "term:schutzklasse" },
+        { "rel": "teaches", "to": "term:anwendungsteil" },
+        { "rel": "teaches", "to": "simulation:elektrische-sicherheit" },
+        { "rel": "based_on", "to": "legal_reference:din-en-62353" },
+        { "rel": "based_on", "to": "legal_reference:iec-60601-1" }
+      ],
+      "sources": ["src:din-en-62353", "src:iec-60601-1"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "quiz_question:es-schutzleiterwiderstand",
+      "title": "Quiz: Grenzwert Schutzleiterwiderstand",
+      "summary": "Welcher Grenzwert gilt bei der Wiederholungsprüfung nach DIN EN 62353 für den Schutzleiterwiderstand inklusive Netzleitung?",
+      "data": {
+        "kind": "single",
+        "question": "Welcher Grenzwert gilt nach DIN EN 62353 für den Schutzleiterwiderstand eines Geräts der Schutzklasse I einschließlich Netzanschlussleitung?",
+        "options": [
+          { "id": "a", "text": "≤ 0,3 Ω" },
+          { "id": "b", "text": "≤ 3 Ω" },
+          { "id": "c", "text": "≤ 1 MΩ" },
+          { "id": "d", "text": "≤ 30 Ω" }
+        ],
+        "correct": ["a"],
+        "explanation": "Für den Schutzleiterwiderstand einschließlich Netzanschlussleitung gilt ≤ 0,3 Ω – siehe [[test_procedure:elektrische-sicherheit-62353]].",
+        "difficulty": 1
+      },
+      "links": [
+        { "rel": "quiz_for", "to": "learning_module:elektrische-sicherheit-62353" },
+        { "rel": "quiz_for", "to": "test_procedure:elektrische-sicherheit-62353" }
+      ],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "quiz_question:es-cf-anwendungsteil",
+      "title": "Quiz: Ableitstrom am CF-Anwendungsteil",
+      "summary": "Welcher Grenzwert gilt für den Ableitstrom vom Anwendungsteil Typ CF bei der Wiederholungsprüfung?",
+      "data": {
+        "kind": "single",
+        "question": "Welcher Grenzwert gilt nach DIN EN 62353 für den Ableitstrom vom Anwendungsteil bei Typ CF?",
+        "options": [
+          { "id": "a", "text": "≤ 50 µA" },
+          { "id": "b", "text": "≤ 500 µA" },
+          { "id": "c", "text": "≤ 5000 µA" },
+          { "id": "d", "text": "≤ 1000 µA" }
+        ],
+        "correct": ["a"],
+        "explanation": "CF-Anwendungsteile sind für die direkte Anwendung am Herzen vorgesehen und haben mit ≤ 50 µA den strengsten Grenzwert; für Typ BF gilt ≤ 5000 µA. Siehe [[term:anwendungsteil]].",
+        "difficulty": 2
+      },
+      "links": [
+        { "rel": "quiz_for", "to": "learning_module:elektrische-sicherheit-62353" },
+        { "rel": "quiz_for", "to": "term:anwendungsteil" }
+      ],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "quiz_question:es-schutzklasse-2",
+      "title": "Quiz: Schutzleiterprüfung bei Schutzklasse II",
+      "summary": "Wird bei einem Gerät der Schutzklasse II der Schutzleiterwiderstand gemessen?",
+      "data": {
+        "kind": "truefalse",
+        "question": "Bei einem Gerät der Schutzklasse II wird im Rahmen der Prüfung nach DIN EN 62353 der Schutzleiterwiderstand gemessen.",
+        "options": [
+          { "id": "wahr", "text": "Wahr" },
+          { "id": "falsch", "text": "Falsch" }
+        ],
+        "correct": ["falsch"],
+        "explanation": "Geräte der [[term:schutzklasse|Schutzklasse II]] haben keinen Schutzleiter, sondern eine doppelte bzw. verstärkte Isolierung. Die Schutzleiterwiderstandsmessung entfällt; Ableitströme werden dennoch gemessen.",
+        "difficulty": 1
+      },
+      "links": [
+        { "rel": "quiz_for", "to": "learning_module:elektrische-sicherheit-62353" },
+        { "rel": "quiz_for", "to": "term:schutzklasse" }
+      ],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "quiz_question:es-ersatzableitstrom-sk1",
+      "title": "Quiz: Ersatz-Geräteableitstrom Schutzklasse I",
+      "summary": "Grenzwert des Geräteableitstroms bei der Ersatzableitstrommethode für ein Gerät der Schutzklasse I.",
+      "data": {
+        "kind": "single",
+        "question": "Ein Gerät der Schutzklasse I wird mit der Ersatzableitstrommethode gemessen. Welcher Grenzwert gilt für den Ersatz-Geräteableitstrom?",
+        "options": [
+          { "id": "a", "text": "≤ 1000 µA" },
+          { "id": "b", "text": "≤ 100 µA" },
+          { "id": "c", "text": "≤ 50 µA" },
+          { "id": "d", "text": "≤ 10 mA" }
+        ],
+        "correct": ["a"],
+        "explanation": "Bei der Ersatzableitstrommethode gilt für Schutzklasse I ≤ 1000 µA. Mit der direkten bzw. Differenzstrommethode wären es ≤ 500 µA – deshalb muss die Methode dokumentiert werden. Siehe [[test_procedure:elektrische-sicherheit-62353]].",
+        "difficulty": 2
+      },
+      "links": [{ "rel": "quiz_for", "to": "learning_module:elektrische-sicherheit-62353" }],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "quiz_question:es-dokumentation",
+      "title": "Quiz: Inhalte des Prüfprotokolls",
+      "summary": "Welche Angaben gehören in das Protokoll einer elektrischen Sicherheitsprüfung nach DIN EN 62353?",
+      "data": {
+        "kind": "multiple",
+        "question": "Welche Angaben gehören in das Protokoll einer Prüfung nach DIN EN 62353? (Mehrere Antworten möglich)",
+        "options": [
+          { "id": "a", "text": "Verwendete Messmethode und Messgerät" },
+          { "id": "b", "text": "Messwerte mit den zugehörigen Grenzwerten" },
+          { "id": "c", "text": "Bewertung und Unterschrift der prüfenden Person" },
+          { "id": "d", "text": "Der Anschaffungspreis des Geräts" }
+        ],
+        "correct": ["a", "b", "c"],
+        "explanation": "Dokumentiert werden Geräteidentifikation, Prüfmethode und Messgerät, Messwerte und Grenzwerte sowie Bewertung und Unterschrift – siehe [[test_procedure:elektrische-sicherheit-62353]]. Der Preis ist für die Sicherheitsbewertung ohne Bedeutung.",
+        "difficulty": 1
+      },
+      "links": [{ "rel": "quiz_for", "to": "learning_module:elektrische-sicherheit-62353" }],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "simulation:elektrische-sicherheit",
+      "title": "Simulation: Elektrische Sicherheitsprüfung (DIN EN 62353)",
+      "aliases": ["Sicherheitstester-Simulator", "Ableitstrom-Simulator"],
+      "summary": "Interaktive Simulation eines Medizingeräte-Sicherheitstesters: Schutzklasse, Anwendungsteil und Messmethode wählen, Messwerte für Schutzleiterwiderstand und Ableitströme bewerten und das Ergebnis begründen.",
+      "body": "Die Simulation vergleicht die Messwerte mit den Grenzwerten aus [[test_procedure:elektrische-sicherheit-62353]]. Achte darauf, dass sich die Grenzwerte für den Geräteableitstrom je nach Methode und [[term:schutzklasse]] unterscheiden und dass für [[term:anwendungsteil|CF-Anwendungsteile]] deutlich strengere Werte gelten.",
+      "tags": ["Elektrische Sicherheit", "Simulation", "Ableitstrom"],
+      "data": {
+        "engine": "electrical-safety",
+        "learningGoals": [
+          "Prüfschritte der Wiederholungsprüfung in der richtigen Reihenfolge anwenden",
+          "Grenzwerte abhängig von Schutzklasse, Anwendungsteil und Messmethode zuordnen",
+          "Messergebnisse bewerten und über Weiterbetrieb bzw. Außerbetriebnahme entscheiden"
+        ],
+        "scenarios": [
+          { "id": "sk1-einwandfrei", "title": "Schutzklasse I – einwandfrei", "description": "Gerät der Schutzklasse I mit BF-Anwendungsteil, Ersatzableitstrommethode – alle Werte im zulässigen Bereich.", "params": { "protectionClass": "I", "appliedPart": "BF", "method": "ersatz", "peResistance": 0.12, "equipmentLeakage": 180, "appliedPartLeakage": 20 } },
+          { "id": "pe-zu-hoch", "title": "Zu hoher Schutzleiterwiderstand", "description": "Beim Bewegen der Netzleitung steigt der Schutzleiterwiderstand deutlich – Hinweis auf eine beschädigte Leitung oder lockere Verbindung.", "params": { "protectionClass": "I", "appliedPart": "BF", "method": "ersatz", "peResistance": 0.65, "equipmentLeakage": 160, "appliedPartLeakage": 20 } },
+          { "id": "pe-unterbrochen", "title": "Schutzleiterunterbrechung", "description": "Der Schutzleiter ist unterbrochen – das Gerät der Schutzklasse I hat keinen wirksamen Schutz mehr.", "params": { "protectionClass": "I", "appliedPart": "BF", "method": "ersatz", "peResistance": 100000, "equipmentLeakage": 150, "appliedPartLeakage": 20 } },
+          { "id": "geraeteableitstrom-erhoeht", "title": "Erhöhter Geräteableitstrom", "description": "Direkte Methode an einem Gerät der Schutzklasse I – der Geräteableitstrom überschreitet den Grenzwert dieser Methode.", "params": { "protectionClass": "I", "appliedPart": "BF", "method": "direkt", "peResistance": 0.1, "equipmentLeakage": 720, "appliedPartLeakage": 30 } },
+          { "id": "cf-grenzwert", "title": "CF-Anwendungsteil über Grenzwert", "description": "Ein Gerät mit CF-Anwendungsteil: Der Ableitstrom vom Anwendungsteil liegt über dem strengen CF-Grenzwert, obwohl er für Typ BF zulässig wäre.", "params": { "protectionClass": "I", "appliedPart": "CF", "method": "direkt", "peResistance": 0.1, "equipmentLeakage": 150, "appliedPartLeakage": 85 } },
+          { "id": "sk2", "title": "Schutzklasse II", "description": "Gerät der Schutzklasse II ohne Schutzleiter – die Schutzleitermessung entfällt, es gelten die Ableitstromgrenzwerte für Schutzklasse II.", "params": { "protectionClass": "II", "appliedPart": "BF", "method": "ersatz", "peResistance": 0, "equipmentLeakage": 120, "appliedPartLeakage": 15 } }
+        ]
+      },
+      "links": [
+        { "rel": "simulates", "to": "term:ableitstrom" },
+        { "rel": "simulates", "to": "term:schutzklasse" },
+        { "rel": "simulates", "to": "term:anwendungsteil" },
+        { "rel": "related", "to": "test_procedure:elektrische-sicherheit-62353" }
+      ],
+      "sources": ["src:din-en-62353", "src:iec-60601-1"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    }
+  ]
+}

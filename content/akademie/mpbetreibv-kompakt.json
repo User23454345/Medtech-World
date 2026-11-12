@@ -1,0 +1,199 @@
+{
+  "entities": [
+    {
+      "id": "learning_module:mpbetreibv-kompakt",
+      "title": "Medizinprodukterecht für Betreiber (MPBetreibV kompakt)",
+      "aliases": ["Lernmodul MPBetreibV", "Betreiberpflichten Medizinprodukte", "MPBetreibV kompakt"],
+      "summary": "Kompaktes Lernmodul zu den Pflichten von Betreibern und Anwendern von Medizinprodukten in Deutschland: Rechtsrahmen, Einweisung, Instandhaltung, STK, MTK, Bestandsverzeichnis, Medizinproduktebuch und Meldewesen.",
+      "tags": ["Recht", "MPBetreibV", "STK", "MTK", "Betreiber"],
+      "data": {
+        "level": "einsteiger",
+        "durationMinutes": 35,
+        "objectives": [
+          "MDR, MPDG und MPBetreibV gegeneinander abgrenzen",
+          "Rollen von Betreiber, Anwender und beauftragter Person unterscheiden",
+          "Anforderungen an Funktionsprüfung und Einweisung bei Medizinprodukten nach Anlage 1 erläutern",
+          "Zweck, Umfang und Fristenlogik von STK und MTK erklären",
+          "Bestandsverzeichnis, Medizinproduktebuch und Meldepflichten einordnen"
+        ],
+        "sections": [
+          {
+            "title": "1. Der Rechtsrahmen im Überblick",
+            "body": "Das Medizinprodukterecht verteilt die Pflichten nach Rollen:\n\n- Die [[legal_reference:eu-mdr|EU-Medizinprodukteverordnung (MDR)]] regelt vor allem das **Inverkehrbringen**: Klassifizierung, Konformitätsbewertung, technische Dokumentation, Überwachung nach dem Inverkehrbringen. Sie richtet sich in erster Linie an Hersteller.\n- Das [[legal_reference:de-mpdg|Medizinprodukterecht-Durchführungsgesetz (MPDG)]] ergänzt die MDR national, z. B. bei Zuständigkeiten und Verordnungsermächtigungen.\n- Die [[legal_reference:de-mpbetreibv|Medizinprodukte-Betreiberverordnung (MPBetreibV)]] regelt das **Errichten, Betreiben, Anwenden und Instandhalten** von Medizinprodukten in Deutschland.\n\nÄltere Unterlagen verweisen häufig noch auf das [[legal_reference:de-mpg|MPG]] oder die [[legal_reference:eu-mdd|MDD]] – diese Verweise sind zu aktualisieren. Maßgeblich ist stets die aktuelle Fassung der Primärquelle."
+          },
+          {
+            "title": "2. Betreiber, Anwender und allgemeine Anforderungen",
+            "body": "**Betreiber** ist, wer für den Betrieb der Gesundheitseinrichtung verantwortlich ist, in der Medizinprodukte eingesetzt werden – etwa der Träger eines Krankenhauses. **Anwender** ist, wer ein Medizinprodukt im Rahmen seiner Tätigkeit am Patienten einsetzt.\n\nGrundsätze der MPBetreibV:\n- Medizinprodukte dürfen nur ihrer Zweckbestimmung entsprechend und nach den allgemein anerkannten Regeln der Technik betrieben und angewendet werden.\n- Sie dürfen nur von Personen angewendet werden, die die erforderliche Ausbildung oder Kenntnis und Erfahrung besitzen.\n- Der Anwender muss sich **vor der Anwendung** von der Funktionsfähigkeit und dem ordnungsgemäßen Zustand des Produkts überzeugen und die Gebrauchsanweisung beachten.\n- Gebrauchsanweisung und sicherheitsbezogene Informationen müssen für den Anwender jederzeit zugänglich sein."
+          },
+          {
+            "title": "3. Funktionsprüfung und Einweisung",
+            "body": "Für aktive Medizinprodukte nach **Anlage 1** der MPBetreibV – dazu gehören z. B. [[device:defibrillator|Defibrillatoren]], [[device:infusionspumpe|Infusionspumpen]] und [[device:beatmungsgeraet|Beatmungsgeräte]] – gelten besondere Anforderungen:\n\n1. Vor der ersten Inbetriebnahme führt der Hersteller oder eine dazu befugte Person am Betriebsort eine **Funktionsprüfung** durch und weist die vom Betreiber **beauftragte Person** ein.\n2. Anwender dürfen das Produkt erst anwenden, wenn sie durch den Hersteller oder die beauftragte Person in die sachgerechte Handhabung eingewiesen wurden.\n3. Die Einweisungen werden dokumentiert, u. a. im Medizinproduktebuch.\n\nEine strukturierte Vorlage bietet die [[document:checkliste-geraeteeinweisung]]."
+          },
+          {
+            "title": "4. Instandhaltung, STK und MTK",
+            "body": "**Instandhaltung** (Wartung, Inspektion, Instandsetzung, Aufbereitung) darf nur durch Personen, Betriebe oder Einrichtungen erfolgen, die die erforderliche Sachkenntnis, Voraussetzungen und Mittel besitzen.\n\n**Sicherheitstechnische Kontrollen (STK)** sind für Produkte nach Anlage 1 durchzuführen – nach Herstellerangaben, fehlen diese, spätestens alle zwei Jahre ([[legal_reference:de-mpbetreibv-stk]]). Beispiele: [[test_procedure:stk-defibrillator]], [[test_procedure:stk-infusionspumpe]].\n\n**Messtechnische Kontrollen (MTK)** betreffen Produkte mit Messfunktion nach Anlage 2 und prüfen, ob die zulässigen Fehlergrenzen eingehalten werden ([[legal_reference:de-mpbetreibv-mtk]]). Beispiel: [[test_procedure:mtk-nibp]]. Nach bestandener MTK wird das Produkt gekennzeichnet, sodass das Jahr der nächsten MTK und die durchführende Stelle erkennbar sind.\n\nDie elektrische Sicherheit wird ergänzend nach [[test_procedure:elektrische-sicherheit-62353]] geprüft."
+          },
+          {
+            "title": "5. Dokumentation, Organisation und Meldewesen",
+            "body": "- **Bestandsverzeichnis:** Der Betreiber führt ein Bestandsverzeichnis für alle aktiven nichtimplantierbaren Medizinprodukte der jeweiligen Betriebsstätte.\n- **Medizinproduktebuch:** Für Produkte nach Anlage 1 und 2 sind u. a. Funktionsprüfungen, Einweisungen, STK, MTK, Funktionsstörungen und Meldungen zu dokumentieren.\n- **Beauftragte Person für Medizinproduktesicherheit:** Gesundheitseinrichtungen mit regelmäßig mehr als 20 Beschäftigten müssen eine solche Person bestimmen; sie ist Kontaktstelle für Behörden, Hersteller und Vertreiber bei Fragen der Medizinproduktesicherheit.\n- **Meldungen:** Schwerwiegende Vorkommnisse sind der zuständigen Bundesoberbehörde (in der Regel dem BfArM) zu melden; die Einzelheiten regelt eine eigene Verordnung (Medizinprodukte-Anwendermelde- und Informationsverordnung, MPAMIV).\n\nFür Protokolle eignet sich die [[document:protokollvorlage-stk]]."
+          }
+        ],
+        "prerequisites": []
+      },
+      "links": [
+        { "rel": "based_on", "to": "legal_reference:de-mpbetreibv" },
+        { "rel": "based_on", "to": "legal_reference:de-mpbetreibv-stk" },
+        { "rel": "based_on", "to": "legal_reference:de-mpbetreibv-mtk" },
+        { "rel": "based_on", "to": "legal_reference:de-mpdg" },
+        { "rel": "based_on", "to": "legal_reference:eu-mdr" },
+        { "rel": "teaches", "to": "legal_reference:de-mpbetreibv" },
+        { "rel": "teaches", "to": "legal_reference:de-mpbetreibv-stk" },
+        { "rel": "teaches", "to": "legal_reference:de-mpbetreibv-mtk" },
+        { "rel": "teaches", "to": "document:checkliste-geraeteeinweisung" },
+        { "rel": "teaches", "to": "document:protokollvorlage-stk" }
+      ],
+      "sources": ["src:de-mpbetreibv", "src:de-mpdg", "src:eu-mdr-2017-745"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "quiz_question:mpbetreibv-stk-frist",
+      "title": "Quiz: STK-Frist ohne Herstellerangabe",
+      "summary": "Welche Frist gilt für Sicherheitstechnische Kontrollen, wenn der Hersteller keine Angaben macht?",
+      "data": {
+        "kind": "single",
+        "question": "Der Hersteller eines Medizinprodukts nach Anlage 1 MPBetreibV macht keine Angaben zur Frist der Sicherheitstechnischen Kontrolle. Wann ist die STK spätestens durchzuführen?",
+        "options": [
+          { "id": "a", "text": "Spätestens alle zwei Jahre" },
+          { "id": "b", "text": "Spätestens alle fünf Jahre" },
+          { "id": "c", "text": "Nur nach einer Instandsetzung" },
+          { "id": "d", "text": "Gar nicht – ohne Herstellerangabe entfällt die STK" }
+        ],
+        "correct": ["a"],
+        "explanation": "Fehlen Herstellerangaben, ist die STK nach der MPBetreibV spätestens alle zwei Jahre durchzuführen – siehe [[legal_reference:de-mpbetreibv-stk]].",
+        "difficulty": 1
+      },
+      "links": [
+        { "rel": "quiz_for", "to": "learning_module:mpbetreibv-kompakt" },
+        { "rel": "quiz_for", "to": "legal_reference:de-mpbetreibv-stk" }
+      ],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "quiz_question:mpbetreibv-rechtsrahmen",
+      "title": "Quiz: Welche Vorschrift regelt das Betreiben?",
+      "summary": "Zuordnung von MDR, MPDG und MPBetreibV zu Herstellern und Betreibern.",
+      "data": {
+        "kind": "single",
+        "question": "Welche Vorschrift regelt in Deutschland vorrangig das Betreiben, Anwenden und Instandhalten von Medizinprodukten?",
+        "options": [
+          { "id": "a", "text": "Die Medizinprodukte-Betreiberverordnung (MPBetreibV)" },
+          { "id": "b", "text": "Die Richtlinie 93/42/EWG (MDD)" },
+          { "id": "c", "text": "Das Medizinproduktegesetz (MPG)" },
+          { "id": "d", "text": "Anhang VIII der MDR (Klassifizierungsregeln)" }
+        ],
+        "correct": ["a"],
+        "explanation": "Die [[legal_reference:de-mpbetreibv]] regelt Errichten, Betreiben, Anwenden und Instandhalten. MDD und MPG sind abgelöst; die Klassifizierungsregeln der MDR betreffen das Inverkehrbringen.",
+        "difficulty": 1
+      },
+      "links": [{ "rel": "quiz_for", "to": "learning_module:mpbetreibv-kompakt" }],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "quiz_question:mpbetreibv-mtk-zweck",
+      "title": "Quiz: Zweck der Messtechnischen Kontrolle",
+      "summary": "Was wird bei einer Messtechnischen Kontrolle nach MPBetreibV festgestellt?",
+      "data": {
+        "kind": "single",
+        "question": "Was soll eine Messtechnische Kontrolle (MTK) nach MPBetreibV feststellen?",
+        "options": [
+          { "id": "a", "text": "Ob das Medizinprodukt mit Messfunktion die zulässigen Fehlergrenzen einhält" },
+          { "id": "b", "text": "Ob das Produkt eine CE-Kennzeichnung trägt" },
+          { "id": "c", "text": "Ob die Anwender eingewiesen wurden" },
+          { "id": "d", "text": "Ob der Ableitstrom vom Anwendungsteil eingehalten wird" }
+        ],
+        "correct": ["a"],
+        "explanation": "Die MTK betrifft Produkte mit Messfunktion nach Anlage 2 und prüft die Einhaltung der Fehlergrenzen – siehe [[legal_reference:de-mpbetreibv-mtk]] und [[test_procedure:mtk-nibp]]. Ableitströme werden bei der elektrischen Sicherheitsprüfung gemessen.",
+        "difficulty": 1
+      },
+      "links": [
+        { "rel": "quiz_for", "to": "learning_module:mpbetreibv-kompakt" },
+        { "rel": "quiz_for", "to": "legal_reference:de-mpbetreibv-mtk" }
+      ],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "quiz_question:mpbetreibv-betreiberpflichten",
+      "title": "Quiz: Pflichten des Betreibers",
+      "summary": "Welche der genannten Aufgaben gehören zu den Pflichten des Betreibers nach MPBetreibV?",
+      "data": {
+        "kind": "multiple",
+        "question": "Welche Aufgaben gehören nach der MPBetreibV zu den Pflichten des Betreibers? (Mehrere Antworten möglich)",
+        "options": [
+          { "id": "a", "text": "Ein Bestandsverzeichnis für aktive nichtimplantierbare Medizinprodukte führen" },
+          { "id": "b", "text": "Fristgerechte Sicherheitstechnische Kontrollen für Produkte nach Anlage 1 veranlassen" },
+          { "id": "c", "text": "Die Konformitätsbewertung des Produkts vor dem Inverkehrbringen durchführen" },
+          { "id": "d", "text": "Sicherstellen, dass Instandhaltung nur durch Personen mit erforderlicher Sachkenntnis, Voraussetzungen und Mitteln erfolgt" }
+        ],
+        "correct": ["a", "b", "d"],
+        "explanation": "Bestandsverzeichnis, STK und qualifizierte Instandhaltung sind Betreiberpflichten nach [[legal_reference:de-mpbetreibv]]. Die Konformitätsbewertung ist eine Herstellerpflicht nach der [[legal_reference:eu-mdr|MDR]].",
+        "difficulty": 2
+      },
+      "links": [{ "rel": "quiz_for", "to": "learning_module:mpbetreibv-kompakt" }],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "quiz_question:mpbetreibv-anwender-pruefung",
+      "title": "Quiz: Prüfpflicht des Anwenders vor der Anwendung",
+      "summary": "Muss sich der Anwender vor der Anwendung von der Funktionsfähigkeit des Medizinprodukts überzeugen?",
+      "data": {
+        "kind": "truefalse",
+        "question": "Der Anwender muss sich vor der Anwendung eines Medizinprodukts von dessen Funktionsfähigkeit und ordnungsgemäßem Zustand überzeugen.",
+        "options": [
+          { "id": "wahr", "text": "Wahr" },
+          { "id": "falsch", "text": "Falsch" }
+        ],
+        "correct": ["wahr"],
+        "explanation": "Diese Pflicht besteht nach [[legal_reference:de-mpbetreibv]] unabhängig von STK und MTK – sie ersetzt diese Kontrollen aber nicht.",
+        "difficulty": 1
+      },
+      "links": [{ "rel": "quiz_for", "to": "learning_module:mpbetreibv-kompakt" }],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "document:protokollvorlage-stk",
+      "title": "Protokollvorlage: Sicherheitstechnische Kontrolle (STK)",
+      "aliases": ["STK-Protokoll", "Prüfprotokoll STK Vorlage"],
+      "summary": "Allgemeine Vorlage für das Protokoll einer Sicherheitstechnischen Kontrolle nach MPBetreibV – mit Geräteidentifikation, Prüfmitteln, Prüfschritten, Messwerten, Bewertung und Unterschrift. Gerätespezifische Herstellervorgaben sind zu ergänzen.",
+      "body": "Die Vorlage ist geräteneutral. Prüfumfang, Grenzwerte und Toleranzen stammen aus den **Herstellerunterlagen**; Rechtsgrundlage ist [[legal_reference:de-mpbetreibv-stk]].\n\n## 1. Kopfdaten\n- Betreiber / Einrichtung, Abteilung, Standort\n- Gerätebezeichnung, Hersteller, Typ, Seriennummer, Inventarnummer\n- Softwarestand (falls relevant)\n- Prüfgrundlage: Herstellervorgabe (Dokument, Version), MPBetreibV\n- Prüfart: STK / STK nach Instandsetzung\n\n## 2. Prüfmittel\n| Prüfmittel | Typ / Seriennummer | Kalibriert bis |\n|---|---|---|\n| z. B. Medizingeräte-Sicherheitstester | | |\n| z. B. gerätespezifischer Analysator | | |\n\n## 3. Prüfschritte\n| Nr. | Prüfschritt | Soll / Grenzwert (Quelle) | Ist | i. O. / n. i. O. |\n|---|---|---|---|---|\n| 1 | Sichtprüfung (Gehäuse, Leitungen, Zubehör, Kennzeichnung) | – | | |\n| 2 | Selbsttest / Anzeigen / Alarme | Herstellerangabe | | |\n| 3 | Gerätespezifische Funktions- und Messprüfungen | Herstellerangabe | | |\n| 4 | Elektrische Sicherheit nach DIN EN 62353 | siehe Prüfverfahren | | |\n\n## 4. Bewertung\n- [ ] Keine Mängel – Gerät darf weiter betrieben werden\n- [ ] Mängel ohne unmittelbare Gefährdung – Behebung bis: ____\n- [ ] Gefährdende Mängel – Gerät außer Betrieb genommen, Betreiber informiert\n\nNächste STK fällig: ____ (nach Herstellerangabe; fehlt diese, spätestens nach zwei Jahren)\n\n## 5. Abschluss\nDatum, Name und Unterschrift der prüfenden Person; Eintrag in das Medizinproduktebuch; Prüfkennzeichnung am Gerät.\n\nBeispiele für gerätespezifische Abläufe: [[test_procedure:stk-defibrillator]], [[test_procedure:stk-infusionspumpe]], [[test_procedure:beatmungsgeraet-funktionspruefung-stk]].",
+      "tags": ["STK", "Vorlage", "Dokumentation", "MPBetreibV"],
+      "data": { "docType": "protokollvorlage", "language": "de", "version": "1.0" },
+      "links": [
+        { "rel": "based_on", "to": "legal_reference:de-mpbetreibv-stk" },
+        { "rel": "documents", "to": "test_procedure:stk-defibrillator" },
+        { "rel": "documents", "to": "test_procedure:stk-infusionspumpe" },
+        { "rel": "documents", "to": "test_procedure:beatmungsgeraet-funktionspruefung-stk" },
+        { "rel": "documents", "to": "test_procedure:elektrische-sicherheit-62353" }
+      ],
+      "sources": ["src:de-mpbetreibv", "src:din-en-62353"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "document:checkliste-geraeteeinweisung",
+      "title": "Checkliste: Geräteeinweisung nach MPBetreibV",
+      "aliases": ["Einweisungsprotokoll", "Checkliste Einweisung Medizinprodukt"],
+      "summary": "Checkliste für die strukturierte Einweisung von Anwendern in ein Medizinprodukt – von Zweckbestimmung und Bedienung über Alarme, Zubehör und Aufbereitung bis zur Dokumentation der Einweisung.",
+      "body": "Die Checkliste unterstützt Hersteller, beauftragte Personen und Geräteverantwortliche. Inhalt und Tiefe der Einweisung richten sich nach Gebrauchsanweisung und Risiko des Produkts. Rechtsgrundlage: [[legal_reference:de-mpbetreibv]].\n\n## Vorbereitung\n- [ ] Gerät, Typ, Softwarestand und Seriennummer erfasst\n- [ ] Aktuelle Gebrauchsanweisung liegt vor und ist am Einsatzort zugänglich\n- [ ] Bei Produkten nach Anlage 1: Funktionsprüfung am Betriebsort ist erfolgt\n\n## Inhalte der Einweisung\n- [ ] Zweckbestimmung, Anwendungsbereich, Gegenanzeigen laut Gebrauchsanweisung\n- [ ] Aufbau, Bedienelemente, Anzeigen\n- [ ] Inbetriebnahme, Selbsttest und Prüfung vor der Anwendung\n- [ ] Anwendung am Patienten einschließlich Einstellungen und Grenzwerte\n- [ ] Alarme: Bedeutung, Prioritäten, richtige Reaktion\n- [ ] Zubehör und Verbrauchsmaterial: nur freigegebene Artikel\n- [ ] Akku- bzw. Netzbetrieb, Verhalten bei Netzausfall\n- [ ] Reinigung, Desinfektion bzw. Aufbereitung nach Herstellerangabe\n- [ ] Verhalten bei Störungen und Vorkommnissen (Gerät sichern, Medizintechnik informieren, Meldewege)\n- [ ] Praktische Übung der Anwender mit Rückfragen\n\n## Dokumentation\n- Name und Funktion der eingewiesenen Personen\n- Name der einweisenden Person (Hersteller bzw. beauftragte Person)\n- Datum, Inhalte, Unterschriften\n- Bei Produkten nach Anlage 1: Eintrag in das Medizinproduktebuch\n\nGeeignete Übungsgeräte sind z. B. [[device:infusionspumpe]], [[device:spritzenpumpe]] oder [[device:defibrillator]].",
+      "tags": ["Einweisung", "Checkliste", "MPBetreibV", "Anwender"],
+      "data": { "docType": "checkliste", "language": "de", "version": "1.0" },
+      "links": [
+        { "rel": "based_on", "to": "legal_reference:de-mpbetreibv" },
+        { "rel": "documents", "to": "device:infusionspumpe" },
+        { "rel": "documents", "to": "device:spritzenpumpe" },
+        { "rel": "documents", "to": "device:defibrillator" },
+        { "rel": "documents", "to": "device:beatmungsgeraet" }
+      ],
+      "sources": ["src:de-mpbetreibv"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    }
+  ]
+}

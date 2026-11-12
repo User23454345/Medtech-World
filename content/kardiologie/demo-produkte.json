@@ -1,0 +1,137 @@
+{
+  "sources": [],
+  "entities": [
+    {
+      "id": "product_model:nordlicht-cardiopuls-d300",
+      "title": "Nordlicht CardioPuls D300 (Demo)",
+      "aliases": ["CardioPuls D300"],
+      "summary": "Fiktiver klinischer Defibrillator/Monitor mit biphasischer Impulsform, manuellem und AED-Modus, Synchronisation und EKG-Überwachung – Demo-Datensatz für Produktmodell, Ersatzteile und Angebote.",
+      "body": "Demo-Datensatz – keine reale Herstellerangabe. Das Modell zeigt, wie ein konkretes Produktmodell mit dem Gerätetyp [[device:defibrillator]], seinen Komponenten, Ersatzteilen und der [[test_procedure:stk-defibrillator|STK]] verknüpft ist.",
+      "tags": ["Defibrillation", "Demo", "Kardiologie"],
+      "data": { "status": "aktiv", "releaseYear": 2023, "riskClass": "IIb" },
+      "specs": [
+        { "key": "impulsform", "label": "Impulsform", "value": "biphasisch, impedanzkompensiert", "source": "src:mtw-redaktion-demo" },
+        { "key": "energiebereich", "label": "Wählbare Energie (manuell)", "value": "2–200", "unit": "J", "source": "src:mtw-redaktion-demo" },
+        { "key": "ladezeit_max", "label": "Ladezeit auf 200 J", "value": "≤ 7", "unit": "s", "condition": "neuer, voll geladener Akku", "source": "src:mtw-redaktion-demo" },
+        { "key": "schocks_pro_akkuladung", "label": "Schocks mit maximaler Energie pro Akkuladung", "value": 150, "source": "src:mtw-redaktion-demo" },
+        { "key": "ekg_ableitung", "label": "EKG-Ableitung", "value": "über Pads oder 3-/5-adriges Patientenkabel", "source": "src:mtw-redaktion-demo" },
+        { "key": "gewicht", "label": "Gewicht inkl. Akku", "value": 5.5, "unit": "kg", "source": "src:mtw-redaktion-demo" }
+      ],
+      "links": [
+        { "rel": "model_of", "to": "device:defibrillator" },
+        { "rel": "manufactured_by", "to": "manufacturer:nordlicht-medizintechnik" },
+        { "rel": "has_component", "to": "component:hochspannungskondensator" },
+        { "rel": "has_component", "to": "component:defibrillator-akku" },
+        { "rel": "has_component", "to": "component:defibrillationselektroden" },
+        { "rel": "has_component", "to": "component:ekg-verstaerker" },
+        { "rel": "has_component", "to": "component:ekg-patientenkabel" }
+      ],
+      "sources": ["src:mtw-redaktion-demo"],
+      "demo": true,
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "product_model:nordlicht-cardiograph-e12",
+      "title": "Nordlicht Cardiograph E12 (Demo)",
+      "aliases": ["Cardiograph E12"],
+      "summary": "Fiktiver 12-Kanal-Elektrokardiograph mit Touchdisplay, Thermodrucker und automatischer Vermessung – Demo-Datensatz zur Verknüpfung von EKG-Gerät, Zubehör und Ersatzteilen.",
+      "body": "Demo-Datensatz – keine reale Herstellerangabe. Gerätetyp: [[device:ekg-geraet]].",
+      "tags": ["EKG", "Demo", "Kardiologie"],
+      "data": { "status": "aktiv", "releaseYear": 2022, "riskClass": "IIa" },
+      "specs": [
+        { "key": "kanaele", "label": "Ableitungen", "value": 12, "source": "src:mtw-redaktion-demo" },
+        { "key": "abtastrate", "label": "Abtastrate je Kanal", "value": 1000, "unit": "Hz", "source": "src:mtw-redaktion-demo" },
+        { "key": "druckerpapier", "label": "Papierbreite Thermodrucker", "value": 112, "unit": "mm", "source": "src:mtw-redaktion-demo" },
+        { "key": "akkubetrieb", "label": "Akkubetrieb", "value": "ca. 100 Ruhe-EKG", "source": "src:mtw-redaktion-demo" }
+      ],
+      "links": [
+        { "rel": "model_of", "to": "device:ekg-geraet" },
+        { "rel": "manufactured_by", "to": "manufacturer:nordlicht-medizintechnik" },
+        { "rel": "has_component", "to": "component:ekg-verstaerker" },
+        { "rel": "has_component", "to": "component:ekg-patientenkabel" },
+        { "rel": "has_component", "to": "component:ekg-elektroden" }
+      ],
+      "sources": ["src:mtw-redaktion-demo"],
+      "demo": true,
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "spare_part:nordlicht-defi-pads-nl-dp20",
+      "title": "Defibrillations-Klebeelektroden Erwachsene NL-DP20 (Demo)",
+      "aliases": ["NL-DP20"],
+      "summary": "Fiktive selbstklebende Einmal-Defibrillationselektroden für Erwachsene mit Verfallsdatum, kompatibel mit dem Demo-Modell CardioPuls D300.",
+      "tags": ["Defibrillation", "Verbrauchsmaterial", "Demo"],
+      "data": { "partNumber": "NL-DP20", "kind": "verbrauchsmaterial", "wearPart": true, "original": true, "typicalLifetime": "Einmalprodukt; Verfallsdatum laut Verpackung" },
+      "links": [
+        { "rel": "fits", "to": "product_model:nordlicht-cardiopuls-d300" },
+        { "rel": "fits", "to": "component:defibrillationselektroden" },
+        { "rel": "manufactured_by", "to": "manufacturer:nordlicht-medizintechnik" }
+      ],
+      "sources": ["src:mtw-redaktion-demo"],
+      "demo": true,
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "spare_part:nordlicht-defi-akku-nl-ba30",
+      "title": "Li-Ionen-Akku NL-BA30 für CardioPuls D300 (Demo)",
+      "aliases": ["NL-BA30"],
+      "summary": "Fiktiver wiederaufladbarer Lithium-Ionen-Akku für das Demo-Modell CardioPuls D300 – Verschleißteil mit vom (Demo-)Hersteller empfohlenem Austauschintervall.",
+      "tags": ["Defibrillation", "Akku", "Demo"],
+      "data": { "partNumber": "NL-BA30", "kind": "energie", "wearPart": true, "original": true, "typicalLifetime": "Austausch nach Demo-Herstellerangabe, spätestens nach 4 Jahren" },
+      "links": [
+        { "rel": "fits", "to": "product_model:nordlicht-cardiopuls-d300" },
+        { "rel": "fits", "to": "component:defibrillator-akku" },
+        { "rel": "manufactured_by", "to": "manufacturer:nordlicht-medizintechnik" }
+      ],
+      "sources": ["src:mtw-redaktion-demo"],
+      "demo": true,
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "spare_part:nordlicht-ekg-kabel-nl-ek10",
+      "title": "EKG-Patientenkabel 10-adrig NL-EK10 (Demo)",
+      "aliases": ["NL-EK10"],
+      "summary": "Fiktives 10-adriges, geschirmtes EKG-Patientenkabel mit IEC-Farbkodierung und Druckknopfanschlüssen für das Demo-Modell Cardiograph E12.",
+      "tags": ["EKG", "Kabel", "Demo", "Zubehör"],
+      "data": { "partNumber": "NL-EK10", "kind": "elektronik", "wearPart": true, "original": true, "typicalLifetime": "abhängig von Nutzung, Reinigung und Desinfektion" },
+      "links": [
+        { "rel": "fits", "to": "product_model:nordlicht-cardiograph-e12" },
+        { "rel": "fits", "to": "component:ekg-patientenkabel" },
+        { "rel": "manufactured_by", "to": "manufacturer:nordlicht-medizintechnik" }
+      ],
+      "sources": ["src:mtw-redaktion-demo"],
+      "demo": true,
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "offer:nordlicht-defi-pads-neu",
+      "title": "NL-DP20 Defi-Klebeelektroden, 5er-Pack, neu (Demo-Angebot)",
+      "summary": "Demo-Angebot im MedTech Market: Original-Klebeelektroden NL-DP20 für den CardioPuls D300, neu, mit Restlaufzeit von mindestens 24 Monaten.",
+      "tags": ["Defibrillation", "Demo", "Verbrauchsmaterial"],
+      "data": { "seller": "Demo-Servicepartner Nord", "price": 189, "currency": "EUR", "condition": "neu", "stock": 40, "location": "Hamburg" },
+      "links": [{ "rel": "offers", "to": "spare_part:nordlicht-defi-pads-nl-dp20" }],
+      "demo": true,
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "offer:nordlicht-defi-akku-neu",
+      "title": "NL-BA30 Akku für CardioPuls D300, neu (Demo-Angebot)",
+      "summary": "Demo-Angebot im MedTech Market: Original-Akku NL-BA30 für den Demo-Defibrillator CardioPuls D300, neu und mit Herstellerdatum.",
+      "tags": ["Defibrillation", "Akku", "Demo"],
+      "data": { "seller": "Demo-Medizintechnik Süd", "price": 349, "currency": "EUR", "condition": "neu", "stock": 8, "location": "München", "warrantyMonths": 12 },
+      "links": [{ "rel": "offers", "to": "spare_part:nordlicht-defi-akku-nl-ba30" }],
+      "demo": true,
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "offer:nordlicht-cardiopuls-d300-generalueberholt",
+      "title": "CardioPuls D300, generalüberholt mit STK (Demo-Angebot)",
+      "summary": "Demo-Angebot im MedTech Market: generalüberholter Demo-Defibrillator CardioPuls D300 mit neuem Akku, neuen Elektroden und aktueller STK.",
+      "tags": ["Defibrillation", "Demo", "Gerät"],
+      "data": { "seller": "Demo-Servicepartner Nord", "price": 6900, "currency": "EUR", "condition": "generalueberholt", "stock": 2, "location": "Hamburg", "warrantyMonths": 12 },
+      "links": [{ "rel": "offers", "to": "product_model:nordlicht-cardiopuls-d300" }],
+      "demo": true,
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    }
+  ]
+}

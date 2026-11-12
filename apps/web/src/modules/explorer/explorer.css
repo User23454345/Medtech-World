@@ -1,0 +1,67 @@
+/* MedTech 3D Explorer – modulspezifische Stile (Präfix mw-explorer-) */
+.mw-explorer-viewer { display: flex; flex-direction: column; gap: var(--mw-space-3); }
+.mw-explorer-toolbar { display: flex; flex-wrap: wrap; gap: var(--mw-space-2); align-items: center; }
+.mw-explorer-zoom { display: inline-flex; gap: 4px; margin-left: auto; }
+.mw-explorer-layout { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: var(--mw-space-4); align-items: start; }
+.mw-explorer-viewer--compact .mw-explorer-layout { grid-template-columns: minmax(0, 1fr) 240px; }
+@media (max-width: 760px) {
+  .mw-explorer-layout, .mw-explorer-viewer--compact .mw-explorer-layout { grid-template-columns: minmax(0, 1fr); }
+}
+.mw-explorer-main { min-width: 0; }
+.mw-explorer-stage {
+  position: relative;
+  height: clamp(320px, 62vh, 620px);
+  border: 1px solid var(--mw-border);
+  border-radius: var(--mw-radius);
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 35%, var(--mw-surface) 0%, var(--mw-surface-2) 60%, var(--mw-surface-3) 100%);
+  outline: none;
+}
+.mw-explorer-viewer--compact .mw-explorer-stage { height: clamp(260px, 42vh, 380px); }
+.mw-explorer-stage:focus-visible { box-shadow: 0 0 0 3px var(--mw-focus); border-color: var(--mw-mod-explorer); }
+.mw-explorer-canvas-host { position: absolute; inset: 0; }
+.mw-explorer-canvas { display: block; width: 100%; height: 100%; cursor: grab; }
+.mw-explorer-overlay { position: absolute; inset: 0; display: grid; place-items: center; }
+.mw-explorer-hover {
+  position: absolute; left: 12px; bottom: 12px; pointer-events: none;
+  padding: 4px 10px; border-radius: var(--mw-radius-sm);
+  background: var(--mw-surface); color: var(--mw-text); border: 1px solid var(--mw-border);
+  box-shadow: var(--mw-shadow-sm); font-size: var(--mw-fs-sm);
+}
+.mw-explorer-help { margin: var(--mw-space-2) 0 0; }
+.mw-explorer-side { display: flex; flex-direction: column; gap: var(--mw-space-3); min-width: 0; }
+.mw-explorer-hint { margin: 0; padding: var(--mw-space-3); border: 1px dashed var(--mw-border); border-radius: var(--mw-radius); }
+.mw-explorer-detail {
+  padding: var(--mw-space-3); border-radius: var(--mw-radius);
+  border: 1px solid var(--mw-border); border-left: 4px solid var(--mw-mod-explorer);
+  background: var(--mw-surface); display: flex; flex-direction: column; gap: var(--mw-space-2);
+}
+.mw-explorer-detail__title { margin: 0; font-size: var(--mw-fs-md); line-height: 1.3; }
+.mw-explorer-detail p { margin: 0; }
+.mw-explorer-component { display: flex; flex-direction: column; gap: 6px; padding-top: var(--mw-space-2); border-top: 1px solid var(--mw-border); align-items: flex-start; }
+.mw-explorer-component__title { font-weight: 600; }
+.mw-explorer-facts { display: flex; flex-direction: column; gap: 4px; color: var(--mw-text-2); }
+.mw-explorer-list-title { margin: 0; font-size: var(--mw-fs-sm); text-transform: uppercase; letter-spacing: .04em; color: var(--mw-text-3); }
+.mw-explorer-parts { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; max-height: 420px; overflow-y: auto; }
+.mw-explorer-viewer--compact .mw-explorer-parts { max-height: 260px; }
+.mw-explorer-part {
+  width: 100%; display: flex; align-items: center; gap: 8px; text-align: left;
+  padding: 6px 10px; border-radius: var(--mw-radius-sm); border: 1px solid transparent;
+  background: transparent; color: var(--mw-text); font: inherit; font-size: var(--mw-fs-sm); cursor: pointer;
+  transition: background var(--mw-transition), border-color var(--mw-transition);
+}
+.mw-explorer-part:hover { background: var(--mw-surface-2); }
+.mw-explorer-part:focus-visible { outline: 2px solid var(--mw-focus); outline-offset: 1px; }
+.mw-explorer-part[aria-pressed='true'] { background: var(--mw-surface-2); border-color: var(--mw-mod-explorer); font-weight: 600; }
+.mw-explorer-part__label { flex: 1; min-width: 0; }
+.mw-explorer-swatch { width: 14px; height: 14px; border-radius: 4px; flex: none; border: 1px solid var(--mw-border-strong); }
+.mw-explorer-cards { display: grid; gap: var(--mw-space-4); grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); }
+.mw-explorer-card { display: flex; flex-direction: column; gap: var(--mw-space-2); height: 100%; border-top: 3px solid var(--mw-mod-explorer); }
+.mw-explorer-card__title { margin: 0; font-size: var(--mw-fs-lg); }
+.mw-explorer-card__summary { margin: 0; color: var(--mw-text-2); font-size: var(--mw-fs-sm); flex: 1; }
+.mw-explorer-swatches { display: flex; gap: 3px; flex-wrap: wrap; }
+@media (prefers-reduced-motion: reduce) { .mw-explorer-part { transition: none; } }
+.mw-explorer-detail__head { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--mw-space-2); }
+/* Leeres 3D-Panel auf der Detailseite (Gerät ohne Szene) samt Überschrift ausblenden */
+.mw-section:has(> .mw-explorer-noscene) { display: none; }

@@ -1,0 +1,792 @@
+{
+  "sources": [
+    {
+      "id": "src:iec-60601-2-4",
+      "title": "IEC 60601-2-4 – Medizinische elektrische Geräte – Teil 2-4: Besondere Festlegungen für die Sicherheit einschließlich der wesentlichen Leistungsmerkmale von Defibrillatoren",
+      "publisher": "IEC",
+      "kind": "norm",
+      "edition": "2010",
+      "accessedAt": "2026-11-01"
+    },
+    {
+      "id": "src:iec-60601-2-25",
+      "title": "IEC 60601-2-25 – Medizinische elektrische Geräte – Teil 2-25: Besondere Festlegungen für die Sicherheit einschließlich der wesentlichen Leistungsmerkmale von Elektrokardiographen",
+      "publisher": "IEC",
+      "kind": "norm",
+      "edition": "2011",
+      "accessedAt": "2026-11-01"
+    },
+    {
+      "id": "src:erc-leitlinien-2021",
+      "title": "European Resuscitation Council Guidelines 2021 (Reanimationsleitlinien)",
+      "publisher": "European Resuscitation Council (ERC)",
+      "kind": "verband",
+      "edition": "2021",
+      "note": "Deutsche Fassung über den German Resuscitation Council (GRC). Für klinische Entscheidungen stets die jeweils aktuelle Leitlinienfassung heranziehen.",
+      "accessedAt": "2026-11-01"
+    }
+  ],
+  "entities": [
+    {
+      "id": "term:elektrokardiogramm",
+      "title": "Elektrokardiogramm (EKG)",
+      "aliases": ["EKG", "ECG", "Elektrokardiographie", "Herzstromkurve"],
+      "summary": "Aufzeichnung der von der Herzerregung erzeugten elektrischen Potenzialdifferenzen an der Körperoberfläche über die Zeit. Grundlage für Rhythmusdiagnostik, Überwachung und die Schockentscheidung bei der Defibrillation.",
+      "body": "## Entstehung des Signals\nDie Erregung des Herzens breitet sich vom Sinusknoten über die Vorhöfe, den AV-Knoten und das Erregungsleitungssystem auf die Kammern aus. Die dabei entstehenden elektrischen Felder erzeugen an der Hautoberfläche Spannungen im Bereich von etwa einem Millivolt, die über [[component:ekg-elektroden|EKG-Elektroden]] abgegriffen und von einem [[component:ekg-verstaerker|EKG-Verstärker]] aufbereitet werden.\n\n## Die Kurve\n- **P-Welle:** Erregung der Vorhöfe\n- **PQ-Strecke:** Überleitung im AV-Knoten\n- **QRS-Komplex:** Erregung der Kammern\n- **ST-Strecke und T-Welle:** Erregungsrückbildung der Kammern\n\n## Darstellung\nIn der Standarddarstellung entspricht 1 mV einer Auslenkung von 10 mm; die Papiergeschwindigkeit beträgt meist 25 mm/s (alternativ 50 mm/s). Welche Spannung zwischen welchen Elektroden gemessen wird, legen die [[term:einthoven-ableitungen|Ableitungen]] fest.\n\n## Geräte\nDas EKG wird mit dem [[device:ekg-geraet|12-Kanal-EKG-Gerät]] diagnostisch aufgezeichnet, am [[device:patientenmonitor|Patientenmonitor]] kontinuierlich überwacht und vom [[device:defibrillator|Defibrillator]] bzw. [[device:aed|AED]] zur Rhythmusanalyse genutzt.",
+      "tags": ["EKG", "Kardiologie", "Vitalparameter", "Messprinzip"],
+      "data": { "category": "messprinzip", "abbreviation": "EKG", "english": "electrocardiogram" },
+      "specs": [
+        { "key": "papiergeschwindigkeit", "label": "Standard-Papiergeschwindigkeit", "value": 25, "unit": "mm/s", "condition": "Standarddarstellung; alternativ 50 mm/s", "source": "src:kramme-medizintechnik" },
+        { "key": "amplitudenmassstab", "label": "Standard-Amplitudenmaßstab", "value": 10, "unit": "mm/mV", "source": "src:kramme-medizintechnik" }
+      ],
+      "links": [
+        { "rel": "related", "to": "term:einthoven-ableitungen" },
+        { "rel": "related", "to": "device:patientenmonitor" }
+      ],
+      "sources": ["src:kramme-medizintechnik", "src:iec-60601-2-25"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "term:einthoven-ableitungen",
+      "title": "Ableitungen nach Einthoven",
+      "aliases": ["Einthoven-Ableitungen", "Extremitätenableitungen I, II, III", "Einthoven-Dreieck", "bipolare Extremitätenableitungen"],
+      "summary": "Die drei bipolaren Extremitätenableitungen I, II und III messen die Spannung zwischen rechtem Arm, linkem Arm und linkem Bein. Zusammen mit den Goldberger- und Wilson-Ableitungen bilden sie das 12-Kanal-EKG.",
+      "body": "## Definition\n- **Ableitung I:** linker Arm gegen rechten Arm\n- **Ableitung II:** linkes Bein gegen rechten Arm\n- **Ableitung III:** linkes Bein gegen linken Arm\n\nDie Elektrodenpunkte bilden näherungsweise ein gleichseitiges Dreieck mit dem Herzen im Zentrum (Einthoven-Dreieck, siehe [[media:einthoven-dreieck]]). Aus den Definitionen folgt das **Einthoven-Gesetz**: Die Spannung in Ableitung II ist gleich der Summe der Spannungen in I und III.\n\n## Das 12-Kanal-EKG\n| Gruppe | Ableitungen | Art |\n|---|---|---|\n| Einthoven | I, II, III | bipolar, Extremitäten |\n| Goldberger | aVR, aVL, aVF | unipolar (verstärkt), Extremitäten |\n| Wilson | V1–V6 | unipolar, Brustwand |\n\nDafür werden zehn [[component:ekg-elektroden|Elektroden]] benötigt: vier an den Extremitäten (die Elektrode am rechten Bein dient als Bezugs- bzw. Neutralelektrode) und sechs an der Brustwand.\n\n## Farbkodierung der Extremitätenelektroden (IEC)\nRechter Arm rot, linker Arm gelb, linkes Bein grün, rechtes Bein schwarz. In Nordamerika ist eine abweichende Kodierung (AHA) üblich – bei Importzubehör beachten.\n\nVertauschte Elektroden verfälschen die Kurven und sind eine häufige Fehlerquelle, die zu Fehlinterpretationen führen kann.",
+      "tags": ["EKG", "Ableitungen", "Grundlagen"],
+      "data": { "category": "messprinzip", "english": "Einthoven leads", "formula": "U_II = U_I + U_III" },
+      "links": [
+        { "rel": "related", "to": "device:ekg-geraet" }
+      ],
+      "sources": ["src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "term:kammerflimmern",
+      "title": "Kammerflimmern",
+      "aliases": ["VF", "Ventrikuläres Flimmern", "ventricular fibrillation"],
+      "summary": "Lebensbedrohliche Herzrhythmusstörung mit völlig unkoordinierter elektrischer Aktivität der Herzkammern. Es findet keine wirksame Pumpleistung statt (Kreislaufstillstand); Therapie der Wahl ist die sofortige Defibrillation.",
+      "body": "## EKG-Bild\nUnregelmäßige, unterschiedlich hohe Flimmerwellen ohne abgrenzbare QRS-Komplexe. Man unterscheidet grob- und feinschlägiges Kammerflimmern.\n\n## Bedeutung für die Medizintechnik\n- Kammerflimmern und pulslose ventrikuläre Tachykardie sind **defibrillierbare Rhythmen**; Asystolie ist es nicht.\n- Die Rhythmusanalyse eines [[device:aed|AED]] muss Kammerflimmern zuverlässig erkennen und von Artefakten unterscheiden – Bewegung oder Erschütterung während der Analyse können die Erkennung stören.\n- Bei der [[test_procedure:stk-defibrillator|STK]] wird die Rhythmuserkennung mit simulierten Rhythmen eines Defibrillator-Analysators geprüft.\n\nTherapie: [[term:biphasische-defibrillation|Defibrillation]] im Rahmen der Reanimation nach aktuellen Leitlinien.",
+      "tags": ["Kardiologie", "Notfall", "Rhythmus"],
+      "data": { "category": "physiologie", "abbreviation": "VF", "english": "ventricular fibrillation" },
+      "links": [
+        { "rel": "related", "to": "term:elektrokardiogramm" },
+        { "rel": "related", "to": "term:biphasische-defibrillation" }
+      ],
+      "sources": ["src:erc-leitlinien-2021", "src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "term:vorhofflimmern",
+      "title": "Vorhofflimmern",
+      "aliases": ["VHF", "AF", "atrial fibrillation"],
+      "summary": "Häufigste anhaltende Herzrhythmusstörung: Die Vorhöfe werden ungeordnet erregt, die Kammern schlagen unregelmäßig. Im EKG fehlen P-Wellen, die RR-Abstände sind absolut unregelmäßig.",
+      "body": "## EKG-Bild\n- Keine abgrenzbaren P-Wellen, stattdessen feine Flimmerwellen in der Grundlinie\n- Absolut unregelmäßige RR-Abstände (absolute Arrhythmie)\n- QRS-Komplexe meist schmal\n\n## Technischer Bezug\nDie Unterscheidung von Flimmerwellen und Störsignalen erfordert eine gute Signalqualität – [[fault:ekg-netzbrummen|Netzbrummen]] oder Muskelzittern können Flimmerwellen vortäuschen oder überdecken. Bei Vorhofflimmern kann eine [[term:synchronisierte-kardioversion]] durchgeführt werden.",
+      "tags": ["Kardiologie", "Rhythmus", "EKG"],
+      "data": { "category": "physiologie", "abbreviation": "VHF", "english": "atrial fibrillation" },
+      "links": [
+        { "rel": "related", "to": "term:elektrokardiogramm" },
+        { "rel": "related", "to": "term:synchronisierte-kardioversion" }
+      ],
+      "sources": ["src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "term:biphasische-defibrillation",
+      "title": "Biphasische Defibrillation",
+      "aliases": ["biphasischer Schock", "biphasische Impulsform", "Defibrillation"],
+      "summary": "Defibrillation mit einem Stromimpuls, dessen Polarität während der Abgabe einmal wechselt. Biphasische Impulse erreichen die Defibrillation mit geringerer Energie als die früher üblichen monophasischen Impulse und sind heute Standard.",
+      "body": "## Prinzip der Defibrillation\nEin kurzer, starker Stromimpuls durch das Herz depolarisiert gleichzeitig einen kritischen Anteil des Herzmuskels. Dadurch wird die chaotische Erregung beim [[term:kammerflimmern|Kammerflimmern]] unterbrochen, und der Sinusknoten kann wieder die Führung übernehmen. Die Energie wird zuvor in einem [[component:hochspannungskondensator|Hochspannungskondensator]] gespeichert und über [[component:defibrillationselektroden|Defibrillationselektroden]] abgegeben.\n\n## Monophasisch vs. biphasisch\n- **Monophasisch:** Strom fließt nur in eine Richtung; hohe Energien erforderlich (bei Erwachsenen 360 J).\n- **Biphasisch:** Strom kehrt nach der ersten Phase die Richtung um. Die erforderliche Energie ist geringer; die konkreten Energiestufen sind herstellerspezifisch.\n\n## Impedanzkompensation\nDer Stromfluss hängt von der [[term:impedanz|transthorakalen Impedanz]] ab. Biphasische Geräte messen die Impedanz und passen Dauer bzw. Form des Impulses an.\n\n## Energieangaben\nDie angegebene Energie bezieht sich auf die an den Patienten abgegebene Energie. Geprüft wird sie mit einem Defibrillator-Analysator an einer definierten Prüflast (siehe [[test_procedure:stk-defibrillator]]).",
+      "tags": ["Defibrillation", "Notfall", "Kardiologie"],
+      "data": { "category": "technik", "english": "biphasic defibrillation", "formula": "E = ½ · C · U²" },
+      "specs": [
+        { "key": "energie_monophasisch_erwachsene", "label": "Energie monophasischer Schock (Erwachsene)", "value": 360, "unit": "J", "condition": "Empfehlung ERC-Leitlinien 2021", "source": "src:erc-leitlinien-2021" },
+        { "key": "energie_biphasisch_erster_schock", "label": "Energie erster biphasischer Schock (Erwachsene)", "value": "≥ 150", "unit": "J", "condition": "Empfehlung ERC-Leitlinien 2021; Herstellerangaben beachten", "source": "src:erc-leitlinien-2021" }
+      ],
+      "links": [
+        { "rel": "related", "to": "term:impedanz" },
+        { "rel": "related", "to": "term:synchronisierte-kardioversion" }
+      ],
+      "sources": ["src:erc-leitlinien-2021", "src:kramme-medizintechnik", "src:iec-60601-2-4"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "term:synchronisierte-kardioversion",
+      "title": "Synchronisierte Kardioversion",
+      "aliases": ["Kardioversion", "R-Zacken-synchronisierter Schock", "Synchronmodus"],
+      "summary": "Elektrische Schockabgabe, die vom Defibrillator auf die R-Zacke des EKG synchronisiert wird. So wird vermieden, dass der Schock in die vulnerable Phase (T-Welle) fällt und Kammerflimmern auslöst.",
+      "body": "## Ablauf\n1. Synchronmodus am [[device:defibrillator]] aktivieren – auf dem Monitor erscheinen Markierungen an den erkannten R-Zacken.\n2. Prüfen, ob jede R-Zacke korrekt markiert wird (und nicht etwa hohe T-Wellen oder Artefakte).\n3. Laden; bei Auslösung gibt das Gerät den Schock erst mit der nächsten erkannten R-Zacke ab.\n\n## Technische Hinweise\n- Voraussetzung ist ein sauberes [[term:elektrokardiogramm|EKG-Signal]] mit gut erkennbaren QRS-Komplexen.\n- Viele Geräte schalten nach der Schockabgabe in den asynchronen Modus zurück – Verhalten laut Gebrauchsanweisung kennen.\n- Bei Kammerflimmern ist keine Synchronisation möglich, da keine R-Zacken vorhanden sind; hier wird asynchron defibrilliert.\n\nDie Synchronisationsfunktion ist Bestandteil der [[test_procedure:stk-defibrillator|STK]].",
+      "tags": ["Defibrillation", "Kardioversion", "Kardiologie"],
+      "data": { "category": "technik", "english": "synchronized cardioversion" },
+      "links": [
+        { "rel": "related", "to": "term:elektrokardiogramm" }
+      ],
+      "sources": ["src:erc-leitlinien-2021", "src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "term:impedanz",
+      "title": "Impedanz (Elektroden-Haut- und transthorakale Impedanz)",
+      "aliases": ["Impedanz", "Transthorakale Impedanz", "Elektrodenimpedanz", "Hautübergangswiderstand"],
+      "summary": "Wechselstromwiderstand, den ein Stromkreis einem Strom entgegensetzt. In der Kardiologietechnik wichtig als Elektroden-Haut-Impedanz beim EKG und als transthorakale Impedanz bei der Defibrillation.",
+      "body": "## Grundlage\nDie Impedanz Z ist das Verhältnis von Spannung zu Strom bei Wechselgrößen und wird in Ohm angegeben. Sie setzt sich aus ohmschen und kapazitiven Anteilen zusammen.\n\n## Elektroden-Haut-Impedanz (EKG)\nEine hohe oder zwischen den Elektroden stark unterschiedliche Übergangsimpedanz – etwa durch trockene Haut, Haare, ausgetrocknetes Elektrodengel oder gemischte Elektrodentypen – verschlechtert die Unterdrückung von Gleichtaktstörungen im [[component:ekg-verstaerker|EKG-Verstärker]]. Folge sind z. B. [[fault:ekg-netzbrummen|Netzbrummen]] und Grundlinienschwankungen. Viele Geräte nutzen eine Impedanz- bzw. Strommessung zur Erkennung von [[fault:ekg-elektrode-ab|„Elektrode ab“]].\n\n## Transthorakale Impedanz (Defibrillation)\nDer Widerstand des Brustkorbs zwischen den [[component:defibrillationselektroden|Defibrillationselektroden]] bestimmt, welcher Strom bei gegebener Spannung fließt. Er hängt u. a. von Elektrodengröße, Elektrodenposition, Hautkontakt und Körperbau ab. Biphasische Defibrillatoren messen die Impedanz und kompensieren sie ([[term:biphasische-defibrillation]]).",
+      "tags": ["Elektrotechnik", "EKG", "Defibrillation"],
+      "data": { "category": "technik", "english": "impedance", "formula": "Z = U / I" },
+      "links": [
+        { "rel": "related", "to": "term:elektrokardiogramm" }
+      ],
+      "sources": ["src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "device:defibrillator",
+      "title": "Defibrillator",
+      "aliases": ["Defi", "Manueller Defibrillator", "Defibrillator/Monitor", "Klinischer Defibrillator"],
+      "summary": "Gerät zur Abgabe eines elektrischen Stromimpulses über das Herz, um Kammerflimmern oder pulslose Kammertachykardie zu beenden. Klinische Geräte kombinieren meist EKG-Monitor, manuellen Modus, Synchronisation und oft einen AED-Modus.",
+      "body": "## Aufbau\n- **Energieversorgung:** [[component:defibrillator-akku|Akku bzw. Batterie]], bei klinischen Geräten zusätzlich Netzteil bzw. Ladehalterung\n- **Ladeschaltung und [[component:hochspannungskondensator|Hochspannungskondensator]]:** speichern die Schockenergie\n- **Patientenschnittstelle:** [[component:defibrillationselektroden|Klebeelektroden (Pads)]] oder Hartelektroden (Paddles)\n- **EKG-Teil:** [[component:ekg-verstaerker|EKG-Verstärker]] mit Ableitung über Pads oder ein [[component:ekg-patientenkabel|EKG-Patientenkabel]]\n- **Bedienung und Anzeige:** Energiewahl, Laden, Schock, Synchronisation, Monitor\n\n## Betriebsarten\n- **Manuell:** Anwender beurteilt den Rhythmus und wählt die Energie.\n- **Synchronisiert:** [[term:synchronisierte-kardioversion]]\n- **AED-Modus:** automatische Rhythmusanalyse wie beim [[device:aed]]\n- Je nach Gerät: externer Schrittmacher, SpO₂, Kapnographie (Übergang zum [[device:patientenmonitor|Monitor]])\n\n## Betreiberpflichten\nDefibrillatoren gehören zu den Medizinprodukten nach Anlage 1 der MPBetreibV und unterliegen damit der [[legal_reference:de-mpbetreibv-stk|Sicherheitstechnischen Kontrolle]] – siehe [[test_procedure:stk-defibrillator]]. Tägliche bzw. regelmäßige Funktionskontrollen und Selbsttests nach Herstellerangabe sichern die Einsatzbereitschaft ([[fault:defibrillator-selbsttest-fehlgeschlagen]]).\n\n## Sicherheit\nIm Gerät treten gefährliche Hochspannungen auf; der Kondensator kann auch nach dem Ausschalten geladen sein. Arbeiten im Geräteinneren nur durch autorisiertes, geschultes Personal.",
+      "tags": ["Defibrillation", "Notfall", "Kardiologie", "STK"],
+      "data": {
+        "category": "Notfall- und Kardiologietechnik",
+        "typicalRiskClass": "IIb",
+        "applications": ["Reanimation (Kammerflimmern, pulslose VT)", "Synchronisierte Kardioversion", "Notaufnahme, Intensivstation, OP", "Rettungsdienst"],
+        "operatingPrinciple": "Speicherung elektrischer Energie in einem Hochspannungskondensator und Abgabe als (meist biphasischer) Stromimpuls über Elektroden durch den Brustkorb.",
+        "scene": {
+          "camera": [3.6, 2.4, 4.4],
+          "parts": [
+            { "id": "gehaeuse", "label": "Gerätegehäuse", "shape": "box", "size": [2.6, 1.7, 1.3], "position": [0, 0, 0], "color": "#d9dee5", "opacity": 0.35, "description": "Kunststoffgehäuse mit Hochspannungsteil, Steuerung und EKG-Elektronik" },
+            { "id": "display", "label": "Monitor (EKG, Energie, Status)", "shape": "box", "size": [1.3, 0.85, 0.05], "position": [-0.45, 0.25, 0.66], "color": "#0f2a3d" },
+            { "id": "bedienfeld", "label": "Bedienfeld (Energiewahl, Laden, Schock)", "shape": "box", "size": [0.8, 0.85, 0.05], "position": [0.8, 0.25, 0.66], "color": "#9aa5b1" },
+            { "id": "schocktaste", "label": "Schocktaste", "shape": "cylinder", "size": [0.11, 0.06, 0], "position": [0.8, -0.05, 0.7], "rotation": [1.5708, 0, 0], "color": "#e53935" },
+            { "id": "griff", "label": "Tragegriff", "shape": "torus", "size": [0.45, 0.07, 0], "position": [0, 1.05, 0], "color": "#374151" },
+            { "id": "kondensator", "label": "Hochspannungskondensator", "component": "component:hochspannungskondensator", "shape": "cylinder", "size": [0.28, 0.75, 0], "position": [0.55, -0.35, -0.25], "rotation": [0, 0, 1.5708], "color": "#f59e0b", "description": "Speichert die Schockenergie" },
+            { "id": "ekg-platine", "label": "EKG-Verstärker", "component": "component:ekg-verstaerker", "shape": "box", "size": [0.8, 0.05, 0.6], "position": [-0.5, -0.25, -0.2], "color": "#15803d" },
+            { "id": "akku", "label": "Akku", "component": "component:defibrillator-akku", "shape": "box", "size": [1.0, 0.3, 0.6], "position": [-0.55, -0.62, 0.1], "color": "#1f2937" },
+            { "id": "therapiekabel", "label": "Therapiekabel", "component": "component:defibrillationselektroden", "shape": "cylinder", "size": [0.05, 1.4, 0], "position": [1.85, -0.3, 0.2], "rotation": [0, 0, 0.9], "color": "#4b5563" },
+            { "id": "pad-sternal", "label": "Klebeelektrode sternal", "component": "component:defibrillationselektroden", "shape": "box", "size": [0.55, 0.75, 0.04], "position": [2.4, 0.5, 0.3], "color": "#e5e7eb" },
+            { "id": "pad-apikal", "label": "Klebeelektrode apikal", "component": "component:defibrillationselektroden", "shape": "box", "size": [0.55, 0.75, 0.04], "position": [2.4, -0.45, 0.3], "color": "#e5e7eb" },
+            { "id": "ekg-kabel", "label": "EKG-Patientenkabel", "component": "component:ekg-patientenkabel", "shape": "cylinder", "size": [0.04, 1.2, 0], "position": [-1.75, -0.4, 0.2], "rotation": [0, 0, -0.9], "color": "#6b7280" }
+          ]
+        }
+      },
+      "links": [
+        { "rel": "has_component", "to": "component:hochspannungskondensator" },
+        { "rel": "has_component", "to": "component:defibrillator-akku" },
+        { "rel": "has_component", "to": "component:defibrillationselektroden" },
+        { "rel": "has_component", "to": "component:ekg-verstaerker" },
+        { "rel": "has_component", "to": "component:ekg-patientenkabel" },
+        { "rel": "uses_principle", "to": "term:biphasische-defibrillation" },
+        { "rel": "uses_principle", "to": "term:synchronisierte-kardioversion" },
+        { "rel": "uses_principle", "to": "term:impedanz" },
+        { "rel": "uses_principle", "to": "term:elektrokardiogramm" },
+        { "rel": "based_on", "to": "legal_reference:de-mpbetreibv-stk" },
+        { "rel": "related", "to": "device:aed" },
+        { "rel": "related", "to": "device:patientenmonitor" }
+      ],
+      "sources": ["src:kramme-medizintechnik", "src:iec-60601-2-4", "src:de-mpbetreibv"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "device:aed",
+      "title": "Automatisierter externer Defibrillator (AED)",
+      "aliases": ["AED", "Laiendefibrillator", "Halbautomatischer Defibrillator", "Frühdefibrillator"],
+      "summary": "Defibrillator, der den Herzrhythmus über die aufgeklebten Elektroden selbst analysiert und den Anwender per Sprach- und Bildanweisungen führt. Ausgelegt auch für die Anwendung durch Laien, z. B. im öffentlichen Raum.",
+      "body": "## Funktionsweise\n1. Gerät einschalten bzw. Deckel öffnen – Sprachanweisungen starten.\n2. [[component:defibrillationselektroden|Klebeelektroden]] nach Abbildung aufkleben.\n3. Das Gerät analysiert das [[term:elektrokardiogramm|EKG]]; während der Analyse darf der Patient nicht berührt oder bewegt werden.\n4. Bei defibrillierbarem Rhythmus ([[term:kammerflimmern]], pulslose VT) lädt der AED und fordert zur Schockabgabe auf (halbautomatisch) oder löst nach Warnung selbst aus (vollautomatisch).\n\n## Technische Besonderheiten\n- Regelmäßige automatische Selbsttests; Statusanzeige für die Einsatzbereitschaft\n- Häufig nicht wiederaufladbare Lithiumbatterien und vorkonnektierte Elektroden mit Verfallsdatum – siehe [[fault:defibrillator-selbsttest-fehlgeschlagen]]\n- Gleiches Grundprinzip wie der klinische [[device:defibrillator]], jedoch ohne manuelle Rhythmusbeurteilung\n\n## Betreiberpflichten\nAuch AED sind aktive Medizinprodukte zur Defibrillation. Für AED im öffentlichen Raum enthält die MPBetreibV Sonderregelungen (z. B. zu Einweisung und Kontrollen); maßgeblich sind die aktuelle Fassung der [[legal_reference:de-mpbetreibv]] und die Herstellerangaben.",
+      "tags": ["Defibrillation", "Notfall", "Erste Hilfe", "Kardiologie"],
+      "data": {
+        "category": "Notfall- und Kardiologietechnik",
+        "applications": ["Öffentlicher Raum (Laienreanimation)", "Betriebe und Sporteinrichtungen", "Krankenhausstationen ohne manuelle Defibrillatoren", "Erste-Hilfe- und Sanitätsdienste"],
+        "operatingPrinciple": "Automatische EKG-Rhythmusanalyse über die Klebeelektroden mit Schockempfehlung und Abgabe eines biphasischen Stromimpulses.",
+        "scene": {
+          "camera": [3.0, 2.2, 3.8],
+          "parts": [
+            { "id": "gehaeuse", "label": "AED-Gehäuse", "shape": "box", "size": [1.8, 2.2, 0.7], "position": [0, 0, 0], "color": "#16a34a", "opacity": 0.4, "description": "Robustes Gehäuse mit Lautsprecher und Statusanzeige" },
+            { "id": "status", "label": "Statusanzeige (einsatzbereit)", "shape": "sphere", "size": [0.08, 0, 0], "position": [0.6, 0.85, 0.36], "color": "#22c55e" },
+            { "id": "schocktaste", "label": "Schocktaste", "shape": "cylinder", "size": [0.18, 0.06, 0], "position": [0, 0.2, 0.37], "rotation": [1.5708, 0, 0], "color": "#f97316" },
+            { "id": "lautsprecher", "label": "Lautsprecher (Sprachanweisungen)", "shape": "cylinder", "size": [0.2, 0.04, 0], "position": [-0.5, 0.75, 0.36], "rotation": [1.5708, 0, 0], "color": "#1f2937" },
+            { "id": "kondensator", "label": "Hochspannungskondensator", "component": "component:hochspannungskondensator", "shape": "cylinder", "size": [0.22, 0.6, 0], "position": [0.3, -0.35, -0.1], "color": "#f59e0b" },
+            { "id": "analyse", "label": "EKG-Analyseelektronik", "component": "component:ekg-verstaerker", "shape": "box", "size": [0.6, 0.05, 0.4], "position": [-0.35, -0.1, -0.1], "color": "#15803d" },
+            { "id": "batterie", "label": "Batterie", "component": "component:defibrillator-akku", "shape": "box", "size": [1.2, 0.3, 0.45], "position": [0, -0.85, 0], "color": "#1f2937" },
+            { "id": "elektroden-paket", "label": "Vorkonnektiertes Elektrodenpaket", "component": "component:defibrillationselektroden", "shape": "box", "size": [0.9, 0.6, 0.12], "position": [1.55, -0.3, 0.2], "color": "#e5e7eb" }
+          ]
+        }
+      },
+      "links": [
+        { "rel": "has_component", "to": "component:defibrillationselektroden" },
+        { "rel": "has_component", "to": "component:hochspannungskondensator" },
+        { "rel": "has_component", "to": "component:defibrillator-akku" },
+        { "rel": "has_component", "to": "component:ekg-verstaerker" },
+        { "rel": "uses_principle", "to": "term:biphasische-defibrillation" },
+        { "rel": "uses_principle", "to": "term:kammerflimmern" },
+        { "rel": "uses_principle", "to": "term:impedanz" },
+        { "rel": "based_on", "to": "legal_reference:de-mpbetreibv" }
+      ],
+      "sources": ["src:erc-leitlinien-2021", "src:kramme-medizintechnik", "src:iec-60601-2-4", "src:de-mpbetreibv"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "device:ekg-geraet",
+      "title": "EKG-Gerät (12-Kanal-Elektrokardiograph)",
+      "aliases": ["Elektrokardiograph", "12-Kanal-EKG", "EKG-Schreiber", "Ruhe-EKG-Gerät"],
+      "summary": "Diagnostisches Gerät zur Aufzeichnung des Ruhe-EKG mit zwölf Standardableitungen über zehn Elektroden. Die Kurven werden ausgedruckt, gespeichert und häufig automatisch vermessen und interpretiert.",
+      "body": "## Aufbau\n- [[component:ekg-elektroden|EKG-Elektroden]] (4 Extremitäten-, 6 Brustwandelektroden)\n- [[component:ekg-patientenkabel|EKG-Patientenkabel]] mit zehn Ableitkabeln\n- [[component:ekg-verstaerker|EKG-Verstärker]] mit Filtern, Analog-Digital-Wandlung und Schutzbeschaltung\n- Anzeige, Thermodrucker, Speicher und Schnittstellen (Datenübertragung ins Krankenhausinformationssystem)\n\n## Ableitungen\nDas Gerät berechnet aus den Elektrodenpotenzialen die Ableitungen nach Einthoven, Goldberger und Wilson ([[term:einthoven-ableitungen]]).\n\n## Abgrenzung\n- **Diagnostisches EKG:** große Bandbreite, damit z. B. ST-Strecken unverfälscht dargestellt werden\n- **Monitoring-EKG** am [[device:patientenmonitor|Patientenmonitor]]: stärkere Filterung zugunsten einer ruhigen Kurve und zuverlässiger Herzfrequenzbestimmung\n\n## Service-Schwerpunkte\nZubehör (Kabel, Elektroden), Drucker, Filtereinstellungen und Signalqualität ([[fault:ekg-netzbrummen]], [[fault:ekg-elektrode-ab]]) sowie die elektrische Sicherheit nach [[test_procedure:elektrische-sicherheit-62353|DIN EN 62353]]. Patientenanschlüsse sind häufig als defibrillationsgeschützte Anwendungsteile ausgeführt ([[term:anwendungsteil]]).",
+      "tags": ["EKG", "Kardiologie", "Diagnostik"],
+      "data": {
+        "category": "Kardiologische Diagnostik",
+        "typicalRiskClass": "IIa",
+        "applications": ["Ruhe-EKG in Praxis und Klinik", "Notaufnahme (z. B. Infarktdiagnostik)", "Präoperative Diagnostik", "Rettungsdienst (12-Kanal-EKG)"],
+        "operatingPrinciple": "Differenzverstärkung der Körperoberflächenpotenziale zwischen definierten Elektroden, Filterung, Digitalisierung und Darstellung der zwölf Standardableitungen.",
+        "scene": {
+          "camera": [3.4, 2.4, 4.2],
+          "parts": [
+            { "id": "gehaeuse", "label": "Gerätegehäuse", "shape": "box", "size": [2.4, 0.6, 1.8], "position": [-0.6, 0, 0], "color": "#e5e7eb", "opacity": 0.4 },
+            { "id": "display", "label": "Display mit Tastatur", "shape": "box", "size": [1.4, 0.05, 0.9], "position": [-0.9, 0.31, 0.2], "color": "#0f2a3d" },
+            { "id": "drucker", "label": "Thermodrucker mit Papierfach", "shape": "box", "size": [0.8, 0.4, 1.4], "position": [0.15, 0.05, 0], "color": "#9ca3af" },
+            { "id": "papier", "label": "EKG-Papier", "shape": "box", "size": [0.6, 0.02, 0.9], "position": [0.15, 0.32, -0.9], "rotation": [0.4, 0, 0], "color": "#fecaca" },
+            { "id": "verstaerker", "label": "EKG-Verstärker (Eingangsteil)", "component": "component:ekg-verstaerker", "shape": "box", "size": [0.9, 0.05, 0.7], "position": [-1.2, -0.1, -0.3], "color": "#15803d" },
+            { "id": "kabel-stamm", "label": "EKG-Patientenkabel (Stammkabel)", "component": "component:ekg-patientenkabel", "shape": "cylinder", "size": [0.06, 1.2, 0], "position": [1.2, -0.1, 0.3], "rotation": [0, 0, 1.5708], "color": "#4b5563" },
+            { "id": "verteiler", "label": "Verteilerblock", "component": "component:ekg-patientenkabel", "shape": "box", "size": [0.3, 0.2, 0.3], "position": [1.9, -0.1, 0.3], "color": "#374151" },
+            { "id": "elektrode-ra", "label": "Elektrode rechter Arm (rot)", "component": "component:ekg-elektroden", "shape": "sphere", "size": [0.1, 0, 0], "position": [2.5, 0.6, 0.0], "color": "#dc2626" },
+            { "id": "elektrode-la", "label": "Elektrode linker Arm (gelb)", "component": "component:ekg-elektroden", "shape": "sphere", "size": [0.1, 0, 0], "position": [2.5, 0.6, 0.6], "color": "#facc15" },
+            { "id": "elektrode-ll", "label": "Elektrode linkes Bein (grün)", "component": "component:ekg-elektroden", "shape": "sphere", "size": [0.1, 0, 0], "position": [2.5, -0.7, 0.6], "color": "#16a34a" },
+            { "id": "elektrode-rl", "label": "Elektrode rechtes Bein (schwarz)", "component": "component:ekg-elektroden", "shape": "sphere", "size": [0.1, 0, 0], "position": [2.5, -0.7, 0.0], "color": "#111827" },
+            { "id": "elektrode-v", "label": "Brustwandelektroden V1–V6", "component": "component:ekg-elektroden", "shape": "box", "size": [0.12, 0.12, 0.9], "position": [2.6, 0.0, 0.3], "color": "#f3f4f6" }
+          ]
+        }
+      },
+      "specs": [
+        { "key": "anzahl_ableitungen", "label": "Standardableitungen", "value": 12, "source": "src:kramme-medizintechnik" },
+        { "key": "anzahl_elektroden", "label": "Elektroden für das 12-Kanal-EKG", "value": 10, "source": "src:kramme-medizintechnik" }
+      ],
+      "links": [
+        { "rel": "has_component", "to": "component:ekg-elektroden" },
+        { "rel": "has_component", "to": "component:ekg-patientenkabel" },
+        { "rel": "has_component", "to": "component:ekg-verstaerker" },
+        { "rel": "uses_principle", "to": "term:elektrokardiogramm" },
+        { "rel": "uses_principle", "to": "term:einthoven-ableitungen" },
+        { "rel": "uses_principle", "to": "term:impedanz" },
+        { "rel": "uses_principle", "to": "term:anwendungsteil" },
+        { "rel": "related", "to": "device:patientenmonitor" }
+      ],
+      "sources": ["src:kramme-medizintechnik", "src:iec-60601-2-25"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "component:defibrillationselektroden",
+      "title": "Defibrillationselektroden (Pads/Paddles)",
+      "aliases": ["Defi-Pads", "Klebeelektroden Defibrillator", "Paddles", "Therapieelektroden"],
+      "summary": "Großflächige Elektroden, über die der Defibrillationsimpuls abgegeben und häufig gleichzeitig das EKG abgeleitet wird – als selbstklebende Einmal-Pads oder als wiederverwendbare Hartelektroden (Paddles).",
+      "body": "## Ausführungen\n- **Selbstklebende Pads:** Einmalprodukte mit leitfähigem Gel; ermöglichen eine „Hands-off“-Defibrillation und EKG-Ableitung. Sie haben ein Verfallsdatum, da das Gel austrocknen kann.\n- **Paddles:** wiederverwendbare Hartelektroden, die mit Kontaktgel angepresst werden.\n- Kinderelektroden bzw. Energiereduzierung nach Herstellerangabe.\n\n## Bedeutung für Service und Betrieb\nGuter Hautkontakt senkt die [[term:impedanz|transthorakale Impedanz]]. Abgelaufene, beschädigte oder nicht angeschlossene Pads sind eine häufige Ursache für Warnmeldungen oder fehlgeschlagene Selbsttests ([[fault:defibrillator-selbsttest-fehlgeschlagen]]). Nur vom Hersteller freigegebene, kompatible Elektroden verwenden.",
+      "tags": ["Defibrillation", "Zubehör", "Verbrauchsmaterial"],
+      "data": { "kind": "verbrauchsmaterial", "function": "Abgabe des Defibrillationsimpulses an den Patienten und EKG-Ableitung über die Therapieelektroden", "wearPart": true },
+      "links": [
+        { "rel": "uses_principle", "to": "term:impedanz" },
+        { "rel": "causes", "to": "fault:defibrillator-selbsttest-fehlgeschlagen" }
+      ],
+      "sources": ["src:kramme-medizintechnik", "src:erc-leitlinien-2021"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "component:hochspannungskondensator",
+      "title": "Hochspannungskondensator (Defibrillator)",
+      "aliases": ["Energiespeicherkondensator", "Defi-Kondensator"],
+      "summary": "Kondensator, der vor der Schockabgabe von der Ladeschaltung auf Hochspannung geladen wird und die Defibrillationsenergie speichert. Die gespeicherte Energie folgt E = ½ · C · U².",
+      "body": "Die Ladeschaltung erzeugt aus der Akku- bzw. Netzspannung eine Spannung im Kilovoltbereich. Nach dem Auslösen schaltet eine Hochspannungs-Schaltstufe den Kondensator auf die [[component:defibrillationselektroden]]; bei biphasischen Geräten wird die Polarität während der Abgabe umgekehrt ([[term:biphasische-defibrillation]]).\n\nWird ein geladener Schock nicht abgegeben, entlädt das Gerät den Kondensator nach einer Wartezeit bzw. beim Abbruch intern über einen Widerstand.\n\n**Sicherheit:** Der Kondensator kann gefährliche Ladung speichern. Öffnen und Instandsetzen des Geräts ausschließlich durch autorisiertes, für Hochspannung geschultes Fachpersonal.",
+      "tags": ["Defibrillation", "Hochspannung", "Elektronik"],
+      "data": { "kind": "energie", "function": "Speicherung der Defibrillationsenergie und Abgabe als Stromimpuls", "wearPart": false },
+      "links": [
+        { "rel": "uses_principle", "to": "term:biphasische-defibrillation" },
+        { "rel": "causes", "to": "fault:defibrillator-selbsttest-fehlgeschlagen" }
+      ],
+      "sources": ["src:kramme-medizintechnik", "src:iec-60601-2-4"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "component:defibrillator-akku",
+      "title": "Akku bzw. Batterie (Defibrillator)",
+      "aliases": ["Defi-Akku", "AED-Batterie", "Defibrillatorbatterie"],
+      "summary": "Energiequelle für Ladeschaltung, Monitor und Selbsttests eines Defibrillators – je nach Gerät wiederaufladbarer Akku oder nicht wiederaufladbare Lithiumbatterie. Ihr Zustand entscheidet über die Einsatzbereitschaft.",
+      "body": "## Typische Ausführungen\n- **Klinische Defibrillatoren:** wiederaufladbare Akkus, Laden über Netzteil oder Ladehalterung\n- **[[device:aed|AED]]:** häufig nicht wiederaufladbare Lithiumbatterien mit langer Standzeit\n\n## Alterung\nKapazität und Belastbarkeit nehmen mit Alter, Ladezyklen und ungünstigen Lagertemperaturen ab. Eine gealterte Energiequelle zeigt sich u. a. durch verlängerte Ladezeiten, Warnmeldungen oder fehlgeschlagene Selbsttests ([[fault:defibrillator-selbsttest-fehlgeschlagen]]).\n\nAustauschintervalle, Lager- und Ladebedingungen legt der Hersteller fest; das Austauschdatum sollte dokumentiert werden.",
+      "tags": ["Defibrillation", "Energieversorgung", "Verschleißteil"],
+      "data": { "kind": "energie", "function": "Energieversorgung für Kondensatorladung, Monitor und Selbsttests", "wearPart": true },
+      "links": [
+        { "rel": "causes", "to": "fault:defibrillator-selbsttest-fehlgeschlagen" }
+      ],
+      "sources": ["src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "component:ekg-elektroden",
+      "title": "EKG-Elektroden",
+      "aliases": ["EKG-Klebeelektroden", "Ag/AgCl-Elektroden", "Saugelektroden", "Brustwandelektroden"],
+      "summary": "Elektroden, die die Herzpotenziale von der Haut abgreifen. Üblich sind Einmal-Klebeelektroden mit Silber/Silberchlorid-Sensor und Elektrolytgel; daneben gibt es wiederverwendbare Saug- und Klammerelektroden.",
+      "body": "## Funktion\nAn der Grenzfläche zwischen Elektrode und Elektrolyt entsteht ein Übergang von Elektronen- zu Ionenleitung. Silber/Silberchlorid-Elektroden zeigen dabei ein vergleichsweise stabiles, geringes Polarisationsverhalten und eignen sich daher gut für das EKG.\n\n## Praxis\n- Haut vorbereiten (ggf. Haare entfernen, entfetten, trocken)\n- Nur Elektroden gleichen Typs kombinieren\n- Verfallsdatum und Lagerung beachten – ausgetrocknetes Gel erhöht die [[term:impedanz]]\n- Elektroden bei Langzeitmonitoring nach Herstellerangabe wechseln\n\nSchlechter Elektrodenkontakt ist eine der häufigsten Ursachen von [[fault:ekg-netzbrummen|Artefakten]] und [[fault:ekg-elektrode-ab|„Elektrode ab“-Alarmen]].",
+      "tags": ["EKG", "Zubehör", "Verbrauchsmaterial", "Sensor"],
+      "data": { "kind": "sensor", "function": "Abgriff der Herzpotenziale an der Hautoberfläche", "wearPart": true },
+      "links": [
+        { "rel": "uses_principle", "to": "term:impedanz" },
+        { "rel": "uses_principle", "to": "term:elektrokardiogramm" },
+        { "rel": "causes", "to": "fault:ekg-netzbrummen" },
+        { "rel": "causes", "to": "fault:ekg-elektrode-ab" }
+      ],
+      "sources": ["src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "component:ekg-patientenkabel",
+      "title": "EKG-Patientenkabel",
+      "aliases": ["EKG-Kabel", "EKG-Stammkabel", "Ableitkabel", "EKG-Leitungen"],
+      "summary": "Verbindet die EKG-Elektroden mit Verstärker bzw. Messmodul – als 3-, 5- oder 10-adrige Ausführung, häufig mit Abschirmung und integrierten Schutzwiderständen für defibrillationsgeschützte Eingänge.",
+      "body": "## Ausführungen\n- **3- bzw. 5-adrig:** Monitoring am [[device:patientenmonitor|Patientenmonitor]] oder [[device:defibrillator|Defibrillator]]\n- **10-adrig:** diagnostisches 12-Kanal-EKG am [[device:ekg-geraet|EKG-Gerät]]\n\n## Verschleiß\nKabel werden ständig bewegt, gereinigt und desinfiziert. Typische Schwachstellen sind Knickschutz, Steckverbinder und Clips bzw. Druckknöpfe der Ableitkabel. Ein Bruch der Abschirmung begünstigt [[fault:ekg-netzbrummen|Netzbrummen]], ein Aderbruch führt zu [[fault:ekg-elektrode-ab|„Elektrode ab“-Meldungen]].\n\nNur vom Hersteller freigegebene Kabel verwenden: Schutzwiderstände im Kabel können Teil des Defibrillationsschutzes sein.",
+      "tags": ["EKG", "Zubehör", "Kabel"],
+      "data": { "kind": "elektronik", "function": "Signalverbindung zwischen EKG-Elektroden und EKG-Verstärker", "wearPart": true },
+      "links": [
+        { "rel": "causes", "to": "fault:ekg-netzbrummen" },
+        { "rel": "causes", "to": "fault:ekg-elektrode-ab" }
+      ],
+      "sources": ["src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "component:ekg-verstaerker",
+      "title": "EKG-Verstärker (Eingangsstufe)",
+      "aliases": ["Biosignalverstärker EKG", "EKG-Eingangsteil", "EKG-Messmodul"],
+      "summary": "Differenzverstärker mit hoher Eingangsimpedanz und hoher Gleichtaktunterdrückung, der die sehr kleinen EKG-Spannungen verstärkt, filtert und digitalisiert. Enthält Schutzbeschaltung und Elektrodenüberwachung.",
+      "body": "## Aufgaben\n- **Differenzverstärkung:** Nur die Spannungsdifferenz zwischen den Elektroden wird verstärkt; Gleichtaktstörungen (z. B. 50-Hz-Einstreuung aus dem Stromnetz) werden unterdrückt.\n- **Bezugselektrode / Rechtes-Bein-Treiber:** verbessert die Gleichtaktunterdrückung.\n- **Filter:** Hochpass gegen Grundlinienschwankungen, Tiefpass gegen hochfrequente Störungen, optional Netzfilter (Notch). Diagnostische Geräte nutzen eine größere Bandbreite als Überwachungsgeräte.\n- **Elektrodenüberwachung:** Erkennung abgefallener Elektroden ([[fault:ekg-elektrode-ab]]).\n- **Schutzbeschaltung:** Schutz der Eingänge vor Defibrillationsimpulsen bei defibrillationsgeschützten Anwendungsteilen ([[term:anwendungsteil]]).\n\nUnterschiedliche [[term:impedanz|Elektrodenimpedanzen]] verschlechtern die Gleichtaktunterdrückung – die Ursache für Netzbrummen liegt daher meist an Elektroden oder Kabeln, seltener am Verstärker selbst.",
+      "tags": ["EKG", "Elektronik", "Signalverarbeitung"],
+      "data": { "kind": "elektronik", "function": "Verstärkung, Filterung und Digitalisierung der EKG-Signale; Elektrodenüberwachung", "wearPart": false },
+      "links": [
+        { "rel": "uses_principle", "to": "term:elektrokardiogramm" },
+        { "rel": "uses_principle", "to": "term:impedanz" },
+        { "rel": "causes", "to": "fault:ekg-netzbrummen" }
+      ],
+      "sources": ["src:kramme-medizintechnik", "src:iec-60601-2-25"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "fault:ekg-netzbrummen",
+      "title": "EKG: Netzbrummen und Störartefakte",
+      "aliases": ["50-Hz-Störung", "EKG-Artefakte", "Netzbrumm EKG", "Wechselstromüberlagerung"],
+      "summary": "Die EKG-Kurve ist von einer regelmäßigen feinen Schwingung (50 Hz), unregelmäßigen Zacken oder einer wandernden Grundlinie überlagert. P-Wellen und ST-Strecken sind schwer beurteilbar, Rhythmusalarme können falsch ausgelöst werden.",
+      "body": "Netzbrummen entsteht, wenn Störspannungen aus dem Stromnetz nicht ausreichend als Gleichtaktsignal unterdrückt werden – meist wegen schlechter oder ungleicher [[term:impedanz|Elektroden-Haut-Impedanz]]. Muskelzittern und Bewegung erzeugen dagegen unregelmäßige Artefakte, Atmung und Bewegung eine wandernde Grundlinie.\n\nVorgehen: zuerst Störungsart bestimmen, dann vom Patienten über Elektroden und Kabel zum Gerät arbeiten.",
+      "tags": ["EKG", "Artefakt", "Fehlerdiagnose", "Signalqualität"],
+      "data": {
+        "severity": "mittel",
+        "symptoms": ["Gleichmäßige feine Schwingung auf der Grundlinie („verdickte“ Nulllinie)", "Unregelmäßige, hochfrequente Zacken", "Langsam wandernde Grundlinie", "Fehlalarme der Rhythmusüberwachung", "Hinweis „Störsignal“ bzw. „Artefakt“ am Gerät"],
+        "causes": [
+          { "text": "Schlechter Elektroden-Haut-Kontakt, ausgetrocknete oder abgelaufene Elektroden", "likelihood": "haeufig" },
+          { "text": "Netzkabel, Netzteile oder andere Geräte dicht am Patientenkabel", "likelihood": "haeufig" },
+          { "text": "Muskelzittern, Frieren oder Bewegung des Patienten", "likelihood": "haeufig" },
+          { "text": "Elektroden unterschiedlicher Typen bzw. Hersteller kombiniert", "likelihood": "gelegentlich" },
+          { "text": "Beschädigte Abschirmung oder Aderbruch im EKG-Patientenkabel", "likelihood": "gelegentlich" },
+          { "text": "Ungeeignete Filtereinstellung", "likelihood": "gelegentlich" },
+          { "text": "Defekt in der Eingangsstufe des EKG-Verstärkers", "likelihood": "selten" }
+        ],
+        "diagnosis": [
+          { "id": "a1", "instruction": "Kurve bei hoher Ablenkung betrachten und die Störungsart bestimmen.", "question": "Ist die Störung eine gleichmäßige, feine Schwingung (Netzbrummen)?", "yes": "a2", "no": "a5" },
+          { "id": "a2", "instruction": "Haut vorbereiten und alle Elektroden durch frische Elektroden desselben Typs ersetzen; Sitz der Druckknöpfe/Clips prüfen.", "question": "Ist die Störung danach verschwunden?", "yes": "o-elektroden", "no": "a3" },
+          { "id": "a3", "instruction": "Netzkabel, Netzteile und andere Geräte vom Patientenkabel weg verlegen; Patientenkabel nicht parallel zu Netzleitungen führen.", "question": "Ist die Störung danach verschwunden?", "yes": "o-umgebung", "no": "a4" },
+          { "id": "a4", "instruction": "Patientenkabel gegen ein nachweislich funktionierendes Kabel tauschen oder Gerät mit einem EKG-Simulator prüfen.", "question": "Ist die Störung mit Ersatzkabel bzw. am Simulator verschwunden?", "yes": "o-kabel", "no": "o-verstaerker" },
+          { "id": "a5", "instruction": "Patienten bequem, warm und entspannt lagern; Arme abstützen.", "question": "Verschwinden die unregelmäßigen Zacken in Ruhe?", "yes": "o-muskel", "no": "a6" },
+          { "id": "a6", "instruction": "Grundlinie über mehrere Atemzüge beobachten.", "question": "Wandert die Grundlinie langsam und atemsynchron?", "yes": "o-grundlinie", "no": "a2" }
+        ],
+        "outcomes": [
+          { "id": "o-elektroden", "text": "Elektrodenproblem – Hautvorbereitung und Elektrodenwechsel in der Anwendung schulen; Lagerung und Verfallsdaten prüfen." },
+          { "id": "o-umgebung", "text": "Einstreuung aus der Umgebung – Kabelführung verbessern, Störquellen entfernen." },
+          { "id": "o-kabel", "text": "Patientenkabel defekt (Abschirmung/Ader) – Kabel aussondern und durch freigegebenes Original-Kabel ersetzen." },
+          { "id": "o-verstaerker", "text": "Verdacht auf Defekt im EKG-Messteil – Gerät außer Betrieb nehmen, Instandsetzung nach Herstellervorgaben, danach Funktions- und elektrische Sicherheitsprüfung." },
+          { "id": "o-muskel", "text": "Muskelartefakt – physiologische Ursache; Lagerung optimieren, bei Bedarf Elektroden auf muskelarme Stellen setzen." },
+          { "id": "o-grundlinie", "text": "Atem- bzw. Bewegungsartefakt – Elektrodensitz prüfen, Elektroden ggf. versetzen; Filtereinstellung laut Herstellerangabe prüfen." }
+        ],
+        "remedies": [
+          "Haut vorbereiten und frische Elektroden gleichen Typs verwenden ([[component:ekg-elektroden]])",
+          "Patientenkabel getrennt von Netzleitungen führen",
+          "Defektes [[component:ekg-patientenkabel|Patientenkabel]] ersetzen",
+          "Netzfilter nur ergänzend einsetzen und Filtereinstellungen nach Herstellerangabe wählen",
+          "Bei Verdacht auf Gerätefehler Instandsetzung und anschließende Prüfung nach DIN EN 62353"
+        ],
+        "safetyNotes": [
+          "Filter können die Kurvenform verändern (z. B. ST-Strecke) – diagnostische Aussagen nur mit geeigneter Filtereinstellung treffen.",
+          "Rhythmusalarme bei Artefakten nicht pauschal abschalten; den Patienten immer klinisch beurteilen."
+        ]
+      },
+      "links": [
+        { "rel": "affects", "to": "device:ekg-geraet" },
+        { "rel": "affects", "to": "device:patientenmonitor" },
+        { "rel": "affects", "to": "device:defibrillator" },
+        { "rel": "affects", "to": "component:ekg-patientenkabel" },
+        { "rel": "uses_principle", "to": "term:impedanz" },
+        { "rel": "remedied_by", "to": "test_procedure:elektrische-sicherheit-62353" },
+        { "rel": "related", "to": "fault:ekg-elektrode-ab" }
+      ],
+      "sources": ["src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "fault:ekg-elektrode-ab",
+      "title": "EKG: Alarm „Elektrode ab“ / „Ableitung ab“",
+      "aliases": ["Elektrode ab", "Lead off", "Ableitung ab", "EKG-Elektrodenalarm"],
+      "summary": "Das Gerät meldet eine abgefallene Elektrode bzw. Ableitung; die betroffene Kurve fehlt oder ist eine flache Linie. Die EKG-Überwachung ist eingeschränkt oder ausgefallen.",
+      "body": "Die Elektrodenüberwachung im [[component:ekg-verstaerker|EKG-Verstärker]] erkennt eine unterbrochene Verbindung zwischen Patient und Gerät meist über eine Impedanz- bzw. Strommessung. Ursache ist fast immer das Zubehör: [[component:ekg-elektroden|Elektroden]] oder [[component:ekg-patientenkabel|Kabel]].\n\n**Wichtig:** Eine flache Linie zuerst am Patienten abklären – eine Asystolie darf nicht als technisches Problem fehlgedeutet werden.",
+      "tags": ["EKG", "Alarm", "Fehlerdiagnose"],
+      "data": {
+        "severity": "hoch",
+        "symptoms": ["Meldung „Elektrode ab“, „Ableitung ab“ oder „Lead off“", "Flache Linie oder fehlende Kurve in einzelnen Ableitungen", "Keine Herzfrequenzanzeige", "Technischer Alarm am Monitor"],
+        "causes": [
+          { "text": "Elektrode gelöst, verrutscht oder Gel ausgetrocknet", "likelihood": "haeufig" },
+          { "text": "Ableitkabel nicht oder nicht fest angeschlossen", "likelihood": "haeufig" },
+          { "text": "Aderbruch im Ableitkabel oder Steckerdefekt", "likelihood": "gelegentlich" },
+          { "text": "Kabeltyp passt nicht zur eingestellten Elektrodenkonfiguration (z. B. 3- statt 5-adrig)", "likelihood": "gelegentlich" },
+          { "text": "Defekt im EKG-Eingangsteil", "likelihood": "selten" }
+        ],
+        "diagnosis": [
+          { "id": "e1", "instruction": "Patienten beurteilen. Dann angezeigte Elektrode identifizieren, Sitz prüfen und Elektrode ggf. erneuern.", "question": "Ist der Alarm erloschen?", "yes": "o-elektrode", "no": "e2" },
+          { "id": "e2", "instruction": "Alle Steckverbindungen zwischen Ableitkabeln, Stammkabel und Gerät prüfen und fest verbinden.", "question": "Ist der Alarm erloschen?", "yes": "o-steckverbindung", "no": "e3" },
+          { "id": "e3", "instruction": "Im Gerätemenü die eingestellte Elektroden- bzw. Kabelkonfiguration mit dem verwendeten Kabel vergleichen.", "question": "Stimmt die Konfiguration mit dem Kabel überein?", "yes": "e4", "no": "o-konfiguration" },
+          { "id": "e4", "instruction": "Patientenkabel gegen ein nachweislich funktionierendes Kabel tauschen oder Gerät mit einem EKG-Simulator prüfen.", "question": "Ist der Alarm mit Ersatzkabel bzw. am Simulator erloschen?", "yes": "o-kabel", "no": "o-geraet" }
+        ],
+        "outcomes": [
+          { "id": "o-elektrode", "text": "Elektrodenproblem – Elektroden korrekt kleben, Hautvorbereitung beachten, Wechselintervalle einhalten." },
+          { "id": "o-steckverbindung", "text": "Lose Steckverbindung – Kabel sichern; bei wiederholtem Auftreten Stecker auf Verschleiß prüfen." },
+          { "id": "o-konfiguration", "text": "Konfigurationsfehler – Einstellung an das verwendete Kabel anpassen; Anwender einweisen." },
+          { "id": "o-kabel", "text": "Kabel defekt – Kabel aussondern und durch freigegebenes Ersatzkabel ersetzen." },
+          { "id": "o-geraet", "text": "Verdacht auf Defekt im EKG-Messteil – Gerät außer Betrieb nehmen, Instandsetzung nach Herstellervorgaben, danach Prüfung nach DIN EN 62353." }
+        ],
+        "remedies": [
+          "Elektroden erneuern ([[component:ekg-elektroden]])",
+          "Steckverbindungen sichern bzw. [[component:ekg-patientenkabel|Patientenkabel]] tauschen",
+          "Elektrodenkonfiguration im Gerät korrekt einstellen",
+          "Messteil durch autorisierten Service instand setzen lassen"
+        ],
+        "safetyNotes": [
+          "Eine flache Linie immer zuerst am Patienten abklären (Bewusstsein, Puls) – Asystolie ausschließen.",
+          "Während der Fehlersuche eine alternative Überwachung sicherstellen.",
+          "Technische Alarme nicht dauerhaft stummschalten."
+        ]
+      },
+      "links": [
+        { "rel": "affects", "to": "device:patientenmonitor" },
+        { "rel": "affects", "to": "device:ekg-geraet" },
+        { "rel": "affects", "to": "device:defibrillator" },
+        { "rel": "affects", "to": "component:ekg-elektroden" },
+        { "rel": "remedied_by", "to": "test_procedure:elektrische-sicherheit-62353" }
+      ],
+      "sources": ["src:kramme-medizintechnik"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "fault:defibrillator-selbsttest-fehlgeschlagen",
+      "title": "Defibrillator: Selbsttest fehlgeschlagen / Akku-Warnung",
+      "aliases": ["Defi nicht einsatzbereit", "AED Selbsttest Fehler", "Defibrillator Akkufehler"],
+      "summary": "Der Defibrillator bzw. AED meldet nach dem automatischen oder manuellen Selbsttest einen Fehler, zeigt „nicht einsatzbereit“ oder warnt vor schwacher Batterie. Die Einsatzbereitschaft ist nicht sichergestellt.",
+      "body": "Ein nicht einsatzbereiter Defibrillator ist ein sicherheitskritischer Zustand: Sofort ein **einsatzbereites Ersatzgerät** bereitstellen und die Verantwortlichen informieren. Die häufigsten Ursachen sind der [[component:defibrillator-akku|Akku bzw. die Batterie]] und die [[component:defibrillationselektroden|Elektroden]]; seltener liegt ein Fehler im Hochspannungsteil vor.",
+      "tags": ["Defibrillation", "Selbsttest", "Akku", "Fehlerdiagnose"],
+      "data": {
+        "severity": "kritisch",
+        "symptoms": ["Statusanzeige rot bzw. „nicht einsatzbereit“", "Fehlermeldung oder Fehlercode nach dem Selbsttest", "Akustisches Warnsignal im Standby", "Warnung „Batterie schwach“ bzw. „Akku ersetzen“", "Auffällig verlängerte Ladezeit"],
+        "causes": [
+          { "text": "Akku entladen, gealtert oder Batterie am Ende der Standzeit", "likelihood": "haeufig" },
+          { "text": "Elektroden abgelaufen, beschädigt oder nicht angeschlossen", "likelihood": "haeufig" },
+          { "text": "Lagerung außerhalb der vom Hersteller zugelassenen Temperatur", "likelihood": "gelegentlich" },
+          { "text": "Gerät lange ohne Ladung bzw. Netzanschluss gelagert", "likelihood": "gelegentlich" },
+          { "text": "Interner Fehler in Ladeschaltung, Hochspannungskondensator oder Steuerung", "likelihood": "selten" }
+        ],
+        "diagnosis": [
+          { "id": "f1", "instruction": "Ersatzgerät bereitstellen. Fehlermeldung bzw. Fehlercode notieren und in der Gebrauchsanweisung nachschlagen.", "question": "Bezieht sich die Meldung auf Akku bzw. Batterie?", "yes": "f2", "no": "f3" },
+          { "id": "f2", "instruction": "Akku vollständig laden bzw. gegen einen geladenen, kompatiblen Akku (bei AED: neue Batterie) tauschen und Selbsttest wiederholen.", "question": "Wird der Selbsttest jetzt bestanden?", "yes": "o-akku", "no": "f5" },
+          { "id": "f3", "instruction": "Elektroden prüfen: angeschlossen, Verpackung unbeschädigt, Verfallsdatum nicht überschritten?", "question": "Bezieht sich die Meldung auf die Elektroden oder ist ein Mangel erkennbar?", "yes": "f4", "no": "f5" },
+          { "id": "f4", "instruction": "Neue, kompatible Elektroden anschließen und Selbsttest wiederholen.", "question": "Wird der Selbsttest jetzt bestanden?", "yes": "o-pads", "no": "f5" },
+          { "id": "f5", "instruction": "Erweiterten bzw. manuellen Selbsttest nach Herstellerangabe durchführen; Fehlerprotokoll auslesen.", "question": "Wird der erweiterte Test bestanden?", "yes": "o-sporadisch", "no": "o-service" }
+        ],
+        "outcomes": [
+          { "id": "o-akku", "text": "Energiequelle erschöpft bzw. gealtert – Akku/Batterie ersetzen, alten Akku aussondern, Austauschdatum dokumentieren, Ladekonzept prüfen." },
+          { "id": "o-pads", "text": "Elektroden mangelhaft – Elektroden ersetzen, Verfallsdaten in die Bestandsüberwachung aufnehmen." },
+          { "id": "o-sporadisch", "text": "Sporadischer Fehler – Gerät nur nach Rücksprache mit dem Hersteller weiter verwenden; Fehlerprotokoll sichern und Hersteller bzw. Service kontaktieren." },
+          { "id": "o-service", "text": "Gerätefehler – Gerät außer Betrieb nehmen und kennzeichnen, Instandsetzung durch Hersteller bzw. autorisierten Service; danach Prüfung entsprechend STK und DIN EN 62353." }
+        ],
+        "remedies": [
+          "Akku bzw. Batterie ersetzen ([[component:defibrillator-akku]])",
+          "Abgelaufene oder beschädigte Elektroden ersetzen",
+          "Lagerbedingungen und Ladekonzept nach Herstellerangabe anpassen",
+          "Instandsetzung durch autorisierten Service und anschließende [[test_procedure:stk-defibrillator|STK]]"
+        ],
+        "safetyNotes": [
+          "Lebensgefahr durch Hochspannung: Der Kondensator kann auch im ausgeschalteten Gerät geladen sein – Gehäuse nur durch autorisiertes, geschultes Personal öffnen.",
+          "Testentladungen nur in die vom Hersteller vorgesehene Prüflast bzw. einen Defibrillator-Analysator.",
+          "Ein nicht einsatzbereiter Defibrillator muss sofort ersetzt und deutlich gekennzeichnet werden."
+        ]
+      },
+      "links": [
+        { "rel": "affects", "to": "device:defibrillator" },
+        { "rel": "affects", "to": "device:aed" },
+        { "rel": "affects", "to": "component:defibrillator-akku" },
+        { "rel": "affects", "to": "component:defibrillationselektroden" },
+        { "rel": "remedied_by", "to": "test_procedure:stk-defibrillator" }
+      ],
+      "sources": ["src:kramme-medizintechnik", "src:iec-60601-2-4"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "test_procedure:stk-defibrillator",
+      "title": "STK Defibrillator",
+      "aliases": ["Sicherheitstechnische Kontrolle Defibrillator", "STK AED", "Defibrillator-Prüfung"],
+      "summary": "Sicherheitstechnische Kontrolle nach MPBetreibV für Defibrillatoren (Anlage 1): Sichtprüfung, Selbsttest, Energieabgabe und Ladezeit mit Defibrillator-Analysator, Synchronisation, Rhythmusanalyse, Alarme und elektrische Sicherheit.",
+      "body": "Umfang, Grenzwerte und Toleranzen legt der **Hersteller** in seinen Unterlagen fest; fehlen Angaben zur Frist, ist die STK nach [[legal_reference:de-mpbetreibv-stk]] spätestens alle zwei Jahre durchzuführen. Die hier beschriebenen Schritte geben den typischen Ablauf wieder und ersetzen nicht die Herstellervorgaben.\n\nDie Energieabgabe wird an einer definierten Prüflast gemessen (siehe technische Daten); moderne Defibrillator-Analysatoren enthalten Prüflast, Energiemessung, Ladezeitmessung und EKG-Simulator. Die elektrische Sicherheit wird nach [[test_procedure:elektrische-sicherheit-62353]] geprüft.\n\nGrundlagen: [[term:biphasische-defibrillation]], [[term:synchronisierte-kardioversion]], [[term:impedanz]].",
+      "tags": ["STK", "Defibrillation", "Prüfung", "MPBetreibV"],
+      "data": {
+        "kind": "STK",
+        "interval": "nach Herstellerangabe; fehlen Angaben, spätestens alle zwei Jahre (MPBetreibV)",
+        "qualification": "Person, die die Anforderungen der MPBetreibV an Sachkenntnis, Voraussetzungen und Mittel erfüllt, i. d. R. mit Herstellerschulung für den Gerätetyp",
+        "equipment": [
+          "Defibrillator-Analysator mit Prüflast und EKG-Simulation",
+          "Medizingeräte-Sicherheitstester nach DIN EN 62353",
+          "Herstellerunterlagen (Serviceanleitung, STK-Checkliste)",
+          "Prüfprotokoll bzw. Medizinproduktebuch"
+        ],
+        "steps": [
+          { "title": "Sichtprüfung", "description": "Gehäuse, Bedienelemente, Display, Therapie- und EKG-Kabel, Paddles bzw. Elektrodenanschluss, Akku und Ladehalterung, Netzteil, Kennzeichnung sowie Zubehör (Elektroden, Verfallsdaten) auf Beschädigung und Vollständigkeit prüfen." },
+          { "title": "Selbsttest und Statusanzeige", "description": "Gerätegesteuerten Selbsttest auslösen bzw. Protokoll der automatischen Selbsttests auswerten; Statusanzeige und Fehlerspeicher prüfen.", "limit": "Selbsttest bestanden" },
+          { "title": "Energieabgabe", "description": "Schocks in mehreren Energiestufen einschließlich der Maximalenergie in den Defibrillator-Analysator abgeben; gemessene mit eingestellter Energie vergleichen.", "limit": "Toleranz nach Herstellerangabe" },
+          { "title": "Ladezeit", "description": "Ladezeit bis zur Maximalenergie messen – im Akkubetrieb und, falls vorgesehen, im Netzbetrieb.", "limit": "nach Herstellerangabe" },
+          { "title": "Interne Sicherheitsentladung", "description": "Prüfen, ob geladene Energie bei Abbruch bzw. nach Ablauf der vorgesehenen Zeit ohne Schockabgabe intern abgebaut wird." },
+          { "title": "Synchronisation", "description": "Synchronmodus aktivieren, EKG-Signal vom Analysator einspeisen, Markierung der R-Zacken und synchrone Schockabgabe prüfen; Verzögerung zwischen R-Zacke und Schock messen, sofern vom Hersteller gefordert.", "limit": "nach Herstellerangabe" },
+          { "title": "Rhythmusanalyse (AED-Modus)", "description": "Simulierte Rhythmen einspeisen: Bei Kammerflimmern muss ein Schock empfohlen, bei Sinusrhythmus und Asystolie kein Schock empfohlen werden." },
+          { "title": "EKG-, Alarm- und Anzeigefunktionen", "description": "EKG-Darstellung, Herzfrequenzanzeige, Alarme, Akkuanzeige sowie ggf. Drucker und Datenspeicherung prüfen." },
+          { "title": "Elektrische Sicherheit", "description": "Prüfung nach DIN EN 62353 (Schutzleiterwiderstand bei Schutzklasse I, Geräte- und Patientenableitstrom) gemäß dem verknüpften Prüfverfahren." },
+          { "title": "Bewertung und Dokumentation", "description": "Ergebnisse bewerten, Prüfprotokoll erstellen, Eintrag in das Medizinproduktebuch, Prüfplakette; bei Mängeln Gerät außer Betrieb nehmen und Betreiber informieren." }
+        ],
+        "documentation": [
+          "Geräteidentifikation (Typ, Seriennummer, Inventarnummer)",
+          "Verwendete Prüfmittel mit Kalibrierstatus",
+          "Messwerte: abgegebene Energien, Ladezeiten, Synchronisation, Ableitströme",
+          "Bewertung, Mängel, Datum und Unterschrift",
+          "Eintrag im Medizinproduktebuch"
+        ]
+      },
+      "specs": [
+        { "key": "pruefwiderstand_energiemessung", "label": "Prüflast für die Energiemessung", "value": 50, "unit": "Ω", "condition": "Bezugslast für Energieangaben", "source": "src:iec-60601-2-4" }
+      ],
+      "links": [
+        { "rel": "based_on", "to": "legal_reference:de-mpbetreibv-stk" },
+        { "rel": "based_on", "to": "legal_reference:de-mpbetreibv" },
+        { "rel": "tests", "to": "device:defibrillator" },
+        { "rel": "tests", "to": "device:aed" },
+        { "rel": "tests", "to": "component:hochspannungskondensator" },
+        { "rel": "uses_principle", "to": "term:biphasische-defibrillation" },
+        { "rel": "uses_principle", "to": "term:synchronisierte-kardioversion" },
+        { "rel": "uses_principle", "to": "term:kammerflimmern" },
+        { "rel": "related", "to": "test_procedure:elektrische-sicherheit-62353" }
+      ],
+      "sources": ["src:de-mpbetreibv", "src:iec-60601-2-4", "src:din-en-62353"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "simulation:ekg-monitor",
+      "title": "Simulation: EKG-Monitor – Rhythmen und Störungen",
+      "aliases": ["EKG-Simulator", "Rhythmus-Simulator"],
+      "summary": "Interaktive Simulation einer EKG-Monitorkurve mit umschaltbaren Rhythmen (Sinus, Vorhofflimmern, Kammerflimmern, Asystolie) sowie technischen Störungen wie Netzbrummen, Grundlinienschwankung und abgefallener Elektrode.",
+      "body": "Vergleiche in den Szenarien die physiologischen Rhythmen mit technischen Störungen. Besonders wichtig: Eine flache Linie durch eine abgefallene Elektrode ([[fault:ekg-elektrode-ab]]) und eine echte Asystolie sehen ähnlich aus – das Gerät unterscheidet sie über die Elektrodenüberwachung, der Anwender durch Blick auf den Patienten.",
+      "tags": ["EKG", "Simulation", "Rhythmus", "Artefakt"],
+      "data": {
+        "engine": "ecg-monitor",
+        "learningGoals": [
+          "Sinusrhythmus, Vorhofflimmern, Kammerflimmern und Asystolie im Monitor-EKG unterscheiden",
+          "Technische Störungen (Rauschen, Grundlinienschwankung, abgefallene Elektrode) von Rhythmusstörungen abgrenzen",
+          "Verstehen, warum bei „Elektrode ab“ zuerst der Patient beurteilt werden muss"
+        ],
+        "scenarios": [
+          { "id": "sinus", "title": "Sinusrhythmus", "description": "Normaler Sinusrhythmus mit sauberer Kurve – Referenz für alle weiteren Szenarien.", "params": { "heartRate": 72, "rhythm": "sinus", "noise": 0.02, "electrodeOff": false, "baselineWander": 0.05 } },
+          { "id": "vorhofflimmern", "title": "Vorhofflimmern", "description": "Unregelmäßige RR-Abstände ohne P-Wellen – absolute Arrhythmie.", "params": { "heartRate": 110, "rhythm": "af", "noise": 0.03, "electrodeOff": false, "baselineWander": 0.05 } },
+          { "id": "kammerflimmern", "title": "Kammerflimmern", "description": "Chaotische Flimmerwellen ohne QRS-Komplexe – defibrillierbarer Rhythmus, Herzfrequenz nicht bestimmbar.", "params": { "heartRate": 0, "rhythm": "vf", "noise": 0.02, "electrodeOff": false, "baselineWander": 0 } },
+          { "id": "asystolie", "title": "Asystolie", "description": "Keine elektrische Herzaktivität – nicht defibrillierbar. Elektroden sind korrekt angeschlossen.", "params": { "heartRate": 0, "rhythm": "asystole", "noise": 0.02, "electrodeOff": false, "baselineWander": 0.03 } },
+          { "id": "elektrode-ab", "title": "Elektrode ab", "description": "Eine Elektrode hat sich gelöst – flache Linie mit technischem Alarm trotz normalem Rhythmus.", "params": { "heartRate": 72, "rhythm": "sinus", "noise": 0, "electrodeOff": true, "baselineWander": 0 }, "fault": "fault:ekg-elektrode-ab" },
+          { "id": "stoerung", "title": "Netzbrummen und Grundlinienschwankung", "description": "Schlechter Elektrodenkontakt: überlagerte Störung und wandernde Grundlinie erschweren die Beurteilung.", "params": { "heartRate": 80, "rhythm": "sinus", "noise": 0.7, "electrodeOff": false, "baselineWander": 0.6 }, "fault": "fault:ekg-netzbrummen" }
+        ]
+      },
+      "links": [
+        { "rel": "simulates", "to": "device:patientenmonitor" },
+        { "rel": "simulates", "to": "term:elektrokardiogramm" },
+        { "rel": "simulates", "to": "term:kammerflimmern" },
+        { "rel": "simulates", "to": "term:vorhofflimmern" },
+        { "rel": "simulates", "to": "fault:ekg-elektrode-ab" },
+        { "rel": "simulates", "to": "fault:ekg-netzbrummen" },
+        { "rel": "uses_principle", "to": "term:impedanz" }
+      ],
+      "sources": ["src:kramme-medizintechnik", "src:erc-leitlinien-2021"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "learning_module:ekg-defibrillation-medizintechnik",
+      "title": "EKG und Defibrillation für die Medizintechnik",
+      "aliases": ["Lernmodul EKG und Defibrillation", "Kardiologietechnik Grundlagen"],
+      "summary": "Lernmodul zu EKG-Entstehung und Ableitungen, Signalqualität und Fehlersuche, Technik der Defibrillation und Kardioversion sowie zur STK von Defibrillatoren – mit Simulation und Abschlussquiz.",
+      "tags": ["EKG", "Defibrillation", "STK", "Grundlagen"],
+      "data": {
+        "level": "fortgeschritten",
+        "durationMinutes": 60,
+        "objectives": [
+          "Entstehung des EKG und die Bedeutung von P-Welle, QRS-Komplex und T-Welle erklären",
+          "Ableitungen nach Einthoven, Goldberger und Wilson zuordnen und das Einthoven-Gesetz anwenden",
+          "Ursachen von Netzbrummen und „Elektrode ab“-Alarmen systematisch eingrenzen",
+          "Aufbau eines Defibrillators sowie biphasische Defibrillation und synchronisierte Kardioversion technisch beschreiben",
+          "Ablauf und Inhalte der STK eines Defibrillators benennen"
+        ],
+        "sections": [
+          {
+            "title": "1. Vom Herzen zur Kurve",
+            "body": "Die Erregung des Herzens erzeugt an der Körperoberfläche Spannungen im Bereich von etwa einem Millivolt. Das [[term:elektrokardiogramm|EKG]] stellt sie über die Zeit dar: Die **P-Welle** zeigt die Vorhoferregung, der **QRS-Komplex** die Kammererregung, die **T-Welle** die Erregungsrückbildung der Kammern.\n\nFür die Technik heißt das: Ein Nutzsignal im Millivoltbereich muss gegen Störungen verteidigt werden, die oft um ein Vielfaches größer sind – etwa Einstreuungen aus dem Stromnetz oder Gleichspannungen an der Elektroden-Haut-Grenzfläche. Daraus ergeben sich die Anforderungen an [[component:ekg-elektroden|Elektroden]], [[component:ekg-patientenkabel|Kabel]] und [[component:ekg-verstaerker|Verstärker]].\n\nStandarddarstellung: 10 mm/mV und 25 mm/s."
+          },
+          {
+            "title": "2. Ableitungen und das 12-Kanal-EKG",
+            "body": "Eine Ableitung ist die Spannung zwischen definierten Elektrodenpunkten. Die bipolaren [[term:einthoven-ableitungen|Ableitungen nach Einthoven]] (I, II, III) bilden das Einthoven-Dreieck ([[media:einthoven-dreieck]]); es gilt **II = I + III**. Hinzu kommen die verstärkten Extremitätenableitungen nach Goldberger (aVR, aVL, aVF) und die Brustwandableitungen nach Wilson (V1–V6).\n\nDas [[device:ekg-geraet|12-Kanal-EKG-Gerät]] benötigt dafür zehn Elektroden. Am [[device:patientenmonitor|Patientenmonitor]] genügen für die Überwachung meist 3 oder 5 Elektroden.\n\n**Praxistipp:** Vertauschte Extremitätenelektroden verändern die Kurven deutlich. Die Farbkodierung (IEC: rot – gelb – grün – schwarz) hilft, Fehler zu vermeiden."
+          },
+          {
+            "title": "3. Signalqualität und Fehlersuche",
+            "body": "Der EKG-Verstärker ist ein Differenzverstärker: Er verstärkt die Differenz zwischen den Elektroden und unterdrückt Störungen, die an allen Elektroden gleich anliegen. Diese Unterdrückung funktioniert nur, wenn die [[term:impedanz|Elektroden-Haut-Impedanzen]] niedrig und ähnlich sind. Deshalb sind schlechte Elektroden die häufigste Ursache für [[fault:ekg-netzbrummen|Netzbrummen]].\n\nBei „Elektrode ab“ gilt: **zuerst den Patienten beurteilen**, dann Elektrode, Steckverbindung, Konfiguration und Kabel prüfen – siehe Diagnosebaum [[fault:ekg-elektrode-ab]].\n\nProbiere die Szenarien der Simulation [[simulation:ekg-monitor]] aus und vergleiche eine echte Asystolie mit einer abgefallenen Elektrode."
+          },
+          {
+            "title": "4. Defibrillation und Kardioversion",
+            "body": "Beim [[term:kammerflimmern|Kammerflimmern]] pumpt das Herz nicht mehr. Ein [[device:defibrillator|Defibrillator]] lädt einen [[component:hochspannungskondensator|Hochspannungskondensator]] und gibt die gespeicherte Energie (E = ½ · C · U²) über [[component:defibrillationselektroden|Elektroden]] als Stromimpuls ab. Heute werden [[term:biphasische-defibrillation|biphasische Impulse]] verwendet, die mit geringerer Energie auskommen; die [[term:impedanz|transthorakale Impedanz]] wird gemessen und kompensiert.\n\nBei der [[term:synchronisierte-kardioversion|synchronisierten Kardioversion]] wird der Schock auf die R-Zacke getriggert, damit er nicht in die vulnerable Phase der T-Welle fällt.\n\nDer [[device:aed|AED]] analysiert den Rhythmus selbst und führt auch Laien per Sprachanweisung durch die Anwendung."
+          },
+          {
+            "title": "5. Einsatzbereitschaft, STK und elektrische Sicherheit",
+            "body": "Defibrillatoren müssen jederzeit einsatzbereit sein. Selbsttests überwachen u. a. [[component:defibrillator-akku|Akku/Batterie]] und Elektroden; bei Fehlern hilft der Diagnosebaum [[fault:defibrillator-selbsttest-fehlgeschlagen]].\n\nAls Medizinprodukte nach Anlage 1 der MPBetreibV unterliegen Defibrillatoren der [[legal_reference:de-mpbetreibv-stk|Sicherheitstechnischen Kontrolle]]. Die [[test_procedure:stk-defibrillator|STK]] umfasst u. a. Energieabgabe und Ladezeit mit einem Defibrillator-Analysator, Synchronisation, Rhythmusanalyse und die [[test_procedure:elektrische-sicherheit-62353|elektrische Sicherheitsprüfung]]. Grenzwerte und Toleranzen stammen aus den Herstellerunterlagen.\n\n**Sicherheit:** Im Defibrillator treten lebensgefährliche Spannungen auf. Testentladungen nur in eine Prüflast bzw. einen Analysator."
+          }
+        ],
+        "prerequisites": []
+      },
+      "links": [
+        { "rel": "teaches", "to": "term:elektrokardiogramm" },
+        { "rel": "teaches", "to": "term:einthoven-ableitungen" },
+        { "rel": "teaches", "to": "term:biphasische-defibrillation" },
+        { "rel": "teaches", "to": "term:synchronisierte-kardioversion" },
+        { "rel": "teaches", "to": "device:defibrillator" },
+        { "rel": "teaches", "to": "device:ekg-geraet" },
+        { "rel": "teaches", "to": "fault:ekg-netzbrummen" },
+        { "rel": "teaches", "to": "fault:ekg-elektrode-ab" },
+        { "rel": "teaches", "to": "fault:defibrillator-selbsttest-fehlgeschlagen" },
+        { "rel": "teaches", "to": "test_procedure:stk-defibrillator" },
+        { "rel": "teaches", "to": "simulation:ekg-monitor" },
+        { "rel": "based_on", "to": "legal_reference:de-mpbetreibv-stk" }
+      ],
+      "sources": ["src:kramme-medizintechnik", "src:erc-leitlinien-2021", "src:iec-60601-2-4", "src:de-mpbetreibv"],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "quiz_question:ekg-einthoven-gesetz",
+      "title": "Quiz: Einthoven-Gesetz",
+      "summary": "Welcher Zusammenhang besteht zwischen den Spannungen der Einthoven-Ableitungen I, II und III?",
+      "data": {
+        "kind": "single",
+        "question": "Welche Beziehung gilt zwischen den Einthoven-Ableitungen I, II und III?",
+        "options": [
+          { "id": "a", "text": "II = I + III" },
+          { "id": "b", "text": "I = II + III" },
+          { "id": "c", "text": "III = I + II" },
+          { "id": "d", "text": "I + II + III = 0" }
+        ],
+        "correct": ["a"],
+        "explanation": "Ableitung I misst linker Arm gegen rechten Arm, III linkes Bein gegen linken Arm, II linkes Bein gegen rechten Arm. Addiert man I und III, hebt sich das Potenzial des linken Arms auf – es bleibt II. Siehe [[term:einthoven-ableitungen]].",
+        "difficulty": 2
+      },
+      "links": [{ "rel": "quiz_for", "to": "learning_module:ekg-defibrillation-medizintechnik" }],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "quiz_question:ekg-zwoelf-kanal-elektroden",
+      "title": "Quiz: Elektroden für das 12-Kanal-EKG",
+      "summary": "Wie viele Elektroden werden für ein Standard-12-Kanal-EKG angelegt?",
+      "data": {
+        "kind": "single",
+        "question": "Wie viele Elektroden werden für ein Standard-12-Kanal-EKG angelegt?",
+        "options": [
+          { "id": "a", "text": "6" },
+          { "id": "b", "text": "10" },
+          { "id": "c", "text": "12" },
+          { "id": "d", "text": "5" }
+        ],
+        "correct": ["b"],
+        "explanation": "Vier Extremitätenelektroden (davon eine als Bezugselektrode am rechten Bein) und sechs Brustwandelektroden. Die zwölf Ableitungen werden aus diesen zehn Elektrodenpotenzialen gebildet.",
+        "difficulty": 1
+      },
+      "links": [{ "rel": "quiz_for", "to": "learning_module:ekg-defibrillation-medizintechnik" }],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "quiz_question:defibrillierbare-rhythmen",
+      "title": "Quiz: Defibrillierbare Rhythmen",
+      "summary": "Bei welchen Herzrhythmen ist eine Defibrillation angezeigt?",
+      "data": {
+        "kind": "multiple",
+        "question": "Bei welchen Rhythmen empfiehlt ein AED einen Schock? (Mehrfachauswahl)",
+        "options": [
+          { "id": "a", "text": "Kammerflimmern" },
+          { "id": "b", "text": "Pulslose ventrikuläre Tachykardie" },
+          { "id": "c", "text": "Asystolie" },
+          { "id": "d", "text": "Normaler Sinusrhythmus" }
+        ],
+        "correct": ["a", "b"],
+        "explanation": "Kammerflimmern und pulslose ventrikuläre Tachykardie sind defibrillierbar. Bei Asystolie gibt es keine elektrische Aktivität, die durch einen Schock „zurückgesetzt“ werden könnte – hier wird nicht defibrilliert. Siehe [[term:kammerflimmern]].",
+        "difficulty": 1
+      },
+      "links": [{ "rel": "quiz_for", "to": "learning_module:ekg-defibrillation-medizintechnik" }],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "quiz_question:kardioversion-synchronisation",
+      "title": "Quiz: Zweck der Synchronisation",
+      "summary": "Warum wird der Schock bei der Kardioversion auf die R-Zacke synchronisiert?",
+      "data": {
+        "kind": "single",
+        "question": "Warum wird bei der Kardioversion der Schock auf die R-Zacke synchronisiert?",
+        "options": [
+          { "id": "a", "text": "Damit der Schock nicht in die vulnerable Phase (T-Welle) fällt und Kammerflimmern auslöst" },
+          { "id": "b", "text": "Damit der Kondensator schneller geladen wird" },
+          { "id": "c", "text": "Damit die transthorakale Impedanz sinkt" },
+          { "id": "d", "text": "Damit weniger Energie aus dem Akku benötigt wird" }
+        ],
+        "correct": ["a"],
+        "explanation": "Ein Schock während der Erregungsrückbildung (T-Welle) kann Kammerflimmern auslösen. Die Synchronisation auf die R-Zacke vermeidet das – siehe [[term:synchronisierte-kardioversion]].",
+        "difficulty": 2
+      },
+      "links": [{ "rel": "quiz_for", "to": "learning_module:ekg-defibrillation-medizintechnik" }],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "quiz_question:stk-defibrillator-energiemessung",
+      "title": "Quiz: Energiemessung bei der STK",
+      "summary": "Wie wird bei der STK eines Defibrillators die abgegebene Energie überprüft?",
+      "data": {
+        "kind": "single",
+        "question": "Wie wird bei der STK eines Defibrillators die abgegebene Energie geprüft?",
+        "options": [
+          { "id": "a", "text": "Schockabgabe in einen Defibrillator-Analysator mit definierter Prüflast und Vergleich mit der eingestellten Energie" },
+          { "id": "b", "text": "Ablesen der Energieanzeige am Defibrillator ohne Schockabgabe" },
+          { "id": "c", "text": "Messung des Ableitstroms mit dem Sicherheitstester" },
+          { "id": "d", "text": "Schockabgabe mit offenen Elektroden in die Luft" }
+        ],
+        "correct": ["a"],
+        "explanation": "Die abgegebene Energie wird an einer definierten Prüflast (50 Ω) mit einem Defibrillator-Analysator gemessen und mit der eingestellten Energie sowie der Herstellertoleranz verglichen. Schocks ohne Last sind unzulässig. Siehe [[test_procedure:stk-defibrillator]].",
+        "difficulty": 2
+      },
+      "links": [{ "rel": "quiz_for", "to": "learning_module:ekg-defibrillation-medizintechnik" }],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    },
+    {
+      "id": "media:einthoven-dreieck",
+      "title": "Schema: Einthoven-Dreieck",
+      "summary": "Schematische Darstellung der Extremitätenelektroden rechter Arm, linker Arm und linkes Bein mit den bipolaren Ableitungen I, II und III nach Einthoven.",
+      "data": {
+        "kind": "schema",
+        "alt": "Gleichseitiges Dreieck mit den Elektroden rechter Arm (rot) und linker Arm (gelb) oben sowie linkes Bein (grün) unten; Pfeile kennzeichnen Ableitung I oben, II links und III rechts, das Herz liegt im Zentrum.",
+        "license": "CC BY 4.0",
+        "attribution": "MedTech World Redaktion",
+        "svg": "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 360 300'><defs><marker id='p' markerWidth='10' markerHeight='10' refX='8' refY='5' orient='auto'><path d='M0,0 L10,5 L0,10 z' fill='#1f2937'/></marker></defs><rect width='360' height='300' fill='#f4f8fb'/><polygon points='70,60 290,60 180,250' fill='none' stroke='#94a3b8' stroke-width='2' stroke-dasharray='5 4'/><line x1='90' y1='60' x2='268' y2='60' stroke='#1f2937' stroke-width='2.5' marker-end='url(#p)'/><line x1='80' y1='77' x2='168' y2='230' stroke='#1f2937' stroke-width='2.5' marker-end='url(#p)'/><line x1='280' y1='77' x2='192' y2='230' stroke='#1f2937' stroke-width='2.5' marker-end='url(#p)'/><text x='180' y='50' font-family='sans-serif' font-size='16' font-weight='bold' fill='#1f2937' text-anchor='middle'>I</text><text x='108' y='160' font-family='sans-serif' font-size='16' font-weight='bold' fill='#1f2937' text-anchor='middle'>II</text><text x='252' y='160' font-family='sans-serif' font-size='16' font-weight='bold' fill='#1f2937' text-anchor='middle'>III</text><path d='M180,118 C165,100 140,112 150,132 C158,148 180,160 180,160 C180,160 202,148 210,132 C220,112 195,100 180,118 z' fill='#e11d48' opacity='0.85'/><circle cx='70' cy='60' r='12' fill='#dc2626'/><circle cx='290' cy='60' r='12' fill='#facc15'/><circle cx='180' cy='250' r='12' fill='#16a34a'/><text x='70' y='30' font-family='sans-serif' font-size='12' fill='#1f2937' text-anchor='middle'>rechter Arm (RA)</text><text x='290' y='30' font-family='sans-serif' font-size='12' fill='#1f2937' text-anchor='middle'>linker Arm (LA)</text><text x='180' y='285' font-family='sans-serif' font-size='12' fill='#1f2937' text-anchor='middle'>linkes Bein (LL)</text><text x='12' y='292' font-family='sans-serif' font-size='11' fill='#475569'>II = I + III</text></svg>"
+      },
+      "links": [
+        { "rel": "illustrates", "to": "term:einthoven-ableitungen" },
+        { "rel": "illustrates", "to": "term:elektrokardiogramm" },
+        { "rel": "illustrates", "to": "device:ekg-geraet" }
+      ],
+      "review": { "status": "geprueft", "reviewedAt": "2026-11-01", "reviewer": "MedTech-World-Redaktion" }
+    }
+  ]
+}

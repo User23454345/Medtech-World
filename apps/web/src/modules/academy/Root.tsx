@@ -1,6 +1,18 @@
-import { ModuleLanding } from '../../shell/ModuleLanding.tsx';
+import { Route, Routes } from 'react-router';
+import { Landing } from './Landing.tsx';
+import { LearningPlayer } from './LearningPlayer.tsx';
+import { ProtocolPage } from './ProtocolPage.tsx';
+import { NotFound } from '../../pages/NotFound.tsx';
+import './academy.css';
 
-/** Platzhalter – wird im Ausbau durch die modulspezifische Startseite ersetzt. */
+/** MedTech Prüfakademie: Startseite, Lernmodul-Player und Prüfprotokoll */
 export default function Root() {
-  return <ModuleLanding module="academy" />;
+  return (
+    <Routes>
+      <Route index element={<Landing />} />
+      <Route path="lernen/:slug" element={<LearningPlayer />} />
+      <Route path="pruefung/:slug" element={<ProtocolPage />} />
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+  );
 }
